@@ -103,30 +103,30 @@ To do quickly : ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
 To do later : ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
 
 
-Week 38 : Choose a topic, build the teams [#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
-Week 39 : Define Scope, users. Identify Risk area, investigations, define use cases ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
-Week 40 : General Architecture, technology choice, external interfaces ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
-Week 41 : Component details, internal interfaces. Ext system mocked ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+) 
-Week 42 : Contiuous integration, Env. built, Walking Skeleton ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
-Week 43 : Main risk mitigated ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
-Week 44 : Coding enough of the rest for the POC ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
-Week 45 : POC complete ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
-Week 46 : 
-Week 47 :
-Week 48 :
-Week 49 : 
-Week 50 :
+- Week 38 : Choose a topic, build the teams [#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
+- Week 39 : Define Scope, users. Identify Risk area, investigations, define use cases ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
+- Week 40 : General Architecture, technology choice, external interfaces ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
+- Week 41 : Component details, internal interfaces. Ext system mocked ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+) 
+- Week 42 : Contiuous integration, Env. built, Walking Skeleton ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
+- Week 43 : Main risk mitigated ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
+- Week 44 : Coding enough of the rest for the POC ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
+- Week 45 : POC complete ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
+- Week 46 : 
+- Week 47 :
+- Week 48 :
+- Week 49 : 
+- Week 50 :
 
 
-Week 1 :
-Week 2 :
-Week 3 :
-Week 4 :
-Week 5 :
-Week 6 :
-Week 7 :
-Week 8 :
-Week 9 :
+- Week 1 :
+- Week 2 :
+- Week 3 :
+- Week 4 :
+- Week 5 :
+- Week 6 :
+- Week 7 :
+- Week 8 :
+- Week 9 :
 
 ------------ 
 
