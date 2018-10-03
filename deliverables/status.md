@@ -103,7 +103,7 @@ To do quickly : ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
 To do later : ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
 
 
-- Week 38 : Choose a topic, build the teams [#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
+- Week 38 : Choose a topic, build the teams ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
 - Week 39 : Define Scope, users. Identify Risk area, investigations, define use cases ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
 - Week 40 : General Architecture, technology choice, external interfaces ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
 - Week 41 : Component details, internal interfaces. Ext system mocked ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+) 
