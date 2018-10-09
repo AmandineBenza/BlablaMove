@@ -96,6 +96,8 @@ EP:   extern provider
 
 > Week 40 - 03/10/18
 
+------------ 
+
 Brainstorming RoadMap :
 
 * Done : ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
@@ -106,7 +108,7 @@ Brainstorming RoadMap :
 - Week 38 : Choose a topic, build the teams ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
 - Week 39 : Define Scope, users. Identify Risk area, investigations, define use cases ![#9BC09D](https://placehold.it/15/9BC09D/000000?text=+)
 - Week 40 : General Architecture, technology choice, external interfaces ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
-	- General Architecture : ?
+	- General Architecture : Will be in architecture.pdf
 	- Technological Choices : Java, SpringBoot, SQL Server (JPA plugin)
 	- External interfaces : ? 
 
@@ -115,15 +117,14 @@ Brainstorming RoadMap :
 - Week 43 : Main risk mitigated ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
 - Week 44 : Coding enough of the rest for the POC ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
 - Week 45 : POC complete ![#F1C40F](https://placehold.it/15/F1C40F/000000?text=+)
+- Week 46 : // ?
 
-- Week 46 : // PFE & APPRENTICESHIP
 - Week 47 : // PFE & APPRENTICESHIP
 - Week 48 : // PFE & APPRENTICESHIP
 - Week 49 : // PFE & APPRENTICESHIP
+- Week 50 : // PFE & APPRENTICESHIP
 
-- Week 50 :
-- Week 51 : // ?
-
+- Week 51 :
 - Week 1 : 
 - Week 2 :
 - Week 3 :
