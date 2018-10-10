@@ -94,7 +94,7 @@ EP:   extern provider
 ----------------------
 ----------------------
 
-> Week 40 - 03/10/18
+> Week 40 & 41 - 03/10/18 
 
 ------------ 
 
@@ -137,7 +137,22 @@ Brainstorming RoadMap :
 
 ------------ 
 
+- WEEK 40 & 41 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(10/10/18)
 
+>>>>> What was achieved this week ? 
+
+- We have modified our use cases to focus more on billing (our part).
+- We have defined a road map until the week 45 (POC).
+- We have defined some technological choices and a architecture overview.
+
+>>>>> What is planned for the following week ?
+
+- As we say on our roadmap, we will start our implementation of BlaBlaMove.
+
+>>>>> What are the blockers and risks ?
+
+- We have not yet divided the work between us, so it must be done quickly.
 
 
 
