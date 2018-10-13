@@ -2,24 +2,33 @@ package com.xaamruda.bbm.controller;
 
 import org.springframework.http.ResponseEntity;
 
+import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
+
 @SuppressWarnings({ "rawtypes"})
 public interface IWebServiceController {
 	
-	// GET
+	// >>>>> GET <<<<<<
 	public ResponseEntity getAllOffers();
-	public ResponseEntity getAveragePriceByPath(); //TODO : A path in argument
-	public ResponseEntity getPointsByUser(); // TODO : A user in argument 
-	public ResponseEntity getPathByOffer(); // // TODO : A offer in argument 
-		
-	//POST
-	public ResponseEntity identifyUser(); // TODO : User mail/id(?) and password 	
-	//public ResponseEntity makeOffer(); 
+	public ResponseEntity getOfferByPath(); // Todo : Add parameters
+	public ResponseEntity getOfferByNumberOfPoint(); // Todo : Add parameters
+	public ResponseEntity getOfferByDate(); // Todo : Add parameters
 	
-	// New offer
-	// Delete offer
-	// Modify User Info ?
-	// Make research ? 
-	// Modify user points 
+	// >>>>> POST <<<<<<
+	
+	//Shared
+	public ResponseEntity createUser(UserCreationContainer userInformation);	
+	public ResponseEntity identifyUser(String userInformation);
+	public ResponseEntity confirmTransaction(); // Todo : Add parameters
+	public ResponseEntity cancelTransaction(); // Todo : Add parameters
+	public ResponseEntity confirmOffer(String offerInformation);
+	
+	//Alice
+	public ResponseEntity makeOffer(String offerInformation); 
+	public ResponseEntity modifyOffer(String offerInformation); 
+	public ResponseEntity deleteOffer(String offerInformation); 
 
+	//Bob
+	public ResponseEntity selectOffer(String offerInformation);
+	
 }
 
