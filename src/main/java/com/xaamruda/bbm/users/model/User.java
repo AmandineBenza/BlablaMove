@@ -1,33 +1,31 @@
 package com.xaamruda.bbm.users.model;
 
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+
+//@Entity
+//@Table(name = "user_tbl")
 public class User {
 
-	private long id;
+	@Id
+	private String mail;
+	private String address;
+	private String creditCard;
 	private long telNumber;
 	private long pointsAmount;
-	private String address;
-	private String mail;
-	private String creditCard;
 	
 	public User(){
 		
 	}
 
-	public User(long id, long telNumber, long pointsAmount, String address, String mail, String creditCard) {
-		this.id = id;
+	public User(long telNumber, long pointsAmount, String address, String mail, String creditCard) {
 		this.telNumber = telNumber;
 		this.pointsAmount = pointsAmount;
 		this.address = address;
 		this.mail = mail;
 		this.creditCard = creditCard;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public long getTelNumber() {
