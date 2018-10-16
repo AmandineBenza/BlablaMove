@@ -1,9 +1,7 @@
 package com.xaamruda.bbm.controller;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrator;
 import com.xaamruda.bbm.communication.internal.IFlowOrchestrator;
 import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
+import com.xaamruda.bbm.users.model.User;
 
 @RestController
 @RequestMapping("/BBM/")
-@SuppressWarnings({ "rawtypes", "unchecked"})
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class WebServiceController implements IWebServiceController {
 	
 	@Autowired
@@ -29,8 +28,12 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "USER/CREATE", method = RequestMethod.POST)
 	public ResponseEntity createUser(@RequestBody UserCreationContainer userInformation) {
-		flowOrchestrator.createUser(userInformation);
-		return null;
+		User user = flowOrchestrator.createUser(userInformation);
+		
+		if(user == null)
+			return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
+		
+		return new ResponseEntity("User successfully created.", HttpStatus.OK);
 	}
 
 

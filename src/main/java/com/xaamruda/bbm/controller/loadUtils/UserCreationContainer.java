@@ -10,7 +10,6 @@ public class UserCreationContainer {
 	public UserCreationContainer() {};
 	
 	public UserCreationContainer(String mail, String address, String creditCard, long telNumber) {
-		super();
 		this.mail = mail;
 		this.address = address;
 		this.creditCard = creditCard;

@@ -7,6 +7,6 @@ import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
  */
 public interface IUserIdentificator {
 
-	public boolean createUser(UserCreationContainer user);
+	public boolean identify(UserCreationContainer user);
 	
 }

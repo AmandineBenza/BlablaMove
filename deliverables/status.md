@@ -155,6 +155,9 @@ Brainstorming RoadMap :
 - We have not yet divided the work between us, so it must be done quickly.
 
 
+- WEEK 42 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(16/10/18)
 
+- Is BBM its own client or client of another company ?
 
 
