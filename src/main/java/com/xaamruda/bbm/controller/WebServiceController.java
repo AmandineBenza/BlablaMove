@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xaamruda.bbm.commons.users.UserCreationContainer;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrator;
 import com.xaamruda.bbm.communication.internal.IFlowOrchestrator;
-import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
-import com.xaamruda.bbm.users.model.User;
 
 @RestController
 @RequestMapping("/BBM/")
@@ -28,9 +27,9 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "USER/CREATE", method = RequestMethod.POST)
 	public ResponseEntity createUser(@RequestBody UserCreationContainer userInformation) {
-		User user = flowOrchestrator.createUser(userInformation);
+		boolean created = flowOrchestrator.createUser(userInformation);
 		
-		if(user == null)
+		if(!created)
 			return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
 		
 		return new ResponseEntity("User successfully created.", HttpStatus.OK);

@@ -1,12 +1,10 @@
-package com.xaamruda.bbm.dbaccess.users.service;
+package com.xaamruda.bbm.users.dbaccess.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.xaamruda.bbm.dbaccess.users.repository.IUserRepository;
 import com.xaamruda.bbm.users.model.User;
 
 @Transactional
@@ -22,6 +20,11 @@ public class UserService implements IUserService {
 	public List<User> getUsersByMail(String mail) {
 		// return repository.findByMail(mail);
 		return null;
+	}
+
+	@Override
+	public void store(User user) {
+		// srepository.save(user);
 	}
 
 }

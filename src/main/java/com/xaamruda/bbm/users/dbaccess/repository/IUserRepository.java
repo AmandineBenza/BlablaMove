@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.dbaccess.users.repository;
+package com.xaamruda.bbm.users.dbaccess.repository;
 
 import java.util.List;
 // import org.springframework.data.jpa.repository.JpaRepository;

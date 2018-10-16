@@ -1,9 +1,8 @@
 package com.xaamruda.bbm.users.model;
 
-//import javax.persistence.Entity;
-//import javax.persistence.Table;
-
 import org.springframework.data.annotation.Id;
+
+import com.xaamruda.bbm.commons.users.UserCreationContainer;
 
 //@Entity
 //@Table(name = "user_tbl")
@@ -18,6 +17,10 @@ public class User {
 	
 	public User(){
 		
+	}
+	
+	public User(UserCreationContainer container){
+		this(container.getTelNumber(), 100, container.getAddress(), container.getMail(), container.getCreditCard());
 	}
 
 	public User(long telNumber, long pointsAmount, String address, String mail, String creditCard) {

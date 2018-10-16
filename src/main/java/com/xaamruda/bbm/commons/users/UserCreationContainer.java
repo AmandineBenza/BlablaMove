@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.controller.loadUtils;
+package com.xaamruda.bbm.commons.users;
 
 public class UserCreationContainer {
 	

@@ -1,12 +1,13 @@
 package com.xaamruda.bbm.users.identification;
 
-import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
+import com.xaamruda.bbm.commons.users.UserCreationContainer;
+import com.xaamruda.bbm.users.model.User;
 
 /**
  * Allows user identification.
  */
 public interface IUserIdentificator {
 
-	public boolean identify(UserCreationContainer user);
+	public User identify(UserCreationContainer user);
 	
 }

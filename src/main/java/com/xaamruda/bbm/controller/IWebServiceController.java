@@ -2,7 +2,7 @@ package com.xaamruda.bbm.controller;
 
 import org.springframework.http.ResponseEntity;
 
-import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
+import com.xaamruda.bbm.commons.users.UserCreationContainer;
 
 @SuppressWarnings({ "rawtypes"})
 public interface IWebServiceController {

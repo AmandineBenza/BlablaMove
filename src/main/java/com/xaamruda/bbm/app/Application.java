@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {
 		"com.xaamruda.bbm.app",
+		"com.xaamruda.bbm.commons",
 		"com.xaamruda.bbm.communication",
 		"com.xaamruda.bbm.controller",
-		"com.xaamruda.bbm.dbaccess",
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
 })

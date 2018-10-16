@@ -1,15 +1,12 @@
 package com.xaamruda.bbm.communication.internal;
 
-import com.xaamruda.bbm.controller.loadUtils.UserCreationContainer;
-import com.xaamruda.bbm.dbaccess.IDatabaseAccessor;
-import com.xaamruda.bbm.users.model.User;
+import com.xaamruda.bbm.commons.users.UserCreationContainer;
 
 /**
  * Handles communication between modules.
  */
 public interface IFlowOrchestrator {
 
-	public IDatabaseAccessor getDatabaseAccessor();
-	public User createUser(UserCreationContainer container);
+	public boolean createUser(UserCreationContainer container);
 	
 }
