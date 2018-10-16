@@ -69,28 +69,6 @@ EP:   extern provider
 - Extern provider (map API) ?
 
 
-----------
-
-
-- WEEK 39 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
-(30/09/18)
-
->>>>> What was achieved this week ? 
-
-- We defined use cases (Alice & Bob)
-- We defined the services our API will provide to the users (Using Alice & Bob use cases)
-- We have begun to talk about the architecture of our API and the technologies we will use.
-
->>>>> What is planned for the following week ?
-
-- We will continue to think about our architectural and technological choices 
-- We will planify our future objectives week by week 
-
->>>>> What are the blockers and risks ?
-
-- One risk is that our Scope may not be well defined
-
-----------------------
 ----------------------
 ----------------------
 
@@ -135,7 +113,38 @@ Brainstorming RoadMap :
 - Week 8 :
 - Week 9 :
 
------------- 
+----------------------
+
+----------------------
+
+> Week 42 - 16/10/18 
+ 
+
+- Is BBM its own client or client of another company ?
+
+
+----------------------
+
+
+- WEEK 39 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(30/09/18)
+
+>>>>> What was achieved this week ? 
+
+- We defined use cases (Alice & Bob)
+- We defined the services our API will provide to the users (Using Alice & Bob use cases)
+- We have begun to talk about the architecture of our API and the technologies we will use.
+
+>>>>> What is planned for the following week ?
+
+- We will continue to think about our architectural and technological choices 
+- We will planify our future objectives week by week 
+
+>>>>> What are the blockers and risks ?
+
+- One risk is that our Scope may not be well defined
+
+----------------------
 
 - WEEK 40 & 41 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (10/10/18)
@@ -154,10 +163,25 @@ Brainstorming RoadMap :
 
 - We have not yet divided the work between us, so it must be done quickly.
 
+----------------------
 
-- WEEK 42 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+
+- WEEK 42 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 (16/10/18)
 
-- Is BBM its own client or client of another company ?
+>>>>> What was achieved this week ? 
 
+ - We have talked a bit more about the billing system 
+ - We have separated the tasks we needed to do for this week
+ - We have begun our implementation and put in place a preliminary architecture for our project 
+
+>>>>> What is planned for the following week ?
+
+ - We will continue our implementation of BlablaMove
+ - We will continue to follow our RoadMap 
+
+>>>>> What are the blockers and risks ?
+
+ - We will need to be careful and to manage/anticipate the scale-up of our project
+ - We will also need to determinate a good data architecture 
 
