@@ -1,0 +1,15 @@
+version: "3"
+services:
+    web:
+        build: .
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
+    db:
+        image: "microsoft/mssql-server-linux"
+        environment:
+            SA_PASSWORD: "Bl@bl@Move2018P*sword"
+            ACCEPT_EULA: "Y"
+            MSSQL_MEMORY_LIMIT_MB : "1024"
+        
