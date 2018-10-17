@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.app;
+package com.xaamruda.bbm.calculatora.maincalculator;
 
 public class Calculator implements ICalculator{
 
