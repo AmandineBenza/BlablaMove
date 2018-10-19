@@ -1,23 +1,18 @@
 version: "2"
 services:
-    web:
-       build: .
-       ports:
-           - "8080:8080"
-       depends_on:
-           - db
-       links:
-           - db
-        
-    db:
-        container_name: sqldatabase
+    sqldatabase1:
+        container_name: sqldatabase1
         image: "microsoft/mssql-server-linux"
         environment:
             SA_PASSWORD: "Bl@bl@Move2018P*sword"
             ACCEPT_EULA: "Y"
             MSSQL_MEMORY_LIMIT_MB : "1024"
-        # networks:
-        #     softwarearchitectureproject_default:
-        #         aliases: 
-        #             - XDDAMOY
-
+    web:
+        build: .
+        restart: always
+        ports:
+           - "8080:8080"
+        depends_on:
+           - sqldatabase1
+        links:
+           - sqldatabase1
