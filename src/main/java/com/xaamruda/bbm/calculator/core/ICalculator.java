@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.calculatora.maincalculator;
+package com.xaamruda.bbm.calculator.core;
 
 /**
  * External provider connector.
