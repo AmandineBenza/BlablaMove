@@ -1,19 +1,20 @@
-package com.xaamruda.bbm.commons.users;
+package com.xaamruda.bbm.users.model;
 
 public class UserCreationContainer {
-	
+
 	private String mail;
 	private String address;
-	private String creditCard;
 	private long telNumber;
-	
-	public UserCreationContainer() {};
-	
-	public UserCreationContainer(String mail, String address, String creditCard, long telNumber) {
+	private long pointsAmount;
+
+	public UserCreationContainer() {
+	};
+
+	public UserCreationContainer(String mail, String address, long telNumber, long pointsAmount) {
 		this.mail = mail;
 		this.address = address;
-		this.creditCard = creditCard;
 		this.telNumber = telNumber;
+		this.pointsAmount = pointsAmount;
 	}
 
 	public String getMail() {
@@ -32,20 +33,20 @@ public class UserCreationContainer {
 		this.address = address;
 	}
 
-	public String getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(String creditCard) {
-		this.creditCard = creditCard;
-	}
-
 	public long getTelNumber() {
 		return telNumber;
 	}
 
 	public void setTelNumber(long telNumber) {
 		this.telNumber = telNumber;
+	}
+
+	public long getPointsAmount() {
+		return pointsAmount;
+	}
+
+	public void setPointsAmount(long pointsAmount) {
+		this.pointsAmount = pointsAmount;
 	}
 	
 }

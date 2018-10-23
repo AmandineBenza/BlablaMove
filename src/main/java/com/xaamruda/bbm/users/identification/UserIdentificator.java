@@ -1,8 +1,6 @@
 package com.xaamruda.bbm.users.identification;
 
-import com.xaamruda.bbm.commons.users.UserCreationContainer;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
-import com.xaamruda.bbm.users.model.User;
 
 public class UserIdentificator implements IUserIdentificator {
 
@@ -23,8 +21,9 @@ public class UserIdentificator implements IUserIdentificator {
 	}
 	
 	@Override
-	public User identify(UserCreationContainer user) {
-		return service.getUsersByMail(user.getMail()).get(0);
+	// TODO see password ?
+	public boolean identify(String userMail, String userPassword) {
+		return service.getUsersByMail(userMail).size() > 0;
 	}
 
 }

@@ -20,12 +20,12 @@ import ch.qos.logback.core.filter.Filter;
 @Transactional
 @Service("UserService")
 public class OfferService implements IOfferService {
-	@Autowired 
+	@Autowired
 	IOfferRepository offerRepository;
-	
+
 	@Autowired
 	MongoTemplate mongoTemplate;
-	
+
 	@Override
 	public List<Offer> getAllArchivedOffers() {
 		return offerRepository.getByStatus(OfferStatus.CLOSED);
@@ -34,45 +34,45 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<Offer> getOffersByOwnerID(int OwnerID) {
-		return offerRepository.getByOwnerID(OwnerID) ;
+		return offerRepository.getByOwnerID(OwnerID);
 	}
 
-	//TODO speak about
+	// TODO speak about
 	@Override
 	public List<ClientOffer> askOfferByPrice(Filter f) {
 		return null;
 	}
 
-	@Override                                                     
-	public List<Offer> getAvailableOffers() {                     
-		return  offerRepository.getByStatus(OfferStatus.POSTED);  
-	}    
-	
 	@Override
-	public List<Offer> getAvailableOffers(Query query) {     
-		List<Offer> offers = mongoTemplate.find(query, Offer.class);
-		return offers;  
-	} 
-	
+	public List<Offer> getAvailableOffers() {
+		return offerRepository.getByStatus(OfferStatus.POSTED);
+	}
 
-	//TODO
-	@Override                                                     
+	@Override
+	public List<Offer> getAvailableOffers(Query query) {
+		List<Offer> offers = mongoTemplate.find(query, Offer.class);
+		return offers;
+	}
+
+	// TODO
+	@Override
 	public boolean createNewOffer(String jsonOffer) {
-		Offer offer =  GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create().fromJson(jsonOffer, Offer.class);
-		if(offer != null){
+		Offer offer = GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create().fromJson(jsonOffer,
+				Offer.class);
+		if (offer != null) {
 			offerRepository.insert(offer);
 		}
 		return (offer != null);
 	}
 
-	@Override                                                     
-	public boolean changeOfferStatus(int id , OfferStatus status) {     
-		Optional<Offer> offer = offerRepository.findById(id);//.findOne(id);
-		if(offer.isPresent()){
+	@Override
+	public boolean changeOfferStatus(int id, OfferStatus status) {
+		Optional<Offer> offer = offerRepository.findById(id);// .findOne(id);
+		if (offer.isPresent()) {
 			offer.get().setStatus(status);
 			offerRepository.save(offer.get());
-			return true;  
+			return true;
 		}
 		return false;
-	}  
-}                                                          
+	}
+}

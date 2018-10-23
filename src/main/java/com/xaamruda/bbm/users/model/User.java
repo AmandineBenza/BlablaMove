@@ -2,8 +2,6 @@ package com.xaamruda.bbm.users.model;
 
 import org.springframework.data.annotation.Id;
 
-import com.xaamruda.bbm.commons.users.UserCreationContainer;
-
 //@Entity
 //@Table(name = "user_tbl")
 public class User {
@@ -11,7 +9,6 @@ public class User {
 	@Id
 	private String mail;
 	private String address;
-	private String creditCard;
 	private long telNumber;
 	private long pointsAmount;
 	
@@ -20,15 +17,14 @@ public class User {
 	}
 	
 	public User(UserCreationContainer container){
-		this(container.getTelNumber(), 100, container.getAddress(), container.getMail(), container.getCreditCard());
+		this();
 	}
-
-	public User(long telNumber, long pointsAmount, String address, String mail, String creditCard) {
+	
+	public User(String mail, String address, long telNumber, long pointsAmount) {
+		this.mail = mail;
+		this.address = address;
 		this.telNumber = telNumber;
 		this.pointsAmount = pointsAmount;
-		this.address = address;
-		this.mail = mail;
-		this.creditCard = creditCard;
 	}
 
 	public long getTelNumber() {
@@ -63,12 +59,4 @@ public class User {
 		this.mail = mail;
 	}
 
-	public String getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(String creditCard) {
-		this.creditCard = creditCard;
-	}
-	
 }

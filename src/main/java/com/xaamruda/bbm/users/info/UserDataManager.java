@@ -1,8 +1,8 @@
 package com.xaamruda.bbm.users.info;
 
-import com.xaamruda.bbm.commons.users.UserCreationContainer;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.model.User;
+import com.xaamruda.bbm.users.model.UserCreationContainer;
 
 public class UserDataManager implements IUserDataManager {
 

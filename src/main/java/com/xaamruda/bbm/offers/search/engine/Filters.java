@@ -6,21 +6,33 @@ import com.xaamruda.bbm.offers.model.OfferStatus;
 //TODO complete
 public class Filters {
 
-	//Mandatory field
+	// Mandatory field
 	public String startAddress;
-	
-	//Mandatory field
+
+	// Mandatory field
 	public String endAddress;
-	
-	//Mandatory field
+
+	// Mandatory field
 	public int weith;
-	
-	//TODO mocked for now
-	//Mandatory field
-	//public int
-	
+
+	// TODO mocked for now
+	// Mandatory field
+	// public int
+
 	public int maxPrice;
-	
+
 	public OfferStatus status;
 	
+	public Filters(){
+		
+	}
+
+	public Filters(String startAddress, String endAddress, int weith, int maxPrice, OfferStatus status) {
+		this.startAddress = startAddress;
+		this.endAddress = endAddress;
+		this.weith = weith;
+		this.maxPrice = maxPrice;
+		this.status = status;
+	}
+
 }

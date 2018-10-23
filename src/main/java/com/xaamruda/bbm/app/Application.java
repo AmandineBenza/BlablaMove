@@ -2,7 +2,6 @@ package com.xaamruda.bbm.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-// import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * BlablaMove entry point. 
@@ -15,9 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
 })
-//@EnableJpaRepositories(basePackages = {
-//		"com.xaamruda.bbm.dbaccess"
-//})
 public class Application {
 	
 	public static void main(String[] args) {
