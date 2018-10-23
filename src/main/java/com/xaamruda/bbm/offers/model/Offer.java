@@ -1,17 +1,17 @@
 package com.xaamruda.bbm.offers.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
-@Entity
-@Table(name = "offer")
+//@Entity
+//@Table(name = "offer")
 public class Offer {
 	
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+  //  @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     //TODO test
@@ -23,9 +23,10 @@ public class Offer {
     private String StartAddress;
     private String EndAddress;
     private Integer capacity; 
+    private Integer offerPrice;
     
-    
-  //--------------------------------GETTERS--------------------------
+
+	//--------------------------------GETTERS--------------------------
     public String getStartAddress() {
 		return StartAddress;
 	}
@@ -95,6 +96,14 @@ public class Offer {
 		this.ownerID = ownerID;
 	}
     
-    //TODO toString
+	public Integer getOfferPrice() {
+		return offerPrice;
+	}
+	
+	public void setOfferPrice(Integer offerPrice) {
+		this.offerPrice = offerPrice;
+	}
+    
+	//TODO toString offers
 
 }

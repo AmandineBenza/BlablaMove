@@ -1,8 +1,12 @@
 package com.xaamruda.bbm.offers.dbaccess.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +22,10 @@ import ch.qos.logback.core.filter.Filter;
 public class OfferService implements IOfferService {
 	@Autowired 
 	IOfferRepository offerRepository;
+	
+	@Autowired
+	MongoTemplate mongoTemplate;
+	
 	@Override
 	public List<Offer> getAllArchivedOffers() {
 		return offerRepository.getByStatus(OfferStatus.CLOSED);
@@ -38,19 +46,31 @@ public class OfferService implements IOfferService {
 	@Override                                                     
 	public List<Offer> getAvailableOffers() {                     
 		return  offerRepository.getByStatus(OfferStatus.POSTED);  
-	}                                                             
-
-	@Override                                                     
-	public List<Offer> createNewOffer() {                     
-		return null; //offerRepository.store(new Offer());  
+	}    
+	
+	@Override
+	public List<Offer> getAvailableOffers(Query query) {     
+		List<Offer> offers = mongoTemplate.find(query, Offer.class);
+		return offers;  
 	} 
+	
+
+	//TODO
+	@Override                                                     
+	public boolean createNewOffer(String jsonOffer) {
+		Offer offer =  GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create().fromJson(jsonOffer, Offer.class);
+		if(offer != null){
+			offerRepository.insert(offer);
+		}
+		return (offer != null);
+	}
 
 	@Override                                                     
 	public boolean changeOfferStatus(int id , OfferStatus status) {     
-		Offer offer = offerRepository.findOne(id);
-		if(offer != null){
-			offer.setStatus(status);
-			offerRepository.save(offer);
+		Optional<Offer> offer = offerRepository.findById(id);//.findOne(id);
+		if(offer.isPresent()){
+			offer.get().setStatus(status);
+			offerRepository.save(offer.get());
 			return true;  
 		}
 		return false;

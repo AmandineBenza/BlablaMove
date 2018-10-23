@@ -1,18 +1,27 @@
 version: "2"
 services:
-    sqldatabase1:
-        container_name: sqldatabase1
-        image: "microsoft/mssql-server-linux"
-        environment:
-            SA_PASSWORD: "Bl@bl@Move2018P*sword"
-            ACCEPT_EULA: "Y"
-            MSSQL_MEMORY_LIMIT_MB : "1024"
+    # sqldatabase1:
+    #     container_name: sqldatabase1
+    #     image: "microsoft/mssql-server-linux"
+    #     environment:
+    #         SA_PASSWORD: "Bl@bl@Move2018P*sword"
+    #         ACCEPT_EULA: "Y"
+    #         MSSQL_MEMORY_LIMIT_MB : "1024"
+
+    #     depends_on:
+    #         - mongo
+    mongo_BBm:
+      container_name: mongo_BBm
+      image: mongo:latest
+      restart: always
+      ports:
+        - "27017:27017"
     web:
-        build: .
-        restart: always
-        ports:
-           - "8080:8080"
-        depends_on:
-           - sqldatabase1
-        links:
-           - sqldatabase1
+       build: .
+       restart: always
+       ports:
+          - "8080:8080"
+       depends_on:
+          - mongo_BBm
+       links:
+          - mongo_BBm

@@ -1,19 +1,19 @@
 package com.xaamruda.bbm.offers.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
 
 //TODO rename
-@Entity
-@Table(name = "client_offer")
+//@Entity
+//@Table(name = "client_offer")
 public class ClientOffer {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	private Integer clientId;
