@@ -50,7 +50,7 @@
 			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/com.google.maps/google-maps-services -->
 		<dependency>
 			<groupId>com.google.maps</groupId>
@@ -62,26 +62,25 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-		</dependency> -->
+
+		<!-- Logging ; https://mvnrepository.com/artifact/log4j/log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+
+		<!-- <dependency> <groupId>com.microsoft.sqlserver</groupId> <artifactId>mssql-jdbc</artifactId> 
+			</dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-jpa</artifactId> 
+			</dependency> -->
 		<!-- TODO -->
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
-		<!-- <dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>mssql-jdbc</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.microsoft.sqlserver</groupId> <artifactId>mssql-jdbc</artifactId> 
+			<scope>test</scope> </dependency> <dependency> <groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-data-jpa</artifactId> </dependency> -->
 	</dependencies>
 
 	<build>

@@ -4,28 +4,28 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.model.Offer;
 
 @Component
 public class FlowOrchestrator implements IFlowOrchestrator {
 
 	@Autowired
-	private com.xaamruda.bbm.users.IOHandler userIO;
+	private com.xaamruda.bbm.users.UsersIOHandler userIO;
 
 	@Autowired
-	private com.xaamruda.bbm.billing.IOHandler calculatorIO;
+	private com.xaamruda.bbm.billing.BillingIOHandler billingIO;
 
 	@Autowired
-	private com.xaamruda.bbm.offers.IOHandler offerIO;
+	private com.xaamruda.bbm.offers.OffersIOHandler offerIO;
 
 	@Autowired
-	private com.xaamruda.bbm.roads.IOHandler roadsIO;
+	private com.xaamruda.bbm.roads.RoadsIOHandler roadsIO;
 	
 	public FlowOrchestrator() {}
 
@@ -37,9 +37,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
-		JsonObject jsonObject = GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create().fromJson(jsonEvents,
-				JsonObject.class);
-		
+		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
 
@@ -72,6 +70,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			clazz = Boolean.class;
 			status = userExists ? HttpStatus.OK : HttpStatus.CREATED;
 			content = userExists;
+			break;
 		}
 
 		default:

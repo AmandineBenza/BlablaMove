@@ -14,7 +14,7 @@ public class ExternalConnector implements IExternalConnector {
 	}
 	
 	/**
-	 * TODO
+	 * External API connector mock.
 	 * 
 	 * @param origins
 	 * @param destinations

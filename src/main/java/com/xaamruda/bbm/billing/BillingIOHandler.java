@@ -1,12 +1,15 @@
 package com.xaamruda.bbm.billing;
 
+import org.springframework.stereotype.Component;
+
 import com.xaamruda.bbm.billing.calculator.Calculator;
 import com.xaamruda.bbm.offers.model.Offer;
 
 /**
  * Calculator entry point.
  */
-public class IOHandler {
+@Component
+public class BillingIOHandler {
 	// TODO DO. Calculations.
 	Calculator facturation = new Calculator();
 

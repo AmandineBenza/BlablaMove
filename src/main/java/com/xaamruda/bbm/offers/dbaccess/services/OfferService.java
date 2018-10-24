@@ -6,19 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xaamruda.bbm.offers.model.ClientOffer;
 import com.xaamruda.bbm.offers.model.Offer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
+import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 
 import ch.qos.logback.core.filter.Filter;
 
 @Transactional
-@Service("UserService")
+@Service("OfferService")
 public class OfferService implements IOfferService {
 	@Autowired
 	IOfferRepository offerRepository;
@@ -57,8 +57,7 @@ public class OfferService implements IOfferService {
 	// TODO
 	@Override
 	public boolean createNewOffer(String jsonOffer) {
-		Offer offer = GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create().fromJson(jsonOffer,
-				Offer.class);
+		Offer offer = JsonUtils.getFromJson(jsonOffer, Offer.class);
 		if (offer != null) {
 			offerRepository.insert(offer);
 		}

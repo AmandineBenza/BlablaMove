@@ -13,32 +13,36 @@ import org.springframework.data.annotation.Id;
 public class ClientOffer {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
+	// @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	private Integer clientId;
 	private Integer offerId;
-	private Integer Weight;
-	//TODO test
-	//private Offer refference
-	
-	
-	//--------------------------------GETTERS--------------------------
+	private Integer weight;
+	// TODO test
+	// private Offer reference
+
+	// --------------------------------GETTERS--------------------------
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Integer getClientId() {
 		return clientId;
 	}
+
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
+
 	public Integer getOfferId() {
 		return offerId;
 	}
+
 	public void setOfferId(Integer offerId) {
 		this.offerId = offerId;
 	}

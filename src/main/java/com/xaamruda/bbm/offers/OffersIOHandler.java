@@ -3,22 +3,26 @@ package com.xaamruda.bbm.offers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
+import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
+import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.dbaccess.services.IOfferService;
 import com.xaamruda.bbm.offers.model.Offer;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 import com.xaamruda.bbm.offers.search.engine.Filters;
 
-public class IOHandler {
+@Component
+public class OffersIOHandler {
 	
 	@Autowired
 	private IOfferService offerService;
 
 	@Autowired
-	private com.xaamruda.bbm.billing.IOHandler calculatorHandler;
-
+	private com.xaamruda.bbm.billing.BillingIOHandler calculatorHandler;
+	
+	public OffersIOHandler() {
+	}
+	
 	public List<Offer> getOffers() {
 		return offerService.getAvailableOffers();
 	}
@@ -31,10 +35,8 @@ public class IOHandler {
 	// TODO add check on offer if lenght == 0
 	// TODO
 	public List<Offer> retrieveOffers(String filters, String workData) {
-		Gson gb = GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create();
-
 		List<Offer> offers = offerService
-				.getAvailableOffers(QueryEngine.buildMongoQuery(gb.fromJson(filters, Filters.class)));
+				.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
 		
 		for (Offer offer : offers) {
 			calculatorHandler.doWork(workData, offer);
