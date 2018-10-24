@@ -11,11 +11,25 @@ public class Calculator implements ICalculator {
 	}
 
 	@Override
-	public void simpleCalcul(int weight, int distance, int volume, int day) {
+	public void calcul_price_base(int weight, int distance, int volume, int day) {
 		double calcul = fullAddition(weight, distance, volume, day);
 		this.socityPoint = (calcul / 100) * 10;
 		this.userPoint = (calcul / 100) * 90;
 	}
+
+	@Override
+	public void advance_date_with_offer(int date,int offer){
+		if(date <= 3){
+			res = 5 + offer;
+			this.socityPoint = (res/100)*10;
+			this.userPoint = (res/100)*90;
+		}else{
+			res = 2 + offer;
+			this.socityPoint = (res/100)*10;
+			this.userPoint = (res/100)*90;
+		}
+	}
+
 
 	//////////// SETTER////////////
 	public void setSocityPoint(int total) {

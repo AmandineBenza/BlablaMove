@@ -5,6 +5,6 @@ package com.xaamruda.bbm.calculator.core;
  */
 public interface ICalculator{
 
-	public void simpleCalcul(int weight,int size, int distance,int day);
-
+	public void calcul_price_base(int weight,int size, int distance,int day);
+	public void advance_date_with_offer(int date,int offer);
 }
