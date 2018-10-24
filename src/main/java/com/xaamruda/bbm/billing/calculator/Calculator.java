@@ -1,52 +1,52 @@
-package com.xaamruda.bbm.calculator.core;
+package com.xaamruda.bbm.billing.calculator;
 
 public class Calculator implements ICalculator {
 
-	double socityPoint = 0;
-	double userPoint = 0;
+	private double companyPoints;
+	private double userPoints;
 
 	public Calculator() {
-		this.socityPoint = 0;
-		this.userPoint = 0;
+		this.companyPoints = 0.0;
+		this.userPoints = 0.0;
 	}
 
 	@Override
 	public void calcul_price_base(int weight, int distance, int volume, int day) {
 		double calcul = fullAddition(weight, distance, volume, day);
-		this.socityPoint = (calcul / 100) * 10;
-		this.userPoint = (calcul / 100) * 90;
+		this.companyPoints = (calcul / 100) * 10;
+		this.userPoints = (calcul / 100) * 90;
 	}
 
 	@Override
-	public void advance_date_with_offer(int date,int offer){
+	public void advance_date_with_offer(int date, int offer){
+		int res = 0;
+		
 		if(date <= 3){
 			res = 5 + offer;
-			this.socityPoint = (res/100)*10;
-			this.userPoint = (res/100)*90;
-		}else{
+		} else {
 			res = 2 + offer;
-			this.socityPoint = (res/100)*10;
-			this.userPoint = (res/100)*90;
 		}
+		
+		this.companyPoints = (res / 100) * 10;
+		this.userPoints = (res / 100) * 90;
 	}
 
-
-	//////////// SETTER////////////
+	//////////// SETTER ////////////
 	public void setSocityPoint(int total) {
-		this.socityPoint = total;
+		this.companyPoints = total;
 	}
 
 	public void setUserPoint(int total) {
-		this.socityPoint = total;
+		this.companyPoints = total;
 	}
 
-	//////////// GETTER////////////
+	//////////// GETTER ////////////
 	public double getSocityPoint() {
-		return this.socityPoint;
+		return this.companyPoints;
 	}
 
 	public double getUserPoint() {
-		return this.userPoint;
+		return this.userPoints;
 	}
 
 	private double fullAddition(double weight, double distance, double volume, double day) {
@@ -57,7 +57,7 @@ public class Calculator implements ICalculator {
 		return (weightPoint + distancePoint + volumePoint + reservationPoint);
 	}
 
-	//////////// CONVERTISOR////////////
+	//////////// CONVERTER ////////////
 	private double conversionWeight(double weight) {
 		return weight;
 	}

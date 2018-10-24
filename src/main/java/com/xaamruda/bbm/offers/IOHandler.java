@@ -17,7 +17,7 @@ public class IOHandler {
 	private IOfferService offerService;
 
 	@Autowired
-	private com.xaamruda.bbm.calculator.IOHandler calculatorHandler;
+	private com.xaamruda.bbm.billing.IOHandler calculatorHandler;
 
 	public List<Offer> getOffers() {
 		return offerService.getAvailableOffers();

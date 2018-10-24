@@ -15,7 +15,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		"com.xaamruda.bbm.users",
 })
 public class Application {
-	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class);
 	}

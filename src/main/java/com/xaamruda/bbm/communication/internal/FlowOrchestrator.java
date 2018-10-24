@@ -19,7 +19,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	private com.xaamruda.bbm.users.IOHandler userIO;
 
 	@Autowired
-	private com.xaamruda.bbm.calculator.IOHandler calculatorIO;
+	private com.xaamruda.bbm.billing.IOHandler calculatorIO;
 
 	@Autowired
 	private com.xaamruda.bbm.offers.IOHandler offerIO;
