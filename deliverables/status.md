@@ -185,3 +185,21 @@ Brainstorming RoadMap :
  - We will need to be careful and to manage/anticipate the scale-up of our project
  - We will also need to determinate a good data architecture 
 
+----------------------
+
+ WEEK 43 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(24/10/18)
+
+>>>>> What was achieved this week ?
+ - Establishment of application user entry points
+ - Establishment of internal communication routing basis
+ - Establishment of data structures used inside our business logic
+ - Establishment of a temporary NoSQL database
+
+>>>>> What is planned for the following week ?
+ - Switching from NoSQL database to transactional one
+ - Speed up on implementing the core business logic
+
+>>>>> What are the blockers and risks ?
+ - Fix sql driver / springboot coupling in order to mount a transactional database
+ - Late on code content
