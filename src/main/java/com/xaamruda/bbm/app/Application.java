@@ -14,7 +14,6 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 		"com.xaamruda.bbm.billing",
 		"com.xaamruda.bbm.commons",
 		"com.xaamruda.bbm.communication",
-		"com.xaamruda.bbm.communication.internal",
 		"com.xaamruda.bbm.controller",
 		"com.xaamruda.bbm.offers",
 		"com.xaamruda.bbm.roads",
