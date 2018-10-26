@@ -2,7 +2,6 @@ package com.xaamruda.bbm.users.info;
 
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.model.User;
-import com.xaamruda.bbm.users.model.UserCreationContainer;
 
 public class UserDataManager implements IUserDataManager {
 
@@ -23,8 +22,7 @@ public class UserDataManager implements IUserDataManager {
 	}
 
 	@Override
-	public User storeNewUser(UserCreationContainer container) {
-		User user = new User(container);
+	public User storeNewUser(User user) {
 		service.store(user);
 		return user;
 	}

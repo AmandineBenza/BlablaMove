@@ -7,7 +7,7 @@ import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.UserIdentificator;
 import com.xaamruda.bbm.users.info.UserDataManager;
-import com.xaamruda.bbm.users.model.UserCreationContainer;
+import com.xaamruda.bbm.users.model.User;
 
 /**
  * Entry point to users module. 
@@ -30,10 +30,14 @@ public class UsersIOHandler {
 		
 		if(!exists){
 			UserDataManager.getInstance().storeNewUser(
-					JsonUtils.getFromJson(wholeUserData, UserCreationContainer.class));
+					JsonUtils.getFromJson(wholeUserData, User.class));
 		}
 		
 		return exists;
+	}
+	
+	public void postNewUser(String userJson){
+		UserDataManager.getInstance().storeNewUser(JsonUtils.getFromJson(userJson, User.class));
 	}
 	
 }
