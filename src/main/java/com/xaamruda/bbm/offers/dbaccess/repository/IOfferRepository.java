@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import  com.xaamruda.bbm.offers.model.Offer;
+import  com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
-public interface IOfferRepository extends MongoRepository<Offer, Integer>{
+public interface IOfferRepository extends MongoRepository<PostedOffer, Integer>{
 
-	List<Offer> getByStatus(OfferStatus status);
+	List<PostedOffer> getByStatus(OfferStatus status);
 
-	List<Offer> getByOwnerID(int ownerID);
+	List<PostedOffer> getByOwnerID(int ownerID);
  
 }

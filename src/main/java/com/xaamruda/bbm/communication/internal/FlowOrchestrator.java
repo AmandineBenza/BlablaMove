@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
-import com.xaamruda.bbm.offers.model.Offer;
+import com.xaamruda.bbm.offers.model.PostedOffer;
 
 @Component
 public class FlowOrchestrator implements IFlowOrchestrator {
@@ -122,7 +122,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	}
 
 	// data are data used for calculation
-	private List<Offer> callGetFilteredOffers(String filters, String calculationData) {
+	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) {
 		return offerIO.retrieveOffers(filters, calculationData);
 	}
 	
