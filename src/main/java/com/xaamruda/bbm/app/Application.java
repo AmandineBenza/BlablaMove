@@ -9,7 +9,7 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 /**
  * BlablaMove entry point. 
  */
-@SpringBootApplication(scanBasePackages = {
+@SpringBootApplication(scanBasePackages = { 
 		"com.xaamruda.bbm.app",
 		"com.xaamruda.bbm.billing",
 		"com.xaamruda.bbm.commons",

@@ -10,18 +10,20 @@ services:
 
     #     depends_on:
     #         - mongo
-    mongo_BBm:
-      container_name: mongo_BBm
+    mongodbar:
+      container_name: mongodbar
       image: mongo:latest
       restart: always
       ports:
         - "27017:27017"
-    web:
+    application:
        build: .
        restart: always
        ports:
           - "8080:8080"
        depends_on:
-          - mongo_BBm
+          - mongodbar
        links:
-          - mongo_BBm
+          - mongodbar
+
+

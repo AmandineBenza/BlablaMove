@@ -40,6 +40,6 @@ public final class BBMLogger {
 	}
 	
 	public static void errorln(String msg) {
-		logger.error(msg + "\n");
+	//	logger.error(msg + "\n");
 	}
 }
