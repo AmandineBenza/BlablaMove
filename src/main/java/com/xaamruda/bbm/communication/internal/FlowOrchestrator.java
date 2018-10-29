@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
-import com.xaamruda.bbm.offers.model.Offer;
+import com.xaamruda.bbm.offers.model.PostedOffer;
 
 @Component
 public class FlowOrchestrator implements IFlowOrchestrator {
@@ -47,19 +47,13 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		Object content = null;
 
 		switch (event.getAsString()) {
-		case "create-offer": {
-			content = callMakeOffer(data.getAsString());
-			clazz = Boolean.class;
-			status = HttpStatus.OK;
-			break;
-		}
-
-		case "consult-offers": {
-			content = callGetFilteredOffers(jsonObject.get("filters").getAsString(), data.getAsString());
-			clazz = List.class;
-			status = HttpStatus.OK;
-			break;
-		}
+			case "create-user" : {
+				callCreateUser(data.getAsString());
+				clazz = String.class;
+				content = "User created.";
+				status = HttpStatus.OK;
+				break;
+			}
 
 		// user identification case
 		case "identify-user" : {
@@ -82,23 +76,58 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return new FlowOrchestrationResult(status, content, clazz);
 	}
 
-	// TODO verify prices
-	private boolean callMakeOffer(String offerInformation) {
-		return offerIO.postNewOffer(offerInformation);
-	}
-
-	// data are data used for calculation
-	private List<Offer> callGetFilteredOffers(String filters, String calculationData) {
-		return offerIO.retrieveOffers(filters, calculationData);
-	}
-	
 	/*
 	 * -------- OFFERS --------
 	 */
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public FlowOrchestrationResult orchestrateOffersEntryPoint(String jsonEvents) {
-		return null;
+		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
+		JsonElement event = jsonObject.get("event");
+		JsonElement data = jsonObject.get("data");
+
+		HttpStatus status;
+
+		Class clazz = null;
+		Object content = null;
+
+		switch (event.getAsString()) {
+			case "create-offer": {
+				content = callMakeOffer(data.getAsString());
+				clazz = Boolean.class;
+				status = HttpStatus.OK;
+				break;
+			}
+	
+			case "consult-offers": {
+				content = callGetFilteredOffers(jsonObject.get("filters").getAsString(), data.getAsString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			
+			default: {
+				status = HttpStatus.NOT_ACCEPTABLE;
+				content = null;
+				clazz = null;
+			}
+		}
+	
+		return new FlowOrchestrationResult(status, content, clazz);
+	}
+	
+	private boolean callMakeOffer(String offerJson) {
+		return offerIO.postNewOffer(offerJson);
+	}
+
+	// data are data used for calculation
+	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) {
+		return offerIO.retrieveOffers(filters, calculationData);
+	}
+	
+	private void callCreateUser(String userJson) {
+		userIO.postNewUser(userJson);
 	}
 
 }

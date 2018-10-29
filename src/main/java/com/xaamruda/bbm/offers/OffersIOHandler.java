@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.dbaccess.services.IOfferService;
-import com.xaamruda.bbm.offers.model.Offer;
+import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 import com.xaamruda.bbm.offers.search.engine.Filters;
 
@@ -23,7 +23,7 @@ public class OffersIOHandler {
 	public OffersIOHandler() {
 	}
 	
-	public List<Offer> getOffers() {
+	public List<PostedOffer> getOffers() {
 		return offerService.getAvailableOffers();
 	}
 
@@ -34,11 +34,11 @@ public class OffersIOHandler {
 	// TODO add filterChecker to add the "status.Available" filter ?
 	// TODO add check on offer if lenght == 0
 	// TODO
-	public List<Offer> retrieveOffers(String filters, String workData) {
-		List<Offer> offers = offerService
+	public List<PostedOffer> retrieveOffers(String filters, String workData) {
+		List<PostedOffer> offers = offerService
 				.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
 		
-		for (Offer offer : offers) {
+		for (PostedOffer offer : offers) {
 			calculatorHandler.doWork(workData, offer);
 		}
 		

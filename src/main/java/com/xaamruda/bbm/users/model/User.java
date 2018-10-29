@@ -2,45 +2,41 @@ package com.xaamruda.bbm.users.model;
 
 import org.springframework.data.annotation.Id;
 
-//@Entity
-//@Table(name = "user_tbl")
 public class User {
 
 	@Id
 	private String mail;
+	private String name;
 	private String address;
-	private long telNumber;
-	private long pointsAmount;
+	private String phone;
+	private String password;
+	private Integer pointsAmount;
 	
-	public User(){
-		
-	}
-	
-	public User(UserCreationContainer container){
-		this();
-	}
-	
-	public User(String mail, String address, long telNumber, long pointsAmount) {
+	public User(){}
+
+	public User(String mail, String name, String address, String phone, String password, Integer pointsAmount) {
 		this.mail = mail;
+		this.name = name;
 		this.address = address;
-		this.telNumber = telNumber;
+		this.phone = phone;
+		this.password = password;
 		this.pointsAmount = pointsAmount;
 	}
 
-	public long getTelNumber() {
-		return telNumber;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setTelNumber(long telNumber) {
-		this.telNumber = telNumber;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
-	public long getPointsAmount() {
-		return pointsAmount;
+	public String getName() {
+		return name;
 	}
 
-	public void setPointsAmount(long pointsAmount) {
-		this.pointsAmount = pointsAmount;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress() {
@@ -51,12 +47,28 @@ public class User {
 		this.address = address;
 	}
 
-	public String getMail() {
-		return mail;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getPointsAmount() {
+		return pointsAmount;
+	}
+
+	public void setPointsAmount(Integer pointsAmount) {
+		this.pointsAmount = pointsAmount;
 	}
 
 }
