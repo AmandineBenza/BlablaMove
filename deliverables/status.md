@@ -1,14 +1,12 @@
-Software Architecture  	         --
-Master II - IFI - AL 			 --
-2018 - 2019			 			 --
-University Nice-Sophia-Antipolis --
-								 --
-			- BILLING - 		 --
-								 --
-BENZA Amandine					 --
-TOUTAIN Xavier					 --
-MEERSMAN Rudy					 --
-FORNALI Damien					 --
+Software Architecture<br>  	        
+Master II - IFI - AL > 2018 - 2019<br>
+University Nice-Sophia-Antipolis / Polytech<br> 
+
+Members:			 
+* BENZA Amandine<br>				 
+* TOUTAIN Xavier<br>					 
+* MEERSMAN Rudy<br>					 
+* FORNALI Damien<br>
 -----------------------------------
 
 
@@ -203,3 +201,23 @@ Brainstorming RoadMap :
 >>>>> What are the blockers and risks ?
  - Fix sql driver / springboot coupling in order to mount a transactional database
  - Late on code content
+
+ ----------------------
+
+WEEK 44 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(24/10/18)
+
+>>>>> What was achieved this week ?
+ - Improvement of application user entry points
+ - Following of internal communication routing
+ - Following of data structures used inside our business logic
+ - Containerization of application
+
+>>>>> What is planned for the following week ?
+ - Speed up on implementing the core business logic
+ - Start to truly focus on billing module
+ - Create a proper first A to Z small scenario
+
+>>>>> What are the blockers and risks ?
+ - Late on code content
+ - Blocker/risk is the amount of projects to realize in parallel, it forces us to divide our time between all the projects. Result is that we work a little bit on each project but cannot be really productive.
