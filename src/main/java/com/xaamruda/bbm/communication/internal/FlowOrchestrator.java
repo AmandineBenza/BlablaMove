@@ -28,14 +28,14 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 	@Autowired
 	private com.xaamruda.bbm.roads.RoadsIOHandler roadsIO;
-	
-	public FlowOrchestrator() {}
 
-	
+	public FlowOrchestrator() {
+	}
+
 	/*
 	 * -------- USERS --------
 	 */
-	
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
@@ -44,63 +44,61 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
 		BBMLogger.infoln("Request's event and data recovered.");
-		
+
 		HttpStatus status;
 
 		Class clazz = null;
 		Object content = null;
 
 		switch (event.getAsString()) {
-			case "create-user" : {
-				BBMLogger.infoln("Event: " + event.getAsString());
-				callCreateUser(data.getAsString());
-				clazz = String.class;
-				content = "User created.";
-				status = HttpStatus.OK;
-				break;
-			}
+		case "create-user": {
+			BBMLogger.infoln("Event: " + event.getAsString());
+			callCreateUser(data.toString());
+			clazz = String.class;
+			content = "User created.";
+			status = HttpStatus.OK;
+			break;
+		}
 
 		// user identification case
-		case "identify-user" : {
+		case "identify-user": {
 			// identify or create if does not exist
 			JsonArray dataArray = data.getAsJsonArray();
 			boolean userExists = userIO.identifyUserByMailPlusPassword(data.getAsString(),
-					dataArray.get(0).getAsString(), dataArray.get(1).getAsString()); 
+					dataArray.get(0).getAsString(), dataArray.get(1).getAsString());
 			clazz = Boolean.class;
 			status = userExists ? HttpStatus.OK : HttpStatus.CREATED;
 			content = userExists;
 			break;
 		}
-		
-		//consult users
-		case "consult-users" : {
+
+		// consult users
+		case "consult-users": {
 			content = callGetUsers();
 			clazz = List.class;
 			List lcontent = (List) content;
-			if(content == null || lcontent == null || lcontent.isEmpty()) {
-				status = HttpStatus.NOT_FOUND;		
-			}
-			else {
+			if (content == null || lcontent == null || lcontent.isEmpty()) {
+				status = HttpStatus.NOT_FOUND;
+			} else {
 				status = HttpStatus.OK;
 			}
-			
+
 			data.getAsJsonObject().get("mail").getAsString();
-						
-			break;	
+
+			break;
 		}
-		
-		//consult user by mail
-		case "consult-user" : {
+
+		// consult user by mail
+		case "consult-user": {
 			content = callGetUser(data.getAsJsonObject().get("mail").getAsString());
 			clazz = User.class;
-			if(content == null) {
-				status = HttpStatus.NOT_FOUND;		
-			}
-			else {
+			if (content == null) {
+				status = HttpStatus.NOT_FOUND;
+			} else {
 				status = HttpStatus.OK;
 			}
-			
-			break;	
+
+			break;
 		}
 
 		default:
@@ -108,7 +106,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			content = null;
 			clazz = null;
 		}
-		
+
 		return new FlowOrchestrationResult(status, content, clazz);
 	}
 
@@ -129,30 +127,30 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		Object content = null;
 
 		switch (event.getAsString()) {
-			case "create-offer": {
-				content = callMakeOffer(data.getAsString());
-				clazz = Boolean.class;
-				status = HttpStatus.OK;
-				break;
-			}
-	
-			case "consult-offers": {
-				content = callGetFilteredOffers(jsonObject.get("filters").getAsString(), data.getAsString());
-				clazz = List.class;
-				status = HttpStatus.OK;
-				break;
-			}
-			
-			default: {
-				status = HttpStatus.NOT_ACCEPTABLE;
-				content = null;
-				clazz = null;
-			}
+		case "create-offer": {
+			content = callMakeOffer(data.toString());
+			clazz = Boolean.class;
+			status = HttpStatus.OK;
+			break;
 		}
-	
+
+		case "consult-offers": {
+			content = callGetFilteredOffers(jsonObject.get("filters").getAsString(), data.getAsString());
+			clazz = List.class;
+			status = HttpStatus.OK;
+			break;
+		}
+
+		default: {
+			status = HttpStatus.NOT_ACCEPTABLE;
+			content = null;
+			clazz = null;
+		}
+		}
+
 		return new FlowOrchestrationResult(status, content, clazz);
 	}
-	
+
 	private boolean callMakeOffer(String offerJson) {
 		return offerIO.postNewOffer(offerJson);
 	}
@@ -161,15 +159,15 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) {
 		return offerIO.retrieveOffers(filters, calculationData);
 	}
-	
+
 	private void callCreateUser(String userJson) {
 		userIO.postNewUser(userJson);
 	}
-	
+
 	private List<User> callGetUsers() {
 		return userIO.retrieveUsers();
 	}
-	
+
 	private User callGetUser(String mail) {
 		return userIO.retrieveUser(mail);
 	}

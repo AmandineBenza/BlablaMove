@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
-import com.xaamruda.bbm.users.dbaccess.service.UserService;
-import com.xaamruda.bbm.users.identification.UserIdentificator;
-import com.xaamruda.bbm.users.info.UserDataManager;
+import com.xaamruda.bbm.users.identification.IUserIdentificator;
+import com.xaamruda.bbm.users.info.IUserDataManager;
 import com.xaamruda.bbm.users.model.User;
 
 /**
@@ -23,18 +22,20 @@ public class UsersIOHandler {
 	private IUserService service;
 	
 	@Autowired
+	private IUserIdentificator identificator;
+	
+	@Autowired
+	private IUserDataManager dataManager;
+	
 	public UsersIOHandler() {
-		UserIdentificator.init(service);
-		UserDataManager.init(service);
 	}
 	
 	// TODO
 	public boolean identifyUserByMailPlusPassword(String wholeUserData, String userMail, String userPassword){
-		boolean exists = UserIdentificator.getInstance().identify(userMail, userPassword);
+		boolean exists = identificator.identify(userMail, userPassword);
 		
 		if(!exists){
-			UserDataManager.getInstance().storeNewUser(
-					JsonUtils.getFromJson(wholeUserData, User.class));
+			dataManager.storeNewUser(JsonUtils.getFromJson(wholeUserData, User.class));
 		}
 		
 		return exists;
@@ -42,7 +43,7 @@ public class UsersIOHandler {
 	
 	public void postNewUser(String userJson){
 		BBMLogger.infoln("Creating user...");
-		UserDataManager.getInstance().storeNewUser(JsonUtils.getFromJson(userJson, User.class));
+		dataManager.storeNewUser(JsonUtils.getFromJson(userJson, User.class));
 		BBMLogger.infoln("User created.");
 	}
 	
