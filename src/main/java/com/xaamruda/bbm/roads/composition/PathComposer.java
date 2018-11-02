@@ -31,10 +31,8 @@ public class PathComposer implements IPathComposer {
 		 if(cache.containsKey(localValue) ) {
 			 return cache.get(localValue);
 		 }
-		 
 		 int value = ((new Random().nextInt(950) + 50) / new Random().nextInt(500));
 		 cache.put(localValue, value);
 		 return value;
 	}
-
 }

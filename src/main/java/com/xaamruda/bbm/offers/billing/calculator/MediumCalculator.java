@@ -23,7 +23,7 @@ public class MediumCalculator {
 	 * @param distance
 	 * @return
 	 */
-	static Utils compute(List<PostedOffer> offers, int distance){
+	static public Utils compute(List<PostedOffer> offers, int distance){
 		if(cache.containsKey(distance) && Math.abs(validateCache.get(distance) - offers.size()) < CACHE_OFFSET) {
 			return cache.get(distance);
 		}

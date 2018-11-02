@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.offers.billing.calculator.Utils;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
 //Import du pif
@@ -19,7 +20,8 @@ public interface IOfferService {
 	List<PostedOffer> getAvailableOffers();
 	List<PostedOffer> getAvailableOffers(Query query); 
 	boolean changeOfferStatus(int id, OfferStatus status);
-	boolean createNewOffer(String jsonOffer);
+	Utils checkPrice(List<PostedOffer> offers, int distance);
+	boolean createNewOffer(PostedOffer offer);
 	
 	
 }

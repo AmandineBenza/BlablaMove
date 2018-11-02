@@ -120,7 +120,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-
+		
 		HttpStatus status;
 
 		Class clazz = null;

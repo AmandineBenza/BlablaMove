@@ -13,18 +13,18 @@ import com.xaamruda.bbm.roads.model.Path;
 public class RoadsIOHandler {
 
 	public RoadsIOHandler() {
-		
+
 	}
-	
+
 	// Mock
 	public String getPathComposition(String departureLocation, String arrivalLocation) {
 		Path path = PathComposer.getInstance().compose(departureLocation, arrivalLocation);
 		return JsonUtils.toJson(path);
 	}
-	
-	// Mock
-	public String getPathDistances(String departureLocation, String arrivalLocation) {
-			Path path = PathComposer.getInstance().compose(departureLocation, arrivalLocation);
-			return JsonUtils.toJson(path);
-		}
+
+
+	public int getPathDistances(String departureLocation, String arrivalLocation) {
+		int distance = PathComposer.getInstance().computeDistance(departureLocation, arrivalLocation);
+		return distance;
+	}
 }

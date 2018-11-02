@@ -8,5 +8,6 @@ import com.xaamruda.bbm.roads.model.Path;
 public interface IPathComposer {
 
 	public Path compose(String departureLocation, String arrivalLocation);
+	public int computeDistance(String departureLocation, String arrivalLocation);
 	
 }

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.offers.billing.calculator.MediumCalculator;
+import com.xaamruda.bbm.offers.billing.calculator.Utils;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 
 import ch.qos.logback.core.filter.Filter;
@@ -50,8 +53,7 @@ public class OfferService implements IOfferService {
 
 	
 	@Override
-	public boolean createNewOffer(String jsonOffer){
-		PostedOffer offer = JsonUtils.getFromJson(jsonOffer, PostedOffer.class);
+	public boolean createNewOffer(PostedOffer offer){
 		
 		if(offer != null){
 			offerRepository.insert(offer);
@@ -59,6 +61,11 @@ public class OfferService implements IOfferService {
 		return (offer != null);
 	}
 
+	@Override
+	public Utils checkPrice(List<PostedOffer> offers,int distance){
+		return MediumCalculator.getInstance().compute(offers, distance);
+	}
+	
 	@Override
 	public boolean changeOfferStatus(int id, OfferStatus status) {
 		Optional<PostedOffer> offer = offerRepository.findById(id);// .findOne(id);
