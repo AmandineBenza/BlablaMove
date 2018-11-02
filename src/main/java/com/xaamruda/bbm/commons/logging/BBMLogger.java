@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public final class BBMLogger {
+	
+	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
 
 	private static String dateInfo() {
-		return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()) + " | ";
+		return formatter.format(new Date()) + " | ";
 	}
 	
 	public static void info(String msg) {
