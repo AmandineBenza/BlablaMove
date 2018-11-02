@@ -22,10 +22,12 @@ public class PostedOffer {
     private String endCity;
     private Integer capacity; 
     private OfferStatus status;
+    private int distance;
     
 	public Integer getOfferID() {
 		return offerID;
 	}
+	
 	public void setOfferID(Integer offerID) {
 		this.offerID = offerID;
 	}
@@ -65,7 +67,13 @@ public class PostedOffer {
 	public void setStatus(OfferStatus status) {
 		this.status = status;
 	}
-    
-	//TODO toString offers
 
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+    
 }

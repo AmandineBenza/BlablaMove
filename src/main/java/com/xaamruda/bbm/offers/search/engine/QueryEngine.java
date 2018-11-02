@@ -24,4 +24,15 @@ public class QueryEngine {
 		}
 		return query;
 	}
+	
+	static public Query buildMongoQuery(int distance) {
+		Query query = new Query();
+		// TODO Query - Criteria - Evolve ->
+		// For now we decided that only town will affect availability
+		query.addCriteria(Criteria.where("distance").lt(distance + 10));
+		query.addCriteria(Criteria.where("distance").gt(distance - 10));
+
+		
+		return query;
+	}
 }

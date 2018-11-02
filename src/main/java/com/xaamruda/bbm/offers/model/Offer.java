@@ -22,6 +22,7 @@ public class Offer {
     private Integer price;
     private String StartAddress;
     private String EndAddress;
+    private int distance;
     private Integer capacity; 
     private Integer offerPrice;
     
@@ -102,6 +103,14 @@ public class Offer {
 	
 	public void setOfferPrice(Integer offerPrice) {
 		this.offerPrice = offerPrice;
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
     
 	//TODO toString offers

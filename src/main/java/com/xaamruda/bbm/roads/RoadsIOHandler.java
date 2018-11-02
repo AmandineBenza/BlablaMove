@@ -21,4 +21,10 @@ public class RoadsIOHandler {
 		Path path = PathComposer.getInstance().compose(departureLocation, arrivalLocation);
 		return JsonUtils.toJson(path);
 	}
+	
+	// Mock
+	public String getPathDistances(String departureLocation, String arrivalLocation) {
+			Path path = PathComposer.getInstance().compose(departureLocation, arrivalLocation);
+			return JsonUtils.toJson(path);
+		}
 }

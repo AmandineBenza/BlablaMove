@@ -23,6 +23,8 @@ public class Filters {
 
 	public OfferStatus status;
 	
+	public int distance; 
+	
 	public Filters(){
 		
 	}
