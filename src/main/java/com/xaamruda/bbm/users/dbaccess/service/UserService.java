@@ -14,11 +14,12 @@ import com.xaamruda.bbm.users.model.User;
 @Service("UserService")
 public class UserService implements IUserService {
 
-	 @Autowired
-	 private IUserRepository repository;
-	
-	 public UserService() {}
-	
+	@Autowired
+	private IUserRepository repository;
+
+	public UserService() {
+	}
+
 	@Override
 	public User getUserByMail(String mail) {
 		BBMLogger.infoln("Database access..");
@@ -27,9 +28,9 @@ public class UserService implements IUserService {
 
 	@Override
 	public void store(User user) {
-		// srepository.save(user);
+		repository.save(user);
 	}
-	
+
 	@Override
 	public List<User> getAllUsers() {
 		BBMLogger.infoln("Database access..");

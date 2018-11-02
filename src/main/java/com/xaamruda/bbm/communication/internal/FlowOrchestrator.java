@@ -2,8 +2,6 @@ package com.xaamruda.bbm.communication.internal;
 
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

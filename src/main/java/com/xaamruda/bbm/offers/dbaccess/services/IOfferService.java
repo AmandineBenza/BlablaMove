@@ -7,19 +7,17 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
-//Import du pif
-import ch.qos.logback.core.filter.Filter;
-
 public interface IOfferService {
-	List<PostedOffer> getAllArchivedOffers();
-	List<PostedOffer> getOffersByOwnerID(int OwnerID);
-	
-	//???
-	//List<ClientOffer> askOfferByPrice(Filter f);
-	List<PostedOffer> getAvailableOffers();
-	List<PostedOffer> getAvailableOffers(Query query); 
-	boolean changeOfferStatus(int id, OfferStatus status);
-	boolean createNewOffer(String jsonOffer);
-	
-	
+	public List<PostedOffer> getAllArchivedOffers();
+
+	public List<PostedOffer> getOffersByOwnerID(int OwnerID);
+
+	public List<PostedOffer> getAvailableOffers();
+
+	public List<PostedOffer> getAvailableOffers(Query query);
+
+	public boolean changeOfferStatus(int id, OfferStatus status);
+
+	public boolean createNewOffer(String jsonOffer);
+
 }
