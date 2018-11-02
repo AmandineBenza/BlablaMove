@@ -2,6 +2,8 @@ package com.xaamruda.bbm.communication.internal;
 
 import java.util.List;
 
+import javax.validation.constraints.Null;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -11,6 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.users.model.User;
 
 @Component
 public class FlowOrchestrator implements IFlowOrchestrator {
@@ -65,6 +68,21 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			status = userExists ? HttpStatus.OK : HttpStatus.CREATED;
 			content = userExists;
 			break;
+		}
+		
+		//consult user
+		case "consult-users" : {
+			content = callGetUsers();
+			clazz = List.class;
+			List lcontent = (List) content;
+			if(content == null || lcontent == null || lcontent.isEmpty()) {
+				status = HttpStatus.NOT_FOUND;		
+			}
+			else {
+				status = HttpStatus.OK;
+			}
+						
+			break;	
 		}
 
 		default:
@@ -128,6 +146,10 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	
 	private void callCreateUser(String userJson) {
 		userIO.postNewUser(userJson);
+	}
+	
+	private List<User> callGetUsers() {
+		return userIO.retrieveUsers();
 	}
 
 }

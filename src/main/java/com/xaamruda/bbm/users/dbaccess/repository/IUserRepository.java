@@ -10,5 +10,6 @@ public interface IUserRepository extends CrudRepository<User, String> {
 	// public interface IUserRepository extends JpaRepository<User, String> {
 
 	public List<User> findByMail(String mail);
+	public List<User> findAll();
 
 }

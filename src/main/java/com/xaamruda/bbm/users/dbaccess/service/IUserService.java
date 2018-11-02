@@ -10,4 +10,7 @@ public interface IUserService {
 
 	public void store(User user);
 	
+	public List<User> getAllUsers();
+
+	
 }
