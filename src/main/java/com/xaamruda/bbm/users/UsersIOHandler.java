@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.UserIdentificator;
 import com.xaamruda.bbm.users.info.UserDataManager;
@@ -37,7 +38,9 @@ public class UsersIOHandler {
 	}
 	
 	public void postNewUser(String userJson){
+		BBMLogger.info("Creating user...");
 		UserDataManager.getInstance().storeNewUser(JsonUtils.getFromJson(userJson, User.class));
+		BBMLogger.info("User created.");
 	}
 	
 }

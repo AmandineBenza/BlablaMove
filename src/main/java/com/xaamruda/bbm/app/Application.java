@@ -26,13 +26,13 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 public class Application {
 	
 	public static void main(String[] args) {
-		init();
 		SpringApplication.run(Application.class);
+		init();
 	}
 	
 	private static void init() {
 		BBMLogger.init();
-		BBMLogger.infoln("Launching BlablaMove...");
+		BBMLogger.info(">> Welcome to BlablaMove <<");
 	}
 	
 }
