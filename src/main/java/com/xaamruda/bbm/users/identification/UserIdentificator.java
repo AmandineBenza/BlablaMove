@@ -1,24 +1,23 @@
 package com.xaamruda.bbm.users.identification;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.model.User;
 
+@Component
 public class UserIdentificator implements IUserIdentificator {
 
-	private static IUserIdentificator instance;
+	@Autowired
 	private IUserService service;
 
-	private UserIdentificator(IUserService userService) {
+	public UserIdentificator(IUserService userService) {
 		this.service = userService;
 	}
-
-	public static IUserIdentificator init(IUserService service) {
-		instance = new UserIdentificator(service);
-		return instance;
-	}
-
-	public static IUserIdentificator getInstance() {
-		return instance;
+	
+	public UserIdentificator() {
+		// 
 	}
 
 	@Override
