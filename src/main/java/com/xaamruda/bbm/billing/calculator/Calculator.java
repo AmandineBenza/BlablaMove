@@ -1,5 +1,9 @@
 package com.xaamruda.bbm.billing.calculator;
 
+
+/**
+ * Class for billing calculation
+ */
 public class Calculator implements ICalculator {
 
 	private double companyPoints;
@@ -11,24 +15,27 @@ public class Calculator implements ICalculator {
 	}
 
 	@Override
-	public void calcul_price_base(int weight, int distance, int volume, int day) {
+	public void calcul_price_base(double weight, double distance, double volume, double day) {
 		double calcul = fullAddition(weight, distance, volume, day);
-		this.companyPoints = (calcul / 100) * 10;
-		this.userPoints = (calcul / 100) * 90;
+		this.userPoints = (calcul / 100.0);
 	}
 
 	@Override
-	public void advance_date_with_offer(int date, int offer){
-		int res = 0;
-		
-		if(date <= 3){
-			res = 5 + offer;
-		} else {
-			res = 2 + offer;
-		}
-		
-		this.companyPoints = (res / 100) * 10;
-		this.userPoints = (res / 100) * 90;
+	public void advance_date_with_offer(double date, int offer){
+		double res = offer + conversionDay(date);
+		this.userPoints = (res / 100.0);
+	}
+
+	@Override
+	public void finalConfirmation(double point){
+		this.userPoints = (point/100.0) * 90.0;
+		this.companyPoints = (point/100.0) * 10.0;
+	}
+
+	@Override
+	public void reset(){
+		this.userPoints = 0.0;
+		this.companyPoints = 0.0;
 	}
 
 	//////////// SETTER ////////////
@@ -59,18 +66,24 @@ public class Calculator implements ICalculator {
 
 	//////////// CONVERTER ////////////
 	private double conversionWeight(double weight) {
-		return weight;
+		return Math.floor(weight/1.0);
 	}
 
 	private double conversionDistance(double distance) {
-		return distance;
+		return Math.floor(distance/1.0);
 	}
 
 	private double conversionVolume(double volume) {
-		return volume;
+		return Math.floor(volume/1.0);
 	}
 
 	private double conversionDay(double day) {
-		return day;
+		double res = 0;
+		if(day > 3){
+			res = 10.0;
+		}else{
+			res = 5.0;
+		}
+		return res;
 	}
 }
