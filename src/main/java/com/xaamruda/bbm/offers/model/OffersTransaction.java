@@ -12,7 +12,8 @@ public class OffersTransaction {
     private Integer volume; 
     private Integer weigth; 
     private Integer finalPrice;
-
+    //TODO Damoy rename
+    private Integer dateBeforeOrder;
     private String askforConfirmationDate;
     private String confirmationDate;
     private String clientDepositDate;
@@ -130,6 +131,16 @@ public class OffersTransaction {
 
 	public void setStatus(OfferStatus status) {
 		this.status = status;
+	}
+
+
+	public Integer getDateBeforeOrder() {
+		return dateBeforeOrder;
+	}
+
+
+	public void setDateBeforeOrder(Integer dateBeforeOrder) {
+		this.dateBeforeOrder = dateBeforeOrder;
 	}
     
 

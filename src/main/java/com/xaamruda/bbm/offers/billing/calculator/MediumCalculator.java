@@ -1,0 +1,43 @@
+package com.xaamruda.bbm.offers.billing.calculator;
+
+import java.math.MathContext;
+import java.util.HashMap;
+import java.util.List;
+
+import com.xaamruda.bbm.offers.model.PostedOffer;
+
+public class MediumCalculator {
+	static private HashMap<Integer, Utils> cache = new HashMap<>();
+	static private HashMap<Integer, Integer> validateCache = new HashMap(); 
+	static private int CACHE_OFFSET = 5; 
+	/***
+	 * Basicaly the clients pay 1 point for 1 killometer 
+	 * 
+	 * @param offers The list of offer
+	 * @param distance
+	 * @return
+	 */
+	static Utils compute(List<PostedOffer> offers, int distance){
+		if(cache.containsKey(distance) && Math.abs(validateCache.get(distance) - offers.size()) < CACHE_OFFSET) {
+			return cache.get(distance);
+		}
+		
+		int value = 0;
+		
+		for(PostedOffer offer  : offers) {
+			value += offer.getPrice();
+		}
+		if(offers.isEmpty()) {
+			return new Utils(distance * 3, distance / 2,distance );
+		}
+		else {
+			
+			int average = value/offers.size();
+			Utils range = new Utils(average *3, average / 2,average );
+			cache.put(distance, range);
+			validateCache.put(distance,offers.size());
+			return range;
+
+		}
+	}
+}

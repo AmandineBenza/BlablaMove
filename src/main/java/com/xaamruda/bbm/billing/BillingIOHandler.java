@@ -1,9 +1,12 @@
-package main.java.com.xaamruda.bbm.billing;
+package com.xaamruda.bbm.billing;
 
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.xaamruda.bbm.billing.calculator.Calculator;
 import com.xaamruda.bbm.offers.model.Offer;
+import com.xaamruda.bbm.offers.model.OffersTransaction;
+import com.xaamruda.bbm.offers.model.PostedOffer;
 
 /**
  * Class for Calculator entry point.
@@ -17,11 +20,12 @@ public class BillingIOHandler {
 	 * @param workData string of the object user
 	 * @return the calculation of point for user
 	 */
-	public Offer calcul_without_offer(String workData) {
-		Offer user = workData_Parser(workData);
-		facturation.calcul_price_base(user.getWeight(),user.getDistance(),user.getVolume(),user.getDay());
-		user.setFinalPrice(facturation.getUserPoint());
-		return reponse_flow_parser(user);
+	//TODO distance
+	public String calcul_without_offer(String workData) {
+		OffersTransaction offer = workData_Parser(workData);
+		facturation.calcul_price_base(offer.getWeigth(),0,offer.getVolume(),offer.getDateBeforeOrder());
+		offer.setFinalPrice((int)facturation.getUserPoint());
+		return reponse_flow_parser(offer);
 	}
 
 	/**
@@ -30,10 +34,10 @@ public class BillingIOHandler {
 	 * @param offer object for offer
 	 * @return the calculation of point for user
 	 */
-	public Offer calcul_with_offer(String workData, Offer offer) {
-		Offer user = workData_Parser(workData);
-		facturation.advance_date_with_offer(offer.getPrice(),user.getFinalPrice(),user.getDay());
-		user.setFinalPrice(facturation.getUserPoint());
+	public String calcul_with_offer(String workData, PostedOffer offer) {
+		OffersTransaction user = workData_Parser(workData);
+		facturation.advance_date_with_offer(offer.getPrice(),user.getFinalPrice());
+		user.setFinalPrice((int) facturation.getUserPoint());
 		return reponse_flow_parser(offer);
 	}
 	/**
@@ -41,7 +45,7 @@ public class BillingIOHandler {
 	 * @param type object we want to parse in the response
 	 * @return String of the object
 	 */
-	public String reponse_flow_parser(Class<?> type) {
+	public String reponse_flow_parser(Object type) {
 		String res = "";
 		Gson gson = new Gson();
 		res = gson.toJson(type);
@@ -53,9 +57,9 @@ public class BillingIOHandler {
 	 * @param workData string of the object user
 	 * @return the object user
 	 */
-	private Offer workData_Parser(String workData) {
+	private OffersTransaction workData_Parser(String workData) {
 		Gson gson = new Gson();
-		UserOffer res = gson.fromJson(workData,UserOffer.class);
+		OffersTransaction res = gson.fromJson(workData, OffersTransaction.class);
 		return res;
 	}
 }

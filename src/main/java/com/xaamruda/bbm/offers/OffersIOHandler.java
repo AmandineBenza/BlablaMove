@@ -35,13 +35,19 @@ public class OffersIOHandler {
 	// TODO add check on offer if lenght == 0
 	// TODO
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
-		List<PostedOffer> offers = offerService
-				.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
+		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
 		
 		for (PostedOffer offer : offers) {
-			calculatorHandler.doWork(workData, offer);
+			calculatorHandler.calcul_with_offer(workData, offer);
 		}
 		
 		return offers;
 	}
+	
+	public List<PostedOffer> retrieve(String filters, String workData) {
+		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
+		
+		return offers;
+	}
+	
 }
