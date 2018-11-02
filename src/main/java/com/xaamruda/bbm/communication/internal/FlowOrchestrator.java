@@ -53,14 +53,14 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		switch (event.getAsString()) {
 			case "create-user" : {
 				BBMLogger.infoln("Event: " + event.getAsString());
-				callCreateUser(data.getAsString());
+				callCreateUser(data.toString());
 				clazz = String.class;
 				content = "User created.";
 				status = HttpStatus.OK;
 				break;
 			}
 
-		// user identification case
+		// user identification case TODO
 		case "identify-user" : {
 			// identify or create if does not exist
 			BBMLogger.infoln("Event: " + event.getAsString());
@@ -73,7 +73,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			break;
 		}
 		
-		//consult users
+		// consult users TODO
 		case "consult-users" : {
 			BBMLogger.infoln("Event: " + event.getAsString());
 			content = callGetUsers();
@@ -86,12 +86,10 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				status = HttpStatus.OK;
 			}
 			
-			data.getAsJsonObject().get("mail").getAsString();
-						
 			break;	
 		}
 		
-		//consult user by mail
+		//consult user by mail TODO
 		case "consult-user" : {
 			BBMLogger.infoln("Event: " + event.getAsString());
 			content = callGetUser(data.getAsJsonObject().get("mail").getAsString());
@@ -133,16 +131,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		Class clazz = null;
 		Object content = null;
 
-		switch (event.getAsString()) {
+		switch (event.getAsString()) { // TODO
 			case "create-offer": {
 				BBMLogger.infoln("Event: " + event.getAsString());
-				content = callMakeOffer(data.getAsString());
+				content = callMakeOffer(data.toString());
 				clazz = Boolean.class;
 				status = HttpStatus.OK;
 				break;
 			}
 	
-			case "consult-offers": {
+			case "consult-offers": { // TODO
 				BBMLogger.infoln("Event: " + event.getAsString());
 				content = callGetFilteredOffers(jsonObject.get("filters").getAsString(), data.getAsString());
 				clazz = List.class;
