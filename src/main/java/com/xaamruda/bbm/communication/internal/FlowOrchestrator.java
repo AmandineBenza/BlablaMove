@@ -38,11 +38,11 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
-		BBMLogger.info("Handling user request...");
+		BBMLogger.infoln("Handling user request...");
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-		BBMLogger.info("Request's event and data recovered.");
+		BBMLogger.infoln("Request's event and data recovered.");
 		
 		HttpStatus status;
 
@@ -51,7 +51,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 		switch (event.getAsString()) {
 			case "create-user" : {
-				BBMLogger.info("Event: " + event.getAsString());
+				BBMLogger.infoln("Event: " + event.getAsString());
 				callCreateUser(data.getAsString());
 				clazz = String.class;
 				content = "User created.";

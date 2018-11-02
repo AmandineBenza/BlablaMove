@@ -32,10 +32,10 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "USERS/", method = RequestMethod.POST)
 	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents) {
-		BBMLogger.info("Listened new event on \"BBM/USERS\".");
+		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateUsersEntryPoint(jsonEvents);
-		BBMLogger.info("Got response from the system !");
-		BBMLogger.info("[Content:" + result.getContent() + "]");
+		BBMLogger.infoln("Got response from the system !");
+		BBMLogger.infoln("[Content:" + result.getContent() + "]");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());
 	}
 	
