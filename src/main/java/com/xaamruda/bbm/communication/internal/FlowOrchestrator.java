@@ -70,7 +70,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			break;
 		}
 		
-		//consult user
+		//consult users
 		case "consult-users" : {
 			content = callGetUsers();
 			clazz = List.class;
@@ -81,7 +81,23 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			else {
 				status = HttpStatus.OK;
 			}
+			
+			data.getAsJsonObject().get("mail").getAsString();
 						
+			break;	
+		}
+		
+		//consult user by mail
+		case "consult-user" : {
+			content = callGetUser(data.getAsJsonObject().get("mail").getAsString());
+			clazz = User.class;
+			if(content == null) {
+				status = HttpStatus.NOT_FOUND;		
+			}
+			else {
+				status = HttpStatus.OK;
+			}
+			
 			break;	
 		}
 
@@ -150,6 +166,10 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	
 	private List<User> callGetUsers() {
 		return userIO.retrieveUsers();
+	}
+	
+	private User callGetUser(String mail) {
+		return userIO.retrieveUser(mail);
 	}
 
 }

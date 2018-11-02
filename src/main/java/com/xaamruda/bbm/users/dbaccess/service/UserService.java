@@ -19,9 +19,8 @@ public class UserService implements IUserService {
 	 public UserService() {}
 	
 	@Override
-	public List<User> getUsersByMail(String mail) {
-		// return repository.findByMail(mail);
-		return null;
+	public User getUserByMail(String mail) {
+		return repository.findByMail(mail);
 	}
 
 	@Override

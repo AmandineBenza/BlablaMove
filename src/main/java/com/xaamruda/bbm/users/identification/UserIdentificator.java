@@ -23,7 +23,8 @@ public class UserIdentificator implements IUserIdentificator {
 	@Override
 	// TODO see password ?
 	public boolean identify(String userMail, String userPassword) {
-		return service.getUsersByMail(userMail).size() > 0;
+		//return service.getUsersByMail(userMail).size() > 0;
+		return (service.getUserByMail(userMail) != null);
 	}
 
 }

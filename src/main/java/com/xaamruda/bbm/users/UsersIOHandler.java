@@ -51,4 +51,9 @@ public class UsersIOHandler {
 		return users;
 	}
 	
+	public User retrieveUser(String mail) {
+		User user = service.getUserByMail(mail);
+		return user;
+	}
+	
 }
