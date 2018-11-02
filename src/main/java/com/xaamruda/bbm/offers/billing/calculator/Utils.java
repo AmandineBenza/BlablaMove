@@ -4,14 +4,15 @@ public class Utils {
 	private int supValue;
 	private int infValue;
 	private int averageValue;
-	
+
 	public Utils(int supValue, int infValue, int averageValue) {
 		super();
 		this.supValue = supValue;
 		this.infValue = infValue;
 		this.averageValue = averageValue;
 	}
-    //----------------------GETTERS---------------------
+
+	// ----------------------GETTERS---------------------
 	public int getSupValue() {
 		return supValue;
 	}
@@ -35,5 +36,5 @@ public class Utils {
 	public void setAverageValue(int averageValue) {
 		this.averageValue = averageValue;
 	}
-	
+
 }
