@@ -47,11 +47,13 @@ public class UsersIOHandler {
 	}
 	
 	public List<User> retrieveUsers() {
+		BBMLogger.infoln("Processing...");
 		List<User> users = service.getAllUsers();
 		return users;
 	}
 	
 	public User retrieveUser(String mail) {
+		BBMLogger.infoln("Processing...");
 		User user = service.getUserByMail(mail);
 		return user;
 	}

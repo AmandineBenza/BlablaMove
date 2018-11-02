@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.billing.calculator.Utils;
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.dbaccess.services.IOfferService;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
@@ -17,7 +18,7 @@ import com.xaamruda.bbm.offers.search.engine.Filters;
 
 @Component
 public class OffersIOHandler {
-
+	
 	@Autowired
 	private IOfferService offerService;
 
@@ -29,12 +30,14 @@ public class OffersIOHandler {
 
 	public OffersIOHandler() {
 	}
-
+	
 	public List<PostedOffer> getOffers() {
+		BBMLogger.infoln("Processing...");
 		return offerService.getAvailableOffers();
 	}
 
 	public boolean postNewOffer(String jsonObject) {
+		BBMLogger.infoln("Processing...");
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
 
 		int distance = pathHandler.getPathDistances(offer.getStartCity(), offer.getEndCity());
@@ -50,6 +53,7 @@ public class OffersIOHandler {
 	// TODO add filterChecker to add the "status.Available" filter ?
 	// TODO add check on offer if length == 0
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
+		BBMLogger.infoln("Processing...");
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
 		//TODO lol |
 		for (PostedOffer offer : offers) {
@@ -60,6 +64,7 @@ public class OffersIOHandler {
 	}
 
 	public String validate(String filters, String workData) {
+		BBMLogger.infoln("Processing...");
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
 		int distance = pathHandler.getPathDistances(fil.startAddress, fil.endAddress);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
