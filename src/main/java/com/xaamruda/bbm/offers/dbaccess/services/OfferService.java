@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 
 import ch.qos.logback.core.filter.Filter;
@@ -27,23 +28,27 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<PostedOffer> getAllArchivedOffers() {
+		BBMLogger.infoln("Database access...");
 		return offerRepository.getByStatus(OfferStatus.CLOSED);
 
 	}
 
 	@Override
 	public List<PostedOffer> getOffersByOwnerID(int OwnerID) {
+		BBMLogger.infoln("Database access...");
 		return offerRepository.getByOwnerID(OwnerID);
 	}
 
 	
 	@Override
 	public List<PostedOffer> getAvailableOffers() {
+		BBMLogger.infoln("Database access...");
 		return offerRepository.getByStatus(OfferStatus.POSTED);
 	}
 
 	@Override
 	public List<PostedOffer> getAvailableOffers(Query query) {
+		BBMLogger.infoln("Database access...");
 		List<PostedOffer> offers = mongoTemplate.find(query, PostedOffer.class);
 		return offers;
 	}
@@ -51,6 +56,7 @@ public class OfferService implements IOfferService {
 	
 	@Override
 	public boolean createNewOffer(String jsonOffer){
+		BBMLogger.infoln("Database access...");
 		PostedOffer offer = JsonUtils.getFromJson(jsonOffer, PostedOffer.class);
 		
 		if(offer != null){
@@ -61,6 +67,7 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public boolean changeOfferStatus(int id, OfferStatus status) {
+		BBMLogger.infoln("Database access...");
 		Optional<PostedOffer> offer = offerRepository.findById(id);// .findOne(id);
 		if (offer.isPresent()) {
 			offer.get().setStatus(status);
