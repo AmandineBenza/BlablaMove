@@ -48,11 +48,12 @@ public class OfferService implements IOfferService {
 		return offers;
 	}
 
-	// TODO
+	
 	@Override
-	public boolean createNewOffer(String jsonOffer) {
+	public boolean createNewOffer(String jsonOffer){
 		PostedOffer offer = JsonUtils.getFromJson(jsonOffer, PostedOffer.class);
-		if (offer != null) {
+		
+		if(offer != null){
 			offerRepository.insert(offer);
 		}
 		return (offer != null);

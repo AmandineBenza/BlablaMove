@@ -10,6 +10,12 @@ public class MediumCalculator {
 	static private HashMap<Integer, Utils> cache = new HashMap<>();
 	static private HashMap<Integer, Integer> validateCache = new HashMap(); 
 	static private int CACHE_OFFSET = 5; 
+	
+	static private MediumCalculator instance = new  MediumCalculator();
+	
+	private MediumCalculator() {
+		
+	}
 	/***
 	 * Basicaly the clients pay 1 point for 1 killometer 
 	 * 
@@ -40,4 +46,8 @@ public class MediumCalculator {
 
 		}
 	}
+	public static MediumCalculator getInstance() {
+		return instance;
+	}
+
 }

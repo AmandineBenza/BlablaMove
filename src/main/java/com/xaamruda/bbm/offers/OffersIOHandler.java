@@ -3,6 +3,7 @@ package com.xaamruda.bbm.offers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.Filter;
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
@@ -32,20 +33,23 @@ public class OffersIOHandler {
 	}
 
 	// TODO add filterChecker to add the "status.Available" filter ?
-	// TODO add check on offer if lenght == 0
-	// TODO
+	// TODO add check on offer if length == 0
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
-		
+		//TODO lol |
 		for (PostedOffer offer : offers) {
-			calculatorHandler.calcul_with_offer(workData, offer);
+//			calculatorHandler.calculatorHandler(workData, offer);
+//			calculatorHandler.
 		}
 		
 		return offers;
 	}
 	
 	public List<PostedOffer> retrieve(String filters, String workData) {
-		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(JsonUtils.getFromJson(filters, Filters.class)));
+		//TODO XD
+		int distance = 0 ;
+		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
+		
 		
 		return offers;
 	}
