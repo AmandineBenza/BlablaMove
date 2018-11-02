@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.users.dbaccess.repository.IUserRepository;
 import com.xaamruda.bbm.users.model.User;
 
@@ -21,6 +22,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public User getUserByMail(String mail) {
+		BBMLogger.infoln("Database access..");
 		return repository.findByMail(mail);
 	}
 
@@ -31,6 +33,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<User> getAllUsers() {
+		BBMLogger.infoln("Database access..");
 		return repository.findAll();
 	}
 
