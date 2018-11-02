@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrationResult;
 import com.xaamruda.bbm.communication.internal.IFlowOrchestrator;
 
@@ -31,7 +32,10 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "USERS/", method = RequestMethod.POST)
 	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents) {
+		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateUsersEntryPoint(jsonEvents);
+		BBMLogger.infoln("Got response from the system !");
+		BBMLogger.infoln("[Content:" + result.getContent() + "]");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());
 	}
 	

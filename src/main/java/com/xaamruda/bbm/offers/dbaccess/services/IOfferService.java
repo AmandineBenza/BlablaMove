@@ -8,20 +8,22 @@ import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.billing.calculator.Utils;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
-//Import du pif
-import ch.qos.logback.core.filter.Filter;
 
 public interface IOfferService {
-	List<PostedOffer> getAllArchivedOffers();
-	List<PostedOffer> getOffersByOwnerID(int OwnerID);
 	
-	//???
-	//List<ClientOffer> askOfferByPrice(Filter f);
-	List<PostedOffer> getAvailableOffers();
-	List<PostedOffer> getAvailableOffers(Query query); 
-	boolean changeOfferStatus(int id, OfferStatus status);
+	
 	Utils checkPrice(List<PostedOffer> offers, int distance);
+	
 	boolean createNewOffer(PostedOffer offer);
 	
+	public List<PostedOffer> getAllArchivedOffers();
+
+	public List<PostedOffer> getOffersByOwnerID(int OwnerID);
+
+	public List<PostedOffer> getAvailableOffers();
+
+	public List<PostedOffer> getAvailableOffers(Query query);
+
+	public boolean changeOfferStatus(int id, OfferStatus status);
 	
 }

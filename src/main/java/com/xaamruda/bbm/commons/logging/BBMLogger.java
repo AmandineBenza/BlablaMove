@@ -3,43 +3,36 @@ package com.xaamruda.bbm.commons.logging;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
-
 public final class BBMLogger {
-
-	private final static Logger logger = Logger.getLogger(BBMLogger.class);
-	private final static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-	public static void dateInfo() {
-		info(formatter.format(new Date()) + " | ");
-	}
 	
-	public static void init() {
-		dateInfo();
-		info("BBMLogger initialized.");
+	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
+
+	private static String dateInfo() {
+		return formatter.format(new Date()) + " | ";
 	}
 	
 	public static void info(String msg) {
-		logger.info(msg);
+		System.out.print("[INFO|" + dateInfo() + msg + "]");
 	}
-	
+
 	public static void debug(String msg) {
-		logger.debug(msg);
+		System.out.print("[DEBUG|" + dateInfo() + msg + "]");
 	}
-	
+
 	public static void error(String msg) {
-		logger.error(msg);
+		System.out.print("[ERROR|" + dateInfo() + msg + "]");
 	}
 	
 	public static void infoln(String msg) {
-		logger.info(msg + "\n");
+		System.out.println("[INFO|" + dateInfo() + msg + "]");
 	}
-	
+
 	public static void debugln(String msg) {
-		logger.debug(msg + "\n");
+		System.out.println("[DEBUG|" + dateInfo() + msg + "]");
+	}
+
+	public static void errorln(String msg) {
+		System.out.println("[ERROR|" + dateInfo() + msg + "]");
 	}
 	
-	public static void errorln(String msg) {
-	//	logger.error(msg + "\n");
-	}
 }

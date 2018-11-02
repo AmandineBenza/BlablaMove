@@ -17,7 +17,6 @@ import com.xaamruda.bbm.offers.billing.calculator.MediumCalculator;
 import com.xaamruda.bbm.offers.billing.calculator.Utils;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 
-import ch.qos.logback.core.filter.Filter;
 
 @Transactional
 @Service("OfferService")
@@ -76,4 +75,8 @@ public class OfferService implements IOfferService {
 		}
 		return false;
 	}
+
+	
+
+	
 }

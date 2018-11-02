@@ -39,20 +39,20 @@ public class Calculator implements ICalculator {
 	}
 
 	//////////// SETTER ////////////
-	public void setSocityPoint(int total) {
+	public void setCompanyPoints(int total) {
 		this.companyPoints = total;
 	}
 
-	public void setUserPoint(int total) {
+	public void setUserPoints(int total) {
 		this.companyPoints = total;
 	}
 
 	//////////// GETTER ////////////
-	public double getSocityPoint() {
+	public double getCompanyPoints() {
 		return this.companyPoints;
 	}
 
-	public double getUserPoint() {
+	public double getUserPoints() {
 		return this.userPoints;
 	}
 

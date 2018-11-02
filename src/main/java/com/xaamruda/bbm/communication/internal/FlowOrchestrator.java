@@ -2,8 +2,6 @@ package com.xaamruda.bbm.communication.internal;
 
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -12,6 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.users.model.User;
 
@@ -40,10 +39,12 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
+		BBMLogger.infoln("Handling user request...");
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-
+		BBMLogger.infoln("Request's event and data recovered.");
+		
 		HttpStatus status;
 
 		Class clazz = null;
@@ -51,6 +52,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 		switch (event.getAsString()) {
 			case "create-user" : {
+				BBMLogger.infoln("Event: " + event.getAsString());
 				callCreateUser(data.getAsString());
 				clazz = String.class;
 				content = "User created.";
