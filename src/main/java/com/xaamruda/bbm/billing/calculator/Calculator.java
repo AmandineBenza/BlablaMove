@@ -1,7 +1,5 @@
 package com.xaamruda.bbm.billing.calculator;
 
-import com.xaamruda.bbm.commons.logging.BBMLogger;
-
 /**
  * Class for billing calculation
  */
@@ -29,37 +27,31 @@ public class Calculator implements ICalculator {
 
 	@Override
 	public void finalConfirmation(double point){
-		BBMLogger.infoln("Computing points repartition...");
 		this.userPoints = (point/100.0) * 90.0;
 		this.companyPoints = (point/100.0) * 10.0;
 	}
 
 	@Override
 	public void reset(){
-		BBMLogger.infoln("Points reset.");
 		this.userPoints = 0.0;
 		this.companyPoints = 0.0;
 	}
 
 	//////////// SETTER ////////////
 	public void setCompanyPoints(int total) {
-		BBMLogger.infoln("Setting company points...");
 		this.companyPoints = total;
 	}
 
 	public void setUserPoints(int total) {
-		BBMLogger.infoln("Setting user points...");
 		this.companyPoints = total;
 	}
 
 	//////////// GETTER ////////////
 	public double getCompanyPoints() {
-		BBMLogger.infoln("Retrieving company points...");
 		return this.companyPoints;
 	}
 
 	public double getUserPoints() {
-		BBMLogger.infoln("Retrieving user points...");
 		return this.userPoints;
 	}
 
@@ -85,12 +77,6 @@ public class Calculator implements ICalculator {
 	}
 
 	private double conversionDay(double day) {
-		double res = 0;
-		if(day > 3){
-			res = 10.0;
-		}else{
-			res = 5.0;
-		}
-		return res;
+		return day > 3 ? 10.0 : 5.0;
 	}
 }
