@@ -49,15 +49,13 @@ public class OffersIOHandler {
 	public String postNewOffer(String jsonObject) {
 		BBMLogger.infoln("Processing...");
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
-
+		
 		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
-
-
 		int distance = pathHandler.getPathDistances(offer.getStartCity(), offer.getEndCity());
+		
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
 
 		Utils range = offerService.checkPrice(offers, distance);
-
 		BBMLogger.infoln("Authorized price range is [" + range.getInfValue() + " : " + range.getSupValue() + " ]");
 
 		if((offer.getPrice() < range.getSupValue() && offer.getPrice() > range.getInfValue())) {
@@ -66,8 +64,7 @@ public class OffersIOHandler {
 			offerService.createNewOffer(offer);
 			return "<span>Offer successfully posted</span>\n<BR>" + JsonUtils.toJson(offer);
 		}
-		
-		return "Incorrect price ! For the the distance the authorised amount is [" + range.getInfValue() + " : " + range.getSupValue() + "]\n";
+		return "Incorect price ! For the the distance the authorised amount is [" + range.getInfValue() + " : " + range.getSupValue() + " ]";
 	}
 
 	// TODO add filterChecker to add the "status.Available" filter ?
@@ -80,12 +77,12 @@ public class OffersIOHandler {
 				QueryEngine.buildMongoQuery(
 						filtersObject
 						));
-
+		
 		for (PostedOffer offer : offers) {
 			BBMLogger.infoln("" + calculatorHandler.calcul_without_offer(workData , offer.getDistance()));
 			offer.setPrice(offer.getPrice() + calculatorHandler.calcul_without_offer(workData , offer.getDistance()));
-			//			calculatorHandler.
 		}
+		
 		BBMLogger.infoln(offers.size() + "");
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice()).collect(Collectors.toList());
 	}
@@ -132,10 +129,9 @@ public class OffersIOHandler {
 			offerService.createNewOffer(offer);
 			offerTransactionService.createNewOffer(offerTransaction);
 			//TODO
-			return "Ordering accepted please wait for confirmation now.\n";
+			return "Ordering accepted please wait for confirmation now";
 		}else {
-
-			return "INVALID OPERATION\n";
+			return "INVALID OPERATION";
 		} 
 	}
 
@@ -151,12 +147,13 @@ public class OffersIOHandler {
 			return JsonUtils.toJson(offers);
 		}
 
-		return "No offers, awaiting confirmation...\n";
+		return "No offers awaiting confirmation";
 	}
 
 	//TODO rename 
 	//this is the method where Alicia accept an offer
 	public String confirmAwaitingOffer(String workData) {
+		
 		BBMLogger.infoln("Processing...");
 		JsonObject json =  JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
@@ -191,10 +188,9 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.AWAITING_RECEIPT_CONFIRMATION);
 			offer.setClientDepositDate(new Date().toString());
 			offerTransactionService.createNewOffer(offer);
-			return JsonUtils.toJson(offer);
+			return 	JsonUtils.toJson(offer);
 		}
-		
-		return "INVALID OPERATION\n";
+		return "INVALID OPERATION";
 	}
 
 	//Todo rename
@@ -204,7 +200,7 @@ public class OffersIOHandler {
 		String transactionID = json.get("transactionID").getAsString();
 
 		List<OffersTransaction> offers = offerTransactionService.getOffersByTransactionID(transactionID);
-
+		
 		if(!offers.isEmpty()) {
 			OffersTransaction offer = offers.get(0);
 			offerTransactionService.remove(offer);
@@ -213,7 +209,7 @@ public class OffersIOHandler {
 			offerTransactionService.createNewOffer(offer);
 			return 	JsonUtils.toJson(offers);
 		}
-		return "INVALID OPERATION\n";
+		return "INVALID OPERATION";
 	}
 
 	public String claimDeposit(String workData) {
@@ -231,8 +227,7 @@ public class OffersIOHandler {
 			offerTransactionService.createNewOffer(offer);
 			return 	JsonUtils.toJson(offers);
 		}
-		
-		return "INVALID OPERATION\n";
+		return "INVALID OPERATION";
 	}
 
 	public String confirmDeposit(String workData) {
@@ -257,7 +252,6 @@ public class OffersIOHandler {
 			offerService.createNewOffer(postoff);				
 			return JsonUtils.toJson(offers);
 		}
-		
-		return "INVALID OPERATION\n";
+		return "INVALID OPERATION";
 	}
 }
