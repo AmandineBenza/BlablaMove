@@ -10,6 +10,7 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.IUserIdentificator;
 import com.xaamruda.bbm.users.info.IUserDataManager;
+import com.xaamruda.bbm.users.mailing.MailSender;
 import com.xaamruda.bbm.users.model.User;
 
 /**
@@ -58,5 +59,25 @@ public class UsersIOHandler {
 		User user = service.getUserByMail(mail);
 		return user;
 	}
+	public boolean sendMail(String mail, int price, String from ) {
+		MailSender.sendEmail(mail);
+		return true;
+	}
+
+	public void debit(String buyerID, Integer finalPrice) {
+		User buyer = service.getUserByMail(buyerID);
+//		service.delete(buyer);
+		buyer.setPointsAmount(buyer.getPointsAmount() + finalPrice);
+//		service.store(buyer);
+		
+	}
+
+	public void credit(String ownerID, Integer finalPrice) {
+		User owner = service.getUserByMail(ownerID);
+//		service.delete(owner);
+//		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
+//		service.store(owner);
+	}
+	
 	
 }

@@ -36,5 +36,11 @@ public class UserService implements IUserService {
 		BBMLogger.infoln("Database access..");
 		return repository.findAll();
 	}
+	
+	@Override
+	public void delete(User user) {
+		BBMLogger.infoln("Database access..");
+		repository.delete(user);
+	}
 
 }

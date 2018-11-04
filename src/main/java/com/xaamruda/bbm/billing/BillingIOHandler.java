@@ -1,7 +1,10 @@
 package com.xaamruda.bbm.billing;
 
 import com.google.gson.JsonObject;
+import com.google.maps.model.Distance;
 import com.xaamruda.bbm.commons.json.JsonUtils;
+
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.billing.calculator.Calculator;
@@ -24,29 +27,31 @@ public class BillingIOHandler {
 	 * @param workData Json containing data for the calculator
 	 * @return the calculation of point for user
 	 */
-	public String mainHandler(String workData) {
-		JsonObject data = JsonUtils.getFromJson(workData);
-		if (data.get("event").getAsString().equals("calcul_without_offer")) {
-			return calcul_without_offer(data);
-		} else if (JsonUtils.getFromJson(workData).get("event").getAsString().equals("calcul_with_offer")) {
-			return calcul_with_offer(data);
-		} else {
-			return "error : Wrong event";
-		}
-	}
+//	public String mainHandler(String workData) {
+////		JsonObject data = JsonUtils.getFromJson(workData);
+////		if (data.get("event").getAsString().equals("calcul_without_offer")) {
+////			return calcul_without_offer(data);
+////		} else if (JsonUtils.getFromJson(workData).get("event").getAsString().equals("calcul_with_offer")) {
+////			return calcul_with_offer(data);
+////		} else {
+////			return "error : Wrong event";
+////		}r
+//	}
 
+	//TODO 
 	/**
 	 * calcul point repartition with an ....
 	 * 
 	 * @param workData Json containing data for the calculator
 	 * @return the calculation of point for user
 	 */
-	private String calcul_without_offer(JsonObject workData) {
-		JsonObject data = workData.get("data").getAsJsonObject();
-		facturation.calcul_price_base(data.get("weight").getAsInt(), data.get("distance").getAsInt(),
+	public int calcul_without_offer(String workData, int distance) {
+		JsonObject data =  JsonUtils.getFromJson(workData);
+		facturation.calcul_price_base(data.get("weight").getAsInt(), distance,
 				data.get("volume").getAsInt(), data.get("date").getAsInt());
-		return JsonUtils.toJson(
-				"{ userPoint : " + facturation.getUserPoints() + ", socityPoint : " + facturation.getCompanyPoints());
+		return  (int) facturation.getUserPoints();
+//				JsonUtils.toJson(
+//				"{ userPoint : " + facturation.getUserPoints() + ", socityPoint : " + facturation.getCompanyPoints());
 	}
 
 	/**
@@ -55,8 +60,8 @@ public class BillingIOHandler {
 	 * @param workData Json containing data for the calculator
 	 * @return the calculation of point for user
 	 */
-	private String calcul_with_offer(JsonObject workData) {
-		JsonObject data = workData.get("data").getAsJsonObject();
+	public String calcul_with_offer(String workData) {
+		JsonObject data =  JsonUtils.getFromJson(workData);
 		facturation.advance_date_with_offer(data.get("date").getAsInt(), data.get("offerPrice").getAsInt());
 		return JsonUtils.toJson(
 				"{ userPoint : " + facturation.getUserPoints() + ", socityPoint : " + facturation.getCompanyPoints());

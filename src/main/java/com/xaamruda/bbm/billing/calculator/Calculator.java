@@ -1,5 +1,6 @@
 package com.xaamruda.bbm.billing.calculator;
 
+import com.xaamruda.bbm.commons.logging.BBMLogger;
 
 /**
  * Class for billing calculation
@@ -17,13 +18,13 @@ public class Calculator implements ICalculator {
 	@Override
 	public void calcul_price_base(double weight, double distance, double volume, double day) {
 		double calcul = fullAddition(weight, distance, volume, day);
-		this.userPoints = (calcul / 100.0);
+		this.userPoints = (calcul);
 	}
 
 	@Override
 	public void advance_date_with_offer(double date, int offer){
 		double res = offer + conversionDay(date);
-		this.userPoints = (res / 100.0);
+		this.userPoints = (res);
 	}
 
 	@Override

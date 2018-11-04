@@ -11,6 +11,8 @@ public interface IOfferRepository extends MongoRepository<PostedOffer, Integer>{
 
 	List<PostedOffer> getByStatus(OfferStatus status);
 
-	List<PostedOffer> getByOwnerID(int ownerID);
+	List<PostedOffer> getByOwnerID(String ownerID);
+	
+	List<PostedOffer> getByOfferID(String offerID);
  
 }

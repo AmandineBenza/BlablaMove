@@ -6,35 +6,36 @@ package com.xaamruda.bbm.offers.model;
 //import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
+
 //@Entity
 //@Table(name = "offer")
 public class PostedOffer {
-	
-    @Id
-  //  @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer offerID;
 
-    //TODO test
-    //private Client
-    private Integer ownerID;
-    private Integer price;
-    private String startCity;
-    private String endCity;
-    private Integer capacity; 
-    private OfferStatus status;
-    private int distance;
-    
-	public Integer getOfferID() {
+
+	//ID IN MONGO ARE BETTER AS STRING
+	//  @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	private String offerID;
+
+	private String ownerID;
+	private Integer price;
+	private String startCity;
+	private String endCity;
+	private Integer capacity; 
+	private OfferStatus status;
+	private int distance;
+	
+	public String getOfferID() {
 		return offerID;
 	}
-	
-	public void setOfferID(Integer offerID) {
+
+	public void setOfferID(String offerID) {
 		this.offerID = offerID;
 	}
-	public Integer getOwnerID() {
+	public String getOwnerID() {
 		return ownerID;
 	}
-	public void setOwnerID(Integer ownerID) {
+	public void setOwnerID(String ownerID) {
 		this.ownerID = ownerID;
 	}
 	public Integer getPrice() {
@@ -52,18 +53,23 @@ public class PostedOffer {
 	public String getEndCity() {
 		return endCity;
 	}
+
 	public void setEndCity(String endCity) {
 		this.endCity = endCity;
 	}
+
 	public Integer getCapacity() {
 		return capacity;
 	}
+
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
 	}
+
 	public OfferStatus getStatus() {
 		return status;
 	}
+
 	public void setStatus(OfferStatus status) {
 		this.status = status;
 	}
@@ -75,5 +81,11 @@ public class PostedOffer {
 	public void setDistance(int distance) {
 		this.distance = distance;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "PostedOffer [offerID=" + offerID + ", ownerID=" + ownerID + ", price=" + price + ", startCity="
+				+ startCity + ", endCity=" + endCity + ", capacity=" + capacity + ", status=" + status + ", distance="
+				+ distance + "]";
+	}
 }

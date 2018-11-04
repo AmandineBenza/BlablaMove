@@ -28,14 +28,19 @@ public class OfferService implements IOfferService {
 	MongoTemplate mongoTemplate;
 
 	@Override
+	public List<PostedOffer> getOfferByID(String offerID) {
+		BBMLogger.infoln("Database access...");
+		return offerRepository.getByOfferID(offerID);
+	}
+	
+	@Override
 	public List<PostedOffer> getAllArchivedOffers() {
 		BBMLogger.infoln("Database access...");
 		return offerRepository.getByStatus(OfferStatus.CLOSED);
-
 	}
 
 	@Override
-	public List<PostedOffer> getOffersByOwnerID(int OwnerID) {
+	public List<PostedOffer> getOffersByOwnerID(String OwnerID) {
 		BBMLogger.infoln("Database access...");
 		return offerRepository.getByOwnerID(OwnerID);
 	}
@@ -79,6 +84,12 @@ public class OfferService implements IOfferService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void remove(PostedOffer offer) {
+		BBMLogger.infoln("Database access...");
+		offerRepository.delete(offer);
 	}
 
 	

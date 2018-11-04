@@ -3,17 +3,22 @@ package com.xaamruda.bbm.offers.search.engine;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.xaamruda.bbm.commons.logging.BBMLogger;
+
 public class QueryEngine {
 
 	// TODO Still again debate
 	static public Query buildMongoQuery(Filters filters) {
+
+		BBMLogger.infoln(filters.toString());
+		
 		Query query = new Query();
 		// TODO Query - Criteria - Evolve ->
 		// For now we decided that only town will affect availability
-		query.addCriteria(Criteria.where("startAddress").is(filters.startAddress));
-		query.addCriteria(Criteria.where("endAddress").is(filters.endAddress));
+		query.addCriteria(Criteria.where("startCity").is(filters.startAddress));
+		query.addCriteria(Criteria.where("endCity").is(filters.endAddress));
 
-		query.addCriteria(Criteria.where("capacity").is(filters.weith));
+		query.addCriteria(Criteria.where("capacity").gt(filters.weight));
 		
 		if (filters.maxPrice > 0) {
 			query.addCriteria(Criteria.where("price").lte(filters.maxPrice));
@@ -27,11 +32,7 @@ public class QueryEngine {
 	
 	static public Query buildMongoQuery(int distance) {
 		Query query = new Query();
-		// TODO Query - Criteria - Evolve ->
-		// For now we decided that only town will affect availability
-		query.addCriteria(Criteria.where("distance").lt(distance + 10));
-		query.addCriteria(Criteria.where("distance").gt(distance - 10));
-
+		query.addCriteria(Criteria.where("distance").lt(distance + 10).gt(distance - 10));
 		
 		return query;
 	}

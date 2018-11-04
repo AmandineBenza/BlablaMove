@@ -1,5 +1,6 @@
 package com.xaamruda.bbm.communication.internal;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.offers.model.OfferStatus;
+import com.xaamruda.bbm.offers.model.OffersTransaction;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.users.model.User;
 
@@ -125,15 +128,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
 		BBMLogger.infoln("Request's event and data recovered.");
-
 		HttpStatus status;
-
+		BBMLogger.infoln("" + jsonObject.get("filters"));
+		BBMLogger.infoln("" + data);
+		BBMLogger.infoln("Event: " + event.getAsString());
+		
 		Class clazz = null;
 		Object content = null;
 
 		switch (event.getAsString()) { // TODO
 			case "create-offer": {
-				BBMLogger.infoln("Event: " + event.getAsString());
 				content = callMakeOffer(data.toString());
 				clazz = Boolean.class;
 				status = HttpStatus.OK;
@@ -141,13 +145,53 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			}
 	
 			case "consult-offers": { // TODO
-				BBMLogger.infoln("Event: " + event.getAsString());
-				content = callGetFilteredOffers(jsonObject.get("filters").getAsString(), data.getAsString());
+				content = callGetFilteredOffers(jsonObject.get("filters").toString(), data.toString());
 				clazz = List.class;
 				status = HttpStatus.OK;
 				break;
 			}
-			
+			case "ask-offer": { // TODO
+				content = callAskOffer( data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			case "consult-awaiting-offers": { 
+				content = callConsultAwaitingOffers(data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			case "confirm-awaiting-offers": { 
+				content = callConfirmAwaitingOffers(data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			case "claim-receipt":{
+				content = callClaimReceipt(data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			case "confirm-receipt":{
+				content = callConfirmReceipt(data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			case "claim-deposit":{
+				content = callClaimDeposit(data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
+			case "confirm-deposit":{
+				content = callConfirmDeposits(data.toString());
+				clazz = List.class;
+				status = HttpStatus.OK;
+				break;
+			}
 			default: {
 				status = HttpStatus.NOT_ACCEPTABLE;
 				content = null;
@@ -158,7 +202,44 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return new FlowOrchestrationResult(status, content, clazz);
 	}
 	
-	private boolean callMakeOffer(String offerJson) {
+	private Object callConfirmDeposits(String string) {
+		return offerIO.confirmDeposit(string);
+	}
+
+
+	private Object callClaimDeposit(String string) {
+		return offerIO.claimDeposit(string);
+	}
+
+
+	private Object callConfirmReceipt(String string) {
+		return offerIO.confirmReceipt(string);
+	}
+
+
+	private Object callClaimReceipt(String string) {
+		return offerIO.claimReceipt(string);
+	}
+
+
+	private Object callConfirmAwaitingOffers(String workData) {
+		return offerIO.confirmAwaitingOffer(workData);
+	}
+
+
+	private Object callConsultAwaitingOffers(String workData) {
+
+		return offerIO.consultAwaitingOffers(workData);
+	}
+
+
+	private Object callAskOffer(String string) {
+		BBMLogger.infoln("Request new offer...");
+		return offerIO.askValidate(string);
+	}
+
+
+	private String callMakeOffer(String offerJson) {
 		BBMLogger.infoln("Creating new offer...");
 		return offerIO.postNewOffer(offerJson);
 	}
