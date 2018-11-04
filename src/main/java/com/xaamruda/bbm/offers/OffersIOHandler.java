@@ -75,10 +75,11 @@ public class OffersIOHandler {
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
 
+		BBMLogger.infoln("Pricing posted offers...");
 		for (PostedOffer offer : offers) {
-			BBMLogger.infoln("" + calculatorHandler.calcul_without_offer(workData, offer.getDistance()));
 			offer.setPrice(offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance()));
 		}
+		BBMLogger.infoln("Ok.");
 
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice())
 				.collect(Collectors.toList());
@@ -105,11 +106,15 @@ public class OffersIOHandler {
 		List<PostedOffer> offers = offerService.getOfferByID(offerID);
 		if (!offers.isEmpty() && offers.get(0).getStatus() == OfferStatus.POSTED) {
 			PostedOffer offer = offers.get(0);
+			
+			BBMLogger.infoln("Computing pricing...");
 			int newPrice = offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance());
-
+			
 			usersHandler.sendMail(offer.getOwnerID(), newPrice, buyerID);
 			OffersTransaction offerTransaction = new OffersTransaction();
 			offerService.remove(offer);
+			
+			BBMLogger.infoln("Creating offer transaction...");
 			// TODO complexify ID
 			offerTransaction.setTransactionID("" + new Date().getTime());
 			offerTransaction.setBuyerID(buyerID);
@@ -124,7 +129,8 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.AWAITING_CONFIRMATION);
 			offerService.createNewOffer(offer);
 			offerTransactionService.createNewOffer(offerTransaction);
-			// TODO
+			BBMLogger.infoln("OK.");
+			
 			return "Ordering accepted. Please wait for confirmation now.";
 		} else {
 			return "INVALID OPERATION\n";

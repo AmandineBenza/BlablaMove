@@ -168,7 +168,8 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		}
 		
 		// Alice confirms one of its requests
-		case "confirm-awaiting-offers": { 
+		case "confirm-awaiting-offers": {
+			BBMLogger.infoln("Confirming pending offers...");
 			content = callConfirmAwaitingOffers(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
@@ -177,6 +178,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		
 		// Bob claims that his items has been sent 
 		case "claim-receipt":{
+			BBMLogger.infoln("Claiming items reception...");
 			content = callClaimReceipt(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
@@ -185,6 +187,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		
 		// Alice confirms she receives Bob items
 		case "confirm-receipt":{
+			BBMLogger.infoln("Confirming items reception...");
 			content = callConfirmReceipt(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
@@ -193,6 +196,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		
 		// Alice claims Bob items has been deposit
 		case "claim-deposit":{
+			BBMLogger.infoln("Claiming items deposit...");
 			content = callClaimDeposit(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
@@ -201,6 +205,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		
 		// Bob confirms his items has been deposit
 		case "confirm-deposit":{
+			BBMLogger.infoln("Confirming items deposit...");
 			content = callConfirmDeposits(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
@@ -253,34 +258,28 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 
 	private Object callAskOffer(String string) {
-		BBMLogger.infoln("Request new offer...");
 		return offerIO.askValidate(string);
 	}
 
 
 	private String callMakeOffer(String offerJson) {
-		BBMLogger.infoln("Creating new offer...");
 		return offerIO.postNewOffer(offerJson);
 	}
 
 	// data are data used for calculation
 	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) {
-		BBMLogger.infoln("Retrieving offers...");
 		return offerIO.retrieveOffers(filters, calculationData);
 	}
 
 	private void callCreateUser(String userJson) {
-		BBMLogger.infoln("Creating new user...");
 		userIO.postNewUser(userJson);
 	}
 
 	private List<User> callGetUsers() {
-		BBMLogger.infoln("Retrieving users...");
 		return userIO.retrieveUsers();
 	}
 
 	private User callGetUser(String mail) {
-		BBMLogger.infoln("Retrieving user...");
 		return userIO.retrieveUser(mail);
 	}
 }

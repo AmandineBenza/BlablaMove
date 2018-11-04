@@ -17,14 +17,12 @@ public class Calculator implements ICalculator {
 
 	@Override
 	public void calcul_price_base(double weight, double distance, double volume, double day) {
-		BBMLogger.infoln("Calculation of the price basis...");
 		double calcul = fullAddition(weight, distance, volume, day);
 		this.userPoints = (calcul);
 	}
 
 	@Override
 	public void advance_date_with_offer(double date, int offer){
-		//BBMLogger.infoln("");
 		double res = offer + conversionDay(date);
 		this.userPoints = (res);
 	}
@@ -38,7 +36,7 @@ public class Calculator implements ICalculator {
 
 	@Override
 	public void reset(){
-		BBMLogger.infoln("Points resseting...");
+		BBMLogger.infoln("Points reset.");
 		this.userPoints = 0.0;
 		this.companyPoints = 0.0;
 	}
@@ -66,7 +64,6 @@ public class Calculator implements ICalculator {
 	}
 
 	private double fullAddition(double weight, double distance, double volume, double day) {
-		BBMLogger.infoln("Retrieving user points...");
 		double weightPoint = conversionWeight(weight);
 		double distancePoint = conversionDistance(distance);
 		double volumePoint = conversionVolume(volume);
