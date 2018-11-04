@@ -62,6 +62,6 @@ public class BillingIOHandler {
 		JsonObject data =  JsonUtils.getFromJson(workData);
 		facturation.advance_date_with_offer(data.get("date").getAsInt(), data.get("offerPrice").getAsInt());
 		return JsonUtils.toJson(
-				"{ userPoint : " + facturation.getUserPoints() + ", socityPoint : " + facturation.getCompanyPoints());
+				"{ userPoints : " + facturation.getUserPoints() + ", companyPoints : " + facturation.getCompanyPoints());
 	}
 }
