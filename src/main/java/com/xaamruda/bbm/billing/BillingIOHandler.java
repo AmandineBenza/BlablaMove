@@ -1,10 +1,8 @@
 package com.xaamruda.bbm.billing;
 
 import com.google.gson.JsonObject;
-import com.google.maps.model.Distance;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.billing.calculator.Calculator;

@@ -1,7 +1,5 @@
 package com.xaamruda.bbm.billing.calculator;
 
-import com.xaamruda.bbm.commons.logging.BBMLogger;
-
 /**
  * Class for billing calculation
  */

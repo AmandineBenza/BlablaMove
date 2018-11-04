@@ -66,7 +66,8 @@ public class OffersIOHandler {
 			offerService.createNewOffer(offer);
 			return "<span>Offer successfully posted</span>\n<BR>" + JsonUtils.toJson(offer);
 		}
-		return "Incorect price ! For the the distance the authorised amount is [" + range.getInfValue() + " : " + range.getSupValue() + " ]";
+		
+		return "Incorrect price ! For the the distance the authorised amount is [" + range.getInfValue() + " : " + range.getSupValue() + "]\n";
 	}
 
 	// TODO add filterChecker to add the "status.Available" filter ?
@@ -98,6 +99,7 @@ public class OffersIOHandler {
 
 		return (fil.maxPrice  < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "OK" : "NOK";
 	}
+	
 	//TODO rename 
 	//this is the method to ask the offer to get accepted by ALICE
 	public String askValidate(String workData) {
@@ -130,10 +132,10 @@ public class OffersIOHandler {
 			offerService.createNewOffer(offer);
 			offerTransactionService.createNewOffer(offerTransaction);
 			//TODO
-			return "Ordering accepted please wait for confirmation now";
+			return "Ordering accepted please wait for confirmation now.\n";
 		}else {
 
-			return "INVALID OPERATION";
+			return "INVALID OPERATION\n";
 		} 
 	}
 
@@ -149,7 +151,7 @@ public class OffersIOHandler {
 			return JsonUtils.toJson(offers);
 		}
 
-		return "No offers awaiting confirmation";
+		return "No offers, awaiting confirmation...\n";
 	}
 
 	//TODO rename 
@@ -189,9 +191,10 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.AWAITING_RECEIPT_CONFIRMATION);
 			offer.setClientDepositDate(new Date().toString());
 			offerTransactionService.createNewOffer(offer);
-			return 	JsonUtils.toJson(offer);
+			return JsonUtils.toJson(offer);
 		}
-		return "INVALID OPERATION";
+		
+		return "INVALID OPERATION\n";
 	}
 
 	//Todo rename
@@ -210,7 +213,7 @@ public class OffersIOHandler {
 			offerTransactionService.createNewOffer(offer);
 			return 	JsonUtils.toJson(offers);
 		}
-		return "INVALID OPERATION";
+		return "INVALID OPERATION\n";
 	}
 
 	public String claimDeposit(String workData) {
@@ -228,7 +231,8 @@ public class OffersIOHandler {
 			offerTransactionService.createNewOffer(offer);
 			return 	JsonUtils.toJson(offers);
 		}
-		return "INVALID OPERATION";
+		
+		return "INVALID OPERATION\n";
 	}
 
 	public String confirmDeposit(String workData) {
@@ -253,6 +257,7 @@ public class OffersIOHandler {
 			offerService.createNewOffer(postoff);				
 			return JsonUtils.toJson(offers);
 		}
-		return "INVALID OPERATION";
+		
+		return "INVALID OPERATION\n";
 	}
 }

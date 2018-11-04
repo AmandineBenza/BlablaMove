@@ -1,6 +1,5 @@
 package com.xaamruda.bbm.communication.internal;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
-import com.xaamruda.bbm.offers.model.OfferStatus;
-import com.xaamruda.bbm.offers.model.OffersTransaction;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.users.model.User;
 
@@ -228,7 +225,6 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 
 	private Object callConsultAwaitingOffers(String workData) {
-
 		return offerIO.consultAwaitingOffers(workData);
 	}
 
