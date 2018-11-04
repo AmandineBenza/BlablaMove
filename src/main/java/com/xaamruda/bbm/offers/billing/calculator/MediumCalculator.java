@@ -6,7 +6,7 @@ import java.util.List;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 
 public class MediumCalculator {
-	static private HashMap<Integer, Utils> cache = new HashMap<>();
+	static private HashMap<Integer, Range> cache = new HashMap<>();
 	static private HashMap<Integer, Integer> validateCache = new HashMap<>();
 	static private int CACHE_OFFSET = 5;
 
@@ -23,8 +23,8 @@ public class MediumCalculator {
 	 * @param distance
 	 * @return
 	 */
-	static public Utils compute(List<PostedOffer> offers, int distance){
-		if(cache.containsKey(distance) && Math.abs(validateCache.get(distance) - offers.size()) < CACHE_OFFSET) {
+	static public Range compute(List<PostedOffer> offers, int distance) {
+		if (cache.containsKey(distance) && Math.abs(validateCache.get(distance) - offers.size()) < CACHE_OFFSET) {
 
 			return cache.get(distance);
 		}
@@ -35,11 +35,11 @@ public class MediumCalculator {
 			value += offer.getPrice();
 		}
 		if (offers.isEmpty()) {
-			return new Utils(distance * 3, distance / 2, distance);
+			return new Range(distance * 3, distance / 2, distance);
 		} else {
 
 			int average = value / offers.size();
-			Utils range = new Utils(average * 3, average / 2, average);
+			Range range = new Range(average * 3, average / 2, average);
 			cache.put(distance, range);
 			validateCache.put(distance, offers.size());
 			return range;

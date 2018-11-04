@@ -1,12 +1,11 @@
 package com.xaamruda.bbm.offers.billing.calculator;
 
-public class Utils {
+public class Range {
 	private int supValue;
 	private int infValue;
 	private int averageValue;
 
-	public Utils(int supValue, int infValue, int averageValue) {
-		super();
+	public Range(int supValue, int infValue, int averageValue) {
 		this.supValue = supValue;
 		this.infValue = infValue;
 		this.averageValue = averageValue;

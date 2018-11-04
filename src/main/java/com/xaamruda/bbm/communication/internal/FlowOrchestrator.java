@@ -42,7 +42,6 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-		BBMLogger.infoln("Request's event and data recovered.");
 
 		HttpStatus status;
 
@@ -51,7 +50,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 		switch (event.getAsString()) {
 		case "create-user" : {
-			BBMLogger.infoln("Event: " + event.getAsString());
+			BBMLogger.infoln("Creating a user...");
 			callCreateUser(data.toString());
 			clazz = String.class;
 			content = "User created.";
@@ -59,10 +58,9 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			break;
 		}
 
-		// user identification case TODO
 		case "identify-user" : {
 			// identify or create if does not exist
-			BBMLogger.infoln("Event: " + event.getAsString());
+			BBMLogger.infoln("Identifying a user...");
 			JsonArray dataArray = data.getAsJsonArray();
 			boolean userExists = userIO.identifyUserByMailPlusPassword(data.getAsString(),
 					dataArray.get(0).getAsString(), dataArray.get(1).getAsString()); 
@@ -72,9 +70,8 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			break;
 		}
 
-		// consult users TODO
 		case "consult-users" : {
-			BBMLogger.infoln("Event: " + event.getAsString());
+			BBMLogger.infoln("Consulting users...");
 			content = callGetUsers();
 			clazz = List.class;
 			List lcontent = (List) content;
@@ -88,9 +85,8 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			break;	
 		}
 
-		//consult user by mail TODO
 		case "consult-user" : {
-			BBMLogger.infoln("Event: " + event.getAsString());
+			BBMLogger.infoln("Consulting user...");
 			content = callGetUser(data.getAsJsonObject().get("mail").getAsString());
 			clazz = User.class;
 			if(content == null) {
@@ -123,76 +119,94 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-		BBMLogger.infoln("Request's event and data recovered.");
-		HttpStatus status;
-		BBMLogger.infoln("" + jsonObject.get("filters"));
-		BBMLogger.infoln("" + data);
-		BBMLogger.infoln("Event: " + event.getAsString());
 
+		HttpStatus status;
 		Class clazz = null;
 		Object content = null;
 
 		switch (event.getAsString()) { // TODO
 		case "validate-price":{
+			BBMLogger.infoln("Validating pricing...");
 			content = callValidatePrice(data.toString(), jsonObject.get("filters").toString());
 			clazz = Boolean.class;
 			status = HttpStatus.OK;
 			break;
 		}	
+		
 		case "create-offer": {
+			BBMLogger.infoln("Creating an offer...");
 			content = callMakeOffer(data.toString());
 			clazz = Boolean.class;
 			status = HttpStatus.OK;
 			break;
 		}
-		case "consult-offers": { // TODO
+		
+		case "consult-offers": {
+			BBMLogger.infoln("Consulting offers...");
 			content = callGetFilteredOffers(jsonObject.get("filters").toString(), data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
-		case "ask-offer": { // TODO
-			content = callAskOffer( data.toString());
+
+		// Bob requests to Alice
+		case "ask-offer": {
+			BBMLogger.infoln("Requesting for an offer...");
+			content = callAskOffer(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
-		case "consult-awaiting-offers": { 
+		
+		// Alice consults its requests
+		case "consult-awaiting-offers": {
+			BBMLogger.infoln("Consulting pending offers...");
 			content = callConsultAwaitingOffers(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
+		
+		// Alice confirms one of its requests
 		case "confirm-awaiting-offers": { 
 			content = callConfirmAwaitingOffers(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
+		
+		// Bob claims that his items has been sent 
 		case "claim-receipt":{
 			content = callClaimReceipt(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
+		
+		// Alice confirms she receives Bob items
 		case "confirm-receipt":{
 			content = callConfirmReceipt(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
+		
+		// Alice claims Bob items has been deposit
 		case "claim-deposit":{
 			content = callClaimDeposit(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
+		
+		// Bob confirms his items has been deposit
 		case "confirm-deposit":{
 			content = callConfirmDeposits(data.toString());
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;
 		}
+		
 		default: {
 			status = HttpStatus.NOT_ACCEPTABLE;
 			content = null;

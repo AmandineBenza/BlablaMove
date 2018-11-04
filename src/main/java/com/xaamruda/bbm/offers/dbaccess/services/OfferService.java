@@ -13,7 +13,7 @@ import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.offers.billing.calculator.MediumCalculator;
-import com.xaamruda.bbm.offers.billing.calculator.Utils;
+import com.xaamruda.bbm.offers.billing.calculator.Range;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 
@@ -70,7 +70,7 @@ public class OfferService implements IOfferService {
 	}
 
 	@Override
-	public Utils checkPrice(List<PostedOffer> offers,int distance){
+	public Range checkPrice(List<PostedOffer> offers,int distance){
 		return MediumCalculator.getInstance().compute(offers, distance);
 	}
 	
