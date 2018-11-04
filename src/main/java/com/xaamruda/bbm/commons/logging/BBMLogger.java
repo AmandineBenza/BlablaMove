@@ -26,6 +26,14 @@ public final class BBMLogger {
 	public static void infoln(String msg) {
 		System.out.println("[INFO|" + dateInfo() + msg + "]");
 	}
+	
+	public static void infoln(String msg, int sleepms) {
+		try {
+			Thread.sleep(sleepms);
+			System.out.println("[INFO|" + dateInfo() + msg + "]");
+		} catch (InterruptedException e) {
+		}
+	}
 
 	public static void debugln(String msg) {
 		System.out.println("[DEBUG|" + dateInfo() + msg + "]");
