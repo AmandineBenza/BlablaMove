@@ -29,4 +29,5 @@ public class Application {
 		SpringApplication.run(Application.class);
 		BBMLogger.infoln(">> Welcome to BlablaMove <<");
 	}
+	
 }

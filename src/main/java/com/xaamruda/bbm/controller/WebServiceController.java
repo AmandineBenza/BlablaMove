@@ -32,6 +32,7 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "USERS", method = RequestMethod.POST)
 	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents) {
+		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateUsersEntryPoint(jsonEvents);
 		BBMLogger.infoln("Received response.");
@@ -41,6 +42,7 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "OFFERS", method = RequestMethod.POST)
 	public ResponseEntity offersEntryPoint(@RequestBody String jsonEvents) {
+		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/OFFERS\".");
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateOffersEntryPoint(jsonEvents);
 		BBMLogger.infoln("Received response.");
