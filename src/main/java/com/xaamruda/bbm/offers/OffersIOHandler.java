@@ -75,10 +75,12 @@ public class OffersIOHandler {
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
 
-		BBMLogger.infoln("Pricing posted offers...");
+		BBMLogger.infoln("Calculating offers prices...");
 		for (PostedOffer offer : offers) {
 			offer.setPrice(offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance()));
 		}
+		
+		BBMLogger.infoln(offers.size() + " offers processed.");
 		BBMLogger.infoln("Ok.");
 
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice())

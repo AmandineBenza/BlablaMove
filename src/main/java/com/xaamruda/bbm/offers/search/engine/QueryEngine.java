@@ -9,9 +9,6 @@ public class QueryEngine {
 
 	// TODO Still again debate
 	static public Query buildMongoQuery(Filters filters) {
-
-		BBMLogger.infoln(filters.toString());
-		
 		Query query = new Query();
 		// TODO Query - Criteria - Evolve ->
 		// For now we decided that only town will affect availability
