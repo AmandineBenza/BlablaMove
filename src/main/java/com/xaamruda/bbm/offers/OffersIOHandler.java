@@ -49,15 +49,13 @@ public class OffersIOHandler {
 	public String postNewOffer(String jsonObject) {
 		BBMLogger.infoln("Processing...");
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
-
+		
 		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
-
-
 		int distance = pathHandler.getPathDistances(offer.getStartCity(), offer.getEndCity());
+		
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
 
 		Utils range = offerService.checkPrice(offers, distance);
-
 		BBMLogger.infoln("Authorized price range is [" + range.getInfValue() + " : " + range.getSupValue() + " ]");
 
 		if((offer.getPrice() < range.getSupValue() && offer.getPrice() > range.getInfValue())) {
@@ -79,12 +77,12 @@ public class OffersIOHandler {
 				QueryEngine.buildMongoQuery(
 						filtersObject
 						));
-
+		
 		for (PostedOffer offer : offers) {
 			BBMLogger.infoln("" + calculatorHandler.calcul_without_offer(workData , offer.getDistance()));
 			offer.setPrice(offer.getPrice() + calculatorHandler.calcul_without_offer(workData , offer.getDistance()));
-			//			calculatorHandler.
 		}
+		
 		BBMLogger.infoln(offers.size() + "");
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice()).collect(Collectors.toList());
 	}
@@ -98,6 +96,7 @@ public class OffersIOHandler {
 
 		return (fil.maxPrice  < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "OK" : "NOK";
 	}
+	
 	//TODO rename 
 	//this is the method to ask the offer to get accepted by ALICE
 	public String askValidate(String workData) {
@@ -132,7 +131,6 @@ public class OffersIOHandler {
 			//TODO
 			return "Ordering accepted please wait for confirmation now";
 		}else {
-
 			return "INVALID OPERATION";
 		} 
 	}
@@ -155,6 +153,7 @@ public class OffersIOHandler {
 	//TODO rename 
 	//this is the method where Alicia accept an offer
 	public String confirmAwaitingOffer(String workData) {
+		
 		BBMLogger.infoln("Processing...");
 		JsonObject json =  JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
@@ -201,7 +200,7 @@ public class OffersIOHandler {
 		String transactionID = json.get("transactionID").getAsString();
 
 		List<OffersTransaction> offers = offerTransactionService.getOffersByTransactionID(transactionID);
-
+		
 		if(!offers.isEmpty()) {
 			OffersTransaction offer = offers.get(0);
 			offerTransactionService.remove(offer);
