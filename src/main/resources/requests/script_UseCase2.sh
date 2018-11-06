@@ -13,10 +13,12 @@ echo ""
 sleep $*;
 echo "4.On BlablaMove she offers to transport things between Nice and Sophia every day, between 7:30 am (Nice) and 8:30 am (Sophia)."
 echo ""
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{"event":"create-offer","data":{"ownerID":"Machin@me.fr", "status":"AWAITING_CONFIRMATION", "price":"0", "startCity":"startA", "endCity":"endA", "capacity":"3" }}" "localhost:8080/BBM/OFFERS"
 
 sleep $*;
 echo "5.When she makes the offer, BlablaMove suggests a amount of point she should charge for the delivery. (Based on the number of points that are usually charged for this distance.)"
 echo ""
+
 
 sleep $*;
 echo "6.She can choose to charge the amount BlablaMove suggest her, or she can make a new offer. The number of points she can charge for a delivery will be in a certain range proposed by the system, it can't be to expensive compare to the average offers."
