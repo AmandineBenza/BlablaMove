@@ -1,6 +1,15 @@
 #!/bin/sh
 # Use: ./script_UseCase1.sh 2
 
+$user = "machin@me.fr"
+$startAdress = "Lyon"
+$endAdress = "Nice"
+#5 choucroutes.
+$bedW ="5";
+#6 patates
+$bedV="6";
+#bullshit
+$inDays="5"
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
 echo "1. Bob is a lambda student who wants to move.\n"
@@ -17,6 +26,9 @@ sleep 0.5; printf "Processing Bob login"; sleep 1; printf "."; sleep 1; printf "
 echo ""
 # curl -H "Accept: application/json" -H "Content-type: application /json" -X POST -d '{"event" : "identify-user" , "data" : {"mail" : "Machin@me.fr" , "password" : "root"}}' "localhost:8080/BBM/OFFERS"
 
+
+echo "\" \""
+ 
 sleep $*;
 echo "5. He fills a form with following information:"
 echo "\t-start location"
@@ -26,17 +38,26 @@ echo "\t-move date"
 echo "\t-maximum points to spend"
 sleep 0.5; printf "Processing form"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
 echo ""
-# curl -H "Accept: application/json" -H "Content-type: application /json" -X POST -d '{"event" : "validate-price","data": {""}}' "localhost:8080/BBM/OFFERS"
+
+#Bob is a really rich boy he allway have money so he put a filter at 10000 points
+$searchResultList = curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" },\"filters\": {\"weight\": \"$bedV\",\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAdress\",\"maxPrice\": \"10000\"}}" "localhost:8080/BBM/OFFERS"
+
+$firstResult = echo $searchResultList | jq '.[0]'
+
 
 sleep $*;
 echo "6. The system proposes a list of results that match his requirements."
 sleep 0.5; printf "Retrieving relevant offers"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
 echo ""
-# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event":"consult-offers","data": {"weight": "5", "volume":"6", "date":"5" },"filters": {"weight": "2","startAddress": "startA","endAddress": "endA","maxPrice": "100"}}' "localhost:8080/BBM/OFFERS"
+
 
 sleep $*;
 echo "7. Bob choses a ride for his bed.\n"
-# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event":"ask-offer" ,"data": {"offerID": "Machin@me.fr1541337161553_50","buyerID": "client@daniel.dog","weight": "5", "volume":"6", "date":"5" }}' "localhost:8080/BBM/OFFERS"
+$
+
+$askValue = curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \"$(echo $firstResult |jq '.offerID'\",\"buyerID\": \"$user\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }}" "localhost:8080/BBM/OFFERS"
+
+
 
 sleep $*;
 echo "8. The system answers with a recap.\n"
@@ -48,14 +69,17 @@ echo "9. Bob confirms.\n"
 
 sleep $*;
 echo "10. He receives a confirmation mail from BlablaMove : Charlie can help him to move his things.\n"
-# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-awaiting-offers" ,"data": {"transactionID": "1541337287184"}}' "localhost:8080/BBM/OFFERS"
+#Non
+# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-awaiting-offers" ,"data": {"transactionID": "1541544645343"}}' "localhost:8080/BBM/OFFERS"
 
 sleep $*;
 echo ">> Ellipse !\n"
 
 sleep $*;
 echo "12. At the chosen date, Charlie goes to Bob house and takes his bed.\n"
-# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "claim-receipt" ,"data": {"transactionID": "1541337287184"}}' "localhost:8080/BBM/OFFERS"
+$transactionID = echo $askValue | jq '.transactionID'
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": \"$transactionID\"}}" "localhost:8080/BBM/OFFERS"
+
 # curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-receipt" ,"data": {"transactionID": "1541337287184"}}' "localhost:8080/BBM/OFFERS"
 
 sleep $*;
@@ -67,7 +91,7 @@ echo "14. Bob receives a notification that confirms the delivery of his bed.\n"
 
 sleep $*;
 echo "15. Bob can now confirm the transaction to BlablaMove.\n"
-# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-deposit" ,"data": {"transactionID": "1541337287184"}}' "localhost:8080/BBM/OFFERS"
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": \"$transactionID\"}}" "localhost:8080/BBM/OFFERS"
 
 sleep $*;
 echo "16. Finally, after Bob's confirmation, BlablaMove performs a points transaction.\n"
