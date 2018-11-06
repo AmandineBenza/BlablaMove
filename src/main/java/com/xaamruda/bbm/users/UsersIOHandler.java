@@ -59,25 +59,23 @@ public class UsersIOHandler {
 		User user = service.getUserByMail(mail);
 		return user;
 	}
+	
 	public boolean sendMail(String mail, int price, String from ) {
-		MailSender.sendEmail(mail);
-		return true;
+		return MailSender.sendEmail(mail);
 	}
 
 	public void debit(String buyerID, Integer finalPrice) {
 		User buyer = service.getUserByMail(buyerID);
-//		service.delete(buyer);
-		buyer.setPointsAmount(buyer.getPointsAmount() + finalPrice);
-//		service.store(buyer);
-		
+		service.delete(buyer);
+		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
+		service.store(buyer);
 	}
 
 	public void credit(String ownerID, Integer finalPrice) {
 		User owner = service.getUserByMail(ownerID);
-//		service.delete(owner);
-//		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
-//		service.store(owner);
+		service.delete(owner);
+		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
+		service.store(owner);
 	}
-	
 	
 }

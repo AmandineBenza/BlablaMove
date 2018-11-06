@@ -1,21 +1,26 @@
-#!/bin/bash
-echo "1.Bob is a lambda student who wants to move."
+#!/bin/sh
+echo "1. Bob is a lambda student who wants to move."
 echo ""
 
 sleep $*;
-echo "2.Bob need to transport his bed from his parents house(Nice) to is new student apartment (Sophia)."
+echo "2. Bob needs to transport his bed from his parents house (Nice) to his new student apartment (Sophia)."
 echo ""
 
 sleep $*;
-echo "3.Bob is a smart guy so he decide to use BlablaMove."
+echo "3. Bob is a smart guy: he decides to use BlablaMove."
 echo ""
 
 sleep $*;
-echo "4.He Login on BlablaMove: he has the right amount of points."
+echo "4. He Logins on BlablaMove: he has the right amount of points."
 echo ""
 
 sleep $*;
-echo "5.He fill a form where he give some informations: the start point of the things he want to move, the arrival point, the size of his bed, the weight of his bed, when he wants to move (range ?) and the maximum number of points he want to spend."
+echo "5. He fills a form with following information:"
+echo "\t-start location"
+echo "\t-arrival location"
+echo "\t-bed's size and weight"
+echo "\t-move date"
+echo "\t-maximum points to spend"
 echo ""
 curl -H "Accept: application/json" -H "Content-type: application /json" -X POST -d
 

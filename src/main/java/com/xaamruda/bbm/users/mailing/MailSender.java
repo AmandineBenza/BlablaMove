@@ -2,10 +2,11 @@ package com.xaamruda.bbm.users.mailing;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 
-public class MailSender implements IMailSender {
+public class MailSender {
 
-	static public void sendEmail(String mail) {
+	public static boolean sendEmail(String mail) {
 		BBMLogger.infoln("Email successfully sent to : " + mail);
+		return true;
 	}
 	
 }
