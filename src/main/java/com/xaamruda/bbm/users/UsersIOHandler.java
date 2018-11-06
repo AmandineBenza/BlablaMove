@@ -43,7 +43,6 @@ public class UsersIOHandler {
 	}
 	
 	public void postNewUser(String userJson){
-		BBMLogger.infoln("Creating user...");
 		dataManager.storeNewUser(JsonUtils.getFromJson(userJson, User.class));
 		BBMLogger.infoln("User created.");
 	}

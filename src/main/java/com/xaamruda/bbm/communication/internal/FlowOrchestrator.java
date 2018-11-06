@@ -41,7 +41,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-		BBMLogger.infoln("Event is: " + event.getAsString() + ".");
+		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
 		BBMLogger.infoln("Handling user request...");
 
 		HttpStatus status;
@@ -51,10 +51,10 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 		switch (event.getAsString()) {
 		case "create-user" : {
-			BBMLogger.infoln("Creating a user...");
+			BBMLogger.infoln("Creating user...");
 			callCreateUser(data.toString());
 			clazz = String.class;
-			content = "User created.";
+			content = "User created.\n";
 			status = HttpStatus.OK;
 			break;
 		}
@@ -119,7 +119,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
-		BBMLogger.infoln("Event is: " + event.getAsString() + ".");
+		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
 		BBMLogger.infoln("Handling offer request...");
 
 		HttpStatus status;
@@ -244,7 +244,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		res = res + "Address of deposit : " + json.get("endAddress").getAsString() + "\n";
 		res = res + "Offer : " + json.get("offerID").getAsString() + "\n";
 		res = res + "Price : " + json.get("price").getAsString() + "\n";
-		return res;
+		return res + "\n";
 	}
 
 	private Object callConfirmDeposits(String string) {
