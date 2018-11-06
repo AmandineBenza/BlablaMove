@@ -1,5 +1,9 @@
-#!/bin/bash
-echo "1.Alice is a student who lives in Nice and goes to Sophia in car every day for her studies."
+#!/bin/sh
+# Use: ./script_UseCase2.sh 2
+
+printf ">> Starting scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
+
+echo "1. Alice is a student who lives in Nice and goes to Sophia in car every day for her studies."
 echo ""
 
 sleep $*;
