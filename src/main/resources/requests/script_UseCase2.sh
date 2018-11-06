@@ -29,8 +29,6 @@ echo "5. When she makes the offer, BlablaMove suggests nn amount of point she sh
 sleep $*;
 echo "6. She can choose to charge the amount BlablaMove suggest her, or she can make a new offer. The number of points she can charge for a delivery will be in a certain range proposed by the system, it can't be too expensive compare to the average offers.\n"
 
-#TODO curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event":"accept-system-price","data":{"response":"yes"}}' "localhost:8080/BBM/OFFERS"
-
 sleep $*;
 echo "7. One day she receives a mail form BlablaMove : Dimitri wants her to transport a box from Nice to Sophia at a certain date.\n"
 

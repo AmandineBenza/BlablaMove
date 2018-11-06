@@ -65,7 +65,7 @@ public class OffersIOHandler {
 			return "<span>Offer successfully posted</span>\n<BR>" + JsonUtils.toJson(offer);
 		}
 		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-				+ range.getSupValue() + "]";
+				+ range.getSupValue() + "]\n";
 	}
 
 	// TODO add filterChecker to add the "status.Available" filter ?

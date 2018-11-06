@@ -1,0 +1,182 @@
+# Pas à jour niveau indentation
+------ TODO ----------------
+# - End of lines \n
+- More logs on billing
+- Thread sleeping
+- Event given in log
+----------------------------
+
+1. Create offer:
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{"event":"create-offer","data":{"ownerID":"Machin@me.fr", "status":"AWAITING_CONFIRMATION", "price":"13", "startCity":"startA", "endCity":"endA", "capacity":"3" }}" "localhost:8080/BBM/OFFERS"
+
+-- response
+<span>Offer successfully posted</span>
+<BR>{"offerID":"Machin@me.fr1541542869784_13","ownerID":"Machin@me.fr","price":13,"startCity":"startA","endCity":"endA","capacity":3,"status":"POSTED","distance":5}
+
+-- logs
+application_1  | [INFO|06/11/2018 22:21:09 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:21:09 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:21:09 | Creating an offer...]
+application_1  | [INFO|06/11/2018 22:21:09 | Processing...]
+application_1  | [INFO|06/11/2018 22:21:09 | Database access...]
+application_1  | [INFO|06/11/2018 22:21:09 | Authorized price range is [2 : 15]]
+application_1  | [INFO|06/11/2018 22:21:09 | Database access...]
+application_1  | [INFO|06/11/2018 22:21:09 | Received response.]
+
+
+2. Consult offers
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event":"consult-offers","data": {"weight": "5", "volume":"6", "date":"5" },"filters": {"weight": "2","startAddress": "startA","endAddress": "endA","maxPrice": "100"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+[ {
+  "offerID" : "Machin@me.fr1541542869784_13",
+  "ownerID" : "Machin@me.fr",
+  "price" : 39,
+  "startCity" : "startA",
+  "endCity" : "endA",
+  "capacity" : 3,
+  "status" : "POSTED",
+  "distance" : 5
+} ]
+
+-- logs
+application_1  | [INFO|06/11/2018 22:27:45 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:27:45 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:27:45 | Consulting offers...]
+application_1  | [INFO|06/11/2018 22:27:45 | Processing...]
+application_1  | [INFO|06/11/2018 22:27:45 | Database access...]
+application_1  | [INFO|06/11/2018 22:27:45 | Calculating offers prices...]
+application_1  | [INFO|06/11/2018 22:27:45 | 1 offers processed.]
+application_1  | [INFO|06/11/2018 22:27:45 | Ok.]
+application_1  | [INFO|06/11/2018 22:27:45 | Received response.]
+
+3. Ask for an offer
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event":"ask-offer" ,"data": {"offerID": "Machin@me.fr1541542869784_13","buyerID": "client@daniel.dog","weight": "5", "volume":"6", "date":"5" }}' "localhost:8080/BBM/OFFERS"
+
+-- response
+Ordering accepted. Please wait for confirmation now.
+
+-- logs
+application_1  | [INFO|06/11/2018 22:30:34 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:30:34 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:30:34 | Requesting for an offer...]
+application_1  | [INFO|06/11/2018 22:30:34 | Processing...]
+application_1  | [INFO|06/11/2018 22:30:34 | Database access...]
+application_1  | [INFO|06/11/2018 22:30:34 | Computing pricing...]
+application_1  | [INFO|06/11/2018 22:30:34 | Email successfully sent to : Machin@me.fr]
+application_1  | [INFO|06/11/2018 22:30:34 | Database access...]
+application_1  | [INFO|06/11/2018 22:30:34 | Creating offer transaction...]
+application_1  | [INFO|06/11/2018 22:30:34 | Database access...]
+application_1  | [INFO|06/11/2018 22:30:34 | OK.]
+application_1  | [INFO|06/11/2018 22:30:34 | Received response.]
+
+4. Consult offers [TODO:log ownerID]
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "consult-awaiting-offers" ,"data": {"ownerID": "Machin@me.fr"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+[{"transactionID":"1541543434816","offerID":"Machin@me.fr1541542869784_13","ownerID":"Machin@me.fr","buyerID":"client@daniel.dog","volume":6,"weigth":5,"finalPrice":39,"dateBeforeOrder":5,"askforConfirmationDate":"Tue Nov 06 22:30:34 GMT 2018","status":"AWAITING_CONFIRMATION"}]
+
+-- logs
+application_1  | [INFO|06/11/2018 22:34:04 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:34:04 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:34:04 | Consulting pending offers...]
+application_1  | [INFO|06/11/2018 22:34:04 | Processing...]
+application_1  | [INFO|06/11/2018 22:34:04 | Received response.]
+
+5. Validate an offer
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-awaiting-offers" ,"data": {"transactionID": "1541543434816"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+[{"transactionID":"1541543434816","offerID":"Machin@me.fr1541542869784_13","ownerID":"Machin@me.fr","buyerID":"client@daniel.dog","volume":6,"weigth":5,"finalPrice":39,"dateBeforeOrder":5,"askforConfirmationDate":"Tue Nov 06 22:30:34 GMT 2018","confirmationDate":"Tue Nov 06 22:36:46 GMT 2018","status":"CONFIRMED"}]
+
+-- logs
+application_1  | [INFO|06/11/2018 22:36:46 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:36:46 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:36:46 | Confirming pending offers...]
+application_1  | [INFO|06/11/2018 22:36:46 | Processing...]
+application_1  | [INFO|06/11/2018 22:36:46 | Email successfully sent to : client@daniel.dog]
+application_1  | [INFO|06/11/2018 22:36:46 | Received response.]
+
+6. Claim items reception (Bob)
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "claim-receipt" ,"data": {"transactionID": "1541543434816"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+{"transactionID":"1541543434816","offerID":"Machin@me.fr1541542869784_13","ownerID":"Machin@me.fr","buyerID":"client@daniel.dog","volume":6,"weigth":5,"finalPrice":39,"dateBeforeOrder":5,"askforConfirmationDate":"Tue Nov 06 22:30:34 GMT 2018","confirmationDate":"Tue Nov 06 22:36:46 GMT 2018","clientDepositDate":"Tue Nov 06 22:39:48 GMT 2018","status":"AWAITING_RECEIPT_CONFIRMATION"}
+
+-- logs
+application_1  | [INFO|06/11/2018 22:39:48 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:39:48 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:39:48 | Claiming items reception...]
+application_1  | [INFO|06/11/2018 22:39:48 | Processing...]
+application_1  | [INFO|06/11/2018 22:39:48 | Received response.]
+
+7. Confirm the items reception (Alice)
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-receipt" ,"data": {"transactionID": "1541543434816"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+[{"transactionID":"1541543434816","offerID":"Machin@me.fr1541542869784_13","ownerID":"Machin@me.fr","buyerID":"client@daniel.dog","volume":6,"weigth":5,"finalPrice":39,"dateBeforeOrder":5,"askforConfirmationDate":"Tue Nov 06 22:30:34 GMT 2018","confirmationDate":"Tue Nov 06 22:36:46 GMT 2018","clientDepositDate":"Tue Nov 06 22:39:48 GMT 2018","clientDepositConfimationDate":"Tue Nov 06 22:42:02 GMT 2018","status":"RECEIPT_DONE"}]
+
+-- logs
+application_1  | [INFO|06/11/2018 22:42:02 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:42:02 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:42:02 | Confirming items reception...]
+application_1  | [INFO|06/11/2018 22:42:02 | Processing...]
+application_1  | [INFO|06/11/2018 22:42:02 | Received response.]
+
+
+8. Claims items deposit (Alice)
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "claim-deposit" ,"data": {"transactionID": "1541543434816"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+[{"transactionID":"1541543434816","offerID":"Machin@me.fr1541542869784_13","ownerID":"Machin@me.fr","buyerID":"client@daniel.dog","volume":6,"weigth":5,"finalPrice":39,"dateBeforeOrder":5,"askforConfirmationDate":"Tue Nov 06 22:30:34 GMT 2018","confirmationDate":"Tue Nov 06 22:36:46 GMT 2018","clientDepositDate":"Tue Nov 06 22:39:48 GMT 2018","clientDepositConfimationDate":"Tue Nov 06 22:44:18 GMT 2018","status":"AWAITING_DEPOSIT_CONFIRMATION"}]
+
+-- logs
+application_1  | [INFO|06/11/2018 22:44:18 | Listened new event on "BBM/OFFERS".]
+application_1  | [INFO|06/11/2018 22:44:18 | Handling offer request...]
+application_1  | [INFO|06/11/2018 22:44:18 | Claiming items deposit...]
+application_1  | [INFO|06/11/2018 22:44:18 | Processing...]
+application_1  | [INFO|06/11/2018 22:44:18 | Received response.]
+
+9. Confirm items deposit (Bob) ; To redo > create user
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-deposit" ,"data": {"transactionID": "1541543434816"}}' "localhost:8080/BBM/OFFERS"
+
+-- response
+
+-- logs
+
+---------- Bis -----------
+
+// String mail, String name, String address, String phone, String password
+1. Create user
+
+-- request
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "create-user" ,"data": {"name":"Daniel LENEGIXT", "mail":"client@daniel.dog","phone":"0675767778","password":"passwordoverop"}}' "localhost:8080/BBM/USERS"
+
+-- response
+User created.
+
+-- logs
+application_1  | [INFO|06/11/2018 23:08:04 | Listened new event on "BBM/USERS".]
+application_1  | [INFO|06/11/2018 23:08:04 | Handling user request...]
+application_1  | [INFO|06/11/2018 23:08:04 | Creating a user...]
+application_1  | [INFO|06/11/2018 23:08:04 | Creating user...]
+application_1  | [INFO|06/11/2018 23:08:04 | User created.]
+application_1  | [INFO|06/11/2018 23:08:04 | Received response.]
