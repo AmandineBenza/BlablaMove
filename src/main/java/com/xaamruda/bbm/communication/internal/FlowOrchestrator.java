@@ -38,10 +38,11 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
-		BBMLogger.infoln("Handling user request...");
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
+		BBMLogger.infoln("Event is: " + event.getAsString() + ".");
+		BBMLogger.infoln("Handling user request...");
 
 		HttpStatus status;
 
@@ -115,10 +116,11 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@Override
 	@SuppressWarnings("rawtypes")
 	public FlowOrchestrationResult orchestrateOffersEntryPoint(String jsonEvents) {
-		BBMLogger.infoln("Handling offer request...");
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
+		BBMLogger.infoln("Event is: " + event.getAsString() + ".");
+		BBMLogger.infoln("Handling offer request...");
 
 		HttpStatus status;
 		Class clazz = null;
