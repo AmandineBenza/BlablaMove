@@ -211,7 +211,15 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			status = HttpStatus.OK;
 			break;
 		}
-		
+
+		case "confirm-command":{
+			BBMLogger.infoln("System return the command....");
+			content = callConfirmCommand(data.toString());
+			clazz = List.class;
+			status = HttpStatus.OK;
+			break;
+		}
+
 		default: {
 			status = HttpStatus.NOT_ACCEPTABLE;
 			content = null;
@@ -226,6 +234,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return offerIO.validatePrice(filters, string);
 	}
 
+	private String callConfirmCommand(String string) {
+		JsonObject json = JsonUtils.getFromJson(string);
+		String res = "Resume of your command :\n ";
+		res = res + "Number of day until moving : " + json.get("date").getAsString() + "\n";
+		res = res + "Address of claim : " + json.get("startAddress").getAsString() + "\n";
+		res = res + "Address of deposit : " + json.get("endAddress").getAsString() + "\n";
+		res = res + "Offer : " + json.get("offerID").getAsString() + "\n";
+		res = res + "Price : " + json.get("price").getAsString() + "\n";
+		return res;
+	}
 
 	private Object callConfirmDeposits(String string) {
 		return offerIO.confirmDeposit(string);

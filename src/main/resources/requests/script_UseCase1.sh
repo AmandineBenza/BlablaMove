@@ -40,6 +40,7 @@ echo "7. Bob choses a ride for his bed.\n"
 
 sleep $*;
 echo "8. The system answers with a recap.\n"
+# curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event":"confirm-command" ,"data": {"offerID": "Machin@me.fr1541337161553_50","date":"5","startAddress": "startA","endAddress": "endA","price": "10" }}' "localhost:8080/BBM/OFFERS"
 
 sleep $*;
 echo "9. Bob confirms.\n"
