@@ -1,7 +1,7 @@
 #!/bin/sh
 # Use: ./script_UseCase1.sh 2
 
-printf ">> Starting scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
+printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
 echo "1. Bob is a lambda student who wants to move.\n"
 
