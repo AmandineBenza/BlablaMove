@@ -1,7 +1,4 @@
 #!/bin/sh
-
-echo "------- Start of scenario -------"
-
 echo "1. Bob is a lambda student who wants to move."
 echo ""
 
@@ -56,7 +53,7 @@ echo ""
 # curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "confirm-awaiting-offers" ,"data": {"transactionID": "1541337287184"}}' "localhost:8080/BBM/OFFERS"
 
 sleep $*;
-echo "11. ------- Ellipse ------- "
+echo "11. >> -- Ellipse -- <<"
 echo ""
 
 sleep $*;
@@ -83,4 +80,4 @@ sleep $*;
 echo "16. Finally, after Bob's confirmation, BlablaMove performs a points transaction."
 echo ""
 
-echo "------- End of scenario -------"
+echo ">> -- End of scenario -- <<"
