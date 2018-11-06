@@ -7,7 +7,8 @@ import com.google.gson.JsonObject;
 
 public final class JsonUtils {
 
-	private static Gson gson = GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays().create();
+	private static Gson gson = GsonBuilderUtils.gsonBuilderWithBase64EncodedByteArrays()
+								.setPrettyPrinting().create();
 	
 	private JsonUtils() {}
 	
