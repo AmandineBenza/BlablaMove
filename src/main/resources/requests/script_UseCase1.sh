@@ -1,18 +1,41 @@
 #!/bin/sh
 # Use: ./script_UseCase1.sh 2
 
-$user = "machin@me.fr"
-$startAdress = "Lyon"
-$endAdress = "Nice"
-#5 choucroutes.
+#curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "create-user" ,"data": {"name":"Bob", "mail":"Bob@me.fr","phone":"0675767778","password":"passwordoverop"}}' "localhost:8080/BBM/USERS
+#curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "create-user" ,"data": {"name":"Alice", "mail":"Alice@me.fr","phone":"0642424242","password":"passwordultraop"}}' "localhost:8080/BBM/USERS
+
+$client = "Bob@me.fr"
+$driver = "Alice@me.fr"
+$startAdress = "Nice"
+$endAdress = "Sophia"
+
 $bedW ="5";
-#6 patates
+
 $bedV="6";
-#bullshit
+
 $inDays="5"
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
+echo "1. Alice is a student who lives in Nice and goes to Sophia in car every day for her studies.\n"
+sleep $*;
+
+echo "2. On BlablaMove she created one offer to transport things between Nice and Sophia every day, between 7:30 am (Nice) and 8:30 am (Sophia)."
+echo "\t-start location"
+echo "\t-arrival location"
+echo "\t-price"
+echo "\t-capacity of car"
+echo ""
+
+#curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d ''{"event":"create-offer","data":{"ownerID":"Alice@me.fr", "status":"AWAITING_CONFIRMATION", "price":"0", "startCity":"Nice", "endCity":"Sophia", "capacity":"3" }}'' "localhost:8080/BBM/OFFERS"
+
+echo "5. When she makes the offer, BlablaMove suggests nn amount of point she should charge for the delivery. Based on the number of points that are usually charged for this distance.\n"
+
+sleep $*;
+echo "6. She can choose to charge the amount BlablaMove suggest her, or she can make a new offer. The number of points she can charge for a delivery will be in a certain range proposed by the system, it can't be too expensive compare to the average offers.\n"
+
+sleep $*;
 echo "1. Bob is a lambda student who wants to move.\n"
+sleep $*;
 
 sleep $*;
 echo "2. Bob needs to transport his bed from his parents house (Nice) to his new student apartment (Sophia).\n"
@@ -24,7 +47,7 @@ sleep $*;
 echo "4. He Logins on BlablaMove: he has the right amount of points."
 sleep 0.5; printf "Processing Bob login"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
 echo ""
-# curl -H "Accept: application/json" -H "Content-type: application /json" -X POST -d '{"event" : "identify-user" , "data" : {"mail" : "Machin@me.fr" , "password" : "root"}}' "localhost:8080/BBM/OFFERS"
+# curl -H "Accept: application/json" -H "Content-type: application /json" -X POST -d '{"event" : "identify-user" , "data" : {"mail" : "Bob@me.fr" , "password" : "passwordoverop"}}' "localhost:8080/BBM/OFFERS"
 
 
 echo "\" \""
