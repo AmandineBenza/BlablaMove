@@ -221,3 +221,14 @@ WEEK 44 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 >>>>> What are the blockers and risks ?
  - Late on code content
  - Blocker/risk is the amount of projects to realize in parallel, it forces us to divide our time between all the projects. Result is that we work a little bit on each project but cannot be really productive.
+
+----------------------
+
+WEEK 45 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(07/11/18)
+
+>>>>> What was achieved this week ?
+ - Finalisations of Bob and Alice scenarios
+ - Realisation of scripted scenarios (to finish)
+ - Following of internal communication routing
+ - Start of presentation and demo
