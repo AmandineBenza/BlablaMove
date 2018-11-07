@@ -63,7 +63,7 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.POSTED);
 			offerService.createNewOffer(offer);
 			BBMLogger.infoln("Offer created. Status: \"" + OfferStatus.POSTED + "\".");
-			return "<span>Offer successfully posted</span>\n<BR>" + JsonUtils.toJson(offer);
+			return JsonUtils.toJson(offer);
 		}
 		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
 				+ range.getSupValue() + "]\n";

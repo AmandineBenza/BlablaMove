@@ -75,7 +75,7 @@ application_1  | [INFO|06/11/2018 22:30:34 | Database access...]
 application_1  | [INFO|06/11/2018 22:30:34 | OK.]
 application_1  | [INFO|06/11/2018 22:30:34 | Received response.]
 
-4. Consult offers [TODO:log ownerID]
+4. Consult awaiting offers [TODO:log ownerID]
 
 -- request
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "consult-awaiting-offers" ,"data": {"ownerID": "Machin@me.fr"}}' "localhost:8080/BBM/OFFERS"

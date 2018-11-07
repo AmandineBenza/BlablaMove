@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "ef476034-446e-4d34-b3b1-99c9867dbd42",
+		"name": "BBM",
+		"description": "Blabla Move end-to-end tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create-offer",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b20c2a3f-140e-4eaf-9cad-31d920d136fc",
+						"exec": [
+							"postman.setGlobalVariable(\"commonPreTest\", () => {",
+							"    // response code validity",
+							"    tests[\"Status code is OK.\"] = responseCode.code == 200;",
+							"    ",
+							"    // content type header existence",
+							"    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"    ",
+							"    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"preJsonTest\", () => {",
+							"    tests[\"Content-Type has application/json.\"] = responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5661bfb9-f559-4e43-b38c-40a0f62726f6",
+						"exec": [
+							"eval(globals.commonPreTest)();",
+							"",
+							"// request's components existence",
+							"tests[\"Has offerID..\"] = responseBody.has(\"offerID\");",
+							"tests[\"Has ownerID.\"] = responseBody.has(\"ownerID\");",
+							"tests[\"Has price.\"] = responseBody.has(\"price\");",
+							"tests[\"Has startCity.\"] = responseBody.has(\"startCity\");",
+							"tests[\"Has endCity.\"] = responseBody.has(\"endCity\");",
+							"tests[\"Has capacity.\"] = responseBody.has(\"capacity\");",
+							"",
+							"tests[\"Has status.\"] = responseBody.has(\"status\");",
+							"tests[\"Has distance.\"] = responseBody.has(\"distance\");",
+							"",
+							"// request's components validity",
+							"var jsonData = JSON.parse(responseBody);",
+							"// request",
+							"var jsonRequest = JSON.parse(request.data)[\"data\"];",
+							"",
+							"tests[\"Event is valid\"] == jsonData[\"event\"] == \"create-offer\";",
+							"",
+							"tests[\"Check offerID content.\"] = jsonData[\"offerID\"].toLowerCase().includes(\"alice\");",
+							"tests[\"Check ownerID.\"] = jsonData[\"ownerID\"].toLowerCase().includes(\"alice\");",
+							"tests[\"Check price.\"] = jsonData[\"price\"] > 0;",
+							"tests[\"Check startCity.\"] = jsonData[\"startCity\"] == jsonRequest[\"startCity\"];",
+							"tests[\"Check endCity.\"] = jsonData[\"endCity\"] == jsonRequest[\"endCity\"];",
+							"tests[\"Check capacity.\"] = jsonData[\"capacity\"] == jsonRequest[\"capacity\"];",
+							"tests[\"Check status.\"] = jsonData[\"status\"] == \"POSTED\";",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"Alice@me.fr\", \"status\":\"AWAITING_CONFIRMATION\", \"price\":\"13\", \"startCity\":\"startA\", \"endCity\":\"endA\", \"capacity\":\"3\" }}"
+				},
+				"url": {
+					"raw": "localhost:8080/BBM/OFFERS",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"BBM",
+						"OFFERS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consult-offers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e6186334-c13a-40b3-93eb-787da8bcbd0f",
+						"exec": [
+							"postman.setGlobalVariable(\"commonPreTest\", () => {",
+							"    // response code validity",
+							"    tests[\"Status code is OK.\"] = responseCode.code == 200;",
+							"    ",
+							"    // content type header existence",
+							"    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"    ",
+							"    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"preJsonTest\", () => {",
+							"    tests[\"Content-Type has application/json.\"] = responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "17aa46a3-c970-470c-98a8-d7353bb4c8e8",
+						"exec": [
+							"eval(globals.commonPreTest)();",
+							"eval(globals.preJsonTest)();",
+							"",
+							"// request's components validity",
+							"var jsonData = JSON.parse(responseBody)[0];",
+							"// request",
+							"var jsonRequest = JSON.parse(request.data);",
+							"",
+							"// request's components existence",
+							"tests[\"Has offerID..\"] = jsonData[\"offerID\"] !== null;",
+							"tests[\"Has ownerID.\"] = jsonData[\"ownerID\"] !== null;",
+							"tests[\"Has price.\"] = jsonData[\"price\"] !== null;",
+							"tests[\"Has startCity.\"] = jsonData[\"startCity\"] !== null;",
+							"tests[\"Has endCity.\"] = jsonData[\"endCity\"] !== null;",
+							"tests[\"Has capacity.\"] = jsonData[\"capacity\"]!== null;",
+							"tests[\"Has status.\"] = jsonData[\"status\"] !== null;",
+							"tests[\"Has distance.\"] =jsonData[\"distance\"] !== null;",
+							"",
+							"tests[\"Event is valid\"] == jsonData[\"event\"] == \"consult-offers\";",
+							"",
+							"tests[\"Check price.\"] = jsonData[\"price\"] > 0;",
+							"tests[\"Check startCity.\"] = jsonData[\"startCity\"] == jsonData[\"startCity\"];",
+							"tests[\"Check endCity.\"] = jsonData[\"endCity\"] == jsonData[\"endCity\"];",
+							"tests[\"Check capacity.\"] = jsonData[\"capacity\"] == jsonData[\"capacity\"];",
+							"tests[\"Check status.\"] = jsonData[\"status\"] == \"POSTED\"; "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"5\", \"volume\":\"6\", \"date\":\"5\" },\"filters\": {\"weight\": \"2\",\"startAddress\": \"startA\",\"endAddress\": \"endA\",\"maxPrice\": \"100\"}}"
+				},
+				"url": {
+					"raw": "localhost:8080/BBM/OFFERS",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"BBM",
+						"OFFERS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consult-awaiting-offers",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "743b950f-97be-4610-89ab-823846ee1564",
+						"exec": [
+							"postman.setGlobalVariable(\"commonPreTest\", () => {",
+							"    // response code validity",
+							"    tests[\"Status code is OK.\"] = responseCode.code == 200;",
+							"    ",
+							"    // content type header existence",
+							"    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"    ",
+							"    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"preJsonTest\", () => {",
+							"    tests[\"Content-Type has application/json.\"] = responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "411116c0-a3d8-4305-b261-0a61e5387363",
+						"exec": [
+							"eval(globals.commonPreTest)();",
+							"",
+							"// request's components validity",
+							"var jsonData = JSON.parse(responseBody)[0];",
+							"// request",
+							"var jsonRequest = JSON.parse(request.data);",
+							"",
+							"tests[\"Event is valid\"] == jsonData[\"event\"] == \"consulting-awaiting-offer\";",
+							"",
+							"tests[\"Check offerID content.\"] = jsonData[\"offerID\"].toLowerCase().includes(\"alice\");",
+							"tests[\"Check ownerID.\"] = jsonData[\"ownerID\"].toLowerCase().includes(\"alice\");",
+							"tests[\"Check weigth.\"] = jsonData[\"weigth\"] !== null;",
+							"tests[\"Check finalPrice.\"] = jsonData[\"finalPrice\"] !== null;",
+							"tests[\"Check dateBeforeOrder.\"] = jsonData[\"dateBeforeOrder\"] !== null;",
+							"tests[\"Check askForConfirmationDate.\"] = jsonData[\"askForConfirmationDate\"] !== null;",
+							"tests[\"Check status.\"] = jsonData[\"status\"] == \"AWAITING_CONFIRMATION\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event\": \"consult-awaiting-offers\" ,\"data\": {\"ownerID\": \"Alice@me.fr\"}}"
+				},
+				"url": {
+					"raw": "localhost:8080/BBM/OFFERS",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"BBM",
+						"OFFERS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ask-offer",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e9ad9119-471b-44bc-84ff-31160ae822ff",
+						"exec": [
+							"postman.setGlobalVariable(\"commonPreTest\", () => {",
+							"    // response code validity",
+							"    tests[\"Status code is OK.\"] = responseCode.code == 200;",
+							"    ",
+							"    // content type header existence",
+							"    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"    ",
+							"    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"preTextTest\", () => {",
+							"    tests[\"Content-Type has text/plain.\"] = responseHeaders[\"Content-Type\"].has(\"text/plain\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f6ed98d2-3ed0-4c70-88a8-4a2fe75f1449",
+						"exec": [
+							"eval(globals.commonPreTest)();",
+							"eval(globals.preTextTest)();",
+							"",
+							"// request's components validity",
+							"tests[\"Response\"] = responseBody.includes(\"Ordering accepted. Now, please wait for confirmation.\");",
+							"// if reponse is bad, please check request offerID and that request has not already be shoot"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event\":\"ask-offer\",\"data\": {\"offerID\": \"Alice@me.fr1541621973288_13\",\"buyerID\": \"client@daniel.dog\",\"weight\": \"5\", \"volume\":\"6\", \"date\":\"5\" }}"
+				},
+				"url": {
+					"raw": "localhost:8080/BBM/OFFERS",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"BBM",
+						"OFFERS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate-offer",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "99b6e421-9650-4395-9af3-f8f576b12fc8",
+						"exec": [
+							"postman.setGlobalVariable(\"commonPreTest\", () => {",
+							"    // response code validity",
+							"    tests[\"Status code is OK.\"] = responseCode.code == 200;",
+							"    ",
+							"    // content type header existence",
+							"    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							"    ",
+							"    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"preJsonTest\", () => {",
+							"    tests[\"Content-Type has application/json.\"] = responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa127bf0-3b87-4377-8010-3cc576fc4874",
+						"exec": [
+							"eval(globals.commonPreTest)();",
+							"",
+							"// request's components validity",
+							"var jsonData = JSON.parse(responseBody)[0];",
+							"// request",
+							"var jsonRequest = JSON.parse(request.data)[\"data\"];",
+							"",
+							"tests[\"Check transactionID.\"] = jsonData[\"transactionID\"] == jsonRequest[\"transactionID\"];",
+							"tests[\"Check offerID\"] = jsonData[\"offerID\"] !== null;",
+							"tests[\"Check ownerID\"] = jsonData[\"ownerID\"] !== null;",
+							"tests[\"Check buyerID\"] = jsonData[\"buyerID\"] !== null;",
+							"tests[\"Check volume\"] = jsonData[\"volume\"] !== null;",
+							"tests[\"Check weight\"] = jsonData[\"weight\"] !== null;",
+							"tests[\"Check finalPrice\"] = jsonData[\"finalPrice\"] !== null;",
+							"tests[\"Check dateBeforeOrder\"] = jsonData[\"dateBeforeOrder\"] !== null;",
+							"tests[\"Check askForConfirmationDate\"] = jsonData[\"askForConfirmationDate\"] !== null;",
+							"tests[\"Check confirmationDate\"] = jsonData[\"confirmationDate\"] !== null;",
+							"tests[\"Check clientDepositDate\"] = jsonData[\"confirmationDate\"] !== null;",
+							"tests[\"Check clientDepositConfirmationDate\"] = jsonData[\"clientDepositConfirmationDate\"] !== null;",
+							"tests[\"Check status.\"] = jsonData[\"status\"] == \"CONFIRMED\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\": \"1541543434816\"}}"
+				},
+				"url": {
+					"raw": "localhost:8080/BBM/OFFERS",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"BBM",
+						"OFFERS"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
