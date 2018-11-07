@@ -35,7 +35,7 @@ public class WebServiceController implements IWebServiceController {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateUsersEntryPoint(jsonEvents);
-		BBMLogger.infoln("Received response.");
+		BBMLogger.infoln("Response Received.");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());
 	}
 	
@@ -45,7 +45,7 @@ public class WebServiceController implements IWebServiceController {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/OFFERS\".");
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateOffersEntryPoint(jsonEvents);
-		BBMLogger.infoln("Received response.");
+		BBMLogger.infoln("Response received.");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());
 	}
 }
