@@ -9,7 +9,7 @@ import com.xaamruda.bbm.users.model.User;
 public interface IUserRepository extends CrudRepository<User, String> {
 	// public interface IUserRepository extends JpaRepository<User, String> {
 
-	public User findByMail(String mail);
+	public List<User> findByMail(String mail);
 	public List<User> findAll();
 
 }

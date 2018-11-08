@@ -21,7 +21,7 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public User getUserByMail(String mail) {
+	public  List<User> getUserByMail(String mail) {
 		BBMLogger.infoln("Database access..");
 		return repository.findByMail(mail);
 	}

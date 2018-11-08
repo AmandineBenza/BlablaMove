@@ -22,7 +22,7 @@ public class UserIdentificator implements IUserIdentificator {
 
 	@Override
 	public boolean identify(String userMail, String userPassword) {
-		User user = service.getUserByMail(userMail);
+		User user = service.getUserByMail(userMail).get(0);
 		userPassword = (userPassword == null) ? null : userPassword.trim();
 		return user != null && user.getPassword().trim().equals(userPassword);
 	}

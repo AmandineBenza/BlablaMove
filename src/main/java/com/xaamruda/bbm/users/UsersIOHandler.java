@@ -55,7 +55,7 @@ public class UsersIOHandler {
 	
 	public User retrieveUser(String mail) {
 		BBMLogger.infoln("Processing...");
-		User user = service.getUserByMail(mail);
+		User user = service.getUserByMail(mail).get(0);
 		return user;
 	}
 	
@@ -64,15 +64,19 @@ public class UsersIOHandler {
 	}
 
 	public void debit(String buyerID, Integer finalPrice) {
-		User buyer = service.getUserByMail(buyerID);
+		User buyer = service.getUserByMail(buyerID).get(0);
 		service.delete(buyer);
+		if(buyer.getPointsAmount() == null)
+			buyer.setPointsAmount(0);
 		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
 		service.store(buyer);
 	}
 
 	public void credit(String ownerID, Integer finalPrice) {
-		User owner = service.getUserByMail(ownerID);
+		User owner = service.getUserByMail(ownerID).get(0);
 		service.delete(owner);
+		if(owner.getPointsAmount() == null)
+			owner.setPointsAmount(0);
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
 		service.store(owner);
 	}

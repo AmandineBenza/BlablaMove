@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.offers.model.OfferStatus;
 
 public class QueryEngine {
 
@@ -24,13 +25,16 @@ public class QueryEngine {
 		if (filters.status != null) {
 			query.addCriteria(Criteria.where("status").lte(filters.status));
 		}
+		else {
+			query.addCriteria(Criteria.where("status").is(OfferStatus.POSTED));
+		}
 		return query;
 	}
 	
 	static public Query buildMongoQuery(int distance) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("distance").lt(distance + 10).gt(distance - 10));
-		
+
 		return query;
 	}
 }

@@ -22,6 +22,7 @@ public class UserDataManager implements IUserDataManager {
 	
 	@Override
 	public User storeNewUser(User user) {
+		user.setPointsAmount(500);
 		service.store(user);
 		return user;
 	}
