@@ -2,16 +2,21 @@
 
 client="Bob@me.fr"
 driver="Alice@me.fr"
-startAddress="Nice"
-endAddress="Sophia"
+startAddress="Nica"
+endAddress="Sophio"
 carV="10" ;
-curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "create-user" ,"data": {"name":"Daniel LENEGIXT", "mail":"Alice@me.fr","phone":"0675767778","password":"passwordoverop"}}' "localhost:8080/BBM/USERS"
 
 bedW="5";
-
 bedV="6";
-
 inDays="5"
+
+
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Alice mabiche\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS"
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"bob onobo\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS"
+
+
 
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
@@ -33,9 +38,6 @@ echo $priceRequest
 rangePrice=$(echo $priceRequest | grep -o -P '\[\d* : \d*\]')
 minPrice=$(echo $rangePrice | grep -o -P '\[\d*' | grep -o -P '\d*')
 
-
-
-echo "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*1.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAdress\", \"endCity\":\"$endAdress\", \"capacity\":\"$carV\" }}"
 
 curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*1.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAdress\", \"endCity\":\"$endAdress\", \"capacity\":\"$carV\" }}" "localhost:8080/BBM/OFFERS"
 
@@ -92,7 +94,7 @@ echo "B.7. Bob choses a ride for his bed.\n"
 
 oId=$(echo $firstResult | jq '.offerID')
 
-askValue=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": $oId,\"buyerID\": \"$user\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }}" "localhost:8080/BBM/OFFERS")
+askValue=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": $oId,\"buyerID\": \"$client\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }}" "localhost:8080/BBM/OFFERS")
 
 echo $askValue
 

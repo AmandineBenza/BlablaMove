@@ -23,7 +23,9 @@ public class PostedOffer {
 	private String endCity;
 	private Integer capacity; 
 	private OfferStatus status;
+	private String days;
 	private int distance;
+	
 	
 	public String getOfferID() {
 		return offerID;
