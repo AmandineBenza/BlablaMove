@@ -1,9 +1,10 @@
-package com.xaamruda.bbm.offers.billing.calculator;
+package com.xaamruda.bbm.billing.calculator;
 
 import java.util.HashMap;
 import java.util.List;
 
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.offers.utils.Range;
 
 public class MediumCalculator {
 	static private HashMap<Integer, Range> cache = new HashMap<>();
@@ -19,11 +20,11 @@ public class MediumCalculator {
 	/***
 	 * Basicaly the clients pay 1 point for 1 killometer
 	 * 
-	 * @param offers   The list of offer
+	 * @param offers The list of offer
 	 * @param distance
 	 * @return
 	 */
-	static public Range compute(List<PostedOffer> offers, int distance) {
+	public Range compute(List<PostedOffer> offers, int distance) {
 		if (cache.containsKey(distance) && Math.abs(validateCache.get(distance) - offers.size()) < CACHE_OFFSET) {
 
 			return cache.get(distance);

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.billing.BillingIOHandler;
 import com.xaamruda.bbm.commons.json.JsonUtils;
-import com.xaamruda.bbm.offers.billing.calculator.Range;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.dbaccess.services.IOfferService;
 import com.xaamruda.bbm.offers.dbaccess.services.IOffersTransactionService;
@@ -16,6 +15,7 @@ import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.offers.model.OffersTransaction;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
+import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.roads.RoadsIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
 import com.xaamruda.bbm.offers.search.engine.Filters;
@@ -55,7 +55,7 @@ public class OffersIOHandler {
 
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
 
-		Range range = offerService.checkPrice(offers, distance);
+		Range range = calculatorHandler.checkPrice(offers, distance);
 		BBMLogger.infoln("Authorized price range is [" + range.getInfValue() + " : " + range.getSupValue() + "]");
 
 		if ((offer.getPrice() < range.getSupValue() && offer.getPrice() > range.getInfValue())) {
@@ -91,7 +91,7 @@ public class OffersIOHandler {
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
 		int distance = pathHandler.getPathDistances(fil.startAddress, fil.endAddress);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
-		Range range = offerService.checkPrice(offers, distance);
+		Range range = calculatorHandler.checkPrice(offers, distance);
 
 		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "Correct price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
 				+ range.getSupValue() + "]\n" : "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "

@@ -2,10 +2,15 @@ package com.xaamruda.bbm.billing;
 
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.offers.utils.Range;
+
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.billing.calculator.Calculator;
+import com.xaamruda.bbm.billing.calculator.MediumCalculator;
 
 /**
  * Class for Calculator entry point.
@@ -64,4 +69,9 @@ public class BillingIOHandler {
 		return JsonUtils.toJson(
 				"{ userPoints : " + facturation.getUserPoints() + ", companyPoints : " + facturation.getCompanyPoints());
 	}
+	
+	public Range checkPrice(List<PostedOffer> offers,int distance){
+		return MediumCalculator.getInstance().compute(offers, distance);
+	}
+	
 }

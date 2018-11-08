@@ -5,14 +5,11 @@ import java.util.List;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.xaamruda.bbm.offers.model.PostedOffer;
-import com.xaamruda.bbm.offers.billing.calculator.Range;
+import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
 
 public interface IOfferService {
-	
-	
-	Range checkPrice(List<PostedOffer> offers, int distance);
 	
 	boolean createNewOffer(PostedOffer offer);
 	
