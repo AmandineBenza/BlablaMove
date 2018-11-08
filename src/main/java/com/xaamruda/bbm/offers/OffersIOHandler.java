@@ -54,7 +54,7 @@ public class OffersIOHandler {
 		int distance = pathHandler.getPathDistances(offer.getStartCity(), offer.getEndCity());
 
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
-		
+
 		Range range = offerService.checkPrice(offers, distance);
 		BBMLogger.infoln("Authorized price range is [" + range.getInfValue() + " : " + range.getSupValue() + "]");
 
@@ -63,14 +63,12 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.POSTED);
 			offerService.createNewOffer(offer);
 			BBMLogger.infoln("Offer created. Status: \"" + OfferStatus.POSTED + "\".");
-			return "<span>Offer successfully posted</span>\n<BR>" + JsonUtils.toJson(offer);
+			return JsonUtils.toJson(offer);
 		}
 		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-				+ range.getSupValue() + "]\n";
+		+ range.getSupValue() + "]\n";
 	}
 
-	// TODO add filterChecker to add the "status.Available" filter ?
-	// TODO add check on offer if length == 0
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
 		BBMLogger.infoln("Processing...");
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
@@ -80,7 +78,7 @@ public class OffersIOHandler {
 		for (PostedOffer offer : offers) {
 			offer.setPrice(offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance()));
 		}
-		
+
 		BBMLogger.infoln(offers.size() + " offers processed.");
 		BBMLogger.infoln("Ok.");
 
@@ -95,7 +93,9 @@ public class OffersIOHandler {
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
 		Range range = offerService.checkPrice(offers, distance);
 
-		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "OK" : "NOT OK";
+		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "Correct price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
+				+ range.getSupValue() + "]\n" : "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
+				+ range.getSupValue() + "]\n";
 	}
 
 	// TODO rename
@@ -109,16 +109,16 @@ public class OffersIOHandler {
 		List<PostedOffer> offers = offerService.getOfferByID(offerID);
 		if (!offers.isEmpty() && offers.get(0).getStatus() == OfferStatus.POSTED) {
 			PostedOffer offer = offers.get(0);
-			
+
 			BBMLogger.infoln("Computing pricing...");
 			int newPrice = offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance());
-			
+
 			usersHandler.sendMail(offer.getOwnerID(), newPrice, buyerID);
 			OffersTransaction offerTransaction = new OffersTransaction();
 			offerService.remove(offer);
-			
+
 			BBMLogger.infoln("Creating offer transaction...");
-			// TODO complexify ID
+
 			offerTransaction.setTransactionID("" + new Date().getTime());
 			offerTransaction.setBuyerID(buyerID);
 			offerTransaction.setFinalPrice(newPrice);
@@ -133,8 +133,7 @@ public class OffersIOHandler {
 			offerService.createNewOffer(offer);
 			offerTransactionService.createNewOffer(offerTransaction);
 			BBMLogger.infoln("Ok.");
-			
-			return "Ordering accepted. Now, please wait for confirmation.\n";
+			return JsonUtils.toJson(offerTransaction);
 		} else {
 			return "INVALID OPERATION\n";
 		}
@@ -238,7 +237,7 @@ public class OffersIOHandler {
 			offerTransactionService.createNewOffer(offer);
 			return JsonUtils.toJson(offers);
 		}
-		
+
 		return "INVALID OPERATION\n";
 	}
 
@@ -256,19 +255,19 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.CLOSED);
 			offer.setClientDepositConfimationDate(new Date().toString());
 			offerTransactionService.createNewOffer(offer);
-			
+
 			BBMLogger.infoln("Performing transaction, withdrawal account: " + offer.getBuyerID()
 			+ ", deposit account: " + offer.getOwnerID() + ".");
 			usersHandler.debit(offer.getBuyerID(), offer.getFinalPrice());
 			usersHandler.credit(offer.getOwnerID(), offer.getFinalPrice());
 			BBMLogger.infoln("Done.");
-			
+
 			List<PostedOffer> offersI = offerService.getOfferByID(offer.getOfferID());
 			PostedOffer postoff = offersI.get(0);
 			offerService.remove(postoff);
 			postoff.setStatus(OfferStatus.CLOSED);
 			offerService.createNewOffer(postoff);
-			
+
 			BBMLogger.infoln("Updated offer status to \"" + OfferStatus.CLOSED + "\".");
 			return JsonUtils.toJson(offers);
 		}
