@@ -22,7 +22,6 @@ public class RoadsIOHandler {
 		return JsonUtils.toJson(path);
 	}
 
-
 	public int getPathDistances(String departureLocation, String arrivalLocation) {
 		int distance = PathComposer.getInstance().computeDistance(departureLocation, arrivalLocation);
 		return distance;

@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.offers.billing.calculator;
+package com.xaamruda.bbm.offers.utils;
 
 public class Range {
 	private int supValue;

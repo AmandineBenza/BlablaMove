@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.offers.model.OfferStatus;
+import com.xaamruda.bbm.billing.calculator.MediumCalculator;
 import com.xaamruda.bbm.commons.json.JsonUtils;
-import com.xaamruda.bbm.offers.billing.calculator.MediumCalculator;
-import com.xaamruda.bbm.offers.billing.calculator.Range;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 
@@ -69,10 +69,6 @@ public class OfferService implements IOfferService {
 		return (offer != null);
 	}
 
-	@Override
-	public Range checkPrice(List<PostedOffer> offers,int distance){
-		return MediumCalculator.getInstance().compute(offers, distance);
-	}
 	
 	@Override
 	public boolean changeOfferStatus(int id, OfferStatus status) {
