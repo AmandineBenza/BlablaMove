@@ -121,4 +121,4 @@ curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POS
 
 sleep $*;
 
-echo ">> End of scenario !"
+echo ">> End of scenario !\n"
