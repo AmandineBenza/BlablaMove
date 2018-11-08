@@ -11,9 +11,11 @@ bedV="6";
 inDays="5"
 
 
+
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Alice mabiche\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS"
 
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"bob onobo\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS"
+
 
 
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
