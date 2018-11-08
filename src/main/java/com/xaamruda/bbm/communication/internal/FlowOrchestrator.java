@@ -42,7 +42,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
 		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
-		BBMLogger.infoln("Handling user request...");
+		BBMLogger.infoln("Handling request...");
 
 		HttpStatus status;
 
@@ -77,7 +77,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			clazz = List.class;
 			List lcontent = (List) content;
 			if(content == null || lcontent == null || lcontent.isEmpty()) {
-				status = HttpStatus.NOT_FOUND;		
+				status = HttpStatus.NOT_FOUND;
 			}
 			else {
 				status = HttpStatus.OK;
@@ -120,7 +120,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
 		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
-		BBMLogger.infoln("Handling offer request...");
+		BBMLogger.infoln("Handling request...");
 
 		HttpStatus status;
 		Class clazz = null;

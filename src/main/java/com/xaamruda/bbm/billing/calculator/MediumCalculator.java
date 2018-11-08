@@ -7,6 +7,7 @@ import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.utils.Range;
 
 public class MediumCalculator {
+	
 	static private HashMap<Integer, Range> cache = new HashMap<>();
 	static private HashMap<Integer, Integer> validateCache = new HashMap<>();
 	static private int CACHE_OFFSET = 5;
@@ -20,13 +21,12 @@ public class MediumCalculator {
 	/***
 	 * Basicaly the clients pay 1 point for 1 killometer
 	 * 
-	 * @param offers The list of offer
+	 * @param offers   The list of offer
 	 * @param distance
 	 * @return
 	 */
 	public Range compute(List<PostedOffer> offers, int distance) {
 		if (cache.containsKey(distance) && Math.abs(validateCache.get(distance) - offers.size()) < CACHE_OFFSET) {
-
 			return cache.get(distance);
 		}
 
@@ -35,6 +35,7 @@ public class MediumCalculator {
 		for (PostedOffer offer : offers) {
 			value += offer.getPrice();
 		}
+		
 		if (offers.isEmpty()) {
 			return new Range(distance * 3, distance / 2, distance);
 		} else {

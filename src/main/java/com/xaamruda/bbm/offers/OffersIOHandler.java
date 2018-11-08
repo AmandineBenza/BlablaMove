@@ -47,10 +47,9 @@ public class OffersIOHandler {
 	}
 
 	public String postNewOffer(String jsonObject) {
-		BBMLogger.infoln("Processing...");
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
-
 		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
+		
 		int distance = pathHandler.getPathDistances(offer.getStartCity(), offer.getEndCity());
 
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
@@ -59,18 +58,33 @@ public class OffersIOHandler {
 		BBMLogger.infoln("Authorized price range is [" + range.getInfValue() + " : " + range.getSupValue() + "]");
 
 		if ((offer.getPrice() < range.getSupValue() && offer.getPrice() > range.getInfValue())) {
+			BBMLogger.infoln("Setting offer...");
 			offer.setDistance(distance);
+			BBMLogger.infoln("Offer distance set.");
 			offer.setStatus(OfferStatus.POSTED);
+			BBMLogger.infoln("Offer status set to " + OfferStatus.POSTED);
 			offerService.createNewOffer(offer);
-			BBMLogger.infoln("Offer created. Status: \"" + OfferStatus.POSTED + "\".");
-			return JsonUtils.toJson(offer);
+			BBMLogger.infoln("Offer created. Content:");
+			String json = JsonUtils.toJson(offer);
+			logJson(offer);
+			return json;
 		}
 		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
 		+ range.getSupValue() + "]\n";
 	}
 
+	private void logJson(PostedOffer offer){
+		BBMLogger.infoln("{\"offerID\": \"" + offer.getOfferID() +"\",");
+		BBMLogger.infoln("\"ownerID\": \"" + offer.getOwnerID() +"\",");
+		BBMLogger.infoln("\"price\": \"" + offer.getPrice() +"\",");
+		BBMLogger.infoln("\"startCity\": \"" + offer.getStartCity() +"\",");
+		BBMLogger.infoln("\"endCity\": \"" + offer.getEndCity() +"\",");
+		BBMLogger.infoln("\"capacity\": \"" + offer.getCapacity() +"\",");
+		BBMLogger.infoln("\"status\": \"" + offer.getStatus() +"\",");
+		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
+	}
+
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
-		BBMLogger.infoln("Processing...");
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
 
@@ -80,14 +94,12 @@ public class OffersIOHandler {
 		}
 
 		BBMLogger.infoln(offers.size() + " offers processed.");
-		BBMLogger.infoln("Ok.");
-
+		BBMLogger.infoln("Filtering offers by prices...");
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice())
 				.collect(Collectors.toList());
 	}
 
 	public String validatePrice(String filters, String workData) {
-		BBMLogger.infoln("Processing...");
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
 		int distance = pathHandler.getPathDistances(fil.startAddress, fil.endAddress);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
@@ -101,7 +113,6 @@ public class OffersIOHandler {
 	// TODO rename
 	// this is the method to ask the offer to get accepted by ALICE
 	public String askValidate(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String offerID = json.get("offerID").getAsString();
 		String buyerID = json.get("buyerID").getAsString();
@@ -132,7 +143,6 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.AWAITING_CONFIRMATION);
 			offerService.createNewOffer(offer);
 			offerTransactionService.createNewOffer(offerTransaction);
-			BBMLogger.infoln("Ok.");
 			return JsonUtils.toJson(offerTransaction);
 		} else {
 			return "INVALID OPERATION\n";
@@ -142,7 +152,6 @@ public class OffersIOHandler {
 	// TODO rename
 	// this is the method where Alicia accept an offer
 	public String consultAwaitingOffers(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String ownerID = json.get("ownerID").getAsString();
 

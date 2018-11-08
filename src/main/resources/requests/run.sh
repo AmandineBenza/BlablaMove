@@ -22,7 +22,11 @@ echo "\t-arrival location"
 echo "\t-price"
 echo "\t-capacity of car\n"
 
+<<<<<<< HEAD
 priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
+=======
+priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/");		
+>>>>>>> branch 'master' of https://github.com/Damoy/BlablaMove.git
 echo $priceRequest
 
 rangePrice=$(echo $priceRequest | grep -o -P '\[\d* : \d*\]')
@@ -45,7 +49,6 @@ echo "\t-move date"
 echo "\t-maximum points to spend"
 sleep 0.5; printf "Processing form"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
 echo ""
-
 
 
 sleep $*;

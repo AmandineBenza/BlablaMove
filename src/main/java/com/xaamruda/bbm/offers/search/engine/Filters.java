@@ -2,8 +2,6 @@ package com.xaamruda.bbm.offers.search.engine;
 
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
-//TODO Debate
-//TODO complete
 public class Filters {
 
 	// Mandatory field
@@ -14,10 +12,14 @@ public class Filters {
 
 	// Mandatory field
 	public int weight;
-
-	// TODO mocked for now
-	// Mandatory field
-	// public int
+	
+	public Filters(String startAddress, String endAddress, int weith, int maxPrice, OfferStatus status) {
+		this.startAddress = startAddress;
+		this.endAddress = endAddress;
+		this.weight = weith;
+		this.maxPrice = maxPrice;
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
@@ -81,14 +83,6 @@ public class Filters {
 
 	public void setDistance(int distance) {
 		this.distance = distance;
-	}
-
-	public Filters(String startAddress, String endAddress, int weith, int maxPrice, OfferStatus status) {
-		this.startAddress = startAddress;
-		this.endAddress = endAddress;
-		this.weight = weith;
-		this.maxPrice = maxPrice;
-		this.status = status;
 	}
 
 }
