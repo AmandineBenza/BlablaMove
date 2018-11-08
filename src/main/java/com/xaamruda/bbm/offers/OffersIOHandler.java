@@ -98,7 +98,8 @@ public class OffersIOHandler {
 				+ range.getSupValue() + "]\n";
 	}
 
-	// Ask the offer to get accepted by Alice
+	// TODO rename
+	// this is the method to ask the offer to get accepted by ALICE
 	public String askValidate(String workData) {
 		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
