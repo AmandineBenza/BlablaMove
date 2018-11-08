@@ -1,14 +1,14 @@
 {
-	"id": "0b53a74d-8783-443b-b795-23de5b7ef4f5",
+	"id": "67e04bc9-82e8-49aa-9908-84b0a78ff162",
 	"name": "BBM",
 	"allTests": [],
-	"timestamp": "2018-11-08T10:27:21.853Z",
+	"timestamp": "2018-11-08T13:56:02.962Z",
 	"collection_id": "ef476034-446e-4d34-b3b1-99c9867dbd42",
 	"folder_id": 0,
 	"target_type": "collection",
 	"environment_id": "40fab309-d11b-4f3d-9e2e-a364e0954987",
 	"data": [],
-	"delay": 100,
+	"delay": 1000,
 	"count": 1,
 	"collection": {
 		"id": "ef476034-446e-4d34-b3b1-99c9867dbd42",
@@ -102,7 +102,7 @@
 				}
 			},
 			"times": [
-				"147"
+				"228"
 			],
 			"allTests": [
 				{
@@ -112,8 +112,8 @@
 					"Response": true
 				}
 			],
-			"time": "147",
-			"totalRequestTime": "147",
+			"time": "228",
+			"totalRequestTime": "228",
 			"iterationResults": {}
 		},
 		{
@@ -155,7 +155,7 @@
 				}
 			},
 			"times": [
-				"24"
+				"9"
 			],
 			"allTests": [
 				{
@@ -165,8 +165,8 @@
 					"Response": true
 				}
 			],
-			"time": "24",
-			"totalRequestTime": "24",
+			"time": "9",
+			"totalRequestTime": "9",
 			"iterationResults": {}
 		},
 		{
@@ -273,7 +273,7 @@
 				}
 			},
 			"times": [
-				"166"
+				"20"
 			],
 			"allTests": [
 				{
@@ -296,8 +296,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "166",
-			"totalRequestTime": "166",
+			"time": "20",
+			"totalRequestTime": "20",
 			"iterationResults": {}
 		},
 		{
@@ -399,7 +399,7 @@
 				}
 			},
 			"times": [
-				"79"
+				"31"
 			],
 			"allTests": [
 				{
@@ -421,8 +421,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "79",
-			"totalRequestTime": "79",
+			"time": "31",
+			"totalRequestTime": "31",
 			"iterationResults": {}
 		},
 		{
@@ -519,7 +519,7 @@
 				}
 			},
 			"times": [
-				"42"
+				"19"
 			],
 			"allTests": [
 				{
@@ -540,8 +540,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "42",
-			"totalRequestTime": "42",
+			"time": "19",
+			"totalRequestTime": "19",
 			"iterationResults": {}
 		},
 		{
@@ -608,7 +608,7 @@
 				}
 			},
 			"times": [
-				"148"
+				"16"
 			],
 			"allTests": [
 				{
@@ -623,8 +623,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "148",
-			"totalRequestTime": "148",
+			"time": "16",
+			"totalRequestTime": "16",
 			"iterationResults": {}
 		},
 		{
@@ -721,7 +721,7 @@
 				}
 			},
 			"times": [
-				"35"
+				"12"
 			],
 			"allTests": [
 				{
@@ -742,8 +742,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "35",
-			"totalRequestTime": "35",
+			"time": "12",
+			"totalRequestTime": "12",
 			"iterationResults": {}
 		},
 		{
@@ -845,7 +845,7 @@
 				}
 			},
 			"times": [
-				"238"
+				"11"
 			],
 			"allTests": [
 				{
@@ -867,8 +867,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "238",
-			"totalRequestTime": "238",
+			"time": "11",
+			"totalRequestTime": "11",
 			"iterationResults": {}
 		},
 		{
@@ -970,7 +970,7 @@
 				}
 			},
 			"times": [
-				"78"
+				"15"
 			],
 			"allTests": [
 				{
@@ -992,8 +992,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "78",
-			"totalRequestTime": "78",
+			"time": "15",
+			"totalRequestTime": "15",
 			"iterationResults": {}
 		},
 		{
@@ -1095,7 +1095,7 @@
 				}
 			},
 			"times": [
-				"67"
+				"19"
 			],
 			"allTests": [
 				{
@@ -1117,8 +1117,8 @@
 					"Check status.": true
 				}
 			],
-			"time": "67",
-			"totalRequestTime": "67",
+			"time": "19",
+			"totalRequestTime": "19",
 			"iterationResults": {}
 		},
 		{
@@ -1127,35 +1127,136 @@
 			"url": "localhost:8080/BBM/OFFERS",
 			"totalTime": 0,
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error",
+				"code": 200,
+				"name": "OK",
 				"detail": {
-					"name": "Internal Server Error",
-					"detail": "A generic error message, given when no more specific message is suitable."
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
 				}
 			},
-			"testPassFailCounts": {},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Event is ok.": true,
+				"TransactionID is valid.": true,
+				"Check offerID": true,
+				"Check ownerID": true,
+				"Check buyerID": true,
+				"Check volume": true,
+				"Check weigth": true,
+				"Check finalPrice": true,
+				"Check dateBeforeOrder": true,
+				"Check askForConfirmationDate": true,
+				"Check confirmationDate": true,
+				"Check clientDepositDate": true,
+				"Check clientDepositConfirmationDate": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
 			"times": [
-				"1992"
+				"33"
 			],
 			"allTests": [
-				{}
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Event is ok.": true,
+					"TransactionID is valid.": true,
+					"Check offerID": true,
+					"Check ownerID": true,
+					"Check buyerID": true,
+					"Check volume": true,
+					"Check weigth": true,
+					"Check finalPrice": true,
+					"Check dateBeforeOrder": true,
+					"Check askForConfirmationDate": true,
+					"Check confirmationDate": true,
+					"Check clientDepositDate": true,
+					"Check clientDepositConfirmationDate": true,
+					"Check status.": true
+				}
 			],
-			"time": "1992",
-			"totalRequestTime": "1992",
+			"time": "33",
+			"totalRequestTime": "33",
 			"iterationResults": {}
 		}
 	],
-	"totalPass": 128,
+	"totalPass": 144,
 	"totalFail": 0,
-	"totalTime": 3016,
+	"totalTime": 413,
 	"lifecycle": "done",
 	"requests": [
 		{
 			"name": "PRE-Create-Alice",
 			"id": "fd67c48a-f34a-46c3-a2e4-8aea5e690cce",
 			"url": "localhost:8080/BBM/USERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1187,7 +1288,7 @@
 			"name": "PRE-Create-Bob",
 			"id": "78122f86-fd15-4e53-9a50-c5c858605272",
 			"url": "localhost:8080/BBM/USERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1219,7 +1320,7 @@
 			"name": "Create-offer",
 			"id": "8cf6d1d3-c9a9-4f1b-81e2-dc288940b30b",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1303,7 +1404,7 @@
 			"name": "Consult-offers",
 			"id": "bf3866cc-d0f9-4ed1-80b4-aadca1ad2640",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1383,7 +1484,7 @@
 			"name": "Ask-offer",
 			"id": "5f4975ab-9cac-41c7-abc6-5d9a1149667a",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1459,7 +1560,7 @@
 			"name": "Consult-awaiting-offers",
 			"id": "83c77235-9d08-4e89-91bc-6707c6f23250",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1511,7 +1612,7 @@
 			"name": "Validate-offer",
 			"id": "7563eef4-8c01-4a1a-bc49-cfc2ceb1b6e4",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1587,7 +1688,7 @@
 			"name": "Bob-claims-items-reception",
 			"id": "120f6722-cece-4ce3-a15b-538909f5c09a",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1667,7 +1768,7 @@
 			"name": "Alice-confirms-Bob-items-reception",
 			"id": "5df859c3-efb5-4186-97ea-3ebcc7ff9d8b",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1747,7 +1848,7 @@
 			"name": "Alice-claims-Bob-items-deposit",
 			"id": "89b0cc9b-ec25-49b3-bf7f-f3c5333388f5",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
 				"code": 200,
 				"name": "OK",
@@ -1827,16 +1928,81 @@
 			"name": "Bob-confirms-its-items-deposit",
 			"id": "9749e4a3-3690-421d-9a4e-fe7113685685",
 			"url": "localhost:8080/BBM/OFFERS",
-			"time": "2018-11-08T10:27:21.853Z",
+			"time": "2018-11-08T13:56:02.962Z",
 			"responseCode": {
-				"code": 500,
-				"name": "Internal Server Error",
+				"code": 200,
+				"name": "OK",
 				"detail": {
-					"name": "Internal Server Error",
-					"detail": "A generic error message, given when no more specific message is suitable."
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
 				}
 			},
-			"testPassFailCounts": {}
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
 		}
 	],
 	"synced": false

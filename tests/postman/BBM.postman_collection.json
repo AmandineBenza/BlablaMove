@@ -851,6 +851,37 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e2d3ed3-a030-451a-bd12-8a9dbc07afdd",
+						"exec": [
+							"eval(globals.commonPreTest)();",
+							"",
+							"// request's components validity",
+							"var jsonData = JSON.parse(responseBody)[0];",
+							"// request",
+							"var jsonRequest = JSON.parse(request.data);",
+							"",
+							"tests[\"Event is ok.\"] = jsonRequest[\"event\"]  == \"confirm-deposit\";",
+							"tests[\"TransactionID is valid.\"] = jsonRequest[\"data\"][\"transactionID\"] == jsonData[\"transactionID\"];",
+							"",
+							"tests[\"Check offerID\"] = jsonData[\"offerID\"] !== null && jsonData[\"offerID\"].includes(\"@\");",
+							"tests[\"Check ownerID\"] = jsonData[\"ownerID\"] !== null && jsonData[\"ownerID\"].includes(\"@\");",
+							"tests[\"Check buyerID\"] = jsonData[\"buyerID\"] !== null && jsonData[\"buyerID\"].includes(\"@\");",
+							"tests[\"Check volume\"] = jsonData[\"volume\"] !== null && jsonData[\"volume\"] > 0;",
+							"tests[\"Check weigth\"] = jsonData[\"weigth\"] !== null && jsonData[\"weigth\"] > 0;",
+							"tests[\"Check finalPrice\"] = jsonData[\"finalPrice\"] !== null && jsonData[\"finalPrice\"] > 0;",
+							"tests[\"Check dateBeforeOrder\"] = jsonData[\"dateBeforeOrder\"] !== null;",
+							"tests[\"Check askForConfirmationDate\"] = jsonData[\"askForConfirmationDate\"] !== null;",
+							"tests[\"Check confirmationDate\"] = jsonData[\"confirmationDate\"] !== null;",
+							"tests[\"Check clientDepositDate\"] = jsonData[\"confirmationDate\"] !== null;",
+							"tests[\"Check clientDepositConfirmationDate\"] = jsonData[\"clientDepositConfirmationDate\"] !== null;",
+							"tests[\"Check status.\"] = jsonData[\"status\"] == \"CLOSED\";"
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
