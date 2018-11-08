@@ -22,17 +22,16 @@ echo "\t-arrival location"
 echo "\t-price"
 echo "\t-capacity of car\n"
 
-<<<<<<< HEAD
 priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
-=======
-priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/");		
->>>>>>> branch 'master' of https://github.com/Damoy/BlablaMove.git
+
 echo $priceRequest
 
 rangePrice=$(echo $priceRequest | grep -o -P '\[\d* : \d*\]')
 minPrice=$(echo $rangePrice | grep -o -P '\[\d*' | grep -o -P '\d*')
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*1.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAdress\", \"endCity\":\"$endAdress\", \"capacity\":\"$carV\" }}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*2.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAddress\", \"endCity\":\"$endAddress\", \"capacity\":\"$carV\" }}" "localhost:8080/BBM/OFFERS"
+
+
 
 echo "B.1. Bob Logins on BlablaMove: he has the right amount of points."
 sleep 0.5; printf "Processing Bob login"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
@@ -57,7 +56,7 @@ sleep 0.5; printf "Retrieving relevant offers"; sleep 1; printf "."; sleep 1; pr
 echo ""
 
 #Bob is a really rich boy he allway have money so he put a filter at 10000 points
-searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" },\"filters\": {\"weight\": \"$bedV\",\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAdress\",\"maxPrice\": \"10000\"}}" "localhost:8080/BBM/OFFERS")
+searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" },\"filters\": {\"weight\": \"$bedV\",\"startAddress\": \"$startAddress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"10000\"}}" "localhost:8080/BBM/OFFERS")
 echo $searchResultList
 
 firstResult=$(echo $searchResultList | jq '.[0]')
@@ -76,7 +75,7 @@ sleep $*;
 echo "B.5. The system answers with a recap.\n"
 
 price=$(echo $askValue | jq '.finalPrice')
-recap=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"confirm-command\" ,\"data\": {\"offerID\": $oId,\"date\":\"$inDays\", \"startAddress\":\"$startAdress\", \"endAddress\":\"$endAdress\",\"price\":\"$price\" }}" "localhost:8080/BBM/OFFERS")
+recap=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"confirm-command\" ,\"data\": {\"offerID\": $oId,\"date\":\"$inDays\", \"startAddress\":\"$startAddress\", \"endAddress\":\"$endAddress\",\"price\":\"$price\" }}" "localhost:8080/BBM/OFFERS")
 
 
 sleep $*;
