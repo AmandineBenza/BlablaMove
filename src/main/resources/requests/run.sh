@@ -10,9 +10,9 @@ bedW="5";
 bedV="6";
 inDays="5"
 
-aliceCreated=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Alice\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS");
+aliceCreated=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Alice\", \"mail\":\"$driver\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS");
 
-bobCreated=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Bob\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS");
+bobCreated=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Bob\", \"mail\":\"$client\",\"phone\":\"0642424242\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS");
 
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
