@@ -2,28 +2,25 @@
 
 client="Bob@me.fr"
 driver="Alice@me.fr"
-startAddress="Nica"
-endAddress="Sophio"
+startAddress="Nice"
+endAddress="Sophia"
 carV="10" ;
 
 bedW="5";
 bedV="6";
 inDays="5"
 
+aliceCreated=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Alice\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS");
 
-curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Alice mabiche\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS"
-
-curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"bob onobo\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS"
-
+bobCreated=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Bob\", \"mail\":\"\",\"phone\":\"0675767778\",\"password\":\"DWpasswOrdL\"}}" "localhost:8080/BBM/USERS");
 
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
-echo "A.1. On BlablaMove she created one offer to transport things between Nice and Sophia every day, between 7:30 am (Nice) and 8:30 am (Sophia)."
+echo "A.1. Alice created on BlablaMove one offer to transport things between Nice and Sophia every day, between 7:30 am (Nice) and 8:30 am (Sophia)."
 echo "\t-start location"
 echo "\t-arrival location"
 echo "\t-price"
-echo "\t-capacity of car"
-echo ""
+echo "\t-capacity of car\n"
 
 priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/")
 echo $priceRequest
@@ -31,16 +28,13 @@ echo $priceRequest
 rangePrice=$(echo $priceRequest | grep -o -P '\[\d* : \d*\]')
 minPrice=$(echo $rangePrice | grep -o -P '\[\d*' | grep -o -P '\d*')
 
-
 curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*1.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAdress\", \"endCity\":\"$endAdress\", \"capacity\":\"$carV\" }}" "localhost:8080/BBM/OFFERS"
 
 echo "B.1. Bob Logins on BlablaMove: he has the right amount of points."
 sleep 0.5; printf "Processing Bob login"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
 echo ""
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"$client\" , \"password\" : \"passwordoverop\"}}" "localhost:8080/BBM/OFFERS"
-
-echo "\" \""
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"$client\" , \"password\" : \"DWpasswOrdL\"}}" "localhost:8080/BBM/OFFERS"
  
 sleep $*;
 echo "B.2. He fills a form with following information:"
