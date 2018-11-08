@@ -42,7 +42,6 @@ public class OffersIOHandler {
 	}
 
 	public List<PostedOffer> getOffers() {
-		BBMLogger.infoln("Processing...");
 		return offerService.getAvailableOffers();
 	}
 
@@ -167,7 +166,6 @@ public class OffersIOHandler {
 
 	// Alicia accepts an offer
 	public String confirmAwaitingOffer(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -190,7 +188,6 @@ public class OffersIOHandler {
 	}
 
 	public String claimReceipt(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -210,7 +207,6 @@ public class OffersIOHandler {
 	}
 
 	public String confirmReceipt(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -230,7 +226,6 @@ public class OffersIOHandler {
 	}
 
 	public String claimDeposit(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -251,7 +246,6 @@ public class OffersIOHandler {
 	}
 
 	public String confirmDeposit(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
