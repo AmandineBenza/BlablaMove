@@ -11,22 +11,29 @@ public class QueryEngine {
 	// TODO Still again debate
 	static public Query buildMongoQuery(Filters filters) {
 		Query query = new Query();
-		// TODO Query - Criteria - Evolve ->
+		
 		// For now we decided that only town will affect availability
 		query.addCriteria(Criteria.where("startCity").is(filters.startAddress));
 		query.addCriteria(Criteria.where("endCity").is(filters.endAddress));
-
 		query.addCriteria(Criteria.where("capacity").gt(filters.weight));
+		
+		BBMLogger.infoln("Embedded filters:");
+		BBMLogger.infoln("Start city: " + filters.startAddress);
+		BBMLogger.infoln("End city:  " + filters.endAddress);
+		BBMLogger.infoln("Capacity: " + filters.weight);
 		
 		if (filters.maxPrice > 0) {
 			query.addCriteria(Criteria.where("price").lte(filters.maxPrice));
+			BBMLogger.infoln("Price: " + filters.maxPrice);
 		}
 		
 		if (filters.status != null) {
 			query.addCriteria(Criteria.where("status").lte(filters.status));
+			BBMLogger.infoln("Status: " + filters.status);
 		}
 		else {
 			query.addCriteria(Criteria.where("status").is(OfferStatus.POSTED));
+			BBMLogger.infoln("Status: " + OfferStatus.POSTED);
 		}
 		return query;
 	}

@@ -77,7 +77,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			clazz = List.class;
 			List lcontent = (List) content;
 			if(content == null || lcontent == null || lcontent.isEmpty()) {
-				status = HttpStatus.NOT_FOUND;		
+				status = HttpStatus.NOT_FOUND;
 			}
 			else {
 				status = HttpStatus.OK;
