@@ -22,8 +22,7 @@ echo "\t-arrival location"
 echo "\t-price"
 echo "\t-capacity of car\n"
 
-
-priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAddress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
+priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
 
 echo $priceRequest
 
