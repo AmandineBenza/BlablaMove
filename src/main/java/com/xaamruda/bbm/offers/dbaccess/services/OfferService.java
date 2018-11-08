@@ -50,7 +50,6 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<PostedOffer> getAvailableOffers(Query query) {
-		BBMLogger.infoln("Retrieving offers given query: " + query.toString() + ".");
 		List<PostedOffer> offers = mongoTemplate.find(query, PostedOffer.class);
 		return offers;
 	}
