@@ -42,7 +42,6 @@ public class OffersIOHandler {
 	}
 
 	public List<PostedOffer> getOffers() {
-		BBMLogger.infoln("Processing...");
 		return offerService.getAvailableOffers();
 	}
 
@@ -101,8 +100,10 @@ public class OffersIOHandler {
 
 	public String validatePrice(String filters, String workData) {
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
+		BBMLogger.infoln("Computing path distance...");
 		int distance = pathHandler.getPathDistances(fil.startAddress, fil.endAddress);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
+		BBMLogger.infoln("Checking offers price...");
 		Range range = calculatorHandler.checkPrice(offers, distance);
 
 		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "Correct price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
@@ -167,7 +168,6 @@ public class OffersIOHandler {
 
 	// Alicia accepts an offer
 	public String confirmAwaitingOffer(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -190,7 +190,6 @@ public class OffersIOHandler {
 	}
 
 	public String claimReceipt(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -210,7 +209,6 @@ public class OffersIOHandler {
 	}
 
 	public String confirmReceipt(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -230,7 +228,6 @@ public class OffersIOHandler {
 	}
 
 	public String claimDeposit(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
@@ -251,7 +248,6 @@ public class OffersIOHandler {
 	}
 
 	public String confirmDeposit(String workData) {
-		BBMLogger.infoln("Processing...");
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
 
