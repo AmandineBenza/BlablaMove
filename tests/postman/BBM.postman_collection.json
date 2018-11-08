@@ -192,8 +192,15 @@
 							"",
 							"tests[\"Event is valid\"] == jsonData[\"event\"] == \"create-offer\";",
 							"",
-							"tests[\"Check offerID content.\"] = jsonData[\"offerID\"].toLowerCase().includes(\"alice\");",
+							"tests[\"Check offerID.\"] = jsonData[\"offerID\"].toLowerCase().includes(\"alice\");",
+							"",
+							"// set environment offer ID",
+							"postman.setEnvironmentVariable(\"offerID\", jsonData[\"offerID\"]);",
+							"console.log(\"offerID:\" + jsonData[\"offerID\"]);",
+							"console.log(\"environment offer ID:\" + environment[\"offerID\"]);",
+							"",
 							"tests[\"Check ownerID.\"] = jsonData[\"ownerID\"].toLowerCase().includes(\"alice\");",
+							"",
 							"tests[\"Check price.\"] = jsonData[\"price\"] > 0;",
 							"tests[\"Check startCity.\"] = jsonData[\"startCity\"] == jsonRequest[\"startCity\"];",
 							"tests[\"Check endCity.\"] = jsonData[\"endCity\"] == jsonRequest[\"endCity\"];",
@@ -217,7 +224,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"Alice@me.fr\", \"status\":\"AWAITING_CONFIRMATION\", \"price\":\"13\", \"startCity\":\"Nice\", \"endCity\":\"Sophia\", \"capacity\":\"3\" }}"
+					"raw": "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"Alice@me.fr\", \"status\":\"AWAITING_CONFIRMATION\", \"price\":\"13\", \"startCity\":\"Nice\", \"endCity\":\"Sophia\", \"capacity\":\"4\" }}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
@@ -337,10 +344,6 @@
 							"    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
 							"    ",
 							"    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;",
-							"});",
-							"",
-							"postman.setGlobalVariable(\"preTextTest\", () => {",
-							"    tests[\"Content-Type has text/plain.\"] = responseHeaders[\"Content-Type\"].has(\"text/plain\");",
 							"});"
 						],
 						"type": "text/javascript"
@@ -352,11 +355,33 @@
 						"id": "f6ed98d2-3ed0-4c70-88a8-4a2fe75f1449",
 						"exec": [
 							"eval(globals.commonPreTest)();",
-							"eval(globals.preTextTest)();",
 							"",
 							"// request's components validity",
-							"tests[\"Response\"] = responseBody.includes(\"Ordering accepted. Now, please wait for confirmation.\");",
-							"// if reponse is bad, please check request offerID and that request has not already be shoot"
+							"var jsonData = JSON.parse(responseBody);",
+							"// request",
+							"var jsonRequest = JSON.parse(request.data);",
+							"",
+							"tests[\"Event is ok.\"] = jsonRequest[\"event\"]  == \"ask-offer\";",
+							"",
+							"// ADD TRANSACTION ID TO ENVIRONMENT",
+							"postman.setEnvironmentVariable(\"transactionID\", jsonData[\"transactionID\"]);",
+							"console.log(\"transactionID:\" + jsonData[\"transactionID\"]);",
+							"console.log(\"environment transaction ID:\" + environment[\"transactionID\"]);",
+							"",
+							"tests[\"Check offerID\"] = jsonData[\"offerID\"] !== null && jsonData[\"offerID\"].includes(\"@\");",
+							"tests[\"Check ownerID\"] = jsonData[\"ownerID\"] !== null && jsonData[\"ownerID\"].includes(\"@\");",
+							"tests[\"Check buyerID\"] = jsonData[\"buyerID\"] !== null && jsonData[\"buyerID\"].includes(\"@\");",
+							"tests[\"Check volume\"] = jsonData[\"volume\"] !== null && jsonData[\"volume\"] > 0;",
+							"tests[\"Check weigth\"] = jsonData[\"weigth\"] !== null && jsonData[\"weigth\"] > 0;",
+							"tests[\"Check finalPrice\"] = jsonData[\"finalPrice\"] !== null && jsonData[\"finalPrice\"] > 0;",
+							"tests[\"Check dateBeforeOrder\"] = jsonData[\"dateBeforeOrder\"] !== null;",
+							"tests[\"Check askForConfirmationDate\"] = jsonData[\"askForConfirmationDate\"] !== null;",
+							"tests[\"Check confirmationDate\"] = jsonData[\"confirmationDate\"] !== null;",
+							"tests[\"Check clientDepositDate\"] = jsonData[\"confirmationDate\"] !== null;",
+							"tests[\"Check clientDepositConfirmationDate\"] = jsonData[\"clientDepositConfirmationDate\"] !== null;",
+							"    tests[\"Check status.\"] = jsonData[\"status\"] == \"AWAITING_CONFIRMATION\";",
+							"",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -374,7 +399,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\":\"ask-offer\",\"data\": {\"offerID\": \"Alice@me.fr\",\"buyerID\": \"Bob@me.fr\",\"weight\": \"5\", \"volume\":\"6\", \"date\":\"5\" }}"
+					"raw": "{\"event\":\"ask-offer\",\"data\": {\"offerID\": \"{{offerID}}\",\"buyerID\": \"Bob@me.fr\",\"weight\": \"5\", \"volume\":\"6\", \"date\":\"5\" }}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
@@ -541,7 +566,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\": \"1541543434816\"}}"
+					"raw": "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\": \"{{transactionID}}\" }}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
@@ -565,11 +590,6 @@
 					"script": {
 						"id": "694d8112-4305-4475-b5f1-e58445468889",
 						"exec": [
-							"// -------",
-							"// If test fails, please check the request body.",
-							"// The transactionID should be provided in the Ask-offer response.",
-							"// -------",
-							"",
 							"eval(globals.commonPreTest)();",
 							"",
 							"// request's components validity",
@@ -629,7 +649,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": \"1541543434816\"}}"
+					"raw": "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\":{{transactionID}} }}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
@@ -653,11 +673,6 @@
 					"script": {
 						"id": "63924992-d1d9-4d7c-bebe-a795c3ae4c31",
 						"exec": [
-							"// -------",
-							"// If test fails, please check the request body.",
-							"// The transactionID should be provided in the Ask-offer response.",
-							"// -------",
-							"",
 							"eval(globals.commonPreTest)();",
 							"",
 							"// request's components validity",
@@ -717,7 +732,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\": \"confirm-receipt\",\"data\": {\"transactionID\": \"1541543434816\"}}"
+					"raw": "{\"event\": \"confirm-receipt\",\"data\": {\"transactionID\": {{transactionID}}}}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
@@ -759,11 +774,6 @@
 					"script": {
 						"id": "b4f347f3-7fa3-4b0d-9981-cafcc987e2e2",
 						"exec": [
-							"// -------",
-							"// If test fails, please check the request body.",
-							"// The transactionID should be provided in the Ask-offer response.",
-							"// -------",
-							"",
 							"eval(globals.commonPreTest)();",
 							"",
 							"// request's components validity",
@@ -805,7 +815,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\": \"claim-deposit\",\"data\": {\"transactionID\": \"1541543434816\"}}"
+					"raw": "{\"event\": \"claim-deposit\",\"data\": {\"transactionID\": {{transactionID}} }}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
@@ -855,7 +865,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": \"1541543434816\"}}"
+					"raw": "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": {{transactionID}} }}"
 				},
 				"url": {
 					"raw": "localhost:8080/BBM/OFFERS",
