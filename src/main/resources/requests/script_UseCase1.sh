@@ -94,8 +94,6 @@ oId=$(echo $firstResult | jq '.offerID')
 
 askValue=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": $oId,\"buyerID\": \"$user\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }}" "localhost:8080/BBM/OFFERS")
 
-echo "x"
-echo "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \"$oId\",\"buyerID\": \"$user\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }}"
 echo $askValue
 
 

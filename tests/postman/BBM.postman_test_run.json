@@ -1,0 +1,1843 @@
+{
+	"id": "0b53a74d-8783-443b-b795-23de5b7ef4f5",
+	"name": "BBM",
+	"allTests": [],
+	"timestamp": "2018-11-08T10:27:21.853Z",
+	"collection_id": "ef476034-446e-4d34-b3b1-99c9867dbd42",
+	"folder_id": 0,
+	"target_type": "collection",
+	"environment_id": "40fab309-d11b-4f3d-9e2e-a364e0954987",
+	"data": [],
+	"delay": 100,
+	"count": 1,
+	"collection": {
+		"id": "ef476034-446e-4d34-b3b1-99c9867dbd42",
+		"name": "BBM",
+		"description": "Blabla Move end-to-end tests",
+		"auth": null,
+		"events": null,
+		"variables": [],
+		"order": [
+			"fd67c48a-f34a-46c3-a2e4-8aea5e690cce",
+			"78122f86-fd15-4e53-9a50-c5c858605272",
+			"8cf6d1d3-c9a9-4f1b-81e2-dc288940b30b",
+			"bf3866cc-d0f9-4ed1-80b4-aadca1ad2640",
+			"5f4975ab-9cac-41c7-abc6-5d9a1149667a",
+			"83c77235-9d08-4e89-91bc-6707c6f23250",
+			"7563eef4-8c01-4a1a-bc49-cfc2ceb1b6e4",
+			"120f6722-cece-4ce3-a15b-538909f5c09a",
+			"5df859c3-efb5-4186-97ea-3ebcc7ff9d8b",
+			"89b0cc9b-ec25-49b3-bf7f-f3c5333388f5",
+			"9749e4a3-3690-421d-9a4e-fe7113685685"
+		],
+		"folders_order": [],
+		"owner": "2707058",
+		"permissions": {},
+		"favorite": false,
+		"shared": false,
+		"type": "collection",
+		"depth": 0
+	},
+	"folder": null,
+	"environment": null,
+	"globals": [
+		{
+			"value": "() => {\n    // response code validity\n    tests[\"Status code is OK.\"] = responseCode.code == 200;\n    \n    // content type header existence\n    var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");\n    \n    tests[\"Has Content-Type.\"] = contentTypeHeaderExists;\n}",
+			"key": "commonPreTest",
+			"enabled": true
+		},
+		{
+			"value": "(request, responseBody) => {\n    var jsonRequest = xml2Json(request.data);\n    var jsonResponse = xml2Json(responseBody);\n    \n    // the actual upsell content encapsulated into a json object\n    var upsell = jsonRequest[\"soap:Envelope\"][\"soap:Body\"][\"Fare_FlexPricerUpsell\"];\n    // the actual reply content encapsulated into a json object\n    var reply = jsonResponse[\"SOAP\\-ENV:Envelope\"][\"SOAP\\-ENV:Body\"][\"Fare_FlexPricerUpsellReply\"];\n    \n    // the connecting services\n    var connectingServices = reply[\"connectingServices\"];\n    // the lounge service\n    var loungeService = connectingServices[\"loungeService\"];\n    // the lounge array\n    var lounges = loungeService[\"lounge\"];\n    \n    // the request departure IATA code\n    var departureIata = extractRequestDeparture(upsell);\n    // the request arrival IATA code\n    var arrivalIata = extractRequestArrival(upsell);\n\n    if(lounges != null){\n            lounges.forEach((lounge) => {\n    \n        let description = lounge[\"description\"];\n        let detailedLocation = lounge[\"detailedLocation\"];\n        let entryConditions = lounge[\"entryConditions\"][\"entryCondition\"];\n        let facilities = lounge[\"facilities\"][\"facility\"];\n        let iata = lounge[\"iata\"];\n        let id = lounge[\"id\"];\n        let images = lounge[\"images\"][\"image\"];\n        let location = lounge[\"location\"];\n        let name = lounge[\"name\"];\n        let openings = lounge[\"openings\"][\"opening\"];\n        let src = lounge[\"srcUrl\"];\n        \n        // check nullity part\n        checkNullity(\"description\", description);\n        checkNullity(\"detailedLocation\", detailedLocation);\n        checkNullity(\"entryConditions\", entryConditions);\n        checkNullity(\"facilities\", facilities);\n        checkNullity(\"iata\", iata);\n        checkNullity(\"id\", id);\n        checkNullity(\"images\", images);\n        checkNullity(\"location\", location);\n        checkNullity(\"name\", name);\n        checkNullity(\"openings\", openings);\n        checkNullity(\"src\", src);\n        \n        // check non-emptyness\n        checkStrEmptyness(\"description\", description);\n        checkStrEmptyness(\"detailedLocation\", detailedLocation);\n        checkStrEmptyness(\"iata\", iata);\n        checkStrEmptyness(\"id\", id);\n        checkStrEmptyness(\"location\", location);\n        checkStrEmptyness(\"name\", name);\n        checkStrEmptyness(\"src\", src);\n        \n        // check arrays\n        checkArrayEmptyness(\"entryConditions\", entryConditions);\n        checkArrayEmptyness(\"facilities\", facilities);\n        checkArrayEmptyness(\"images\", images);\n        checkArrayEmptyness(\"openings\", openings);\n        \n        // check content\n        checkIdConsistence(id, departureIata, arrivalIata);\n        checkIataConsistence(id, departureIata, arrivalIata);\n    });\n    }\n\n    function extractRequestDeparture(upsell){\n        let itineraries = upsell[\"itinerary\"];\n        \n        // have to dissociate OW requests from multi ptc as \n        if(itineraries.constructor == Array){\n            return itineraries[0][\"departureLocalization\"][\"departurePoint\"][\"locationId\"];\n        } else {\n            return itineraries[\"departureLocalization\"][\"departurePoint\"][\"locationId\"];\n        }\n    }\n    \n    function extractRequestArrival(upsell){\n        let itineraries = upsell[\"itinerary\"];\n        \n        // have to dissociate OW requests from multi ptc as \n        if(itineraries.constructor == Array){\n            return itineraries[itineraries.length - 1][\"arrivalLocalization\"][\"arrivalPointDetails\"][\"locationId\"];\n        } else {\n            return itineraries[\"arrivalLocalization\"][\"arrivalPointDetails\"][\"locationId\"];\n        }\n    }\n    \n    function checkNullity(varName, obj){\n        tests[\"Check \" + varName + \" is not null !\"] = obj !== null;\n    }\n    \n    function checkStrEmptyness(varName, obj){\n        tests[\"Check \" + varName + \" is not empty !\"] = obj.trim() != \"\";\n    }\n    \n    function checkArrayEmptyness(varName, obj){\n        tests[\"Check \" + varName + \" is not empty !\"] = obj.length > 0;\n    }\n    \n    function checkIdConsistence(id, departure, arrival){\n        tests[\"Check id consistence.\"] = (id !== departure && id !== arrival);\n    }\n    \n    function checkIataConsistence(iata, departure, arrival){\n        tests[\"Check iata consistence.\"] = (!iata.includes(departure) && !iata.includes(arrival));\n    }\n    \n}",
+			"key": "responseValidityTest",
+			"enabled": true
+		},
+		{
+			"value": "() => {\n    tests[\"Content-Type has application/json.\"] = responseHeaders[\"Content-Type\"].has(\"application/json\");\n}",
+			"key": "preJsonTest",
+			"enabled": true
+		},
+		{
+			"value": "() => {\n    tests[\"Content-Type has text/plain.\"] = responseHeaders[\"Content-Type\"].has(\"text/plain\");\n}",
+			"key": "preTextTest",
+			"enabled": true
+		}
+	],
+	"results": [
+		{
+			"name": "PRE-Create-Alice",
+			"id": "fd67c48a-f34a-46c3-a2e4-8aea5e690cce",
+			"url": "localhost:8080/BBM/USERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Content-Type has text/plain.": true,
+				"Response": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type has text/plain.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"147"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Content-Type has text/plain.": true,
+					"Response": true
+				}
+			],
+			"time": "147",
+			"totalRequestTime": "147",
+			"iterationResults": {}
+		},
+		{
+			"name": "PRE-Create-Bob",
+			"id": "78122f86-fd15-4e53-9a50-c5c858605272",
+			"url": "localhost:8080/BBM/USERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Content-Type has text/plain.": true,
+				"Response": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type has text/plain.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"24"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Content-Type has text/plain.": true,
+					"Response": true
+				}
+			],
+			"time": "24",
+			"totalRequestTime": "24",
+			"iterationResults": {}
+		},
+		{
+			"name": "Create-offer",
+			"id": "8cf6d1d3-c9a9-4f1b-81e2-dc288940b30b",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Has offerID..": true,
+				"Has ownerID.": true,
+				"Has price.": true,
+				"Has startCity.": true,
+				"Has endCity.": true,
+				"Has capacity.": true,
+				"Has status.": true,
+				"Has distance.": true,
+				"Check offerID.": true,
+				"Check ownerID.": true,
+				"Check price.": true,
+				"Check startCity.": true,
+				"Check endCity.": true,
+				"Check capacity.": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has offerID..": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has status.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has distance.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"166"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Has offerID..": true,
+					"Has ownerID.": true,
+					"Has price.": true,
+					"Has startCity.": true,
+					"Has endCity.": true,
+					"Has capacity.": true,
+					"Has status.": true,
+					"Has distance.": true,
+					"Check offerID.": true,
+					"Check ownerID.": true,
+					"Check price.": true,
+					"Check startCity.": true,
+					"Check endCity.": true,
+					"Check capacity.": true,
+					"Check status.": true
+				}
+			],
+			"time": "166",
+			"totalRequestTime": "166",
+			"iterationResults": {}
+		},
+		{
+			"name": "Consult-offers",
+			"id": "bf3866cc-d0f9-4ed1-80b4-aadca1ad2640",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Content-Type has application/json.": true,
+				"Has offerID..": true,
+				"Has ownerID.": true,
+				"Has price.": true,
+				"Has startCity.": true,
+				"Has endCity.": true,
+				"Has capacity.": true,
+				"Has status.": true,
+				"Has distance.": true,
+				"Check price.": true,
+				"Check startCity.": true,
+				"Check endCity.": true,
+				"Check capacity.": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type has application/json.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has offerID..": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has status.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has distance.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"79"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Content-Type has application/json.": true,
+					"Has offerID..": true,
+					"Has ownerID.": true,
+					"Has price.": true,
+					"Has startCity.": true,
+					"Has endCity.": true,
+					"Has capacity.": true,
+					"Has status.": true,
+					"Has distance.": true,
+					"Check price.": true,
+					"Check startCity.": true,
+					"Check endCity.": true,
+					"Check capacity.": true,
+					"Check status.": true
+				}
+			],
+			"time": "79",
+			"totalRequestTime": "79",
+			"iterationResults": {}
+		},
+		{
+			"name": "Ask-offer",
+			"id": "5f4975ab-9cac-41c7-abc6-5d9a1149667a",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Event is ok.": true,
+				"Check offerID": true,
+				"Check ownerID": true,
+				"Check buyerID": true,
+				"Check volume": true,
+				"Check weigth": true,
+				"Check finalPrice": true,
+				"Check dateBeforeOrder": true,
+				"Check askForConfirmationDate": true,
+				"Check confirmationDate": true,
+				"Check clientDepositDate": true,
+				"Check clientDepositConfirmationDate": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"42"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Event is ok.": true,
+					"Check offerID": true,
+					"Check ownerID": true,
+					"Check buyerID": true,
+					"Check volume": true,
+					"Check weigth": true,
+					"Check finalPrice": true,
+					"Check dateBeforeOrder": true,
+					"Check askForConfirmationDate": true,
+					"Check confirmationDate": true,
+					"Check clientDepositDate": true,
+					"Check clientDepositConfirmationDate": true,
+					"Check status.": true
+				}
+			],
+			"time": "42",
+			"totalRequestTime": "42",
+			"iterationResults": {}
+		},
+		{
+			"name": "Consult-awaiting-offers",
+			"id": "83c77235-9d08-4e89-91bc-6707c6f23250",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Check offerID content.": true,
+				"Check ownerID.": true,
+				"Check weigth.": true,
+				"Check finalPrice.": true,
+				"Check dateBeforeOrder.": true,
+				"Check askForConfirmationDate.": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID content.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"148"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Check offerID content.": true,
+					"Check ownerID.": true,
+					"Check weigth.": true,
+					"Check finalPrice.": true,
+					"Check dateBeforeOrder.": true,
+					"Check askForConfirmationDate.": true,
+					"Check status.": true
+				}
+			],
+			"time": "148",
+			"totalRequestTime": "148",
+			"iterationResults": {}
+		},
+		{
+			"name": "Validate-offer",
+			"id": "7563eef4-8c01-4a1a-bc49-cfc2ceb1b6e4",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Check transactionID.": true,
+				"Check offerID": true,
+				"Check ownerID": true,
+				"Check buyerID": true,
+				"Check volume": true,
+				"Check weigth": true,
+				"Check finalPrice": true,
+				"Check dateBeforeOrder": true,
+				"Check askForConfirmationDate": true,
+				"Check confirmationDate": true,
+				"Check clientDepositDate": true,
+				"Check clientDepositConfirmationDate": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check transactionID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"35"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Check transactionID.": true,
+					"Check offerID": true,
+					"Check ownerID": true,
+					"Check buyerID": true,
+					"Check volume": true,
+					"Check weigth": true,
+					"Check finalPrice": true,
+					"Check dateBeforeOrder": true,
+					"Check askForConfirmationDate": true,
+					"Check confirmationDate": true,
+					"Check clientDepositDate": true,
+					"Check clientDepositConfirmationDate": true,
+					"Check status.": true
+				}
+			],
+			"time": "35",
+			"totalRequestTime": "35",
+			"iterationResults": {}
+		},
+		{
+			"name": "Bob-claims-items-reception",
+			"id": "120f6722-cece-4ce3-a15b-538909f5c09a",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Event is ok.": true,
+				"TransactionID is valid.": true,
+				"Check offerID": true,
+				"Check ownerID": true,
+				"Check buyerID": true,
+				"Check volume": true,
+				"Check weigth": true,
+				"Check finalPrice": true,
+				"Check dateBeforeOrder": true,
+				"Check askForConfirmationDate": true,
+				"Check confirmationDate": true,
+				"Check clientDepositDate": true,
+				"Check clientDepositConfirmationDate": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"238"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Event is ok.": true,
+					"TransactionID is valid.": true,
+					"Check offerID": true,
+					"Check ownerID": true,
+					"Check buyerID": true,
+					"Check volume": true,
+					"Check weigth": true,
+					"Check finalPrice": true,
+					"Check dateBeforeOrder": true,
+					"Check askForConfirmationDate": true,
+					"Check confirmationDate": true,
+					"Check clientDepositDate": true,
+					"Check clientDepositConfirmationDate": true,
+					"Check status.": true
+				}
+			],
+			"time": "238",
+			"totalRequestTime": "238",
+			"iterationResults": {}
+		},
+		{
+			"name": "Alice-confirms-Bob-items-reception",
+			"id": "5df859c3-efb5-4186-97ea-3ebcc7ff9d8b",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Event is ok.": true,
+				"TransactionID is valid.": true,
+				"Check offerID": true,
+				"Check ownerID": true,
+				"Check buyerID": true,
+				"Check volume": true,
+				"Check weigth": true,
+				"Check finalPrice": true,
+				"Check dateBeforeOrder": true,
+				"Check askForConfirmationDate": true,
+				"Check confirmationDate": true,
+				"Check clientDepositDate": true,
+				"Check clientDepositConfirmationDate": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"78"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Event is ok.": true,
+					"TransactionID is valid.": true,
+					"Check offerID": true,
+					"Check ownerID": true,
+					"Check buyerID": true,
+					"Check volume": true,
+					"Check weigth": true,
+					"Check finalPrice": true,
+					"Check dateBeforeOrder": true,
+					"Check askForConfirmationDate": true,
+					"Check confirmationDate": true,
+					"Check clientDepositDate": true,
+					"Check clientDepositConfirmationDate": true,
+					"Check status.": true
+				}
+			],
+			"time": "78",
+			"totalRequestTime": "78",
+			"iterationResults": {}
+		},
+		{
+			"name": "Alice-claims-Bob-items-deposit",
+			"id": "89b0cc9b-ec25-49b3-bf7f-f3c5333388f5",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"tests": {
+				"name": "Status code is OK.",
+				"status": "pass",
+				"Has Content-Type.": true,
+				"Event is ok.": true,
+				"TransactionID is valid.": true,
+				"Check offerID": true,
+				"Check ownerID": true,
+				"Check buyerID": true,
+				"Check volume": true,
+				"Check weigth": true,
+				"Check finalPrice": true,
+				"Check dateBeforeOrder": true,
+				"Check askForConfirmationDate": true,
+				"Check confirmationDate": true,
+				"Check clientDepositDate": true,
+				"Check clientDepositConfirmationDate": true,
+				"Check status.": true
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				"67"
+			],
+			"allTests": [
+				{
+					"Status code is OK.": true,
+					"Has Content-Type.": true,
+					"Event is ok.": true,
+					"TransactionID is valid.": true,
+					"Check offerID": true,
+					"Check ownerID": true,
+					"Check buyerID": true,
+					"Check volume": true,
+					"Check weigth": true,
+					"Check finalPrice": true,
+					"Check dateBeforeOrder": true,
+					"Check askForConfirmationDate": true,
+					"Check confirmationDate": true,
+					"Check clientDepositDate": true,
+					"Check clientDepositConfirmationDate": true,
+					"Check status.": true
+				}
+			],
+			"time": "67",
+			"totalRequestTime": "67",
+			"iterationResults": {}
+		},
+		{
+			"name": "Bob-confirms-its-items-deposit",
+			"id": "9749e4a3-3690-421d-9a4e-fe7113685685",
+			"url": "localhost:8080/BBM/OFFERS",
+			"totalTime": 0,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error",
+				"detail": {
+					"name": "Internal Server Error",
+					"detail": "A generic error message, given when no more specific message is suitable."
+				}
+			},
+			"testPassFailCounts": {},
+			"times": [
+				"1992"
+			],
+			"allTests": [
+				{}
+			],
+			"time": "1992",
+			"totalRequestTime": "1992",
+			"iterationResults": {}
+		}
+	],
+	"totalPass": 128,
+	"totalFail": 0,
+	"totalTime": 3016,
+	"lifecycle": "done",
+	"requests": [
+		{
+			"name": "PRE-Create-Alice",
+			"id": "fd67c48a-f34a-46c3-a2e4-8aea5e690cce",
+			"url": "localhost:8080/BBM/USERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type has text/plain.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "PRE-Create-Bob",
+			"id": "78122f86-fd15-4e53-9a50-c5c858605272",
+			"url": "localhost:8080/BBM/USERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type has text/plain.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Create-offer",
+			"id": "8cf6d1d3-c9a9-4f1b-81e2-dc288940b30b",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has offerID..": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has status.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has distance.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Consult-offers",
+			"id": "bf3866cc-d0f9-4ed1-80b4-aadca1ad2640",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Content-Type has application/json.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has offerID..": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has status.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has distance.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check price.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check startCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check endCity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check capacity.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Ask-offer",
+			"id": "5f4975ab-9cac-41c7-abc6-5d9a1149667a",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Consult-awaiting-offers",
+			"id": "83c77235-9d08-4e89-91bc-6707c6f23250",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID content.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Validate-offer",
+			"id": "7563eef4-8c01-4a1a-bc49-cfc2ceb1b6e4",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check transactionID.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Bob-claims-items-reception",
+			"id": "120f6722-cece-4ce3-a15b-538909f5c09a",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Alice-confirms-Bob-items-reception",
+			"id": "5df859c3-efb5-4186-97ea-3ebcc7ff9d8b",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Alice-claims-Bob-items-deposit",
+			"id": "89b0cc9b-ec25-49b3-bf7f-f3c5333388f5",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 200,
+				"name": "OK",
+				"detail": {
+					"name": "OK",
+					"detail": "Standard response for successful HTTP requests. The actual response will depend on the request method used. In a GET request, the response will contain an entity corresponding to the requested resource. In a POST request the response will contain an entity describing or containing the result of the action."
+				}
+			},
+			"testPassFailCounts": {
+				"Status code is OK.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Has Content-Type.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Event is ok.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"TransactionID is valid.": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check offerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check ownerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check buyerID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check volume": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check weigth": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check finalPrice": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check dateBeforeOrder": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check askForConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check confirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check clientDepositConfirmationDate": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check status.": {
+					"pass": 1,
+					"fail": 0
+				}
+			}
+		},
+		{
+			"name": "Bob-confirms-its-items-deposit",
+			"id": "9749e4a3-3690-421d-9a4e-fe7113685685",
+			"url": "localhost:8080/BBM/OFFERS",
+			"time": "2018-11-08T10:27:21.853Z",
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error",
+				"detail": {
+					"name": "Internal Server Error",
+					"detail": "A generic error message, given when no more specific message is suitable."
+				}
+			},
+			"testPassFailCounts": {}
+		}
+	],
+	"synced": false
+}
