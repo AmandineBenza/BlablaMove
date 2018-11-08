@@ -66,11 +66,22 @@ public class OffersIOHandler {
 			offerService.createNewOffer(offer);
 			BBMLogger.infoln("Offer created. Content:");
 			String json = JsonUtils.toJson(offer);
-			BBMLogger.infoln(json);
+			logJson(offer);
 			return json;
 		}
 		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
 		+ range.getSupValue() + "]\n";
+	}
+
+	private void logJson(PostedOffer offer){
+		BBMLogger.infoln("{\"offerID\": \"" + offer.getOfferID() +"\",");
+		BBMLogger.infoln("\"ownerID\": \"" + offer.getOwnerID() +"\",");
+		BBMLogger.infoln("\"price\": \"" + offer.getPrice() +"\",");
+		BBMLogger.infoln("\"startCity\": \"" + offer.getStartCity() +"\",");
+		BBMLogger.infoln("\"endCity\": \"" + offer.getEndCity() +"\",");
+		BBMLogger.infoln("\"capacity\": \"" + offer.getCapacity() +"\",");
+		BBMLogger.infoln("\"status\": \"" + offer.getStatus() +"\",");
+		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
 	}
 
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
