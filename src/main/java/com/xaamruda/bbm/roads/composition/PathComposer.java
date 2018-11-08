@@ -26,7 +26,7 @@ public class PathComposer implements IPathComposer {
 		return new Path(departureLocation, arrivalLocation);
 	}
 	
-	public int  computeDistance(String departureLocation, String arrivalLocation) {
+	public int computeDistance(String departureLocation, String arrivalLocation) {
 		 String localValue = departureLocation +  arrivalLocation;
 		 if(cache.containsKey(localValue) ) {
 			 return cache.get(localValue);

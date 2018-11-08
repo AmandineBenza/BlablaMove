@@ -17,31 +17,29 @@ public class QueryEngine {
 		query.addCriteria(Criteria.where("endCity").is(filters.endAddress));
 		query.addCriteria(Criteria.where("capacity").gt(filters.weight));
 		
-		BBMLogger.infoln("Embedded filters:");
-		BBMLogger.infoln("Start city: " + filters.startAddress);
-		BBMLogger.infoln("End city:  " + filters.endAddress);
-		BBMLogger.infoln("Capacity: " + filters.weight);
+		StringBuilder builder = new StringBuilder();
+		builder.append("Embedded filters | startCity: " + filters.startAddress
+				+ ", endCity: " + filters.endAddress + ", capacity: " + filters.weight);
 		
 		if (filters.maxPrice > 0) {
 			query.addCriteria(Criteria.where("price").lte(filters.maxPrice));
-			BBMLogger.infoln("Price: " + filters.maxPrice);
+			builder.append(", price: " + filters.maxPrice);
 		}
 		
 		if (filters.status != null) {
 			query.addCriteria(Criteria.where("status").lte(filters.status));
-			BBMLogger.infoln("Status: " + filters.status);
-		}
-		else {
+			builder.append(", status: " + filters.status + ".");
+		} else {
 			query.addCriteria(Criteria.where("status").is(OfferStatus.POSTED));
-			BBMLogger.infoln("Status: " + OfferStatus.POSTED);
 		}
+		
+		BBMLogger.infoln(builder.toString());
 		return query;
 	}
 	
 	static public Query buildMongoQuery(int distance) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("distance").lt(distance + 10).gt(distance - 10));
-
 		return query;
 	}
 }
