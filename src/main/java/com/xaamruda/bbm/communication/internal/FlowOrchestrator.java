@@ -237,14 +237,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	}
 
 	private String callConfirmCommand(String string) {
-		JsonObject json = JsonUtils.getFromJson(string);
-		String res = "Resume of your command :\n ";
-		res = res + "Number of day until moving : " + json.get("date").getAsString() + "\n";
-		res = res + "Address of claim : " + json.get("startAddress").getAsString() + "\n";
-		res = res + "Address of deposit : " + json.get("endAddress").getAsString() + "\n";
-		res = res + "Offer : " + json.get("offerID").getAsString() + "\n";
-		res = res + "Price : " + json.get("price").getAsString() + "\n";
-		return res + "\n";
+		return JsonUtils.toJson(JsonUtils.getFromJson(string, CommandResume.class));
 	}
 
 	private Object callConfirmDeposits(String string) {
@@ -301,5 +294,66 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 	private User callGetUser(String mail) {
 		return userIO.retrieveUser(mail);
+	}
+	
+	@SuppressWarnings("unused")
+	private static final class CommandResume {
+		public String date;
+		public String startAddress;
+		public String endAddress;
+		public String offerID;
+		public String price;
+		
+		public CommandResume(String date, String startAddress, String endAddress, String offerID, String price) {
+			this.date = date;
+			this.startAddress = startAddress;
+			this.endAddress = endAddress;
+			this.offerID = offerID;
+			this.price = price;
+		}
+		
+		public CommandResume() {
+			
+		}
+
+		public String getDate() {
+			return date;
+		}
+
+		public void setDate(String date) {
+			this.date = date;
+		}
+
+		public String getStartAddress() {
+			return startAddress;
+		}
+
+		public void setStartAddress(String startAddress) {
+			this.startAddress = startAddress;
+		}
+
+		public String getEndAddress() {
+			return endAddress;
+		}
+
+		public void setEndAddress(String endAddress) {
+			this.endAddress = endAddress;
+		}
+
+		public String getOfferID() {
+			return offerID;
+		}
+
+		public void setOfferID(String offerID) {
+			this.offerID = offerID;
+		}
+
+		public String getPrice() {
+			return price;
+		}
+
+		public void setPrice(String price) {
+			this.price = price;
+		}
 	}
 }

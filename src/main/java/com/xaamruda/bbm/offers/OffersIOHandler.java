@@ -83,7 +83,7 @@ public class OffersIOHandler {
 		BBMLogger.infoln("\"status\": \"" + offer.getStatus() +"\",");
 		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
 	}
-
+	
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
