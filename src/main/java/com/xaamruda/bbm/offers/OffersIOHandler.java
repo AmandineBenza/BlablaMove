@@ -68,8 +68,9 @@ public class OffersIOHandler {
 			logJson(offer);
 			return json;
 		}
-		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-		+ range.getSupValue() + "]\n";
+		return "Incorrect price ! For this distance ("
+		+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
+		+ range.getSupValue() + "].\n";
 	}
 
 	private void logJson(PostedOffer offer){
@@ -107,7 +108,8 @@ public class OffersIOHandler {
 		Range range = calculatorHandler.checkPrice(offers, distance);
 
 		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "Correct price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-				+ range.getSupValue() + "]\n" : "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
+				+ range.getSupValue() + "]\n" : "Incorrect price ! For this distance ("
+						+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
 				+ range.getSupValue() + "]\n";
 	}
 
