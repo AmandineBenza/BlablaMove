@@ -2,9 +2,16 @@ package com.xaamruda.bbm.users.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+@Entity
 public class User {
 
 	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private Integer id;
 	private String mail;
 	private String name;
 	private String address;
@@ -21,6 +28,12 @@ public class User {
 		this.phone = phone;
 		this.password = password;
 		this.pointsAmount = pointsAmount;
+	}
+
+	public Integer getId(){return id;}
+
+	public void setId(int newId){
+		id=newId;
 	}
 
 	public String getMail() {

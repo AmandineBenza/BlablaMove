@@ -7,6 +7,9 @@ package com.xaamruda.bbm.offers.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 //@Entity
 //@Table(name = "offer")
 public class PostedOffer {
@@ -15,7 +18,8 @@ public class PostedOffer {
 	//ID IN MONGO ARE BETTER AS STRING
 	//  @GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private String offerID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer offerID;
 
 	private String ownerID;
 	private Integer price;
@@ -27,11 +31,11 @@ public class PostedOffer {
 	private int distance;
 	
 	
-	public String getOfferID() {
+	public Integer getOfferID() {
 		return offerID;
 	}
 
-	public void setOfferID(String offerID) {
+	public void setOfferID(Integer offerID) {
 		this.offerID = offerID;
 	}
 	public String getOwnerID() {

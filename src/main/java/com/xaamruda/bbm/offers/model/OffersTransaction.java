@@ -2,10 +2,14 @@ package com.xaamruda.bbm.offers.model;
 
 import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 public class OffersTransaction {
 
 	@Id
-	private String transactionID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer transactionID;
 	private String offerID;
 	private String ownerID;
 	private String buyerID;
@@ -122,11 +126,11 @@ public class OffersTransaction {
 		this.ownerID = ownerID;
 	}
 
-	public String getTransactionID() {
+	public Integer getTransactionID() {
 		return transactionID;
 	}
 
-	public void setTransactionID(String transactionID) {
+	public void setTransactionID(Integer transactionID) {
 		this.transactionID = transactionID;
 	}
 

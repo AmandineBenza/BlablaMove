@@ -133,7 +133,7 @@ public class OffersIOHandler {
 
 			BBMLogger.infoln("Creating offer transaction...");
 
-			offerTransaction.setTransactionID("" + new Date().getTime());
+		//	offerTransaction.setTransactionID("" + new Date().getTime());
 			offerTransaction.setBuyerID(buyerID);
 			offerTransaction.setFinalPrice(newPrice);
 			offerTransaction.setStatus(OfferStatus.AWAITING_CONFIRMATION);
