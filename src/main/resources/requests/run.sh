@@ -80,6 +80,8 @@ price=$(echo $askValue | jq '.finalPrice')
 echo "\n";
 recap=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"confirm-command\" ,\"data\": {\"offerID\": $oId,\"date\":\"$inDays\", \"startAddress\":\"$startAddress\", \"endAddress\":\"$endAddress\",\"price\":\"$price\" }}" "localhost:8080/BBM/OFFERS")
 
+echo $recap
+
 
 sleep $*;
 
