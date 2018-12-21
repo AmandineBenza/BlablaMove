@@ -232,3 +232,26 @@ WEEK 45 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
  - Realisation of scripted scenarios (to finish)
  - Following of internal communication routing
  - Start of presentation and demo
+ 
+----------------------
+
+POC DEMO 
+
+----------------------
+
+WEEK 51 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(21/12/2018) 
+
+>>>>> What was achieved this week ?
+- Beginning of the consideration of the change imposed by the client 
+-> Change from NoSQL to SQL  (MongoDB to MySQL)
+-> Idea of system of data duplication (Master/Slave) 
+-> Idea of assembling financial operations within a single SQL request for a simplified rollback (credit and debit)
+
+>>>>> What is planned for the following week ?
+- Establish a new architecture taking the changes into account 
+- Refactor the current database-related code 
+- Validate that the previous use cases are still working 
+
+>>>>> What are the blockers and risks ?
+- There's a risk that the transition from Mongo to MySQL  breaks our current use cases

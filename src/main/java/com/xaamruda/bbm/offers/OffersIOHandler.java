@@ -68,8 +68,9 @@ public class OffersIOHandler {
 			logJson(offer);
 			return json;
 		}
-		return "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-		+ range.getSupValue() + "]\n";
+		return "Incorrect price ! For this distance ("
+		+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
+		+ range.getSupValue() + "].\n";
 	}
 
 	private void logJson(PostedOffer offer){
@@ -82,7 +83,7 @@ public class OffersIOHandler {
 		BBMLogger.infoln("\"status\": \"" + offer.getStatus() +"\",");
 		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
 	}
-
+	
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
@@ -107,7 +108,8 @@ public class OffersIOHandler {
 		Range range = calculatorHandler.checkPrice(offers, distance);
 
 		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "Correct price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-				+ range.getSupValue() + "]\n" : "Incorrect price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
+				+ range.getSupValue() + "]\n" : "Incorrect price ! For this distance ("
+						+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
 				+ range.getSupValue() + "]\n";
 	}
 

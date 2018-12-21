@@ -22,7 +22,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public  List<User> getUserByMail(String mail) {
-		BBMLogger.infoln("Database access..");
+		BBMLogger.infoln("Retrieving user given mail " + mail + ".");
 		return repository.findByMail(mail);
 	}
 
@@ -33,13 +33,13 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		BBMLogger.infoln("Database access..");
+		BBMLogger.infoln("Retrieving all users..");
 		return repository.findAll();
 	}
 	
 	@Override
 	public void delete(User user) {
-		BBMLogger.infoln("Database access..");
+		BBMLogger.infoln("Deleting user " + user.getMail() + ".");
 		repository.delete(user);
 	}
 
