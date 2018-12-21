@@ -14,7 +14,6 @@ import com.xaamruda.bbm.offers.dbaccess.services.IOffersTransactionService;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.offers.model.OffersTransaction;
 import com.xaamruda.bbm.offers.model.PostedOffer;
-import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.roads.RoadsIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
@@ -45,7 +44,7 @@ public class OffersIOHandler {
 		return offerService.getAvailableOffers();
 	}
 
-	public String postNewOffer(String jsonObject) {
+	/*	public String postNewOffer(String jsonObject) {
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
 		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
 		
@@ -71,7 +70,7 @@ public class OffersIOHandler {
 		return "Incorrect price ! For this distance ("
 		+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
 		+ range.getSupValue() + "].\n";
-	}
+	} */
 
 	private void logJson(PostedOffer offer){
 		BBMLogger.infoln("{\"offerID\": \"" + offer.getOfferID() +"\",");
@@ -84,6 +83,7 @@ public class OffersIOHandler {
 		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
 	}
 	
+/*
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
@@ -97,9 +97,9 @@ public class OffersIOHandler {
 		BBMLogger.infoln("Filtering offers by prices...");
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice())
 				.collect(Collectors.toList());
-	}
+	} */
 
-	public String validatePrice(String filters, String workData) {
+/*	public String validatePrice(String filters, String workData) {
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
 		BBMLogger.infoln("Computing path distance...");
 		int distance = pathHandler.getPathDistances(fil.startAddress, fil.endAddress);
@@ -111,7 +111,7 @@ public class OffersIOHandler {
 				+ range.getSupValue() + "]\n" : "Incorrect price ! For this distance ("
 						+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
 				+ range.getSupValue() + "]\n";
-	}
+	} */
 
 	// TODO rename
 	// this is the method to ask the offer to get accepted by ALICE

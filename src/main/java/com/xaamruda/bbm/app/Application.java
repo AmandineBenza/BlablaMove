@@ -2,7 +2,7 @@ package com.xaamruda.bbm.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+//import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 
@@ -19,10 +19,12 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
 })
-@EnableMongoRepositories(basePackages = {
+
+/*@EnableMongoRepositories(basePackages = {
 	"com.xaamruda.bbm.offers.dbaccess.repository",
 	"com.xaamruda.bbm.users.dbaccess.repository"
-})
+}) */
+
 public class Application {
 	
 	public static void main(String[] args) {

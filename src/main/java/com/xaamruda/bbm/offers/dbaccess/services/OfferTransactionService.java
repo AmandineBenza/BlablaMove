@@ -20,7 +20,7 @@ public class OfferTransactionService implements IOffersTransactionService {
 	
 	@Override
 	public boolean createNewOffer(OffersTransaction offer) {
-		offerRepository.insert(offer);
+		offerRepository.save(offer);
 		return (offer != null);
 	}
 	

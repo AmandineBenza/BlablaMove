@@ -1,11 +1,9 @@
 package com.xaamruda.bbm.offers.search.engine;
 
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
+/*
 public class QueryEngine {
 
 	// TODO Still again debate
@@ -43,3 +41,4 @@ public class QueryEngine {
 		return query;
 	}
 }
+*/
