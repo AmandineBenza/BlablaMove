@@ -102,8 +102,8 @@ Brainstorming RoadMap :
 
 - Week 51 :
 - Week 1 : 
-- Week 2 :
-- Week 3 :
+- Week 2 : Architecture Change
+- Week 3 : Demo with architecture changment
 - Week 4 :
 - Week 5 :
 - Week 6 :
