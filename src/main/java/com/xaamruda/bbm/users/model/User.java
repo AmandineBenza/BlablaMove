@@ -1,6 +1,6 @@
 package com.xaamruda.bbm.users.model;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

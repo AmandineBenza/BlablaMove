@@ -234,8 +234,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 	private Object callValidatePrice(String string,String filters) {
 		// TODO
-		//return offerIO.validatePrice(filters, string);
-		return null;
+		return offerIO.validatePrice(filters, string);
 	}
 
 	private String callConfirmCommand(String string) {
@@ -278,16 +277,12 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 
 	private String callMakeOffer(String offerJson) {
-		// TODO
-		// return offerIO.postNewOffer(offerJson);
-		return null;
+		 return offerIO.postNewOffer(offerJson);
 	}
 
 	// data are data used for calculation
 	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) {
-		// TODO
-		// return offerIO.retrieveOffers(filters, calculationData);
-		return null;
+		 return offerIO.retrieveOffers(filters, calculationData);
 	}
 
 	private void callCreateUser(String userJson) {

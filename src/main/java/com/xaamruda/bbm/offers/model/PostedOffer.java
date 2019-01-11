@@ -1,26 +1,25 @@
 package com.xaamruda.bbm.offers.model;
 
-//import javax.persistence.Entity;
+import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-//@Entity
+@Entity
 //@Table(name = "offer")
 public class PostedOffer {
 
 
 	//ID IN MONGO ARE BETTER AS STRING
-	//  @GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer offerID;
-
 	private String ownerID;
 	private Integer price;
 	private String startCity;

@@ -31,14 +31,14 @@ public class BillingIOHandler {
 	 * @return the calculation of point for user
 	 */
 //	public String mainHandler(String workData) {
-////		JsonObject data = JsonUtils.getFromJson(workData);
-////		if (data.get("event").getAsString().equals("calcul_without_offer")) {
-////			return calcul_without_offer(data);
-////		} else if (JsonUtils.getFromJson(workData).get("event").getAsString().equals("calcul_with_offer")) {
-////			return calcul_with_offer(data);
-////		} else {
-////			return "error : Wrong event";
-////		}r
+//		JsonObject data = JsonUtils.getFromJson(workData);
+//		if (data.get("event").getAsString().equals("calcul_without_offer")) {
+//			return calcul_without_offer(data);
+//		} else if (JsonUtils.getFromJson(workData).get("event").getAsString().equals("calcul_with_offer")) {
+//			return calcul_with_offer(data);
+//		} else {
+//			return "error : Wrong event";
+//		}
 //	}
 
 	//TODO 

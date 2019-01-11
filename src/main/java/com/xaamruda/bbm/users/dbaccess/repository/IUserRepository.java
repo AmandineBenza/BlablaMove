@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.xaamruda.bbm.users.model.User;
 
-public interface IUserRepository extends CrudRepository<User, String> {
+public interface IUserRepository extends CrudRepository<User, Integer> {
 	// public interface IUserRepository extends JpaRepository<User, String> {
 
 	public List<User> findByMail(String mail);

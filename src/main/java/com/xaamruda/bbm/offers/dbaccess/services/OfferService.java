@@ -3,11 +3,18 @@ package com.xaamruda.bbm.offers.dbaccess.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.management.Query;
+
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.users.model.User;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
@@ -16,12 +23,16 @@ import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
 @Transactional
 @Service("OfferService")
 public class OfferService implements IOfferService {
+	
 	@Autowired
 	IOfferRepository offerRepository;
 
-/*	@Autowired
-	MongoTemplate mongoTemplate; */
 
+	@Autowired
+	JdbcTemplate mongoTemplate;
+	
+	SessionFactory ss;
+	
 	@Override
 	public List<PostedOffer> getOfferByID(String offerID) {
 		BBMLogger.infoln("Retrieving offer of id " + offerID + ".");
@@ -46,12 +57,19 @@ public class OfferService implements IOfferService {
 		return offerRepository.getByStatus(OfferStatus.POSTED);
 	}
 
-/*	@Override
-	public List<PostedOffer> getAvailableOffers(Query query) {
-		List<PostedOffer> offers = mongoTemplate.find(query, PostedOffer.class);
-		return offers;
-	} */
+//	@Override
+//	public List<PostedOffer> getAvailableOffers(Query query) {
+//		
+//		List<PostedOffer> offers = offerRepository.findAll( example, pageable);
+//		return offers;
+//	} 
+//	
 	
+	@Override
+	public List<PostedOffer> getAvailableOffers(Specification<PostedOffer> query) {
+		List<PostedOffer> offers = offerRepository.findAll(query);
+		return offers;
+	} 
 	@Override
 	public boolean createNewOffer(PostedOffer offer){
 		BBMLogger.infoln("Storing new offer...");

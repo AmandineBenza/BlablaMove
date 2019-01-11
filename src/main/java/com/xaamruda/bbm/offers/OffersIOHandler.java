@@ -18,6 +18,7 @@ import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.roads.RoadsIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
 import com.xaamruda.bbm.offers.search.engine.Filters;
+import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 
 @Component
 public class OffersIOHandler {
@@ -44,13 +45,13 @@ public class OffersIOHandler {
 		return offerService.getAvailableOffers();
 	}
 
-	/*	public String postNewOffer(String jsonObject) {
+	public String postNewOffer(String jsonObject) {
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
-		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
-		
+		//		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
+
 		int distance = pathHandler.getPathDistances(offer.getStartCity(), offer.getEndCity());
 
-		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
+		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(distance));
 
 		Range range = calculatorHandler.checkPrice(offers, distance);
 		BBMLogger.infoln("Authorized price range is [" + range.getInfValue() + " : " + range.getSupValue() + "]");
@@ -70,7 +71,7 @@ public class OffersIOHandler {
 		return "Incorrect price ! For this distance ("
 		+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
 		+ range.getSupValue() + "].\n";
-	} */
+	} 
 
 	private void logJson(PostedOffer offer){
 		BBMLogger.infoln("{\"offerID\": \"" + offer.getOfferID() +"\",");
@@ -82,11 +83,11 @@ public class OffersIOHandler {
 		BBMLogger.infoln("\"status\": \"" + offer.getStatus() +"\",");
 		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
 	}
-	
-/*
+
+
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
-		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(filtersObject));
+		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(filtersObject));
 
 		BBMLogger.infoln("Calculating offers prices...");
 		for (PostedOffer offer : offers) {
@@ -97,21 +98,21 @@ public class OffersIOHandler {
 		BBMLogger.infoln("Filtering offers by prices...");
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice())
 				.collect(Collectors.toList());
-	} */
+	} 
 
-/*	public String validatePrice(String filters, String workData) {
+	public String validatePrice(String filters, String workData) {
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
 		BBMLogger.infoln("Computing path distance...");
 		int distance = pathHandler.getPathDistances(fil.startAddress, fil.endAddress);
-		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMongoQuery(distance));
+		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(distance));
 		BBMLogger.infoln("Checking offers price...");
 		Range range = calculatorHandler.checkPrice(offers, distance);
 
 		return (fil.maxPrice < range.getSupValue() && fil.maxPrice > range.getInfValue()) ? "Correct price ! For the distance the authorized amount is [" + range.getInfValue() + " : "
-				+ range.getSupValue() + "]\n" : "Incorrect price ! For this distance ("
-						+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
-				+ range.getSupValue() + "]\n";
-	} */
+		+ range.getSupValue() + "]\n" : "Incorrect price ! For this distance ("
+		+ distance + ") the authorized points amount is within [" + range.getInfValue() + " : "
+		+ range.getSupValue() + "]\n";
+	} 
 
 	// TODO rename
 	// this is the method to ask the offer to get accepted by ALICE
@@ -133,7 +134,7 @@ public class OffersIOHandler {
 
 			BBMLogger.infoln("Creating offer transaction...");
 
-		//	offerTransaction.setTransactionID("" + new Date().getTime());
+			//	offerTransaction.setTransactionID("" + new Date().getTime());
 			offerTransaction.setBuyerID(buyerID);
 			offerTransaction.setFinalPrice(newPrice);
 			offerTransaction.setStatus(OfferStatus.AWAITING_CONFIRMATION);
