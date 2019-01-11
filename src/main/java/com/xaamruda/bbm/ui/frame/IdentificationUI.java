@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.UI.Model;
+package com.xaamruda.bbm.ui.frame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,13 +18,23 @@ public class IdentificationUI implements IGlobalUI{
 
     @Override
     public void initialisation() {
+        GridLayout gridLayout = new GridLayout(5,1,10,10);
+        panel1 =  new JPanel();
+        panel1.setLayout(gridLayout);
+        panel1.add(new JLabel("Identifient"));
+        identifientField = new JTextField();
+        panel1.add(identifientField);
+        panel1.add(new JLabel("Password"));
+        passwordField = new JTextField();
+        panel1.add(passwordField);
+        loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 utility();
             }
         });
-        loginButton.setPreferredSize(new Dimension(panel1.getWidth()/4,panel1.getHeight()/4));
+        panel1.add(loginButton);
     }
 
     @Override
@@ -38,3 +48,4 @@ public class IdentificationUI implements IGlobalUI{
         System.out.println("Password : " + passwordField.getText());
     }
 }
+

@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.UI;
+package com.xaamruda.bbm.ui;
 
 public class UIIOHandler {
 }

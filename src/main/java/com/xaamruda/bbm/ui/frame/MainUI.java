@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.UI.Model;
+package com.xaamruda.bbm.ui.frame;
 
 import javax.swing.*;
 
