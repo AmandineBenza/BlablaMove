@@ -282,3 +282,17 @@ WEEK 2 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 
 WEEK 3 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 (18/01/2019)
+
+
+------------- Raw status --------------
+---- Week 2 - 11/01/19
+- Architecture pdf
+    -- finir schéma ; DONE
+    -- finir texte ; ONGOING
+    -- status.md - week 3; TODO
+- MySQL ; ONGOING
+- Impl
+    -- Safety ; TODO
+    -- Billing ; TODO
+    -- UI ; ONGOING
+- DB crash scenarios ; TODO
