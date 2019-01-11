@@ -255,3 +255,7 @@ WEEK 51 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 
 >>>>> What are the blockers and risks ?
 - There's a risk that the transition from Mongo to MySQL  breaks our current use cases
+
+----------------------
+
+WEEK 2 :  ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
