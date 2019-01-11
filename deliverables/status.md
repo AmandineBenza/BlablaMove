@@ -102,8 +102,8 @@ Brainstorming RoadMap :
 
 - Week 51 :
 - Week 1 : 
-- Week 2 :
-- Week 3 :
+- Week 2 : Architecture Change ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
+- Week 3 : Demo with architecture changment ![#8B2E2E](https://placehold.it/15/8B2E2E/000000?text=+)
 - Week 4 :
 - Week 5 :
 - Week 6 :
@@ -243,10 +243,11 @@ WEEK 51 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (21/12/2018) 
 
 >>>>> What was achieved this week ?
-- Beginning of the consideration of the change imposed by the client 
--> Change from NoSQL to SQL  (MongoDB to MySQL)
--> Idea of system of data duplication (Master/Slave) 
--> Idea of assembling financial operations within a single SQL request for a simplified rollback (credit and debit)
+- Consideration of the change imposed by the client (crash-safety)
+- Establishing a satefy-auditoring 
+- Change from NoSQL to SQL  (MongoDB to MySQL)
+- Idea of system of data duplication (Master/Slave) 
+- Idea of assembling financial operations within a single SQL request for a simplified rollback (credit and debit)
 
 >>>>> What is planned for the following week ?
 - Establish a new architecture taking the changes into account 
@@ -255,3 +256,43 @@ WEEK 51 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 
 >>>>> What are the blockers and risks ?
 - There's a risk that the transition from Mongo to MySQL  breaks our current use cases
+
+----------------------
+
+Happy new year !
+
+----------------------
+
+WEEK 2 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(11/01/2019)
+
+>>>>> What was achieved this week ?
+- Validate that the previous use cases are still working with the newest database
+- Starting to put in place the new components
+- Refactor the current database-related code 
+
+>>>>> What is planned for the following week ?
+- Prepare a one-week sprint / roadmap
+- Prepare the demonstration of next week 
+
+>>>>> What are the blockers and risks ?
+- There's a risk that the transition from Mongo to MySQL breaks our current use cases
+
+----------------------
+
+WEEK 3 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(18/01/2019)
+
+
+------------- Raw status --------------
+---- Week 2 - 11/01/19
+- Architecture pdf
+    -- finir schéma ; DONE
+    -- finir texte ; ONGOING
+    -- status.md - week 3; TODO
+- MySQL ; ONGOING
+- Impl
+    -- Safety ; TODO
+    -- Billing ; TODO
+    -- UI ; ONGOING
+- DB crash scenarios ; TODO
