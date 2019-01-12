@@ -1,0 +1,27 @@
+# form
+service;action;parameters;state;
+
+# form definitions
+service:
+	1. offers
+	2. users
+
+action;parameters:
+	1.
+		- createNewOffer;PostedOffer offer
+		- changeOfferStatus;Integer id;OfferStatus status
+		- remove;PostedOffer offer
+	2.
+		- store;User user
+		- delete;User user
+
+state:
+	- DONE
+	- TODO
+	- FAIL
+
+####### Requirements #######
+# POJOs toString definitions
+# 
+# 
+############################
