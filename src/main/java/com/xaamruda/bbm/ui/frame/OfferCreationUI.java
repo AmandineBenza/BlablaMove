@@ -5,7 +5,7 @@
  */
 package com.xaamruda.bbm.ui.frame;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -24,6 +24,7 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel priceLabel;
     private javax.swing.JTextField startLocationField;
     private javax.swing.JLabel startLocationLabel;
+    private javax.swing.JFrame frame;
 
     /**
      * Creates new form OfferCreationUI
@@ -32,16 +33,10 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
         initialisation();
     }
 
-    private void startLocationFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     @Override
     public void initialisation() {
+        frame = new JFrame("BlablaMove: Offer Creation");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         startLocationLabel = new javax.swing.JLabel();
         arrivalLocationLabel = new javax.swing.JLabel();
@@ -62,12 +57,6 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
 
         priceLabel.setText("Price");
 
-        startLocationField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startLocationFieldActionPerformed(evt);
-            }
-        });
-
         carCapacityLabel.setText("Car Capacity");
 
         acceptButton.setText("Post");
@@ -78,6 +67,11 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -148,6 +142,9 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
         );
 
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -158,4 +155,15 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public void utility() {
     }
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new MainMenuUI();
+    }
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new MainMenuUI();
+    }
+
 }

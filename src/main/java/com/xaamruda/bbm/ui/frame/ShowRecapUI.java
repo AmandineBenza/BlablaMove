@@ -31,6 +31,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel recapLabel;
     private javax.swing.JLabel startLocationResLabel;
     private javax.swing.JLabel startLocationTxtLabel;
+    private javax.swing.JFrame frame;
 
     /**
      * Creates new form ShowRecapUI
@@ -41,6 +42,8 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
+        frame = new JFrame("Recapitulation");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         cancelButton = new javax.swing.JToggleButton();
         acceptButton = new javax.swing.JToggleButton();
@@ -63,8 +66,18 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         acceptButton.setText("OK");
+        acceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptButtonActionPerformed(evt);
+            }
+        });
 
         dateTxtLabel.setText("Date :");
         dateTxtLabel.setToolTipText("");
@@ -186,6 +199,9 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
         );
 
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -196,6 +212,16 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public void utility() {
 
+    }
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new MainMenuUI();
+    }
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new MainMenuUI();
     }
 
 }

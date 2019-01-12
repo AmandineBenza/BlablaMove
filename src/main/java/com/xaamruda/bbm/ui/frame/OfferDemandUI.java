@@ -26,6 +26,7 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
     private javax.swing.JLabel startLocationLabel;
     private javax.swing.JTextField weightField;
     private javax.swing.JLabel weightLabel;
+    private javax.swing.JFrame frame;
 
     /**
      * Creates new form OfferDemandUI
@@ -34,13 +35,10 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
         initialisation();
     }
 
-
-    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     @Override
     public void initialisation() {
+        frame = new JFrame("BlablaMove");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         startLocationLabel = new javax.swing.JLabel();
         arrivalLocationLabel = new javax.swing.JLabel();
@@ -74,6 +72,11 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         maximumPointSpendLabel.setText("Maximum Point Spend");
 
@@ -158,6 +161,9 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
         );
 
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -167,5 +173,15 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
 
     @Override
     public void utility() {
+    }
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new MainMenuUI();
+    }
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new MainMenuUI();
     }
 }

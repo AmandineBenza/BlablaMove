@@ -15,6 +15,7 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel welcomeLabel;
     private javax.swing.JLabel yourPointResLabel;
     private javax.swing.JLabel yourPointTxtLabel;
+    private javax.swing.JFrame frame;
 
     /**
      * Creates new form MainMenuUI
@@ -23,13 +24,11 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
         initialisation();
     }
 
-    private void createOfferButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOfferButtonActionPerformed
-        // TODO add your handling code here:
-    }
-
 
     @Override
     public void initialisation() {
+        frame = new JFrame("BlablaMove");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         welcomeLabel = new javax.swing.JLabel();
         createOfferButton = new javax.swing.JButton();
@@ -50,8 +49,18 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
         });
 
         offerDemandButton.setText("Offer Demand");
+        offerDemandButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                offerDemandButtonActionPerformed(evt);
+            }
+        });
 
         transactionButton.setText("Transaction");
+        transactionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+               transactionButtonActionPerformed(evt);
+            }
+        });
 
         yourPointTxtLabel.setText("Your Point");
 
@@ -113,6 +122,9 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
         );
 
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -123,5 +135,20 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public void utility() {
 
+    }
+
+    private void createOfferButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new OfferCreationUI();
+    }
+
+    private void offerDemandButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new OfferDemandUI();
+    }
+
+    private void transactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        frame.dispose();
+        new TransactionUI();
     }
 }

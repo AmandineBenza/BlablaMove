@@ -25,6 +25,8 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel minimumPriceTxtLabel;
     private javax.swing.JLabel yourPriceResLabel;
     private javax.swing.JLabel yourPriceTxtLabel;
+    private javax.swing.JFrame frame;
+
     /**
      * Creates new form RangePriceUI
      */
@@ -34,6 +36,8 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
+        frame = new JFrame("Price Recommendation");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         yourPriceTxtLabel = new javax.swing.JLabel();
         minimumPriceTxtLabel = new javax.swing.JLabel();
@@ -66,8 +70,18 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         mediumPriceResLabel.setText("175");
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         acceptButton.setText("Accept");
+        acceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -140,6 +154,9 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         );
 
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -149,5 +166,13 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void utility() {
+    }
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 }
