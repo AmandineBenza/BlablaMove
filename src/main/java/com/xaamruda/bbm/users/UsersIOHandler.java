@@ -64,8 +64,9 @@ public class UsersIOHandler {
 	}
 
 	public void debit(String buyerID, Integer finalPrice) {
+		
 		User buyer = service.getUserByMail(buyerID).get(0);
-		service.delete(buyer);
+		//service.delete(buyer);
 		if(buyer.getPointsAmount() == null)
 			buyer.setPointsAmount(0);
 		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
@@ -74,7 +75,7 @@ public class UsersIOHandler {
 
 	public void credit(String ownerID, Integer finalPrice) {
 		User owner = service.getUserByMail(ownerID).get(0);
-		service.delete(owner);
+		//service.delete(owner);
 		if(owner.getPointsAmount() == null)
 			owner.setPointsAmount(0);
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);

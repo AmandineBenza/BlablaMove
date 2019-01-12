@@ -13,6 +13,6 @@ public interface IOffersTransactionRepository extends JpaRepository<OffersTransa
  
 	List<OffersTransaction> getByOwnerID(String ownerID);
 
-	List<OffersTransaction> getByTransactionID(String transactionID);
+	List<OffersTransaction> getByTransactionID(Integer transactionID);
 	
 }

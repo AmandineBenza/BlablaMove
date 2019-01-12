@@ -104,6 +104,7 @@ echo "";
 echo "At the chosen date, Alice goes to Bob house and takes his bed."
 
 transactionID=$(echo $askValue | jq '.transactionID')
+echo $transactionID
 echo "";
 
 curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": $transactionID}}" "localhost:8080/BBM/OFFERS"

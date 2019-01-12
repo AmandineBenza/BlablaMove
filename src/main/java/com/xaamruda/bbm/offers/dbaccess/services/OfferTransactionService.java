@@ -39,6 +39,6 @@ public class OfferTransactionService implements IOffersTransactionService {
 	@Override
 	public List<OffersTransaction> getOffersByTransactionID(String transactionID) {
 		// TODO Auto-generated method stub
-		return  offerRepository.getByTransactionID(transactionID);
+		return  offerRepository.getByTransactionID(Integer.parseInt(transactionID));
 	}
 }

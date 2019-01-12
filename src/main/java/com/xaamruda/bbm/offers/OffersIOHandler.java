@@ -86,6 +86,8 @@ public class OffersIOHandler {
 
 
 	public List<PostedOffer> retrieveOffers(String filters, String workData) {
+		System.out.println(filters);
+		System.out.println(workData);
 		Filters filtersObject = JsonUtils.getFromJson(filters, Filters.class);
 		List<PostedOffer> offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(filtersObject));
 
@@ -99,6 +101,7 @@ public class OffersIOHandler {
 		return offers.stream().filter(offer -> offer.getPrice() < filtersObject.getMaxPrice())
 				.collect(Collectors.toList());
 	} 
+	
 
 	public String validatePrice(String filters, String workData) {
 		Filters fil = JsonUtils.getFromJson(filters, Filters.class);
@@ -126,15 +129,17 @@ public class OffersIOHandler {
 			PostedOffer offer = offers.get(0);
 
 			BBMLogger.infoln("Computing pricing...");
+			
 			int newPrice = offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance());
 
 			usersHandler.sendMail(offer.getOwnerID(), newPrice, buyerID);
 			OffersTransaction offerTransaction = new OffersTransaction();
-			offerService.remove(offer);
+			//offerService.remove(offer);
 
 			BBMLogger.infoln("Creating offer transaction...");
-
-			//	offerTransaction.setTransactionID("" + new Date().getTime());
+			
+			//offerTransaction.setTransactionID("" + new Date().getTime());
+			//offerTransaction.setTransactionID(1);
 			offerTransaction.setBuyerID(buyerID);
 			offerTransaction.setFinalPrice(newPrice);
 			offerTransaction.setStatus(OfferStatus.AWAITING_CONFIRMATION);
@@ -179,7 +184,7 @@ public class OffersIOHandler {
 		if (!offers.isEmpty()) {
 			BBMLogger.infoln("Retrieved offers according to transaction identifier.");
 			OffersTransaction offer = offers.get(0);
-			offerTransactionService.remove(offer);
+			//offerTransactionService.remove(offer);
 			offer.setStatus(OfferStatus.CONFIRMED);
 			BBMLogger.infoln("Updated offer status to \"" + OfferStatus.CONFIRMED + "\".");
 			offer.setConfirmationDate(new Date().toString());
@@ -195,13 +200,14 @@ public class OffersIOHandler {
 	public String claimReceipt(String workData) {
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
-
+		System.out.println(transactionID);
+		
 		List<OffersTransaction> offers = offerTransactionService.getOffersByTransactionID(transactionID);
 
 		if (!offers.isEmpty()) {
 			BBMLogger.infoln("Retrieved offers according to transaction identifier.");
 			OffersTransaction offer = offers.get(0);
-			offerTransactionService.remove(offer);
+			//offerTransactionService.remove(offer);
 			offer.setStatus(OfferStatus.AWAITING_RECEIPT_CONFIRMATION);
 			BBMLogger.infoln("Updated offer status to \"" + OfferStatus.AWAITING_RECEIPT_CONFIRMATION + "\".");
 			offer.setClientDepositDate(new Date().toString());
@@ -220,7 +226,7 @@ public class OffersIOHandler {
 		if (!offers.isEmpty()) {
 			BBMLogger.infoln("Retrieved offers according to transaction identifier.");
 			OffersTransaction offer = offers.get(0);
-			offerTransactionService.remove(offer);
+			//offerTransactionService.remove(offer);
 			offer.setStatus(OfferStatus.RECEIPT_DONE);
 			BBMLogger.infoln("Updated offer status to \"" + OfferStatus.RECEIPT_DONE + "\".");
 			offer.setClientDepositConfimationDate(new Date().toString());
@@ -239,7 +245,7 @@ public class OffersIOHandler {
 		if (!offers.isEmpty()) {
 			BBMLogger.infoln("Retrieved offers according to transaction identifier.");
 			OffersTransaction offer = offers.get(0);
-			offerTransactionService.remove(offer);
+			//offerTransactionService.remove(offer);
 			offer.setStatus(OfferStatus.AWAITING_DEPOSIT_CONFIRMATION);
 			BBMLogger.infoln("Updated offer status to \"" + OfferStatus.AWAITING_DEPOSIT_CONFIRMATION + "\".");
 			offer.setClientDepositConfimationDate(new Date().toString());
@@ -259,7 +265,7 @@ public class OffersIOHandler {
 		if (!offers.isEmpty()) {
 			BBMLogger.infoln("Retrieved offers according to transaction identifier.");
 			OffersTransaction offer = offers.get(0);
-			offerTransactionService.remove(offer);
+			//offerTransactionService.remove(offer);
 			offer.setStatus(OfferStatus.CLOSED);
 			offer.setClientDepositConfimationDate(new Date().toString());
 			offerTransactionService.createNewOffer(offer);
@@ -272,7 +278,7 @@ public class OffersIOHandler {
 
 			List<PostedOffer> offersI = offerService.getOfferByID(offer.getOfferID());
 			PostedOffer postoff = offersI.get(0);
-			offerService.remove(postoff);
+			//offerService.remove(postoff);
 			postoff.setStatus(OfferStatus.CLOSED);
 			offerService.createNewOffer(postoff);
 

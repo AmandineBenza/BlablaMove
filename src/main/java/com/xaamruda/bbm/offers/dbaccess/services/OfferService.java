@@ -36,7 +36,7 @@ public class OfferService implements IOfferService {
 	@Override
 	public List<PostedOffer> getOfferByID(String offerID) {
 		BBMLogger.infoln("Retrieving offer of id " + offerID + ".");
-		return offerRepository.getByOfferID(offerID);
+		return offerRepository.getByOfferID(Integer.parseInt(offerID));
 	}
 	
 	@Override

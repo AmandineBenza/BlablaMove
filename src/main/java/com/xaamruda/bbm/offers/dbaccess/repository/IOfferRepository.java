@@ -12,6 +12,6 @@ public interface IOfferRepository extends JpaRepository<PostedOffer, Integer>, J
 
 	List<PostedOffer> getByOwnerID(String ownerID);
 	
-	List<PostedOffer> getByOfferID(String offerID);
+	List<PostedOffer> getByOfferID(Integer offerID);
  
 }

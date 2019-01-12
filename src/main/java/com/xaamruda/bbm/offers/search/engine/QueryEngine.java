@@ -51,8 +51,8 @@ public class QueryEngine {
 	static public Specification<PostedOffer> buildMySqlQuery(Filters filters) {
 		StringBuilder builder = new StringBuilder();
 		Specification<PostedOffer> query = (root, request, cb) -> { 
-			cb.equal(root.get("endCity"),filters.endAddress);
-			cb.greaterThan(root.get("capacity"),filters.endAddress);
+			cb.like(root.get("endCity"),filters.endAddress);
+			cb.greaterThan(root.get("capacity"),filters.weight);
 			builder.append("Embedded filters | startCity: " + filters.startAddress
 					+ ", endCity: " + filters.endAddress + ", capacity: " + filters.weight);
 			if (filters.maxPrice > 0) {
@@ -64,8 +64,8 @@ public class QueryEngine {
 				builder.append(", status: " + filters.status + ".");
 			} else {
 				cb.equal(root.get("status"),OfferStatus.POSTED);
-			} 
-			return cb.equal(root.get("startCity"), filters.startAddress);
+			}
+			return cb.like(root.get("startCity"), filters.startAddress);
 		};
 		BBMLogger.infoln(builder.toString());
 		return query;
