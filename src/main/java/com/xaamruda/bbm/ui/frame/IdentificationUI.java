@@ -1,49 +1,148 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.xaamruda.bbm.ui.frame;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JPanel;
 
-public class IdentificationUI implements IGlobalUI {
-	private JPanel panel1;
-	private JTextField identifientField;
-	private JTextField passwordField;
-	private JButton loginButton;
+/**
+ *
+ * @author roody
+ */
+public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
 
-	public IdentificationUI() {
-		initialisation();
-	}
+    /**
+     * Creates new form IdentificationUI
+     */
+    public IdentificationUI() {
+        initComponents();
+    }
 
-	@Override
-	public void initialisation() {
-		GridLayout gridLayout = new GridLayout(5, 1, 10, 10);
-		panel1 = new JPanel();
-		panel1.setLayout(gridLayout);
-		panel1.add(new JLabel("Identifient"));
-		identifientField = new JTextField();
-		panel1.add(identifientField);
-		panel1.add(new JLabel("Password"));
-		passwordField = new JTextField();
-		panel1.add(passwordField);
-		loginButton = new JButton("Login");
-		loginButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				utility();
-			}
-		});
-		panel1.add(loginButton);
-	}
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-	@Override
-	public JPanel getMainPanel() {
-		return panel1;
-	}
+        mainPanel = new javax.swing.JPanel();
+        identifientLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
+        identifientField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JTextField();
+        loginButton = new javax.swing.JToggleButton();
+        img = new javax.swing.JLabel();
 
-	@Override
-	public void utility() {
-		System.out.println("Identifient : " + identifientField.getText());
-		System.out.println("Password : " + passwordField.getText());
-	}
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        identifientLabel.setText("Identifient");
+
+        passwordLabel.setText("Password");
+
+        identifientField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                identifientFieldActionPerformed(evt);
+            }
+        });
+
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png"))); // NOI18N
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loginButton)
+                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(identifientField)
+                        .addComponent(passwordLabel)
+                        .addComponent(identifientLabel)
+                        .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 374, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(identifientLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(identifientField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(passwordLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(loginButton)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void identifientFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identifientFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_identifientFieldActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        utility();
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    @Override
+    public void initialisation() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public JPanel getMainPanel() {
+        return this.mainPanel;
+    }
+
+    @Override
+    public void utility() {
+       	System.out.println("Identifient : " + identifientField.getText());
+	System.out.println("Password : " + passwordField.getText());
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField identifientField;
+    private javax.swing.JLabel identifientLabel;
+    private javax.swing.JLabel img;
+    private javax.swing.JToggleButton loginButton;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JTextField passwordField;
+    private javax.swing.JLabel passwordLabel;
+    // End of variables declaration//GEN-END:variables
 }
