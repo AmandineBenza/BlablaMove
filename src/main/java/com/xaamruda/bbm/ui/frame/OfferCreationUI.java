@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xaamruda.bbm.ui.frame;
 
 import javax.swing.*;
@@ -11,20 +6,20 @@ import javax.swing.*;
  *
  * @author roody
  */
-public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
+public class OfferCreationUI extends JFrame implements IGlobalUI{
 
-    private javax.swing.JToggleButton acceptButton;
-    private javax.swing.JTextField arrivalLocationField;
-    private javax.swing.JLabel arrivalLocationLabel;
-    private javax.swing.JToggleButton cancelButton;
-    private javax.swing.JTextField carCapacityField;
-    private javax.swing.JLabel carCapacityLabel;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JTextField priceField;
-    private javax.swing.JLabel priceLabel;
-    private javax.swing.JTextField startLocationField;
-    private javax.swing.JLabel startLocationLabel;
-    private javax.swing.JFrame frame;
+    private JToggleButton acceptButton;
+    private JTextField arrivalLocationField;
+    private JLabel arrivalLocationLabel;
+    private JToggleButton cancelButton;
+    private JTextField carCapacityField;
+    private JLabel carCapacityLabel;
+    private JPanel mainPanel;
+    private JTextField priceField;
+    private JLabel priceLabel;
+    private JTextField startLocationField;
+    private JLabel startLocationLabel;
+    private JFrame frame;
 
     /**
      * Creates new form OfferCreationUI
@@ -144,6 +139,8 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
         pack();
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
@@ -153,15 +150,35 @@ public class OfferCreationUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public void utility() {
+    public boolean utility() {
+        System.out.println("Start Location : " + startLocationField.getText());
+        System.out.println("Arrival Location : " + arrivalLocationField.getText());
+        System.out.println("Price : " + priceField.getText());
+        System.out.println("Car Capacity : " + carCapacityField.getText());
+        //priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+        // "{"event" : "validate-price" , "data" : {"data" : "x"},
+        // "filters": {"startAddress": "$startAdress","endAddress": "$endAddress","maxPrice": "0"}}"
+        // "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
+
+        if(!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("")
+                && !priceField.getText().equals("") && !carCapacityField.getText().equals("")){
+            //ioHandler.sendToApp("{ event : validate-price , data : { }}");
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        frame.dispose();
-        new MainMenuUI();
+        acceptButton.setSelected(false);
+        if(utility()) {
+            frame.dispose();
+            new RangePriceUI();
+        }
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        cancelButton.setSelected(false);
         frame.dispose();
         new MainMenuUI();
     }

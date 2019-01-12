@@ -1,27 +1,30 @@
 package com.xaamruda.bbm.ui.frame;
 
+import com.xaamruda.bbm.ui.UIIOHandler;
+
 import javax.swing.*;
 
 /**
  *
  * @author roody
  */
-public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
+public class MainMenuUI extends JFrame implements IGlobalUI{
 
-    private javax.swing.JButton createOfferButton;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton offerDemandButton;
-    private javax.swing.JButton transactionButton;
-    private javax.swing.JLabel welcomeLabel;
-    private javax.swing.JLabel yourPointResLabel;
-    private javax.swing.JLabel yourPointTxtLabel;
-    private javax.swing.JFrame frame;
-
+    private JButton createOfferButton;
+    private JPanel mainPanel;
+    private JButton offerDemandButton;
+    private JButton transactionButton;
+    private JLabel welcomeLabel;
+    private JLabel yourPointResLabel;
+    private JLabel yourPointTxtLabel;
+    private JFrame frame;
+    private UIIOHandler ioHandler;
     /**
      * Creates new form MainMenuUI
      */
     public MainMenuUI() {
         initialisation();
+        setPointForActualUser();
     }
 
 
@@ -124,6 +127,8 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
         pack();
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
@@ -133,22 +138,30 @@ public class MainMenuUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public void utility() {
-
+    public boolean utility() {
+        return true;
     }
 
     private void createOfferButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        createOfferButton.setSelected(false);
         frame.dispose();
         new OfferCreationUI();
     }
 
     private void offerDemandButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        offerDemandButton.setSelected(false);
         frame.dispose();
         new OfferDemandUI();
     }
 
     private void transactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        transactionButton.setSelected(false);
         frame.dispose();
         new TransactionUI();
+    }
+
+    private void setPointForActualUser(){
+        //ioHandler.sendToApp("{ event :  , data : { }}");
+        yourPointResLabel.setText("1");
     }
 }

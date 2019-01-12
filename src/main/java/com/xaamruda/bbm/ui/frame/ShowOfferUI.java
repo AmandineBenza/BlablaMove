@@ -53,8 +53,8 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public void utility() {
-
+    public boolean utility() {
+        return true;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

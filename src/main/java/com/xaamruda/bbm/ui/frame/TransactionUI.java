@@ -29,7 +29,7 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
-        frame = new JFrame("BlablaMove");
+        frame = new JFrame("BlablaMove : Transaction");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         endTransactionButton = new javax.swing.JToggleButton();
@@ -113,6 +113,8 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
         pack();
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
@@ -122,15 +124,41 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public void utility() {
+    public boolean utility() {
+        if(statutTransactionResLabel.getText().equals("Transaction in progress")){ //END
 
+
+        }else if ( statutTransactionResLabel.getText().equals("not Started")){ //START
+            //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+            // "{"event": "claim-receipt" ,"data": {"transactionID": $transactionID}}"
+            // "localhost:8080/BBM/OFFERS"
+
+            //ioHandler.sendToApp("{ event : claim-receipt , data : { }}");
+
+            //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+            // "{"event": "confirm-receipt" ,"data": {"transactionID": $offerIdD}}"
+            // "localhost:8080/BBM/OFFERS"
+
+            //ioHandler.sendToApp("{ event confirm-receipt :  , data : { }}");
+        }else{
+            //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+            // "{"event": "confirm-deposit" ,"data": {"transactionID": $transactionID}}"
+            // "localhost:8080/BBM/OFFERS"
+
+            //ioHandler.sendToApp("{ event : confirm-deposit , data : { }}");
+        }
+        return true;
     }
 
     private void startTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        utility();
+        statutTransactionResLabel.setText("Transaction in progress");
+        startTransactionButton.setSelected(false);
     }
 
     private void endTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        utility();
+        statutTransactionResLabel.setText("Transaction ended succesfully");
+        endTransactionButton.setSelected(false);
     }
 }

@@ -8,5 +8,5 @@ public interface IGlobalUI {
 
 	public JPanel getMainPanel();
 
-	public void utility();
+	public boolean utility();
 }

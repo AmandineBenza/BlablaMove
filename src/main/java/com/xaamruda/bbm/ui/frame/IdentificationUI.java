@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xaamruda.bbm.ui.frame;
+
+import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.ui.UIIOHandler;
 
 import javax.swing.*;
 
@@ -11,16 +9,18 @@ import javax.swing.*;
  *
  * @author roody
  */
-public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
+public class IdentificationUI extends JFrame implements IGlobalUI {
 
-    private javax.swing.JTextField identifientField;
-    private javax.swing.JLabel identifientLabel;
-    private javax.swing.JLabel img;
-    private javax.swing.JToggleButton loginButton;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JTextField passwordField;
-    private javax.swing.JLabel passwordLabel;
-    private javax.swing.JFrame frame;
+    private JTextField identifiantField;
+    private JLabel identifiantLabel;
+    private JLabel img;
+    private JToggleButton loginButton;
+    private JPanel mainPanel;
+    private JTextField passwordField;
+    private JLabel passwordLabel;
+    private JFrame frame;
+    private UIIOHandler ioHandler;
+
     /**
      * Creates new form IdentificationUI
      */
@@ -31,19 +31,19 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
 
     @Override
     public void initialisation() {
-        frame = new JFrame("Login");
+        frame = new JFrame("BalblaMove : Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
-        identifientLabel = new javax.swing.JLabel();
+        identifiantLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        identifientField = new javax.swing.JTextField();
+        identifiantField = new javax.swing.JTextField();
         passwordField = new javax.swing.JTextField();
         loginButton = new javax.swing.JToggleButton();
         img = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        identifientLabel.setText("Identifient");
+        identifiantLabel.setText("Identifiant");
 
         passwordLabel.setText("Password");
 
@@ -65,9 +65,9 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(loginButton)
                                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(identifientField)
+                                                .addComponent(identifiantField)
                                                 .addComponent(passwordLabel)
-                                                .addComponent(identifientLabel)
+                                                .addComponent(identifiantLabel)
                                                 .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -78,9 +78,9 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
                                 .addContainerGap()
                                 .addComponent(img, javax.swing.GroupLayout.PREFERRED_SIZE, 374, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(identifientLabel)
+                                .addComponent(identifiantLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(identifientField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(identifiantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
                                 .addComponent(passwordLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -104,6 +104,8 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
         pack();
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
@@ -113,14 +115,26 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
     }
 
     @Override
-    public void utility() {
-       	System.out.println("Identifient : " + identifientField.getText());
-	    System.out.println("Password : " + passwordField.getText());
+    public boolean utility() {
+        System.out.println("Identifient : " + identifiantField.getText());
+        System.out.println("Password : " + passwordField.getText());
+        //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+        // "{"event" : "identify-user" , "data" : {"mail" : "$client" , "password" : "DWpasswOrdL"}}"
+        // "localhost:8080/BBM/OFFERS"
+        if(!identifiantField.getText().equals("") && !passwordField.getText().equals("")){
+            //ioHandler.sendToApp("{ event : identify-user , data : { mail : " +  identifiantField.getText() + ", password : " + passwordField.getText() + "}}");
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        utility();
-        frame.dispose();
-        new MainMenuUI();
+        loginButton.setSelected(false);
+        if(utility()) {
+            frame.dispose();
+            new MainMenuUI();
+        }
     }
 }

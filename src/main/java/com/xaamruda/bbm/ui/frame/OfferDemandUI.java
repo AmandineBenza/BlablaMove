@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xaamruda.bbm.ui.frame;
 
 import javax.swing.*;
@@ -11,22 +6,22 @@ import javax.swing.*;
  *
  * @author roody
  */
-public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
+public class OfferDemandUI extends JFrame implements IGlobalUI {
 
-    private javax.swing.JToggleButton acceptButton;
-    private javax.swing.JTextField arrivalLocationField;
-    private javax.swing.JLabel arrivalLocationLabel;
-    private javax.swing.JToggleButton cancelButton;
-    private javax.swing.JPanel mainPanel;
-    private javax.swing.JTextField maximumPointSpendField;
-    private javax.swing.JLabel maximumPointSpendLabel;
-    private javax.swing.JTextField sizeField;
-    private javax.swing.JLabel sizeLabel;
-    private javax.swing.JTextField startLocationField;
-    private javax.swing.JLabel startLocationLabel;
-    private javax.swing.JTextField weightField;
-    private javax.swing.JLabel weightLabel;
-    private javax.swing.JFrame frame;
+    private JToggleButton acceptButton;
+    private JTextField arrivalLocationField;
+    private JLabel arrivalLocationLabel;
+    private JToggleButton cancelButton;
+    private JPanel mainPanel;
+    private JTextField maximumPointSpendField;
+    private JLabel maximumPointSpendLabel;
+    private JTextField sizeField;
+    private JLabel sizeLabel;
+    private JTextField startLocationField;
+    private JLabel startLocationLabel;
+    private JTextField weightField;
+    private JLabel weightLabel;
+    private JFrame frame;
 
     /**
      * Creates new form OfferDemandUI
@@ -37,7 +32,7 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
 
     @Override
     public void initialisation() {
-        frame = new JFrame("BlablaMove");
+        frame = new JFrame("BlablaMove : Offer Demand");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         startLocationLabel = new javax.swing.JLabel();
@@ -163,6 +158,8 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
         pack();
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
@@ -172,15 +169,36 @@ public class OfferDemandUI extends javax.swing.JFrame implements IGlobalUI {
     }
 
     @Override
-    public void utility() {
+    public boolean utility() {
+        System.out.println("Start Location : " + startLocationField.getText());
+        System.out.println("Arrival Location : " + arrivalLocationField.getText());
+        System.out.println("Max Price : " + maximumPointSpendField.getText());
+        System.out.println("Weight : " + weightField.getText());
+        System.out.println("Size : " + sizeField.getText());
+        //searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+        // "{"event":"consult-offers","data": {"weight": "$bedW", "volume":"$bedV", "date":"$inDays" },
+        // "filters": {"weight": "$bedV","startAddress": "$startAddress","endAddress": "$endAddress","maxPrice": "10000"}}"
+        // "localhost:8080/BBM/OFFERS")
+
+        if(!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("") && !maximumPointSpendField.getText().equals("")
+                && !weightField.getText().equals("") && !sizeField.getText().equals("") ){
+            //ioHandler.sendToApp("{ event : consult-offers , data : { }}");
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        acceptButton.setSelected(false);
+        utility();
         frame.dispose();
         new MainMenuUI();
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        cancelButton.setSelected(false);
+        utility();
         frame.dispose();
         new MainMenuUI();
     }

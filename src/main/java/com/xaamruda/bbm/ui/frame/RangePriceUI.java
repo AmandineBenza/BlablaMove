@@ -36,7 +36,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
-        frame = new JFrame("Price Recommendation");
+        frame = new JFrame("BlablaMove : Price Recommendation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         yourPriceTxtLabel = new javax.swing.JLabel();
@@ -156,6 +156,8 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         pack();
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
@@ -165,14 +167,31 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public void utility() {
+    public boolean utility() {
+        //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+        // "{"event":"create-offer","data":{"ownerID":"$driver", "price": "$(echo $minPrice*2.1 | bc | cut -f1 -d.)", "startCity":"$startAddress", "endCity":"$endAddress", "capacity":"$carV" }}"
+        // "localhost:8080/BBM/OFFERS"
+        //ioHandler.sendToApp("{ event : create-offer , data : { }}");
+        return true;
+    }
+
+    private void setPrice(){
+        yourPriceResLabel.setText("0");
+        maximumPriceResLabel.setText("0");
+        minimumPriceResLabel.setText("0");
+        mediumPriceResLabel.setText("0");
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        utility();
+        acceptButton.setSelected(false);
+        frame.dispose();
+        new MainMenuUI();
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        cancelButton.setSelected(false);
+        frame.dispose();
+        new MainMenuUI();
     }
 }

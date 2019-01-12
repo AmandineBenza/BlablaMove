@@ -46,8 +46,8 @@ public class DemandConfirmationUI extends javax.swing.JFrame implements IGlobalU
     }
 
     @Override
-    public void utility() {
-
+    public boolean utility() {
+        return true;
     }
 
 }
