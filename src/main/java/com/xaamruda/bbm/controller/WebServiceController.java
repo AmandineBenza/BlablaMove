@@ -1,5 +1,7 @@
 package com.xaamruda.bbm.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xaamruda.bbm.commons.communication.NetworkUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrationResult;
 import com.xaamruda.bbm.communication.internal.IFlowOrchestrator;
@@ -31,9 +34,10 @@ public class WebServiceController implements IWebServiceController {
 	 */
 	@Override
 	@RequestMapping(value = "USERS", method = RequestMethod.POST)
-	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents) {
+	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
+		BBMLogger.infoln("From " + NetworkUtils.getRemoteIpAddress(request));
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateUsersEntryPoint(jsonEvents);
 		BBMLogger.infoln("Response Received.");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());
@@ -41,11 +45,15 @@ public class WebServiceController implements IWebServiceController {
 	
 	@Override
 	@RequestMapping(value = "OFFERS", method = RequestMethod.POST)
-	public ResponseEntity offersEntryPoint(@RequestBody String jsonEvents) {
+	public ResponseEntity offersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/OFFERS\".");
+		//BBMLogger.infoln("From " + NetworkUtils.getRemoteIpAddress(request));
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateOffersEntryPoint(jsonEvents);
 		BBMLogger.infoln("Response received.");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());
 	}
+	
+	
+
 }

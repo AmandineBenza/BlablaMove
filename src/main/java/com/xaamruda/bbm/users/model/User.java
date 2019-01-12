@@ -18,6 +18,7 @@ public class User {
 	private String phone;
 	private String password;
 	private Integer pointsAmount;
+	private boolean identified;
 	
 	public User(){}
 
@@ -28,6 +29,15 @@ public class User {
 		this.phone = phone;
 		this.password = password;
 		this.pointsAmount = pointsAmount;
+		this.identified = false;
+	}
+
+	public boolean isIdentified() {
+		return identified;
+	}
+
+	public void setIdentified(boolean identified) {
+		this.identified = identified;
 	}
 
 	public Integer getId(){return id;}
