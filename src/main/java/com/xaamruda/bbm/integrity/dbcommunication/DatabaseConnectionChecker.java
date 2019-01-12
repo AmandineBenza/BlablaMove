@@ -1,17 +1,16 @@
-package com.xaamruda.bbm.integrity.auditor;
+package com.xaamruda.bbm.integrity.dbcommunication;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 
-public class IntegrityAuditor{
+public class DatabaseConnectionChecker {
 
-	private static IntegrityAuditorThread thread; 
+	private static DatabaseConnectionThread thread; 
 	
-	private IntegrityAuditor() {}
+	private DatabaseConnectionChecker() {}
 	
 	public static void start(String... config) {
-		BBMLogger.infoln("Starting integrity auditor...");
-		// use configuration to parameterize thread launch ?
-		thread = new IntegrityAuditorThread();
+		BBMLogger.infoln("Starting database connection checker...");
+		thread = new DatabaseConnectionThread();
 		thread.start();
 	}
 	
@@ -19,12 +18,12 @@ public class IntegrityAuditor{
 		thread.stop();
 	}
 	
-	private static class IntegrityAuditorThread implements Runnable {
+	private static class DatabaseConnectionThread implements Runnable {
 
 		private Thread thread;
 		private boolean running;
 		
-		public IntegrityAuditorThread() {
+		public DatabaseConnectionThread() {
 			running = false;
 		}
 		
@@ -32,7 +31,7 @@ public class IntegrityAuditor{
 		public void run() {
 			while(running) {
 				// do work
-				// BBMLogger.debugln("IA thread running..");
+				
 			}
 		}
 		
