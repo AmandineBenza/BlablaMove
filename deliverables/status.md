@@ -285,14 +285,14 @@ WEEK 3 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 
 
 ------------- Raw status --------------
----- Week 2 - 11/01/19
-- Architecture pdf
-    -- finir schéma ; DONE
-    -- finir texte ; ONGOING
-    -- status.md - week 3; TODO
-- MySQL ; ONGOING
-- Impl
-    -- Safety ; TODO
-    -- Billing ; TODO
-    -- UI ; ONGOING
-- DB crash scenarios ; TODO
+---- Week 2 - 11/01/19 <br>
+- Architecture pdf <br>
+    -- finir schéma ; DONE <br>
+    -- finir texte ; ONGOING <br>
+    -- status.md - week 3; TODO <br>
+- MySQL ; ONGOING <br>
+- Impl <br>
+    -- Safety ; TODO <br>
+    -- Billing ; TODO <br>
+    -- UI ; ONGOING <br>
+- DB crash scenarios ; TODO <br>
