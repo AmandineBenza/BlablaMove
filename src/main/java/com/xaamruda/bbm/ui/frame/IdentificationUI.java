@@ -5,7 +5,7 @@
  */
 package com.xaamruda.bbm.ui.frame;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -20,7 +20,7 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTextField passwordField;
     private javax.swing.JLabel passwordLabel;
-
+    private javax.swing.JFrame frame;
     /**
      * Creates new form IdentificationUI
      */
@@ -29,20 +29,10 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
     }
 
 
-    private void identifientFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        utility();
-    }
-
     @Override
     public void initialisation() {
+        frame = new JFrame("Login");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         identifientLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
@@ -56,18 +46,6 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
         identifientLabel.setText("Identifient");
 
         passwordLabel.setText("Password");
-
-        identifientField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                identifientFieldActionPerformed(evt);
-            }
-        });
-
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
-            }
-        });
 
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +102,9 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
         );
 
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -137,4 +118,9 @@ public class IdentificationUI extends javax.swing.JFrame implements IGlobalUI {
 	    System.out.println("Password : " + passwordField.getText());
     }
 
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        utility();
+        frame.dispose();
+        new MainMenuUI();
+    }
 }

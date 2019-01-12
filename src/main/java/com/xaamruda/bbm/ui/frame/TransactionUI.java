@@ -18,6 +18,7 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JToggleButton startTransactionButton;
     private javax.swing.JLabel statutTransactionResLabel;
     private javax.swing.JLabel statutTransactionTxtLabel;
+    private javax.swing.JFrame frame;
 
     /**
      * Creates new form TransactionUI
@@ -28,6 +29,8 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
+        frame = new JFrame("BlablaMove");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         endTransactionButton = new javax.swing.JToggleButton();
         statutTransactionResLabel = new javax.swing.JLabel();
@@ -37,10 +40,21 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         endTransactionButton.setText("End Transaction");
+        endTransactionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endTransactionButtonActionPerformed(evt);
+            }
+        });
+
 
         statutTransactionResLabel.setText("not started");
 
         startTransactionButton.setText("Start Transaction");
+        startTransactionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startTransactionButtonActionPerformed(evt);
+            }
+        });
 
         statutTransactionTxtLabel.setText("Statut of Transaction");
 
@@ -96,8 +110,10 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
         pack();
+        frame.setContentPane(this.mainPanel);
+        frame.setVisible(true);
+        frame.pack();
     }
 
     @Override
@@ -108,5 +124,13 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public void utility() {
 
+    }
+
+    private void startTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void endTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 }

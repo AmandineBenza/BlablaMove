@@ -63,8 +63,18 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
 
         acceptButton.setText("OK");
+        acceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acceptButtonActionPerformed(evt);
+            }
+        });
 
         dateTxtLabel.setText("Date :");
         dateTxtLabel.setToolTipText("");
@@ -196,6 +206,14 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public void utility() {
 
+    }
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
 }
