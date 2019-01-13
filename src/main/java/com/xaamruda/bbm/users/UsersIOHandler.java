@@ -33,13 +33,20 @@ public class UsersIOHandler {
 	}
 
 	// TODO
+	/*
 	public boolean identifyUserByMailPlusPassword(String wholeUserData, String userMail, String userPassword){
 		boolean exists = identificator.identify(userMail, userPassword);
-
+		
 		if(!exists){
 			dataManager.storeNewUser(JsonUtils.getFromJson(wholeUserData, User.class));
 		}
-
+		
+		return exists;
+	}
+	*/
+	
+	public boolean identifyUserByMailPlusPassword(String userMail, String userPassword){
+		boolean exists = identificator.identify(userMail, userPassword);	
 		return exists;
 	}
 

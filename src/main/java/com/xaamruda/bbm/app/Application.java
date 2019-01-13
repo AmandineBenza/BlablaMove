@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
-import com.xaamruda.bbm.integrity.auditor.IntegrityAuditor;
+import com.xaamruda.bbm.integrity.dbcommunication.DatabaseConnectionChecker;
 
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -74,7 +74,7 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class);
 		BBMLogger.infoln(">> Welcome to BlablaMove <<");
-		IntegrityAuditor.start();
+		DatabaseConnectionChecker.start();
 	}	
 	
 //	@Bean

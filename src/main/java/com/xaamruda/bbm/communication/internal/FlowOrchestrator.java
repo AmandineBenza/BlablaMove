@@ -50,6 +50,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		Object content = null;
 
 		switch (event.getAsString()) {
+		
 		case "create-user" : {
 			BBMLogger.infoln("Creating user...");
 			callCreateUser(data.toString());
@@ -62,9 +63,12 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		case "identify-user" : {
 			// identify or create if does not exist
 			BBMLogger.infoln("Identifying a user...");
-			JsonArray dataArray = data.getAsJsonArray();
-			boolean userExists = userIO.identifyUserByMailPlusPassword(data.getAsString(),
-					dataArray.get(0).getAsString(), dataArray.get(1).getAsString()); 
+			//JsonArray dataArray = data.getAsJsonArray();
+			//boolean userExists = userIO.identifyUserByMailPlusPassword(data.getAsString(),
+				//	dataArray.get(0).getAsString(), dataArray.get(1).getAsString()); 
+			boolean userExists = userIO.identifyUserByMailPlusPassword
+					(data.getAsJsonObject().get("mail").getAsString(), 
+							data.getAsJsonObject().get("password").getAsString()); 
 			clazz = Boolean.class;
 			status = userExists ? HttpStatus.OK : HttpStatus.CREATED;
 			content = userExists;

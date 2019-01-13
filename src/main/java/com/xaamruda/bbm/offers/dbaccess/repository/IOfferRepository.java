@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import  com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 
-public interface IOfferRepository extends JpaRepository<PostedOffer, Integer>, JpaSpecificationExecutor<PostedOffer>{
+public interface IOfferRepository extends JpaRepository<PostedOffer, Integer>, JpaSpecificationExecutor<PostedOffer> {
 
 	List<PostedOffer> getByStatus(OfferStatus status);
 
