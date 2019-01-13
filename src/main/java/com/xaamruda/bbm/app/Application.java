@@ -2,12 +2,15 @@ package com.xaamruda.bbm.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.dbcommunication.DatabaseConnectionChecker;
+import com.xaamruda.bbm.users.dbaccess.service.UserService;
+import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
 
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -51,11 +54,12 @@ import javax.sql.DataSource;
 public class Application {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class);
+		ConfigurableApplicationContext context = SpringApplication.run(Application.class);
 		BBMLogger.infoln(">> Welcome to BlablaMove <<");
 		DatabaseConnectionChecker.start();
-	}	
-
+		UserIdentificationChecker.start(context.getBean(UserService.class));
+	}
+	
     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();

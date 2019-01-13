@@ -2,6 +2,8 @@ package com.xaamruda.bbm.users.model;
 
 import javax.persistence.Id;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +21,9 @@ public class User {
 	private String password;
 	private Integer pointsAmount;
 	private boolean identified;
+	private Timestamp identificationTime;
 	
+
 	public User(){}
 
 	public User(String mail, String name, String address, String phone, String password, Integer pointsAmount) {
@@ -30,14 +34,26 @@ public class User {
 		this.password = password;
 		this.pointsAmount = pointsAmount;
 		this.identified = false;
+		this.identificationTime = null;
 	}
-
+	
 	public boolean isIdentified() {
 		return identified;
 	}
 
 	public void setIdentified(boolean identified) {
+		if(identified && !(this.identified)) {
+			 this.identificationTime = new Timestamp(System.currentTimeMillis());
+		}
 		this.identified = identified;
+	}
+	
+	public Timestamp getIdentificationTime() {
+		return identificationTime;
+	}
+
+	public void setIdentificationTime(Timestamp identificationTime) {
+		this.identificationTime = identificationTime;
 	}
 
 	public Integer getId(){return id;}

@@ -205,7 +205,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = callConfirmAwaitingOffers(data.toString());
 			}
 			clazz = List.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
@@ -220,16 +220,22 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = callClaimReceipt(data.toString());
 			}
 			clazz = List.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
 		// Alice confirms she receives Bob items
 		case "confirm-receipt":{
 			BBMLogger.infoln("Confirming items reception...");
-			content = callConfirmReceipt(data.toString());
+			boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to confirms he received an item");
+				content = "Please login to your account.\n";
+			} else {
+				content = callConfirmReceipt(data.toString());
+			}
 			clazz = List.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
@@ -244,7 +250,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = callClaimDeposit(data.toString());
 			}
 			clazz = List.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
@@ -259,7 +265,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = callConfirmDeposits(data.toString());
 			}
 			clazz = List.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
