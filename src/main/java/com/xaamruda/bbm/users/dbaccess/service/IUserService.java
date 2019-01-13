@@ -9,4 +9,5 @@ public interface IUserService {
 	public void store(User user);
 	public List<User> getAllUsers();
 	public void delete(User user);
+	void store(List<User> user);
 }

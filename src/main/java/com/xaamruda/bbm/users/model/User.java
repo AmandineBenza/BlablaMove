@@ -1,7 +1,6 @@
 package com.xaamruda.bbm.users.model;
 
 import javax.persistence.Id;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +32,7 @@ public class User {
 	public Integer getId(){return id;}
 
 	public void setId(int newId){
-		id=newId;
+		id = newId;
 	}
 
 	public String getMail() {
@@ -75,13 +74,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public Integer getPointsAmount() {
 		return pointsAmount;
 	}
-
+	
 	public void setPointsAmount(Integer pointsAmount) {
 		this.pointsAmount = pointsAmount;
 	}
-
 }

@@ -25,7 +25,7 @@ public final class BBMLogger {
 	
 	public static void infoln(String msg) {
 		// System.out.println("[INFO|" + dateInfo() + msg + "]");
-		infoln(msg, 1000);
+		infoln(msg, 0);
 	}
 	
 	public static void infoln(String msg, int sleepms) {
