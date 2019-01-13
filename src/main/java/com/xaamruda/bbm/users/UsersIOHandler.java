@@ -31,22 +31,19 @@ public class UsersIOHandler {
 	public UsersIOHandler() {
 	}
 	
-	// TODO
-	/*
-	public boolean identifyUserByMailPlusPassword(String wholeUserData, String userMail, String userPassword){
-		boolean exists = identificator.identify(userMail, userPassword);
-		
-		if(!exists){
-			dataManager.storeNewUser(JsonUtils.getFromJson(wholeUserData, User.class));
-		}
-		
-		return exists;
-	}
-	*/
-	
 	public boolean identifyUserByMailPlusPassword(String userMail, String userPassword){
 		boolean exists = identificator.identify(userMail, userPassword);	
+		if(exists) {
+			User user = service.getUserByMail(userMail).get(0);
+			user.setIdentified(true);
+			service.store(user);
+		}
 		return exists;
+	}
+	
+	public boolean isIdentified(String userMail) {
+		User user = service.getUserByMail(userMail).get(0);
+		return user.isIdentified();
 	}
 	
 	public void postNewUser(String userJson){
@@ -71,7 +68,6 @@ public class UsersIOHandler {
 	}
 
 	public void debit(String buyerID, Integer finalPrice) {
-		
 		User buyer = service.getUserByMail(buyerID).get(0);
 		//service.delete(buyer);
 		if(buyer.getPointsAmount() == null)
