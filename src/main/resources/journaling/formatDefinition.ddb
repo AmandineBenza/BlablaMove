@@ -1,5 +1,5 @@
 # form
-id;service;action;([type1;param1];..);state
+id;service;className;action;([type1|param1];..);state
 
 # form definitions
 id:
@@ -12,21 +12,20 @@ service:
 action;parameters:
 	1.
 		- createNewOffer;([PostedOffer;offerJson])
-		- changeOfferStatus;([Integer;id];[OfferStatus;status])
+		- changeOfferStatus;([Integer|id];[OfferStatus|status])
 		- remove;([PostedOffer;offerJson])
 	2.
 		- store;([User;user])
 		- delete;([User;user])
 
 state:
-	- DONE
 	- TODO
-	- FAIL
+	- DONE
 
 ####### Journal file structure #######
 example
-0;users;store;([User;userJson]);TODO
-1;offers;createNewOffer;([clazz;postedOfferJson]);DONE
+0;users;UserService;store;([User;userJson]);TODO
+1;offers;OfferService;createNewOffer;([clazz;postedOfferJson]);DONE
 
 ############################
 

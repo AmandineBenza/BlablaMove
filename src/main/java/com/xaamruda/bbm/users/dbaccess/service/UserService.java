@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.users.dbaccess.repository.IUserRepository;
 import com.xaamruda.bbm.users.model.User;
 
@@ -16,6 +17,9 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private IUserRepository repository;
+	
+	@Autowired
+	private IntegrityIOHandler integrityIOHandler;
 
 	public UserService() {
 	}

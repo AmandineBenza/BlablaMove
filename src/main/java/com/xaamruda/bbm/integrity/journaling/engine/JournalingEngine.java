@@ -7,7 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
@@ -22,6 +26,9 @@ public class JournalingEngine {
 	
 	public final static String OFFERS_SERVICE = "offers";
 	public final static String USERS_SERVICE = "users";
+	private final static String OFFERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.offers.services.";
+	private final static String USERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.users.service.";
+	
 	public final static long ERROR_CODE = -1L;
 	public final static String TODO_STATE = "TODO";
 	public final static String DONE_STATE = "DONE";
@@ -72,8 +79,11 @@ public class JournalingEngine {
 		
 		return id;
 	}
-	
-	// TODO perform journaling analyze
+
+	/**
+	 * Starting the journaling engine.<br>
+	 * Analyzes the database journal file.<br>
+	 */
 	public JournalingEngine start() {
 		File journalFile = new File(journalFilePath);
 		
@@ -88,7 +98,139 @@ public class JournalingEngine {
 		}
 		
 		safeStart = true;
+		analyze();
 		return this;
+	}
+	
+	/**
+	 * Performs journal analyze (journalFilePath).
+	 */
+	public void analyze() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File(journalFilePath)));
+			String line = null;
+			do {
+				line = br.readLine();
+				analyzeTask(line);
+			} while(line != null);
+			
+			br.close();
+			BBMLogger.infoln("Journaling engine successfully analyzed \"" + journalFilePath + "\".");
+		} catch (IOException e) {
+			BBMLogger.errorln("Could not analyze \"" + journalFilePath + "\" journal file.");
+		}
+	}
+	
+	/**
+	 * Journal line example:
+	 * 
+	 * 0;users;UserService;store;([User|userJson]);
+	 */
+	private void analyzeTask(String line) {
+		if(line == null || line.isEmpty())
+			return;
+
+		String[] data = line.split(";");
+		String service = data[1].trim();
+		String className = data[2].trim();
+		String action = data[3].trim();
+		
+		Object[] parameters = analyzeParameters(line);
+		Class<?> serviceCallerClazz = analyzeService(service, className);
+		
+		if(serviceCallerClazz == null || parameters == null) {
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.");
+			return;
+		}
+		
+		Method method = analyzeMethod(serviceCallerClazz, action);
+		
+		if(method == null) {
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.");
+			return;
+		}
+		
+		Object callerInstance;
+		try {
+			callerInstance = serviceCallerClazz.newInstance();
+			method.invoke(callerInstance, parameters);
+		} catch (InstantiationException | IllegalAccessException |
+				IllegalArgumentException | InvocationTargetException e) {
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.");
+		}
+	}
+	
+	private Class<?> analyzeService(String service, String className){
+		if(OFFERS_SERVICE.equals(service)) {
+			try {
+				return Class.forName(OFFERS_SERVICE_MODULE_PATH + className);
+			} catch (ClassNotFoundException e) {
+				return null;
+			}
+		} else if(USERS_SERVICE.equals(service)) {
+			try {
+				return Class.forName(USERS_SERVICE_MODULE_PATH + className);
+			} catch (ClassNotFoundException e) {
+				return null;
+			}
+		}
+		
+		return null;
+	}
+	
+	private Method analyzeMethod(Class<?> clazz, String action) {
+		for(Method method : clazz.getMethods()) {
+			if(method.getName().toLowerCase().equals(action.toLowerCase())){
+				return method;
+			}
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * From journal line, produce objects instances.
+	 */
+	private Object[] analyzeParameters(String line){
+		Pattern pattern = Pattern.compile("\\(.*\\)");
+		Matcher matcher = pattern.matcher(line);
+		matcher.find();
+		String parameters = matcher.group();
+		String[] parametersData = parameters.replaceAll("\\(", "").replaceAll("\\)", "").split(";");
+		Object[] parametersArray = new Object[parametersData.length];
+		int parametersArrayIndex = 0;
+		
+		for(String parameterData : parametersData) {
+			String[] parameterDataComponents = parameterData.substring(1, parameterData.length() - 1).split("\\|");
+			String type = parameterDataComponents[0].trim();
+			String value = parameterDataComponents[1].trim();
+			
+			if(type == null || value == null) continue;
+			
+			String upType = type.toUpperCase();
+			
+			if(upType.contains("INTEGER")) {
+				parametersArray[parametersArrayIndex++] = Integer.parseInt(value); 
+			} else if(upType.contains("FLOAT")) {
+				parametersArray[parametersArrayIndex++] = Float.parseFloat(value);
+			} else if(upType.contains("LONG")) {
+				parametersArray[parametersArrayIndex++] = Long.parseLong(value);
+			} else if(upType.contains("DOUBLE")) {
+				parametersArray[parametersArrayIndex++] = Double.parseDouble(value);
+			} else if(upType.contains("STRING")) {
+				parametersArray[parametersArrayIndex++] = value.trim();
+			} else {
+				// not a primitive type
+				Class<?> clazz;
+				try {
+					clazz = Class.forName(type);
+					parametersArray[parametersArrayIndex++] = new Gson().fromJson(value, clazz); 
+				} catch (ClassNotFoundException e) {
+				}
+			}
+		}
+		
+		return parametersArray;
 	}
 	
 	/**
@@ -99,7 +241,7 @@ public class JournalingEngine {
 	 * @param parameters action parameters
 	 * @return journaling id
 	 */
-	public long journal(String service, String action, Object... parameters){
+	public long journal(String service, String className, String action, Object... parameters){
 		if(!safeStart) {
 			BBMLogger.infoln("Could not log on closed journal");
 			return ERROR_CODE;
@@ -112,7 +254,7 @@ public class JournalingEngine {
 		
 		String parametersRepresentation = formatParameters(parameters);
 		long id = getId();
-		toJournal(id, service, action, parametersRepresentation);
+		toJournal(id, service, className, action, parametersRepresentation);
 		return id;
 	}
 	
@@ -165,7 +307,7 @@ public class JournalingEngine {
 			String className = parameter.getClass().getTypeName();
 			
 			sb.append(className);
-			sb.append(";");
+			sb.append("|");
 			
 			if(primitiveType) {
 				sb.append(parameter);
@@ -189,11 +331,13 @@ public class JournalingEngine {
 	}
 
 	// 0;users;store;([User;userJson]);
-	private void toJournal(long id, String service, String action, String parameters) {
+	private void toJournal(long id, String service, String className, String action, String parameters) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(id);
 		sb.append(";");
 		sb.append(service);
+		sb.append(";");
+		sb.append(className);
 		sb.append(";");
 		sb.append(action);
 		sb.append(";");
