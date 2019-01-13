@@ -49,7 +49,7 @@ public class UserIdentificationChecker {
 						BBMLogger.infoln("CURRENT TIME : " + System.currentTimeMillis());
 						BBMLogger.infoln("SOUSTRACTION : " + (System.currentTimeMillis() - identificationTime.getTime())); */
 
-						if(currentTime.getTime() - identificationTime.getTime() > 300000 ) { 	// 2 minutes
+						if(currentTime.getTime() - identificationTime.getTime() > 120000 ) { 	// 2 minutes
 							user.setIdentified(false);
 							service.store(user);	
 						}		
