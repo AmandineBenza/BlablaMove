@@ -2,19 +2,20 @@ package com.xaamruda.bbm.offers.dbaccess.services;
 
 import java.util.List;
 import java.util.Optional;
-
+import javax.management.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.xaamruda.bbm.offers.model.PostedOffer;
+import com.xaamruda.bbm.users.model.User;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
-import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
+
 
 @Transactional
 @Service("OfferService")
@@ -27,9 +28,6 @@ public class OfferService implements IOfferService {
 	JdbcTemplate mongoTemplate;
 
 	SessionFactory ss;
-	
-	@Autowired
-	private IntegrityIOHandler integrityIOHandler;
 
 	@Override
 	public List<PostedOffer> getOfferByID(String offerID) {
@@ -51,20 +49,39 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<PostedOffer> getAvailableOffers() {
-		BBMLogger.infoln("Retrieving posted offers...");
-		return offerRepository.getByStatus(OfferStatus.POSTED);
+		try {
+			BBMLogger.infoln("Retrieving posted offers...");
+			return offerRepository.getByStatus(OfferStatus.POSTED);
+		} catch(Exception ex) {
+			System.out.println(ex.toString());
+			return null;
+		}
 	}
+
+	//	@Override
+	//	public List<PostedOffer> getAvailableOffers(Query query) {
+	//		
+	//		List<PostedOffer> offers = offerRepository.findAll( example, pageable);
+	//		return offers;
+	//	} 
 
 	@Override
 	public List<PostedOffer> getAvailableOffers(Specification<PostedOffer> query) {
-		List<PostedOffer> offers = offerRepository.findAll(query);
-		return offers;
+		
+		try {
+			List<PostedOffer> offers = offerRepository.findAll(query);
+			return offers;
+		} catch(Exception ex) {
+			System.out.println("ok");
+			System.out.println(ex.toString());
+			return null;
+		}
 	}
 
 	@Override
-	public boolean createNewOffer(PostedOffer offer) {
+	public boolean createNewOffer(PostedOffer offer){
 		BBMLogger.infoln("Storing new offer...");
-		if (offer != null) {
+		if(offer != null){
 			offerRepository.save(offer);
 		}
 		return (offer != null);

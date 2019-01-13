@@ -29,10 +29,17 @@ public class UserService implements IUserService {
 		BBMLogger.infoln("Retrieving user given mail " + mail + ".");
 		return repository.findByMail(mail);
 	}
+	
+	
 
 	@Override
 	public void store(User user) {
 		repository.save(user);
+	}
+	
+	@Override
+	public void store(List<User> user) {
+		repository.saveAll(user);
 	}
 
 	@Override

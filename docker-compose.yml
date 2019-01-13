@@ -28,15 +28,36 @@ services:
        links:
           - dbnouveau
     dbnouveau:
+        container_name: dbnouveau
         image: mysql
-        #command: --default-authentication-plugin=mysql_native_password
+        command: --default-authentication-plugin=mysql_native_password
         restart: always
         ports: 
           - "3306:3306"
+        
         environment:
             MYSQL_ROOT_PASSWORD: mdp
             MYSQL_DATABASE: test
             MYSQL_USER: damien
             MYSQL_PASSWORD: mdp
+       # volumes:
+         #  - /data/mysql:/var/lib/mysql
+         #  - /data/pgsql:/var/lib/postgresql
+         #  - /data/maria:/var/lib/mariadb
+         #  - /data/redis:/var/lib/redis
+         #  - /data/memcached:/var/lib/memcached
+         #  - /data/neo4j:/var/lib/neo4j/data
+    myadm:
+        image : phpmyadmin/phpmyadmin
+        ports : 
+           - "8085:80" 
+        container_name: wpphpmyadmin
+        links:
+           - "dbnouveau:db"
+        environment:
+            MYSQL_USERNAME: root
+            MYSQL_ROOT_PASSWORD: mdp
+        restart: always
+        
     
 
