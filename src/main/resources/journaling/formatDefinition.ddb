@@ -1,27 +1,38 @@
 # form
-service;action;parameters;state;
+id;service;action;([type1;param1];..);state
 
 # form definitions
+id:
+	- journaling entry identifier
+
 service:
 	1. offers
 	2. users
 
 action;parameters:
 	1.
-		- createNewOffer;PostedOffer offer
-		- changeOfferStatus;Integer id;OfferStatus status
-		- remove;PostedOffer offer
+		- createNewOffer;([PostedOffer;offerJson])
+		- changeOfferStatus;([Integer;id];[OfferStatus;status])
+		- remove;([PostedOffer;offerJson])
 	2.
-		- store;User user
-		- delete;User user
+		- store;([User;user])
+		- delete;([User;user])
 
 state:
 	- DONE
 	- TODO
 	- FAIL
 
+####### Journal file structure #######
+example
+0;users;store;([User;userJson]);TODO
+1;offers;createNewOffer;([clazz;postedOfferJson]);DONE
+
+############################
+
 ####### Requirements #######
 # POJOs toString definitions
 # 
 # 
 ############################
+
