@@ -18,11 +18,8 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 
 public class JournalingEngine {
 
-	private final static JournalingEngine usersJournalEngine =
-			new JournalingEngine("./src/main/java/com/xaamruda/bbm/integrity/journaling/data/usersJournal.ddb").start();
-	
-	private final static JournalingEngine offersJournalEngine = 
-			new JournalingEngine("./src/main/java/com/xaamruda/bbm/integrity/journaling/data/offersJournal.ddb").start();
+	private static JournalingEngine usersJournalEngine;
+	private static JournalingEngine offersJournalEngine; 
 	
 	public final static String OFFERS_SERVICE = "offers";
 	public final static String USERS_SERVICE = "users";
@@ -37,7 +34,13 @@ public class JournalingEngine {
 	private long maxId;
 	public String journalFilePath;
 	
-	public static synchronized JournalingEngine get(String service) {
+	public static void init() {
+// 		usersJournalEngine = new JournalingEngine("./src/main/java/com/xaamruda/bbm/integrity/journaling/data/usersJournal.ddb").start();
+		usersJournalEngine = new JournalingEngine("./src/main/resources/journaling/usersJournal.ddb").start();
+		offersJournalEngine = new JournalingEngine("./src/main/resources/journaling//offersJournal.ddb").start();
+	}
+	
+	public static JournalingEngine get(String service) {
 		if(OFFERS_SERVICE.equals(service)) {
 			return offersJournalEngine;
 		} else if(USERS_SERVICE.equals(service)) {
@@ -50,7 +53,7 @@ public class JournalingEngine {
 	private JournalingEngine(String journalFilePath) {
 		this.journalFilePath = journalFilePath;
 		this.safeStart = false;
-		this.maxId = extractId();
+		this.maxId = ERROR_CODE;
 		BBMLogger.infoln("Initialized \"" + journalFilePath + "\" database journaling.");
 	}
 	
@@ -73,7 +76,7 @@ public class JournalingEngine {
 			}
 			
 		} catch (FileNotFoundException e) {
-			BBMLogger.errorln("Journal \"" + journalFilePath + "\" is in an unsatisfied state.");
+			BBMLogger.errorln("Journal engine for \"" + journalFilePath + "\" is in a bad state.");
 			safeStart = false;
 		}
 		
@@ -98,7 +101,9 @@ public class JournalingEngine {
 		}
 		
 		safeStart = true;
+		maxId = extractId();
 		analyze();
+		
 		return this;
 	}
 	
@@ -163,13 +168,21 @@ public class JournalingEngine {
 	private Class<?> analyzeService(String service, String className){
 		if(OFFERS_SERVICE.equals(service)) {
 			try {
-				return Class.forName(OFFERS_SERVICE_MODULE_PATH + className);
+				if(className.contains("\\.")) {
+					return Class.forName(className);
+				} else {
+					return Class.forName(OFFERS_SERVICE_MODULE_PATH + className);
+				}
 			} catch (ClassNotFoundException e) {
 				return null;
 			}
 		} else if(USERS_SERVICE.equals(service)) {
 			try {
-				return Class.forName(USERS_SERVICE_MODULE_PATH + className);
+				if(className.contains("\\.")) {
+					return Class.forName(className);
+				} else {
+					return Class.forName(USERS_SERVICE_MODULE_PATH + className);
+				}
 			} catch (ClassNotFoundException e) {
 				return null;
 			}
@@ -242,6 +255,8 @@ public class JournalingEngine {
 	 * @return journaling id
 	 */
 	public long journal(String service, String className, String action, Object... parameters){
+		checkCreate();
+		
 		if(!safeStart) {
 			BBMLogger.infoln("Could not log on closed journal");
 			return ERROR_CODE;
@@ -256,6 +271,18 @@ public class JournalingEngine {
 		long id = getId();
 		toJournal(id, service, className, action, parametersRepresentation);
 		return id;
+	}
+	
+	private void checkCreate() {
+		File file = new File(journalFilePath); 
+		if(!file.exists()) {
+			try {
+				file.createNewFile();
+				safeStart = true;
+			} catch (IOException e) {
+				safeStart = false;
+			}
+		}
 	}
 	
 	/**

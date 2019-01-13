@@ -2,11 +2,11 @@ package com.xaamruda.bbm.communication.internal;
 
 import java.util.List;
 
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
@@ -28,6 +28,9 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 	@Autowired
 	private com.xaamruda.bbm.roads.RoadsIOHandler roadsIO;
+	
+	@Autowired
+	private com.xaamruda.bbm.integrity.IntegrityIOHandler integrityIOHandler;
 
 	public FlowOrchestrator() {}
 
@@ -50,6 +53,37 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		Object content = null;
 
 		switch (event.getAsString()) {
+		
+		// ---- temporary, debug purposes
+		case "start-journal-user": {
+			BBMLogger.debugln("Journaling user..");
+			User user = new User(data.getAsJsonObject().get("mail").getAsString(), "test", "test", "test", "test", 0);
+			long journalKeyId = integrityIOHandler.addUserJournalEntry("store", "UserService", user);
+			clazz = Long.class;
+			content = "Journaling success. Key ID is: " + journalKeyId + ".\n";
+			status = HttpStatus.OK;
+			break;
+		}
+		
+		case "analyze-journal-user":{
+			BBMLogger.debugln("Analyzing journaling user..");
+			integrityIOHandler.analyzeUserJournal();
+			clazz = Void.class;
+			content = "Analyzed launched. Please check user journal.\n";
+			status = HttpStatus.OK;
+			break;
+		}
+		
+		case "end-journal-user" : {
+			BBMLogger.debugln("End journaling user..");
+			long journalKeyId = data.getAsLong();
+			integrityIOHandler.endUserJournalEntry(journalKeyId);
+			clazz = Void.class;
+			content = "End journaling entry, check it.";
+			status = HttpStatus.OK;
+			break;
+		}
+		// -----------------------------
 
 		case "create-user" : {
 			BBMLogger.infoln("Creating user...");

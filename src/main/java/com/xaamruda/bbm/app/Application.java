@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.dbcommunication.DatabaseConnectionChecker;
+import com.xaamruda.bbm.integrity.journaling.engine.JournalingEngine;
 import com.xaamruda.bbm.users.dbaccess.service.UserService;
 import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
 
@@ -62,8 +63,13 @@ public class Application {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class);
 		BBMLogger.infoln(">> Welcome to BlablaMove <<");
+		launch(context);
+	}
+	
+	private static void launch(ConfigurableApplicationContext context) {
 		DatabaseConnectionChecker.start();
 		UserIdentificationChecker.start(context.getBean(UserService.class));
+		JournalingEngine.init();
 	}
 	
 	/*
