@@ -17,7 +17,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private IUserRepository repository;
-	
+
 	@Autowired
 	private IntegrityIOHandler integrityIOHandler;
 
@@ -25,18 +25,16 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public  List<User> getUserByMail(String mail) {
+	public List<User> getUserByMail(String mail) {
 		BBMLogger.infoln("Retrieving user given mail " + mail + ".");
 		return repository.findByMail(mail);
 	}
-	
-	
 
 	@Override
 	public void store(User user) {
 		repository.save(user);
 	}
-	
+
 	@Override
 	public void store(List<User> user) {
 		repository.saveAll(user);
@@ -47,7 +45,7 @@ public class UserService implements IUserService {
 		BBMLogger.infoln("Retrieving all users..");
 		return repository.findAll();
 	}
-	
+
 	@Override
 	public void delete(User user) {
 		BBMLogger.infoln("Deleting user " + user.getMail() + ".");

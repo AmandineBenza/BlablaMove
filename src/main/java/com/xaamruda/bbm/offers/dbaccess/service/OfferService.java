@@ -1,21 +1,18 @@
-package com.xaamruda.bbm.offers.dbaccess.services;
+package com.xaamruda.bbm.offers.dbaccess.service;
 
 import java.util.List;
 import java.util.Optional;
-import javax.management.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.xaamruda.bbm.offers.model.PostedOffer;
-import com.xaamruda.bbm.users.model.User;
 import com.xaamruda.bbm.offers.model.OfferStatus;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
-
 
 @Transactional
 @Service("OfferService")
@@ -28,6 +25,9 @@ public class OfferService implements IOfferService {
 	JdbcTemplate mongoTemplate;
 
 	SessionFactory ss;
+	
+	@Autowired
+	private IntegrityIOHandler integrityIOHandler;
 
 	@Override
 	public List<PostedOffer> getOfferByID(String offerID) {
@@ -67,7 +67,6 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<PostedOffer> getAvailableOffers(Specification<PostedOffer> query) {
-		
 		try {
 			List<PostedOffer> offers = offerRepository.findAll(query);
 			return offers;

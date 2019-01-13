@@ -26,7 +26,7 @@ public class JournalingEngine {
 	
 	public final static String OFFERS_SERVICE = "offers";
 	public final static String USERS_SERVICE = "users";
-	private final static String OFFERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.offers.services.";
+	private final static String OFFERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.offers.service.";
 	private final static String USERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.users.service.";
 	
 	public final static long ERROR_CODE = -1L;

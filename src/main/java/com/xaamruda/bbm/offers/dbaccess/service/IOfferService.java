@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.offers.dbaccess.services;
+package com.xaamruda.bbm.offers.dbaccess.service;
 
 import java.util.List;
 
