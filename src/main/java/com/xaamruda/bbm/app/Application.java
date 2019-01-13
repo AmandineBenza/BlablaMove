@@ -1,13 +1,9 @@
 package com.xaamruda.bbm.app;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -15,18 +11,6 @@ import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.dbcommunication.DatabaseConnectionChecker;
 import com.xaamruda.bbm.users.dbaccess.service.UserService;
 import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
-
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.Database;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
 
 /**
  * BlablaMove entry point. 
@@ -53,6 +37,7 @@ import javax.sql.DataSource;
 		"com.xaamruda.bbm.commons",
 		"com.xaamruda.bbm.communication",
 		"com.xaamruda.bbm.controller",
+		"com.xaamruda.bbm.integrity",
 		"com.xaamruda.bbm.offers",
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
@@ -65,11 +50,11 @@ import javax.sql.DataSource;
 		"com.xaamruda.bbm.commons",
 		"com.xaamruda.bbm.communication",
 		"com.xaamruda.bbm.controller",
+		"com.xaamruda.bbm.integrity",
 		"com.xaamruda.bbm.offers",
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
 		"com.xaamruda.bbm.users.model",
-		"com.xaamruda.bbm.integrity.errorHandler"
 })
 //@EnableAutoConfiguration(exclude=DataSourceAutoConfiguration.class)
 public class Application {
