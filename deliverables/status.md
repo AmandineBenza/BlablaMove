@@ -287,19 +287,15 @@ WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 - Validate that the previous use cases are still working with the newest database
 - Working on user identification in order to be able to enable ddos safety.
 - Establishing a journaling system to keep trace of performed and to perform operations.
+- Architecture pdf
 
 >>>>> What is planned for the following week 
-- 
+- Finish the UI
+- Do the Upgrade of Billing
 
 >>>>> What are the blockers and risks ?
 - 
 
-------------- Raw status --------------
----- Week 3 - 15/01/19 <br>
-- Architecture pdf <br>
-    -- status.md - week 3; ONGOING <br>
 - Impl <br>
     -- Safety ; ONGOING <br>
-    -- Billing ; TODO <br>
-    -- UI ; ONGOING <br>
 - DB crash scenarios ; TODO <br>
