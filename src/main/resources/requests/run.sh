@@ -14,9 +14,8 @@ inDays="5";
 
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
 
-echo "A.B.0 Alice & Bob login to BlablaMove"
+echo "A.0 Alice log in to BlablaMove"
 curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$client\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
 
 echo "A.1. Alice creates one offer to transport items between Nice and Sophia every day, between 7:30 am (Nice) and 8:30 am (Sophia)."
 echo "She has to inquire the following information:";
@@ -41,8 +40,8 @@ echo "B.1. Bob Logins on BlablaMove: he has the right amount of points."
 sleep 0.5; printf "Processing Bob login"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n";
 echo ""
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"$client\" , \"password\" : \"DWpasswOrdL\"}}" "localhost:8080/BBM/OFFERS"
- 
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$client\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
+
 sleep $*;
 echo "B.2. He fills a form with following information:"
 echo "\t- start location"
