@@ -1,0 +1,10 @@
+1. Start journaling
+
+-- start journaling
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "start-journal-user" ,"data": {"mail":"test@go.com"}}' "localhost:8080/BBM/USERS"
+
+-- analyze journal
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "analyze-journal-user"}' "localhost:8080/BBM/USERS"
+
+-- end journaling
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "end-journal-user" ,"data": {""}}' "localhost:8080/BBM/USERS"
