@@ -35,9 +35,8 @@ public class JournalingEngine {
 	public String journalFilePath;
 	
 	public static void init() {
-// 		usersJournalEngine = new JournalingEngine("./src/main/java/com/xaamruda/bbm/integrity/journaling/data/usersJournal.ddb").start();
 		usersJournalEngine = new JournalingEngine("./src/main/resources/journaling/usersJournal.ddb").start();
-		offersJournalEngine = new JournalingEngine("./src/main/resources/journaling//offersJournal.ddb").start();
+		offersJournalEngine = new JournalingEngine("./src/main/resources/journaling/offersJournal.ddb").start();
 	}
 	
 	public static JournalingEngine get(String service) {
