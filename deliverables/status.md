@@ -280,19 +280,26 @@ WEEK 2 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 
 ----------------------
 
-WEEK 3 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (18/01/2019)
 
+>>>>> What was achieved this week ?
+- Validate that the previous use cases are still working with the newest database
+- Working on user identification in order to be able to enable ddos safety.
+- Establishing a journaling system to keep trace of performed and to perform operations.
+
+>>>>> What is planned for the following week 
+- 
+
+>>>>> What are the blockers and risks ?
+- 
 
 ------------- Raw status --------------
----- Week 2 - 11/01/19 <br>
+---- Week 3 - 15/01/19 <br>
 - Architecture pdf <br>
-    -- finir schéma ; DONE <br>
-    -- finir texte ; ONGOING <br>
-    -- status.md - week 3; TODO <br>
-- MySQL ; ONGOING <br>
+    -- status.md - week 3; ONGOING <br>
 - Impl <br>
-    -- Safety ; TODO <br>
+    -- Safety ; ONGOING <br>
     -- Billing ; TODO <br>
     -- UI ; ONGOING <br>
 - DB crash scenarios ; TODO <br>
