@@ -8,6 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 import com.xaamruda.bbm.integrity.dbcommunication.DatabaseConnectionChecker;
 import com.xaamruda.bbm.integrity.journaling.engine.JournalingEngine;
 import com.xaamruda.bbm.users.dbaccess.service.UserService;
@@ -67,6 +68,7 @@ public class Application {
 	}
 	
 	private static void launch(ConfigurableApplicationContext context) {
+		ContextProvider.init(context);
 		DatabaseConnectionChecker.start();
 		UserIdentificationChecker.start(context.getBean(UserService.class));
 		JournalingEngine.init();

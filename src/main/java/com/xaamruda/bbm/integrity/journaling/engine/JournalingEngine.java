@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 
 public class JournalingEngine {
 
@@ -23,8 +24,8 @@ public class JournalingEngine {
 	
 	public final static String OFFERS_SERVICE = "offers";
 	public final static String USERS_SERVICE = "users";
-	private final static String OFFERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.offers.service.";
-	private final static String USERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.users.service.";
+	private final static String OFFERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.offers.dbaccess.service.";
+	private final static String USERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.users.dbaccess.service.";
 	
 	public final static long ERROR_CODE = -1L;
 	public final static String TODO_STATE = "TODO";
@@ -121,6 +122,7 @@ public class JournalingEngine {
 			br.close();
 			BBMLogger.infoln("Journaling engine successfully analyzed \"" + journalFilePath + "\".");
 		} catch (IOException e) {
+			e.printStackTrace();
 			BBMLogger.errorln("Could not analyze \"" + journalFilePath + "\" journal file.");
 		}
 	}
@@ -142,32 +144,36 @@ public class JournalingEngine {
 		Object[] parameters = analyzeParameters(line);
 		Class<?> serviceCallerClazz = analyzeService(service, className);
 		
-		if(serviceCallerClazz == null || parameters == null) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.");
+		if(serviceCallerClazz == null) {
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Service-caller_error]");
+			return;
+		}
+		
+		if(parameters == null) {
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Parameters_error]");
 			return;
 		}
 		
 		Method method = analyzeMethod(serviceCallerClazz, action);
 		
 		if(method == null) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.");
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method_error]");
 			return;
 		}
 		
 		Object callerInstance;
 		try {
-			callerInstance = serviceCallerClazz.newInstance();
+			callerInstance = ContextProvider.getBean(serviceCallerClazz);
 			method.invoke(callerInstance, parameters);
-		} catch (InstantiationException | IllegalAccessException |
-				IllegalArgumentException | InvocationTargetException e) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.");
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method-invocation_error]");
 		}
 	}
 	
 	private Class<?> analyzeService(String service, String className){
 		if(OFFERS_SERVICE.equals(service)) {
 			try {
-				if(className.contains("\\.")) {
+				if(className.contains(".")) {
 					return Class.forName(className);
 				} else {
 					return Class.forName(OFFERS_SERVICE_MODULE_PATH + className);
@@ -177,16 +183,18 @@ public class JournalingEngine {
 			}
 		} else if(USERS_SERVICE.equals(service)) {
 			try {
-				if(className.contains("\\.")) {
+				if(className.contains(".")) {
 					return Class.forName(className);
 				} else {
-					return Class.forName(USERS_SERVICE_MODULE_PATH + className);
+					String fullClassName = USERS_SERVICE_MODULE_PATH + className; 
+					return Class.forName(fullClassName);
 				}
 			} catch (ClassNotFoundException e) {
 				return null;
 			}
 		}
 		
+		BBMLogger.debugln("Journaling analyze, caller class \"" + service + "\" unknown.");
 		return null;
 	}
 	

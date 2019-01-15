@@ -1,4 +1,4 @@
-1. Start journaling
+> Journaling debugging
 
 -- start journaling
 curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"event": "start-journal-user" ,"data": {"mail":"test@go.com"}}' "localhost:8080/BBM/USERS"

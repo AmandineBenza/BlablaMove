@@ -1,0 +1,2 @@
+docker exec -it blablamove_application_1 /bin/sh -c "[ -e /bin/bash ] && /bin/bash || /bin/sh"
+/ # cat ./src/main/resources/journaling/usersJournal.ddb
