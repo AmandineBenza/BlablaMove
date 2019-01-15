@@ -2,6 +2,8 @@
 
 client="Bob@mail.fr"
 driver="Alice@mail.fr"
+password="DWpasswOrdL"
+
 startAddress="Nice"
 endAddress="Sophia"
 carV="10" ;
@@ -11,6 +13,10 @@ bedV="6";
 inDays="5";
 
 printf ">> Starting BlablaMove scenario"; sleep 1; printf "."; sleep 1; printf "."; sleep 1; printf ".\n"; echo "";
+
+echo "A.B.0 Alice & Bob login to BlablaMove"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$client\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
 
 echo "A.1. Alice creates one offer to transport items between Nice and Sophia every day, between 7:30 am (Nice) and 8:30 am (Sophia)."
 echo "She has to inquire the following information:";
