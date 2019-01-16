@@ -290,12 +290,8 @@ WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 - Architecture pdf
 
 >>>>> What is planned for the following week 
-- Finish the UI
+- Finish small fonctional UI
 - Do the Upgrade of Billing
 
 >>>>> What are the blockers and risks ?
-- 
-
-- Impl <br>
-    -- Safety ; ONGOING <br>
-- DB crash scenarios ; TODO <br>
+--
