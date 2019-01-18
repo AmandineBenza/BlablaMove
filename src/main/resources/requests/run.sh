@@ -24,15 +24,18 @@ echo "\t- arrival location"
 echo "\t- price"
 echo "\t- capacity of car\n"
 
-priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}}" "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
+priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS/" | egrep -o 'F.*' );
 
 echo $priceRequest
 echo "";
 
-rangePrice=$(echo $priceRequest | grep -o -P '\[\d* : \d*\]')
-minPrice=$(echo $rangePrice | grep -o -P '\[\d*' | grep -o -P '\d*')
+echo $priceRequest;
+rangePrice=$(echo $priceRequest | egrep -o  '\[\d+ : \d+\]')
+minPrice=$(echo $rangePrice | egrep -o  '\d+' )
+echo "$minPrice"
+echo "$rangePrice"
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*2.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAddress\", \"endCity\":\"$endAddress\", \"capacity\":\"$carV\" }}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*2.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAddress\", \"endCity\":\"$endAddress\", \"capacity\":\"$carV\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS"
 
 echo "\n";
 
@@ -59,7 +62,7 @@ sleep 0.5; printf "Retrieving relevant offers"; sleep 1; printf "."; sleep 1; pr
 echo ""
 
 #Bob is a really rich boy he allways have money so he put a filter at 10000 points
-searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" },\"filters\": {\"weight\": \"$bedV\",\"startAddress\": \"$startAddress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"10000\"}}" "localhost:8080/BBM/OFFERS")
+searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" },\"filters\": {\"weight\": \"$bedV\",\"startAddress\": \"$startAddress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"10000\"},\"identification\":{\"userID\":\"$client\"}}" "localhost:8080/BBM/OFFERS")
 echo $searchResultList
 
 firstResult=$(echo $searchResultList | jq '.[0]')
@@ -71,7 +74,7 @@ echo "B.4. Bob choses a ride for his bed and confirm."
 oId=$(echo $firstResult | jq '.offerID')
 echo "";
 
-askValue=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": $oId,\"buyerID\": \"$client\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }}" "localhost:8080/BBM/OFFERS")
+askValue=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": $oId,\"buyerID\": \"$client\",\"weight\": \"$bedW\", \"volume\":\"$bedV\", \"date\":\"$inDays\" }, \"identification\":{\"userID\":\"$client\"}}" "localhost:8080/BBM/OFFERS")
 
 echo $askValue
 echo "\n";
@@ -81,7 +84,7 @@ echo "B.5. The system answers with a recap."
 
 price=$(echo $askValue | jq '.finalPrice')
 echo "";
-recap=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"confirm-command\" ,\"data\": {\"offerID\": $oId,\"date\":\"$inDays\", \"startAddress\":\"$startAddress\", \"endAddress\":\"$endAddress\",\"price\":\"$price\" }}" "localhost:8080/BBM/OFFERS")
+recap=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"confirm-command\" ,\"data\": {\"offerID\": $oId,\"date\":\"$inDays\", \"startAddress\":\"$startAddress\", \"endAddress\":\"$endAddress\",\"price\":\"$price\" }, \"identification\":{\"userID\":\"$client\"}}" "localhost:8080/BBM/OFFERS")
 
 echo $recap
 
@@ -92,7 +95,7 @@ sleep $*;
 
 echo "A.2. One day she receives a mail form BlablaMove : Bob wants her to transport a box from Nice to Sophia at a certain date.\n"
 
-offersIdDriver=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"consult-awaiting-offers\" ,\"data\": {\"ownerID\": \"$driver\"}}" "localhost:8080/BBM/OFFERS")
+offersIdDriver=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"consult-awaiting-offers\" ,\"data\": {\"ownerID\": \"$driver\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS")
 
 echo $offersIdDriver
 offerIdD=$(echo $offersIdDriver | jq '.[0].transactionID')
@@ -101,7 +104,7 @@ echo "\n";
 sleep $*;
 echo "A.3. She agrees to do it and confirm on BlablaMove.\n"
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\": $offerIdD}}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\": $offerIdD}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS"
 
 
 sleep $*;
@@ -112,20 +115,20 @@ transactionID=$(echo $askValue | jq '.transactionID')
 echo $transactionID
 echo "";
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": $transactionID}}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": $transactionID}, \"identification\":{\"userID\":\"$client\"}}" "localhost:8080/BBM/OFFERS"
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": $offerIdD}}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": $offerIdD}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS"
 
 echo "";
 echo "A.4. Alice confirms on BlablaMove that she delivered the box.\n"
 
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": $offerIdD}}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": $offerIdD}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS"
 
 sleep $*;
 
 echo "";
 echo "B.6. Bob can now confirm the transaction to BlablaMove.\n"
-curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": $transactionID}}" "localhost:8080/BBM/OFFERS"
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": $transactionID}, \"identification\":{\"userID\":\"$client\"}}" "localhost:8080/BBM/OFFERS"
 
 echo "\n";
 sleep $*;

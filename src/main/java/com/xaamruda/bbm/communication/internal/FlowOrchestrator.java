@@ -40,6 +40,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
+		
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
@@ -152,6 +153,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
+		JsonElement identification = jsonObject.get("identification");
 		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
 		BBMLogger.infoln("Handling request...");
 
@@ -162,15 +164,21 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		switch (event.getAsString()) { // TODO
 		
 		case "validate-price":{
-			BBMLogger.infoln("Validating pricing...");
-			content = callValidatePrice(data.toString(), jsonObject.get("filters").toString());
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to create an offer.");
+				content = "Please login to your account.\n";
+			} else {
+				BBMLogger.infoln("Validating pricing...");
+				content = callValidatePrice(data.toString(), jsonObject.get("filters").toString());
+			}
 			clazz = Boolean.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}	
 
 		case "create-offer": {
-			boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to create an offer.");
 				content = "Please login to your account.\n";
@@ -185,23 +193,22 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		}
 
 		case "consult-offers": {
-			//boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
-			//if(!identifed) {
-			//	BBMLogger.infoln("Unindentified user tried to consult an offer.");
-			//	content = "Please login to your account.\n";
-			//} else {
-			BBMLogger.infoln("Consulting offers...");
-			content = callGetFilteredOffers(jsonObject.get("filters").toString(), data.toString());		
-		//	}
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to consult an offer.");
+				content = "Please login to your account.\n";
+			} else {
+				BBMLogger.infoln("Consulting offers...");
+				content = callGetFilteredOffers(jsonObject.get("filters").toString(), data.toString());		
+			}
 			clazz = List.class;
-			status = HttpStatus.OK;
-			//status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
 		// Bob requests to Alice
 		case "ask-offer": {
-			boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("buyerID").getAsString());
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to request an offer.");
 				content = "Please login to your account.\n";
@@ -217,7 +224,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		// Alice consults her requests
 		case "consult-awaiting-offers": {
 			BBMLogger.infoln("Consulting pending offers...");
-			boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to consult his awaiting offers.");
 				content = "Please login to your account.\n";
@@ -232,77 +239,73 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		// Alice confirms one of her requests
 		case "confirm-awaiting-offers": {
 			BBMLogger.infoln("Confirming pending offers...");
-		//	boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
-		//	if(!identifed) {
-		//		BBMLogger.infoln("Unindentified user tried to confirm his awaiting offers.");
-		//		content = "Please login to your account.\n";
-		//	} else {
-			content = callConfirmAwaitingOffers(data.toString());
-		//	}
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to confirm his awaiting offers.");
+				content = "Please login to your account.\n";
+			} else {
+				content = callConfirmAwaitingOffers(data.toString());
+			}
 			clazz = List.class;
-			status = HttpStatus.OK;
-		//	status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
 		// Bob claims that his items has been sent 
 		case "claim-receipt":{
 			BBMLogger.infoln("Claiming items reception...");
-			// boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
-			// if(!identifed) {
-			//	BBMLogger.infoln("Unindentified user tried to claim that his items has been sent.");
-			//	content = "Please login to your account.\n";
-			//} else {
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to claim that his items has been sent.");
+				content = "Please login to your account.\n";
+			} else {
 			content = callClaimReceipt(data.toString());
-			//}
+			}
 			clazz = List.class;
-			status = HttpStatus.OK;
-			//status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
 		// Alice confirms she receives Bob items
 		case "confirm-receipt":{
 			BBMLogger.infoln("Confirming items reception...");
-		//	boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
-		//	if(!identifed) {
-		//		BBMLogger.infoln("Unindentified user tried to confirms he received an item");
-		//		content = "Please login to your account.\n";
-		//	} else {
-			content = callConfirmReceipt(data.toString());
-		//	}
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to confirms he received an item");
+				content = "Please login to your account.\n";
+			} else {
+				content = callConfirmReceipt(data.toString());
+			}
 			clazz = List.class;
-			status = HttpStatus.OK;
-		//	status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
 		// Alice claims Bob items has been delivered
 		case "claim-deposit":{
 			BBMLogger.infoln("Claiming items deposit...");
-		//	boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
-		//	if(!identifed) {
-		//		BBMLogger.infoln("Unindentified user tried to claim that an item has been delivered.");
-		//		content = "Please login to your account.\n";
-		//	} else {
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to claim that an item has been delivered.");
+				content = "Please login to your account.\n";
+			} else {
 			content = callClaimDeposit(data.toString());
-		//	}
+			}
 			clazz = List.class;
-			status = HttpStatus.OK;
-		//	status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
 		// Bob confirms his items has been delivered
 		case "confirm-deposit":{
 			BBMLogger.infoln("Confirming items deposit...");
-		//	boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
-		//	if(!identifed) {
-		//		BBMLogger.infoln("Unindentified user tried to confirm that an item has been delivered.");
-		//		content = "Please login to your account.\n";
-		//	} else {
-			content = callConfirmDeposits(data.toString());
-		//	}
+			boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
+			if(!identifed) {
+				BBMLogger.infoln("Unindentified user tried to confirm that an item has been delivered.");
+				content = "Please login to your account.\n";
+			} else {
+				content = callConfirmDeposits(data.toString());
+			}
 			clazz = List.class;
 			status = HttpStatus.OK;
 			break;

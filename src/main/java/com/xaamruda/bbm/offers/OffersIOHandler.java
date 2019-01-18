@@ -55,6 +55,7 @@ public class OffersIOHandler {
 	}
 
 	public String postNewOffer(String jsonObject) {
+		System.out.println(jsonObject);
 		PostedOffer offer = JsonUtils.getFromJson(jsonObject, PostedOffer.class);
 		//		offer.setOfferID(offer.getOwnerID() + new Date().getTime() + "_" + offer.getPrice());
 

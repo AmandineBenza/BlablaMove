@@ -43,8 +43,12 @@ public class UsersIOHandler {
 	}
 	
 	public boolean isIdentified(String userMail) {
-		User user = service.getUserByMail(userMail).get(0);
-		return user.isIdentified();
+		List<User> userList = service.getUserByMail(userMail);
+		if(userList != null  && !userList.isEmpty()) {
+			User user = userList.get(0);
+			return user.isIdentified();
+		}
+		return false;
 	}
 		
 
