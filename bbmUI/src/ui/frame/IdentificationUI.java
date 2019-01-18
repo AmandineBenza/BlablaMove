@@ -1,7 +1,6 @@
-package com.xaamruda.bbm.ui.frame;
+package ui.frame;
 
-import com.xaamruda.bbm.commons.json.JsonUtils;
-import com.xaamruda.bbm.ui.UIIOHandler;
+import ui.UIIOHandler;
 
 import javax.swing.*;
 
@@ -54,7 +53,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
             }
         });
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ressources/img/01.png"))); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);

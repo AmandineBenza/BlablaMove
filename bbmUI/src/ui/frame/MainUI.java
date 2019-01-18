@@ -1,6 +1,4 @@
-package com.xaamruda.bbm.ui.frame;
-
-import javax.swing.*;
+package ui.frame;
 
 public class MainUI {
 	public static void main(String args[]) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.xaamruda.bbm.ui.frame;
+package ui.frame;
 
 import javax.swing.*;
 

@@ -1,6 +1,6 @@
-package com.xaamruda.bbm.ui.frame;
+package ui.frame;
 
-import com.xaamruda.bbm.ui.UIIOHandler;
+import ui.UIIOHandler;
 
 import javax.swing.*;
 
