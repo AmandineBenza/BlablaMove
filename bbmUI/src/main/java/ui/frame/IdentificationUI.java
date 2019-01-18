@@ -1,8 +1,12 @@
 package ui.frame;
 
+import netscape.javascript.JSObject;
 import ui.UIIOHandler;
 
 import javax.swing.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -54,7 +58,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
             }
         });
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png"))); // NOI18N
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png")));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -115,24 +119,58 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     }
 
     @Override
-    public boolean utility() {
+    public boolean curlAction() {
         System.out.println("Identifient : " + identifiantField.getText());
         System.out.println("Password : " + passwordField.getText());
         //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
         // "{"event" : "identify-user" , "data" : {"mail" : "$client" , "password" : "DWpasswOrdL"}}"
         // "localhost:8080/BBM/OFFERS"
         if(!identifiantField.getText().equals("") && !passwordField.getText().equals("")){
-            //ioHandler.sendToApp("{ event : identify-user , data : { mail : " +  identifiantField.getText() + ", password : " + passwordField.getText() + "}}");
+            String url="http://localhost:8080/BBM/USERS";
+            try {
+                URL object = new URL(url);
+
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                //{"auth": { "passwordCredentials": {"username": "adm", "password": "pwd"},"tenantName":"adm"}}
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(curlJsonParser());
+                wr.flush();
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                if(HttpResult == HttpURLConnection.HTTP_OK){
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(con.getInputStream(),"utf-8"));
+                    String line = null;
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return true;
         }else{
             return false;
         }
+    }
 
+    @Override
+    public String curlJsonParser() {
+        String mailUser = identifiantField.getText();
+        String passwordUser  = passwordField.getText();
+        String res= "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"" + mailUser + "\" , \"password\" : \"" + passwordUser + "\"}}";
+        return res;
     }
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         loginButton.setSelected(false);
-        if(utility()) {
+        if(curlAction()) {
             frame.dispose();
             new MainMenuUI();
         }

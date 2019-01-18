@@ -8,5 +8,7 @@ public interface IGlobalUI {
 
 	public JPanel getMainPanel();
 
-	public boolean utility();
+	public boolean curlAction();
+
+	public String curlJsonParser();
 }
