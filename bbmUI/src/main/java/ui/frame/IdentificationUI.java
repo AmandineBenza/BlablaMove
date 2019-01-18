@@ -146,6 +146,13 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                     BufferedReader br = new BufferedReader(
                             new InputStreamReader(con.getInputStream(),"utf-8"));
                     String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    System.out.println("" + sb.toString());
+                } else {
+                    System.out.println(con.getResponseMessage());
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
