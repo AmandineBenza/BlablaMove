@@ -124,7 +124,7 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public boolean utility() {
+    public boolean curlAction() {
         if(statutTransactionResLabel.getText().equals("Transaction in progress")){ //END
 
 
@@ -150,14 +150,19 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
         return true;
     }
 
+    @Override
+    public String curlJsonParser() {
+        return null;
+    }
+
     private void startTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        utility();
+        curlAction();
         statutTransactionResLabel.setText("Transaction in progress");
         startTransactionButton.setSelected(false);
     }
 
     private void endTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        utility();
+        curlAction();
         statutTransactionResLabel.setText("Transaction ended succesfully");
         endTransactionButton.setSelected(false);
     }

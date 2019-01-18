@@ -138,8 +138,13 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
     }
 
     @Override
-    public boolean utility() {
-        return true;
+    public boolean curlAction() {
+        return false;
+    }
+
+    @Override
+    public String curlJsonParser() {
+        return null;
     }
 
     private void createOfferButtonActionPerformed(java.awt.event.ActionEvent evt) {

@@ -169,7 +169,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
     }
 
     @Override
-    public boolean utility() {
+    public boolean curlAction() {
         System.out.println("Start Location : " + startLocationField.getText());
         System.out.println("Arrival Location : " + arrivalLocationField.getText());
         System.out.println("Max Price : " + maximumPointSpendField.getText());
@@ -189,16 +189,21 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         }
     }
 
+    @Override
+    public String curlJsonParser() {
+        return null;
+    }
+
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         acceptButton.setSelected(false);
-        utility();
+        curlAction();
         frame.dispose();
         new MainMenuUI();
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
         cancelButton.setSelected(false);
-        utility();
+        curlAction();
         frame.dispose();
         new MainMenuUI();
     }

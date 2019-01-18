@@ -46,8 +46,12 @@ public class DemandConfirmationUI extends javax.swing.JFrame implements IGlobalU
     }
 
     @Override
-    public boolean utility() {
-        return true;
+    public boolean curlAction() {
+        return false;
     }
 
+    @Override
+    public String curlJsonParser() {
+        return null;
+    }
 }

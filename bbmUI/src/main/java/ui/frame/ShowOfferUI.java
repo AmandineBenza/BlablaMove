@@ -53,8 +53,13 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public boolean utility() {
+    public boolean curlAction() {
         return true;
+    }
+
+    @Override
+    public String curlJsonParser() {
+        return null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

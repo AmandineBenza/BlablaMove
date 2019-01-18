@@ -38,7 +38,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
      */
     public ShowRecapUI() {
         initialisation();
-        utility();
+        curlAction();
     }
 
     @Override
@@ -213,12 +213,17 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     @Override
-    public boolean utility() {
+    public boolean curlAction() {
         //recap=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
         // "{"event":"confirm-command" ,"data": {"offerID": $oId,"date":"$inDays", "startAddress":"$startAddress", "endAddress":"$endAddress","price":"$price" }}"
         // "localhost:8080/BBM/OFFERS")
         //ioHandler.sendToApp("{ event : confirm-command , data : {}}");
         return true;
+    }
+
+    @Override
+    public String curlJsonParser() {
+        return null;
     }
 
     private void setRecap(){
@@ -230,7 +235,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        utility();
+        curlAction();
         acceptButton.setSelected(false);
         frame.dispose();
         new MainMenuUI();
