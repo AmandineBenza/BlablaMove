@@ -295,3 +295,35 @@ WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 
 >>>>> What are the blockers and risks ?
 --
+
+--------------------
+
+WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(18/01/2019)
+
+>>>>> What was achieved this week ?
+- 
+
+>>>>> What is planned for the following week 
+- 
+
+>>>>> What are the blockers and risks ?
+-
+
+--------------------
+
+- Explications NoSQL - SQL sur le architecture.pdf
+- Status.md - week 4
+- UI pom + app communication (java http connections)
+- SpringBoot transactional  for resources + db calls enrollment
+- Journaling engine calls
+    - entry / output of io handlers
+    -  try / catch db call exceptions
+- Scripts / scénarios de crash db + app
+- Grep prevent bad run input
+- Chaos  Engine
+    - Configuration system thread sleep to be able to shoot multiple requests
+    - Enabling / disabling configuration
+    - New entry point "/admin/" json payload 
+- Load app script + shutdown app 
+- Billing improvements
