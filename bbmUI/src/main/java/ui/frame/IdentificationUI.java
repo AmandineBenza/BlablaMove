@@ -3,6 +3,8 @@ package ui.frame;
 import ui.UIIOHandler;
 
 import javax.swing.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -121,6 +123,9 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
         // "{"event" : "identify-user" , "data" : {"mail" : "$client" , "password" : "DWpasswOrdL"}}"
         // "localhost:8080/BBM/OFFERS"
         if(!identifiantField.getText().equals("") && !passwordField.getText().equals("")){
+            try {
+                URL url = new URL("http://localhost:8080/BBM/USERS");
+            }
             //ioHandler.sendToApp("{ event : identify-user , data : { mail : " +  identifiantField.getText() + ", password : " + passwordField.getText() + "}}");
             return true;
         }else{
