@@ -261,7 +261,7 @@ public class JournalingEngine {
 	 * @param parameters action parameters
 	 * @return journaling id
 	 */
-	public long journal(String service, String className, String action, Object... parameters){
+	public synchronized long journal(String service, String className, String action, Object... parameters){
 		checkCreate();
 		
 		if(!safeStart) {
@@ -297,7 +297,7 @@ public class JournalingEngine {
 	 * 
 	 * @param id journaling identifier
 	 */
-	public void endJournal(long id) {
+	public synchronized void endJournal(long id) {
 		BufferedReader bReader;
 		try {
 			bReader = new BufferedReader(new FileReader(new File(journalFilePath)));
