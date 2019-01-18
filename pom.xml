@@ -2,7 +2,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.xaamruda.</groupId>
+	<groupId>com.xaamruda</groupId>
 	<artifactId>bbm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BlablaMove</name>
@@ -13,10 +13,6 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-
-	<modules>
-		<module>bbmUI</module>
-	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
