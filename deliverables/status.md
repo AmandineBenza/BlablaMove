@@ -305,28 +305,16 @@ WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 - UI separation from main project
 - Implementation of curl request in UI
 - Correction of run.sh
+- Working on journalinge engine
 
 >>>>> What is planned for the following week 
-- Completly finished the UI
-- 
+- Finish UI (pom + app communication)
+- Finish identification
+- Unit testing
+- Continue on journaling
+- Chaos engine beginning
 
 >>>>> What are the blockers and risks ?
--
+- Time
 
 --------------------
-
-- Explications NoSQL - SQL sur le architecture.pdf
-- Status.md - week 4
-- UI pom + app communication (java http connections)
-- SpringBoot transactional  for resources + db calls enrollment
-- Journaling engine calls
-    - entry / output of io handlers
-    -  try / catch db call exceptions
-- Scripts / scénarios de crash db + app
-- Grep prevent bad run input
-- Chaos  Engine
-    - Configuration system thread sleep to be able to shoot multiple requests
-    - Enabling / disabling configuration
-    - New entry point "/admin/" json payload 
-- Load app script + shutdown app 
-- Billing improvements
