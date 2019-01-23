@@ -299,12 +299,15 @@ WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 --------------------
 
 WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
-(18/01/2019)
+(25/01/2019)
 
 >>>>> What was achieved this week ?
-- 
+- UI separation from main project
+- Implementation of curl request in UI
+- Correction of run.sh
 
 >>>>> What is planned for the following week 
+- Completly finished the UI
 - 
 
 >>>>> What are the blockers and risks ?
