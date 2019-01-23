@@ -30,8 +30,8 @@ echo $priceRequest
 echo "";
 
 echo $priceRequest;
-rangePrice=$(echo $priceRequest | egrep -o  '\[\d+ : \d+\]')
-minPrice=$(echo $rangePrice | egrep -o  '\d+' )
+rangePrice=$(echo $priceRequest | egrep -o '\[[0123456789]+ : [0123456789]*\]')
+minPrice=$(echo $rangePrice | egrep -o  '\[[0123456789]+' | egrep -o  '[0123456789]+') 
 echo "$minPrice"
 echo "$rangePrice"
 
