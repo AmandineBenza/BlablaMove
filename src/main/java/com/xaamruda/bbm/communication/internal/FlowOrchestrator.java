@@ -299,7 +299,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		// Bob confirms his items has been delivered
 		case "confirm-deposit":{
 			BBMLogger.infoln("Confirming items deposit...");
-			boolean identifed = userIO.isIdentified(data.getAsJsonObject().get("ownerID").getAsString());
+			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to confirm that an item has been delivered.");
 				content = "Please login to your account.\n";

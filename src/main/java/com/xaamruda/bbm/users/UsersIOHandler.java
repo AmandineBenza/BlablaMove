@@ -15,7 +15,7 @@ import com.xaamruda.bbm.users.mailing.MailSender;
 import com.xaamruda.bbm.users.model.User;
 
 /**
- * Entry point to users module. 
+ * Entry point to users module.
  */
 @Component
 public class UsersIOHandler {
@@ -31,32 +31,27 @@ public class UsersIOHandler {
 
 	public UsersIOHandler() {
 	}
-	
-	public boolean identifyUserByMailPlusPassword(String userMail, String userPassword){
-		boolean exists = identificator.identify(userMail, userPassword);	
-		if(exists) {
+
+	public boolean identifyUserByMailPlusPassword(String userMail, String userPassword) {
+		boolean exists = identificator.identify(userMail, userPassword);
+		if (exists) {
 			User user = service.getUserByMail(userMail).get(0);
 			user.setIdentified(true);
 			service.store(user);
 		}
 		return exists;
 	}
-	
+
 	public boolean isIdentified(String userMail) {
 		List<User> userList = service.getUserByMail(userMail);
-		if(userList != null  && !userList.isEmpty()) {
+		if (userList != null && !userList.isEmpty()) {
 			User user = userList.get(0);
 			return user.isIdentified();
 		}
 		return false;
 	}
-		
 
-	// TODO
-	
-
-	public void postNewUser(String userJson){
-		//
+	public void postNewUser(String userJson) {
 		dataManager.storeNewUser(JsonUtils.getFromJson(userJson, User.class));
 		BBMLogger.infoln("User created.");
 	}
@@ -73,18 +68,18 @@ public class UsersIOHandler {
 		return user;
 	}
 
-	public boolean sendMail(String mail, int price, String from ) {
+	public boolean sendMail(String mail, int price, String from) {
 		return MailSender.sendEmail(mail);
 	}
 
-	public void makeTransaction(String ownerID,String buyerID, Integer finalPrice){
+	public void makeTransaction(String ownerID, String buyerID, Integer finalPrice) {
 		User buyer = null;
 		User owner = null;
 		try {
 			buyer = service.getUserByMail(buyerID).get(0);
 			owner = service.getUserByMail(ownerID).get(0);
-		}catch(Exception ex) {
-			//TODO journalisation 
+		} catch (Exception ex) {
+			// TODO journalisation
 			System.out.println(ex.toString());
 		}
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
@@ -97,17 +92,17 @@ public class UsersIOHandler {
 
 	public void debit(String buyerID, Integer finalPrice) {
 		User buyer = service.getUserByMail(buyerID).get(0);
-		//service.delete(buyer);
-		if(buyer.getPointsAmount() == null)
+		// service.delete(buyer);
+		if (buyer.getPointsAmount() == null)
 			buyer.setPointsAmount(0);
 		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
 		service.store(buyer);
 	}
 
-	public void credit(String ownerID, Integer finalPrice){
+	public void credit(String ownerID, Integer finalPrice) {
 		User owner = service.getUserByMail(ownerID).get(0);
-		//service.delete(owner);
-		if(owner.getPointsAmount() == null)
+		// service.delete(owner);
+		if (owner.getPointsAmount() == null)
 			owner.setPointsAmount(0);
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
 		service.store(owner);
