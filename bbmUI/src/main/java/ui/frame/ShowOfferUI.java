@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI{
 
-    /** TO DO **/
+    /** TO DO WITH NETBEANS**/
 
     /**
      * Creates new form ShowOfferUI
@@ -44,8 +44,13 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
-
+        initComponents();
     }
+
+    private void lineCreation() {
+        JButton acceptButton = new JButton("Accept");
+        }
+
 
     @Override
     public JPanel getMainPanel() {

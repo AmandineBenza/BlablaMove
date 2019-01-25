@@ -6,6 +6,10 @@
 package ui.frame;
 
 import javax.swing.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -16,6 +20,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JToggleButton acceptButton;
     private javax.swing.JToggleButton cancelButton;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel maximumPriceResLabel;
     private javax.swing.JLabel maximumPriceTxtLabel;
@@ -23,14 +28,23 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel mediumPriceTxtLabel;
     private javax.swing.JLabel minimumPriceResLabel;
     private javax.swing.JLabel minimumPriceTxtLabel;
-    private javax.swing.JLabel yourPriceResLabel;
     private javax.swing.JLabel yourPriceTxtLabel;
+    private javax.swing.JLabel yourPriceResLabel;
     private javax.swing.JFrame frame;
+    private javax.swing.JLabel yourNewPriceTxtLabel;
+    private javax.swing.JTextField yourNewPriceField;
+
+    private int maxPrice;
+    private int minPrice;
+    private String connectedUser;
+    private String[] offerData;
 
     /**
      * Creates new form RangePriceUI
      */
-    public RangePriceUI() {
+    public RangePriceUI(String user,String[] data) {
+        offerData = data;
+        connectedUser = user;
         initialisation();
     }
 
@@ -40,9 +54,9 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         yourPriceTxtLabel = new javax.swing.JLabel();
+        yourPriceResLabel = new javax.swing.JLabel();
         minimumPriceTxtLabel = new javax.swing.JLabel();
         minimumPriceResLabel = new javax.swing.JLabel();
-        yourPriceResLabel = new javax.swing.JLabel();
         maximumPriceResLabel = new javax.swing.JLabel();
         mediumPriceTxtLabel = new javax.swing.JLabel();
         maximumPriceTxtLabel = new javax.swing.JLabel();
@@ -50,16 +64,18 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         cancelButton = new javax.swing.JToggleButton();
         acceptButton = new javax.swing.JToggleButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        yourNewPriceTxtLabel = new javax.swing.JLabel();
+        yourNewPriceField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        yourPriceTxtLabel.setText("Your Price");
+        yourPriceTxtLabel.setText("Your Price is : ");
+        yourPriceResLabel.setText(offerData[2]);
 
         minimumPriceTxtLabel.setText("Minimum Price");
 
         minimumPriceResLabel.setText("100");
-
-        yourPriceResLabel.setText("250");
 
         maximumPriceResLabel.setText("250");
 
@@ -68,6 +84,8 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         maximumPriceTxtLabel.setText("Maximum Price");
 
         mediumPriceResLabel.setText("175");
+
+        yourNewPriceTxtLabel.setText("Choose your final price : ");
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,8 +130,15 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                         .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGap(142, 142, 142)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(yourPriceResLabel)
-                                        .addComponent(yourPriceTxtLabel))
+                                        .addComponent(yourPriceTxtLabel)
+                                        .addComponent(yourPriceResLabel))
+                                .addGap(13,13, 13))
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                       .addComponent(yourNewPriceField)
+                                        .addComponent(yourNewPriceTxtLabel))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -135,6 +160,13 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                                         .addComponent(mediumPriceResLabel)
                                         .addComponent(minimumPriceResLabel)
                                         .addComponent(maximumPriceResLabel))
+                                .addGap(23, 23, 23)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addContainerGap(10, Short.MAX_VALUE)
+                                .addComponent(yourNewPriceTxtLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(yourNewPriceField)
                                 .addGap(23, 23, 23)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(acceptButton)
@@ -168,35 +200,73 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public boolean curlAction() {
-        //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-        // "{"event":"create-offer","data":{"ownerID":"$driver", "price": "$(echo $minPrice*2.1 | bc | cut -f1 -d.)", "startCity":"$startAddress", "endCity":"$endAddress", "capacity":"$carV" }}"
-        // "localhost:8080/BBM/OFFERS"
-        //ioHandler.sendToApp("{ event : create-offer , data : { }}");
-        return true;
+        if(!this.yourNewPriceField.getText().equals("")) {
+            String url = "http://localhost:8080/BBM/OFFERS";
+            try {
+                URL object = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(curlJsonParser());
+                wr.flush();
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                if (HttpResult == HttpURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(con.getInputStream(), "utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    return !("" + sb.toString()).equals(null);
+                } else {
+                    return !("" + sb.toString()).equals(null);
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
     public String curlJsonParser() {
-        return null;
+        String res= "{\"event\" : \"create-offer\" , \"data\" : {\"ownerID\" : \""+ connectedUser + "\", \"price\": \""+yourNewPriceField.getText()+"\"" +
+                ", \"startCity\":\""+ offerData[0] +"\", \"endCity\":\""+ offerData[1] + "\", \"capacity\":\""+ offerData[2]+"\" }}";
+        return res;
     }
 
-    private void setPrice(){
-        yourPriceResLabel.setText("0");
-        maximumPriceResLabel.setText("0");
-        minimumPriceResLabel.setText("0");
-        mediumPriceResLabel.setText("0");
+    private void setPrice(String min,String max,String median){
+        maximumPriceResLabel.setText(max);
+        minimumPriceResLabel.setText(min);
+        mediumPriceResLabel.setText(median);
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        curlAction();
-        acceptButton.setSelected(false);
-        frame.dispose();
-        new MainMenuUI();
+        if(curlAction()){
+        //if(true) {
+            acceptButton.setSelected(false);
+            frame.dispose();
+            new MainMenuUI(connectedUser);
+        } else {
+            JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
+        }
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
         cancelButton.setSelected(false);
         frame.dispose();
-        new MainMenuUI();
+        new MainMenuUI(connectedUser);
     }
 }

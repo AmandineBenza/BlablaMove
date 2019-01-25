@@ -19,10 +19,14 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
     private JLabel yourPointTxtLabel;
     private JFrame frame;
     private UIIOHandler ioHandler;
+
+    private String connectedUser;
+
     /**
      * Creates new form MainMenuUI
      */
-    public MainMenuUI() {
+    public MainMenuUI(String user) {
+        connectedUser = user;
         initialisation();
         setPointForActualUser();
     }
@@ -68,7 +72,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
         yourPointTxtLabel.setText("Your Point");
 
         yourPointResLabel.setText("5800");
-
+        int pointResSize = yourPointResLabel.getText().length();
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -78,7 +82,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(mainPanelLayout.createSequentialGroup()
                                                 .addComponent(createOfferButton)
-                                                .addGap(52, 52, 52)
+                                                .addGap(38, 38, 38)
                                                 .addComponent(offerDemandButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(transactionButton))
@@ -86,7 +90,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                                                .addGap(10, 10, 10)
+                                                                .addGap(15, 15, 15)
                                                                 .addComponent(yourPointResLabel))
                                                         .addComponent(yourPointTxtLabel))
                                                 .addGap(166, 166, 166))
@@ -150,13 +154,13 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
     private void createOfferButtonActionPerformed(java.awt.event.ActionEvent evt) {
         createOfferButton.setSelected(false);
         frame.dispose();
-        new OfferCreationUI();
+        new OfferCreationUI(connectedUser);
     }
 
     private void offerDemandButtonActionPerformed(java.awt.event.ActionEvent evt) {
         offerDemandButton.setSelected(false);
         frame.dispose();
-        new OfferDemandUI();
+        new OfferDemandUI(connectedUser);
     }
 
     private void transactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +171,6 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
 
     private void setPointForActualUser(){
         //ioHandler.sendToApp("{ event :  , data : { }}");
-        yourPointResLabel.setText("1");
+        //yourPointResLabel.setText("1");
     }
 }

@@ -6,6 +6,10 @@
 package ui.frame;
 
 import javax.swing.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -125,45 +129,88 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public boolean curlAction() {
-        if(statutTransactionResLabel.getText().equals("Transaction in progress")){ //END
+        if(!statutTransactionResLabel.getText().equals("Transaction ended succesfully")){
+        String url = "http://localhost:8080/BBM/OFFERS";
+        try {
+            URL object = new URL(url);
 
+            HttpURLConnection con = (HttpURLConnection) object.openConnection();
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Accept", "application/json");
+            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+            wr.write(curlJsonParser());
+            wr.flush();
 
-        }else if ( statutTransactionResLabel.getText().equals("not Started")){ //START
-            //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-            // "{"event": "claim-receipt" ,"data": {"transactionID": $transactionID}}"
-            // "localhost:8080/BBM/OFFERS"
-
-            //ioHandler.sendToApp("{ event : claim-receipt , data : { }}");
-
-            //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-            // "{"event": "confirm-receipt" ,"data": {"transactionID": $offerIdD}}"
-            // "localhost:8080/BBM/OFFERS"
-
-            //ioHandler.sendToApp("{ event confirm-receipt :  , data : { }}");
-        }else{
-            //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-            // "{"event": "confirm-deposit" ,"data": {"transactionID": $transactionID}}"
-            // "localhost:8080/BBM/OFFERS"
-
-            //ioHandler.sendToApp("{ event : confirm-deposit , data : { }}");
+            StringBuilder sb = new StringBuilder();
+            int HttpResult = con.getResponseCode();
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(con.getInputStream(), "utf-8"));
+                String line = null;
+                /////build String....//////
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+                return !("" + sb.toString()).equals(null);
+            } else {
+                return !("" + sb.toString()).equals(null);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return true;
+        return false;
+    } else {
+        return false;
+    }
     }
 
     @Override
     public String curlJsonParser() {
-        return null;
+        String res = "";
+        if(statutTransactionResLabel.getText().equals("not Started")){
+            res =  "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": "+ "" +"}}" ;
+        }else if(statutTransactionResLabel.getText().equals("Transaction in progress")){
+            res =  "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": "+ "" +"}}" ;
+        }else if(statutTransactionResLabel.getText().equals(("Waiting for confirmation"))){
+            res = "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": "+ "" +"}}";
+        } else if(statutTransactionResLabel.getText().equals("Waiting confirmation for Payment")){
+            res = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": "+ "" +"}}";
+        }
+        return res;
     }
 
-    private void startTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        curlAction();
-        statutTransactionResLabel.setText("Transaction in progress");
+    private void startTransactionButtonActionPerformed(java.awt.event.ActionEvent evt){
         startTransactionButton.setSelected(false);
+        curlAction();
+        statutTransactionResLabel.setText("Waiting for confirmation");
+        curlAction();
+        setTransactioLabelToConfirmRecipe();
     }
 
-    private void endTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void setTransactioLabelToConfirmRecipe(){
+        statutTransactionResLabel.setText("Transaction in progress");
+    }
+
+    private void setTransactionLabelToWaitingPayment(){
+        statutTransactionResLabel.setText("Waiting confirmation for Payment");
+    }
+
+    private void endTransactionButtonActionPerformed(java.awt.event.ActionEvent evt){
+        curlAction();
+        setTransactionLabelToWaitingPayment();
         curlAction();
         statutTransactionResLabel.setText("Transaction ended succesfully");
         endTransactionButton.setSelected(false);
+    }
+
+    private void startingScenario(){
+
     }
 }

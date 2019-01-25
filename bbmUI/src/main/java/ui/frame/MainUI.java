@@ -7,6 +7,8 @@ public class MainUI {
 		frame.setContentPane(new IdentificationUI().getMainPanel());
 		frame.setVisible(true);
 		frame.pack();*/
+		//String[] data = {"Nice","Sophia Antipolis","145"};
+		//new RangePriceUI("test@email.fr",data);
 		new IdentificationUI();
 	}
 }
