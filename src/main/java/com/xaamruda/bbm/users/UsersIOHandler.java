@@ -82,6 +82,8 @@ public class UsersIOHandler {
 			// TODO journalisation
 			System.out.println(ex.toString());
 		}
+		
+		// TODO Check negative amount and associated test
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
 		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
 		ArrayList<User> users = new ArrayList<>();
