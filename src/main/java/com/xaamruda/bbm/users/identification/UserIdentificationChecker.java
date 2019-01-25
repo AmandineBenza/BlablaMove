@@ -9,55 +9,64 @@ import com.xaamruda.bbm.users.model.User;
 public class UserIdentificationChecker {
 
 	private static UserIdentificationCheckerThread thread = new UserIdentificationCheckerThread();
-	
-	public static void start(IUserService service) {
-		thread.start(service);
+
+	public static void start(IUserService service, long sleepTimeMs) {
+		thread.start(service, sleepTimeMs);
 	}
 
 	public static void stop() {
 		thread.stop();
 	}
-	
-	private static class UserIdentificationCheckerThread implements Runnable {
+
+	public static class UserIdentificationCheckerThread implements Runnable {
 		private boolean running = false;
 		private Thread thread;
 		private IUserService service;
-		
-		public void start(IUserService userService) {
-			if(this.running) return;
+		private long sleepTimeMs;
+
+		public void start(IUserService userService, long sleepTimeMs) {
+			if (this.running)
+				return;
 			this.thread = new Thread(this);
 			this.running = true;
 			this.service = userService;
 			this.thread.start();
+			this.sleepTimeMs = sleepTimeMs;
 		}
 
 		public void stop() {
-			if(!this.running) return;
+			if (!this.running)
+				return;
 			this.running = false;
 		}
 
 		@Override
 		public void run() {
-			while(running) {
-				if(service.getAllUsers() != null) {		
-					
-					for(User user : service.getAllUsers()) {
+			while (running) {
+				if (service.getAllUsers() != null) {
+					for (User user : service.getAllUsers()) {
 						Timestamp identificationTime = user.getIdentificationTime();
-						if(identificationTime == null) continue;
+						
+						if (identificationTime == null)
+							continue;
 						Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-					/*	BBMLogger.infoln("ID TIME : " + identificationTime.getTime());
-						BBMLogger.infoln("CURRENT TIME : " + System.currentTimeMillis());
-						BBMLogger.infoln("SOUSTRACTION : " + (System.currentTimeMillis() - identificationTime.getTime())); */
+						
+						/*
+						 * BBMLogger.infoln("ID TIME : " + identificationTime.getTime());
+						 * BBMLogger.infoln("CURRENT TIME : " + System.currentTimeMillis());
+						 * BBMLogger.infoln("SOUSTRACTION : " + (System.currentTimeMillis() -
+						 * identificationTime.getTime()));
+						 */
 
-						if(currentTime.getTime() - identificationTime.getTime() > 300000 ) { 	// 5 minutes
+						if (currentTime.getTime() - identificationTime.getTime() > sleepTimeMs) {
 							user.setIdentified(false);
-							service.store(user);	
-						}		
+							service.store(user);
+						}
 					}
 				}
-				
+
 				try {
-					Thread.sleep(30000);
+					Thread.sleep(sleepTimeMs);
 				} catch (InterruptedException e) {
 					BBMLogger.errorln("User Identification Checker Thread failed to sleep.");
 				}
