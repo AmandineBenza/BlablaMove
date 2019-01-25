@@ -32,11 +32,16 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel startLocationResLabel;
     private javax.swing.JLabel startLocationTxtLabel;
     private javax.swing.JFrame frame;
+    private String[] data;
+
+    private String connectedUser;
 
     /**
      * Creates new form ShowRecapUI
      */
-    public ShowRecapUI() {
+    public ShowRecapUI(String user,String[] myData) {
+        data = myData;
+        connectedUser = user;
         initialisation();
         curlAction();
     }
@@ -66,7 +71,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        cancelButton.setText("Cancel");
+        cancelButton.setText("Refused");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelActionPerformed(evt);
@@ -91,17 +96,9 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
 
         startLocationTxtLabel.setText("Start Location :");
 
-        startLocationResLabel.setText("Nice");
-
         recapLabel.setText("Recapitulation of your command");
 
-        arrivalLocationResLabel.setText("Sophia Antipolis");
-
-        offerIdResLabel.setText("056482");
-
-        priceResLabel.setText("250");
-
-        dateResLabel.setText("18/01/2019");
+       setRecap();
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -227,24 +224,24 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     private void setRecap(){
-        offerIdResLabel.setText("id0");
-        priceResLabel.setText("0");
-        dateResLabel.setText("11/11/11");
-        startLocationResLabel.setText("start");
-        arrivalLocationResLabel.setText("arrival");
+        offerIdResLabel.setText(data[0]);
+        priceResLabel.setText(data[1]);
+        dateResLabel.setText(data[2]);
+        startLocationResLabel.setText(data[3]);
+        arrivalLocationResLabel.setText(data[4]);
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         curlAction();
         acceptButton.setSelected(false);
         frame.dispose();
-        new MainMenuUI();
+        new MainMenuUI(connectedUser);
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
         cancelButton.setSelected(false);
         frame.dispose();
-        new MainMenuUI();
+        new MainMenuUI(connectedUser);
     }
 
 }

@@ -120,13 +120,10 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
 
     @Override
     public boolean curlAction() {
-        System.out.println("Identifient : " + identifiantField.getText());
-        System.out.println("Password : " + passwordField.getText());
-        //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-        // "{"event" : "identify-user" , "data" : {"mail" : "$client" , "password" : "DWpasswOrdL"}}"
-        // "localhost:8080/BBM/OFFERS"
-        if(!identifiantField.getText().equals("") && !passwordField.getText().equals("")){
-            String url="http://localhost:8080/BBM/USERS";
+        //System.out.println("Identifient : " + identifiantField.getText());
+        //System.out.println("Password : " + passwordField.getText());
+        if(!identifiantField.getText().equals("") && !passwordField.getText().equals("")) {
+            String url = "http://localhost:8080/BBM/USERS";
             try {
                 URL object = new URL(url);
 
@@ -135,24 +132,24 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                 con.setDoInput(true);
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setRequestProperty("Accept", "application/json");
-                //{"auth": { "passwordCredentials": {"username": "adm", "password": "pwd"},"tenantName":"adm"}}
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
                 wr.write(curlJsonParser());
                 wr.flush();
 
                 StringBuilder sb = new StringBuilder();
                 int HttpResult = con.getResponseCode();
-                if(HttpResult == HttpURLConnection.HTTP_OK){
+                if (HttpResult == HttpURLConnection.HTTP_OK) {
                     BufferedReader br = new BufferedReader(
-                            new InputStreamReader(con.getInputStream(),"utf-8"));
+                            new InputStreamReader(con.getInputStream(), "utf-8"));
                     String line = null;
+                    /////build String....//////
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
                     }
                     br.close();
-                    System.out.println("" + sb.toString());
+                    return !("" + sb.toString()).equals(null);
                 } else {
-                    System.out.println(con.getResponseMessage());
+                    return !("" + sb.toString()).equals(null);
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -161,10 +158,8 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     @Override
@@ -177,9 +172,12 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         loginButton.setSelected(false);
-        if(curlAction()) {
+        if(curlAction()){
+        //if(true) {
             frame.dispose();
-            new MainMenuUI();
+            new MainMenuUI(identifiantField.getText());
+        }else{
+            JOptionPane.showMessageDialog(frame, "Wrong Password or Login.");
         }
     }
 }

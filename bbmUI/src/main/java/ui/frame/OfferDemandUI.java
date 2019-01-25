@@ -1,6 +1,10 @@
 package ui.frame;
 
 import javax.swing.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -23,10 +27,13 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
     private JLabel weightLabel;
     private JFrame frame;
 
+    private String connectedUser;
+
     /**
      * Creates new form OfferDemandUI
      */
-    public OfferDemandUI() {
+    public OfferDemandUI(String user) {
+        connectedUser = user;
         initialisation();
     }
 
@@ -179,32 +186,76 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         // "{"event":"consult-offers","data": {"weight": "$bedW", "volume":"$bedV", "date":"$inDays" },
         // "filters": {"weight": "$bedV","startAddress": "$startAddress","endAddress": "$endAddress","maxPrice": "10000"}}"
         // "localhost:8080/BBM/OFFERS")
-
         if(!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("") && !maximumPointSpendField.getText().equals("")
-                && !weightField.getText().equals("") && !sizeField.getText().equals("") ){
-            //ioHandler.sendToApp("{ event : consult-offers , data : { }}");
-            return true;
-        }else{
-            return false;
+                && !weightField.getText().equals("") && !sizeField.getText().equals("") ) {
+            String url = "http://localhost:8080/BBM/OFFERS";
+            try {
+                URL object = new URL(url);
+
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(curlJsonParser());
+                wr.flush();
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                if (HttpResult == HttpURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(con.getInputStream(), "utf-8"));
+                    String line = null;
+                    /////build String....//////
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    return !("" + sb.toString()).equals(null);
+                } else {
+                    return !("" + sb.toString()).equals(null);
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return false;
     }
 
     @Override
     public String curlJsonParser() {
-        return null;
+        String weight = this.weightField.getText();
+        String volume = this.sizeField.getText();
+        String date = "00";
+        String startAddress = this.startLocationField.getText();
+        String endAddress = this.arrivalLocationField.getText();
+        String maxPrice = this.maximumPointSpendField.getText();
+        String res = "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"" + weight + "\", \"volume\":\"" + volume +
+                "\", \"date\":\"" + date +"\" },\"filters\": {\"weight\": \"" + volume + "\",\"startAddress\": \"" +
+                startAddress +"\",\"endAddress\": \""+ endAddress +"\",\"maxPrice\": \"" + maxPrice +"\"}}";
+        return res;
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        acceptButton.setSelected(false);
-        curlAction();
-        frame.dispose();
-        new MainMenuUI();
+        if(curlAction()) {
+        //if(true){
+            acceptButton.setSelected(false);
+            frame.dispose();
+            String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
+            new ShowRecapUI(connectedUser,newData);
+        }else{
+            JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
+        }
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
         cancelButton.setSelected(false);
-        curlAction();
         frame.dispose();
-        new MainMenuUI();
+        new MainMenuUI(connectedUser);
     }
 }

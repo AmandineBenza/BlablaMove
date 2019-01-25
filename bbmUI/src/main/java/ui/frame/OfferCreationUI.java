@@ -1,6 +1,10 @@
 package ui.frame;
 
 import javax.swing.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  *
@@ -21,10 +25,12 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
     private JLabel startLocationLabel;
     private JFrame frame;
 
+    private String connectedUser;
     /**
      * Creates new form OfferCreationUI
      */
-    public OfferCreationUI() {
+    public OfferCreationUI(String user) {
+        connectedUser = user;
         initialisation();
     }
 
@@ -155,37 +161,82 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         System.out.println("Arrival Location : " + arrivalLocationField.getText());
         System.out.println("Price : " + priceField.getText());
         System.out.println("Car Capacity : " + carCapacityField.getText());
-        //priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-        // "{"event" : "validate-price" , "data" : {"data" : "x"},
-        // "filters": {"startAddress": "$startAdress","endAddress": "$endAddress","maxPrice": "0"}}"
-        // "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
 
-        if(!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("")
-                && !priceField.getText().equals("") && !carCapacityField.getText().equals("")){
-            //ioHandler.sendToApp("{ event : validate-price , data : { }}");
-            return true;
-        }else{
+        if (!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("")
+                && !priceField.getText().equals("") && !carCapacityField.getText().equals("")) {
+            String url = "http://localhost:8080/BBM/OFFERS";
+            try {
+                URL object = new URL(url);
+
+                HttpURLConnection con = (HttpURLConnection) object.openConnection();
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("Accept", "application/json");
+                OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+                wr.write(curlJsonParser());
+                wr.flush();
+
+                StringBuilder sb = new StringBuilder();
+                int HttpResult = con.getResponseCode();
+                if (HttpResult == HttpURLConnection.HTTP_OK) {
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(con.getInputStream(), "utf-8"));
+                    String line = null;
+                    /////build String....//////
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                    br.close();
+                    return !("" + sb.toString()).equals(null);
+                } else {
+                    return !("" + sb.toString()).equals(null);
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        } else {
             return false;
         }
     }
 
+    //priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
+    // "{"event" : "validate-price" , "data" : {"data" : "x"},
+    // "filters": {"startAddress": "$startAdress","endAddress": "$endAddress","maxPrice": "0"}}"
+    // "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
     @Override
-    public String curlJsonParser() {
-        return null;
+    public String curlJsonParser(){
+        String startLocation = startLocationField.getText();
+        String arrivalLocation  = arrivalLocationField.getText();
+        String price  = priceField.getText();
+        String carCapacity = carCapacityField.getText();
+        String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
+                "\"filters\": {\"startAddress\": \""+startLocation+"\",\"endAddress\": \""+arrivalLocation+"\"," +
+                "\"maxPrice\": \""+price+"\"}}";
+        return res;
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         acceptButton.setSelected(false);
-        if(curlAction()) {
+        if(curlAction()){
+        //if (true) {
             frame.dispose();
-            new RangePriceUI();
+            String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText()};
+            new RangePriceUI(connectedUser,data);
+        } else {
+            JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
         }
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
         cancelButton.setSelected(false);
         frame.dispose();
-        new MainMenuUI();
+        new MainMenuUI(connectedUser);
     }
 
 }

@@ -53,37 +53,6 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		Object content = null;
 
 		switch (event.getAsString()) {
-		
-		// ---- temporary, debug purposes
-		case "start-journal-user": {
-			BBMLogger.debugln("Journaling user..");
-			User user = new User(data.getAsJsonObject().get("mail").getAsString(), "test", "test", "test", "test", 0);
-			long journalKeyId = integrityIOHandler.addUserJournalEntry("store", "UserService", user);
-			clazz = Long.class;
-			content = "Journaling success. Key ID is: " + journalKeyId + ".\n";
-			status = HttpStatus.OK;
-			break;
-		}
-		
-		case "analyze-journal-user":{
-			BBMLogger.debugln("Analyzing journaling user..");
-			integrityIOHandler.analyzeUserJournal();
-			clazz = Void.class;
-			content = "Analyzed launched. Please check user journal.\n";
-			status = HttpStatus.OK;
-			break;
-		}
-		
-		case "end-journal-user" : {
-			BBMLogger.debugln("End journaling user..");
-			long journalKeyId = data.getAsLong();
-			integrityIOHandler.endUserJournalEntry(journalKeyId);
-			clazz = Void.class;
-			content = "End journaling entry, check it.";
-			status = HttpStatus.OK;
-			break;
-		}
-		// -----------------------------
 
 		case "create-user" : {
 			BBMLogger.infoln("Creating user...");
