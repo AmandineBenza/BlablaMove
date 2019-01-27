@@ -140,6 +140,8 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			} else {
 				BBMLogger.infoln("Validating pricing...");
 				content = callValidatePrice(data.toString(), jsonObject.get("filters").toString());
+				BBMLogger.infoln("DATA :" + data.toString());
+				BBMLogger.infoln("FILTER :" + jsonObject.get("filters").toString());
 			}
 			clazz = Boolean.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
@@ -276,7 +278,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = callConfirmDeposits(data.toString());
 			}
 			clazz = List.class;
-			status = HttpStatus.OK;
+			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
 		}
 
@@ -298,8 +300,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return new FlowOrchestrationResult(status, content, clazz);
 	}
 
-	private Object callValidatePrice(String string,String filters) {
-		// TODO
+	private String callValidatePrice(String string,String filters) {
 		return offerIO.validatePrice(filters, string);
 	}
 

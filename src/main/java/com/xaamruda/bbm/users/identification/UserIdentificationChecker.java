@@ -50,13 +50,6 @@ public class UserIdentificationChecker {
 						if (identificationTime == null)
 							continue;
 						Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-						
-						/*
-						 * BBMLogger.infoln("ID TIME : " + identificationTime.getTime());
-						 * BBMLogger.infoln("CURRENT TIME : " + System.currentTimeMillis());
-						 * BBMLogger.infoln("SOUSTRACTION : " + (System.currentTimeMillis() -
-						 * identificationTime.getTime()));
-						 */
 
 						if (currentTime.getTime() - identificationTime.getTime() > sleepTimeMs) {
 							user.setIdentified(false);
