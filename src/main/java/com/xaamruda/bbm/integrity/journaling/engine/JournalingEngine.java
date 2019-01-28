@@ -50,7 +50,7 @@ public class JournalingEngine {
 		return null;
 	}
 	
-	private JournalingEngine(String journalFilePath) {
+	public JournalingEngine(String journalFilePath) {
 		this.journalFilePath = journalFilePath;
 		this.safeStart = false;
 		this.maxId = ERROR_CODE;
@@ -275,7 +275,7 @@ public class JournalingEngine {
 		}
 		
 		String parametersRepresentation = formatParameters(parameters);
-		long id = getId();
+		long id = getIdAndIncrement();
 		toJournal(id, service, className, action, parametersRepresentation);
 		return id;
 	}
@@ -389,7 +389,15 @@ public class JournalingEngine {
 		}
 	}
 	
-	private long getId() {
+	private long getIdAndIncrement() {
 		return maxId++;
+	}
+	
+	public long getMaxId() {
+		return maxId;
+	}
+	
+	public boolean isInSafeStartMode() {
+		return safeStart;
 	}
 }

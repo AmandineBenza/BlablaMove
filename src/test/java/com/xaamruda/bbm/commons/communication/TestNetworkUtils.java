@@ -1,6 +1,6 @@
-package com.xaamruda.bbm.commons;
+package com.xaamruda.bbm.commons.communication;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,16 +14,15 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.xaamruda.bbm.commons.communication.NetworkUtils;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestCommons {
+public class TestNetworkUtils {
 	
 	@Ignore
 	@Test
 	public void testGetIpAdress() {
 		HttpServletRequest mockedRequest = Mockito.mock(HttpServletRequest.class);
 		String ip = NetworkUtils.getRemoteIpAddress(mockedRequest);
-				
-		assertNotEquals(ip, "");
 		assertNotNull(ip);	
+		assertFalse(ip.isEmpty());
 	}
 
 }

@@ -9,11 +9,6 @@ public class IntegrityIOHandler {
 
 	private IntegrityIOHandler() {}
 	
-	// TODO - tmp to be  removed
-	public void analyzeUserJournal() {
-		JournalingEngine.get(JournalingEngine.USERS_SERVICE).analyze();
-	}
-	
 	public long addUserJournalEntry(String action, String className, Object... parameters) {
 		return JournalingEngine.get(JournalingEngine.USERS_SERVICE)
 				.journal(JournalingEngine.USERS_SERVICE, className, action, parameters);
