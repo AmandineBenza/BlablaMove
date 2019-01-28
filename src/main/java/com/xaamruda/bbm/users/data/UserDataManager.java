@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.users.info;
+package com.xaamruda.bbm.users.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

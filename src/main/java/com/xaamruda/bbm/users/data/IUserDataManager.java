@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.users.info;
+package com.xaamruda.bbm.users.data;
 
 import com.xaamruda.bbm.users.model.User;
 

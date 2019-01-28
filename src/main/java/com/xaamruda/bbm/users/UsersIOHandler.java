@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.users.data.IUserDataManager;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.IUserIdentificator;
-import com.xaamruda.bbm.users.info.IUserDataManager;
 import com.xaamruda.bbm.users.mailing.MailSender;
 import com.xaamruda.bbm.users.model.User;
 

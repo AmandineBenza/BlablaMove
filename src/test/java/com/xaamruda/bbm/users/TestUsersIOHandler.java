@@ -18,9 +18,9 @@ import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.users.data.IUserDataManager;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.IUserIdentificator;
-import com.xaamruda.bbm.users.info.IUserDataManager;
 import com.xaamruda.bbm.users.model.User;
 
 @RunWith(MockitoJUnitRunner.class)
