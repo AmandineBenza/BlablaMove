@@ -51,12 +51,12 @@ public class TestJournalingEngine {
 		UnitTestingUtils.setStaticField(JournalingEngine.class, "usersJournalEngine", journalingEngine);
 		
 		assertEquals(journalingEngine, UnitTestingUtils.getStaticField(JournalingEngine.class, "usersJournalEngine"));
-		assertEquals(path, journalingEngine.journalFilePath);
+		assertEquals(path, journalingEngine.getJournalFilePath());
 	}
 	
 	@Test
 	public void testJournalingEngineStart() {
-		File file = new File(journalingEngine.journalFilePath);
+		File file = new File(journalingEngine.getJournalFilePath());
 		
 		if(file.exists()) {
 			file.delete();
@@ -87,7 +87,7 @@ public class TestJournalingEngine {
 		String fileContent = "0;;com.xaamruda.bbm.integrity.journaling.engine.TestJournalingEngine;setUserTitleTest;;TODO";
 		
 		// filling journaling engine file
-		FileUtils.writeTo(journalingEngine.journalFilePath, fileContent, false);
+		FileUtils.writeTo(journalingEngine.getJournalFilePath(), fileContent, false);
 
 		// before test
 		assertNull(user.getName());
@@ -107,7 +107,7 @@ public class TestJournalingEngine {
 	@Test
 	public void testJournalingEngineJournaling() {
 		// prepare test
-		File file = new File(journalingEngine.journalFilePath);
+		File file = new File(journalingEngine.getJournalFilePath());
 		
 		if(file.exists()) {
 			file.delete();
@@ -122,14 +122,14 @@ public class TestJournalingEngine {
 		assertNotEquals(journalId, JournalingEngine.ERROR_CODE);
 		assertEquals(journalId, 0L);
 		
-		String journalContent = FileUtils.fileContentToString(journalingEngine.journalFilePath);
+		String journalContent = FileUtils.fileContentToString(journalingEngine.getJournalFilePath());
 		assertEquals(journalContent.trim(), "0;;com.xaamruda.bbm.integrity.journaling.engine.TestJournalingEngine;setUserTitleTest;;TODO");
 	}
 	
 	@Test
 	public void testJournalingEngineEndJournaling() {
 		// prepare test
-		File file = new File(journalingEngine.journalFilePath);
+		File file = new File(journalingEngine.getJournalFilePath());
 		
 		if(file.exists()) {
 			file.delete();
@@ -141,13 +141,13 @@ public class TestJournalingEngine {
 		String fileContent = "0;;com.xaamruda.bbm.integrity.journaling.engine.TestJournalingEngine;setUserTitleTest;;TODO";
 		
 		// filling journaling engine file
-		FileUtils.writeTo(journalingEngine.journalFilePath, fileContent, false);
+		FileUtils.writeTo(journalingEngine.getJournalFilePath(), fileContent, false);
 		
 		// launch logic
 		journalingEngine.endJournal(0);
 		
 		// post testing
-		String journalContent = FileUtils.fileContentToString(journalingEngine.journalFilePath).trim();
+		String journalContent = FileUtils.fileContentToString(journalingEngine.getJournalFilePath()).trim();
 		
 		assertNotEquals(fileContent, journalContent);
 		assertEquals(journalContent.substring(0, journalContent.length() - 4),

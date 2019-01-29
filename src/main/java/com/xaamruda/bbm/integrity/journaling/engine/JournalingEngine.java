@@ -33,14 +33,14 @@ public class JournalingEngine {
 	
 	private boolean safeStart;
 	private long maxId;
-	public String journalFilePath;
+	private String journalFilePath;
 	
 	public static void init() {
 		usersJournalEngine = new JournalingEngine("./src/main/resources/journaling/usersJournal.ddb").start();
 		offersJournalEngine = new JournalingEngine("./src/main/resources/journaling/offersJournal.ddb").start();
 	}
 	
-	public static JournalingEngine get(String service) {
+	public synchronized static JournalingEngine get(String service) {
 		if(OFFERS_SERVICE.equals(service)) {
 			return offersJournalEngine;
 		} else if(USERS_SERVICE.equals(service)) {
@@ -115,7 +115,7 @@ public class JournalingEngine {
 	/**
 	 * Performs journal analyze (journalFilePath).
 	 */
-	public void analyze() {
+	public synchronized void analyze() {
 		if(!safeStart) {
 			BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not perform analyze as engine is not started.");
 			return;
@@ -422,11 +422,16 @@ public class JournalingEngine {
 		return maxId++;
 	}
 	
-	public long getMaxId() {
+	public synchronized long getMaxId() {
 		return maxId;
 	}
 	
-	public boolean isInSafeStartMode() {
+	public synchronized boolean isInSafeStartMode() {
 		return safeStart;
 	}
+
+	public synchronized String getJournalFilePath() {
+		return journalFilePath;
+	}
+	
 }
