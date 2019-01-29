@@ -14,10 +14,7 @@ public class ErrorHandler implements ErrorController {
 	  @ResponseBody
 	  public String handleError(HttpServletRequest request) {
 	      Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-	      
 	      Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
-	      System.out.println(exception.getClass().toString());
-	      
 	      return String.format("<html><body><h2>Error Page</h2><div>Status code: <b>%s</b></div>"
 	                      + "<div>Exception Message: <b>%s</b></div><body></html>",
 	              statusCode, exception == null ? "N/A": exception.getMessage());
