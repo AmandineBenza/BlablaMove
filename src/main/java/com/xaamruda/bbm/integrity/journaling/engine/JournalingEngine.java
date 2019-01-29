@@ -88,6 +88,11 @@ public class JournalingEngine {
 	 * Analyzes the database journal file.<br>
 	 */
 	public JournalingEngine start() {
+		if(safeStart) {
+			BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not start as engine is already started.");
+			return this;
+		}
+		
 		File journalFile = new File(journalFilePath);
 		
 		if(!journalFile.exists()) {
@@ -111,6 +116,11 @@ public class JournalingEngine {
 	 * Performs journal analyze (journalFilePath).
 	 */
 	public void analyze() {
+		if(!safeStart) {
+			BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not perform analyze as engine is not started.");
+			return;
+		}
+		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(new File(journalFilePath)));
 			String line = null;
@@ -120,11 +130,11 @@ public class JournalingEngine {
 			} while(line != null);
 			
 			br.close();
-			BBMLogger.infoln("Journaling engine successfully analyzed \"" + journalFilePath + "\".");
 		} catch (IOException e) {
 			e.printStackTrace();
-			BBMLogger.errorln("Could not analyze \"" + journalFilePath + "\" journal file.");
 		}
+		
+		BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" analyze finished.");
 	}
 	
 	/**
@@ -132,9 +142,9 @@ public class JournalingEngine {
 	 * 
 	 * 0;users;UserService;store;([User|userJson]);
 	 */
-	private void analyzeTask(String line) {
+	private boolean analyzeTask(String line) {
 		if(line == null || line.isEmpty())
-			return;
+			return false;
 
 		String[] data = line.split(";");
 		String service = data[1].trim();
@@ -146,56 +156,56 @@ public class JournalingEngine {
 		
 		if(serviceCallerClazz == null) {
 			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Service-caller_error]");
-			return;
-		}
-		
-		if(parameters == null) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Parameters_error]");
-			return;
+			return false;
 		}
 		
 		Method method = analyzeMethod(serviceCallerClazz, action);
 		
 		if(method == null) {
 			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method_error]");
-			return;
+			return false;
 		}
 		
 		Object callerInstance;
 		try {
 			callerInstance = ContextProvider.getBean(serviceCallerClazz);
-			method.invoke(callerInstance, parameters);
+			
+			if(parameters != null) {
+				method.invoke(callerInstance, parameters);
+			} else {
+				method.invoke(callerInstance);
+			}
+			
+			return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method-invocation_error]");
+			return false;
 		}
 	}
 	
 	private Class<?> analyzeService(String service, String className){
 		if(OFFERS_SERVICE.equals(service)) {
 			try {
-				if(className.contains(".")) {
-					return Class.forName(className);
-				} else {
+				if(!className.contains(".")) {
 					return Class.forName(OFFERS_SERVICE_MODULE_PATH + className);
 				}
 			} catch (ClassNotFoundException e) {
-				return null;
 			}
 		} else if(USERS_SERVICE.equals(service)) {
 			try {
-				if(className.contains(".")) {
-					return Class.forName(className);
-				} else {
-					String fullClassName = USERS_SERVICE_MODULE_PATH + className; 
-					return Class.forName(fullClassName);
+				if(!className.contains(".")) {
+					return Class.forName(USERS_SERVICE_MODULE_PATH + className);
 				}
 			} catch (ClassNotFoundException e) {
-				return null;
 			}
 		}
 		
-		BBMLogger.debugln("Journaling analyze, caller class \"" + service + "\" unknown.");
-		return null;
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			BBMLogger.debugln("Journaling analyze, caller class \"" + className + "\" unknown.");
+			return null;
+		}
 	}
 	
 	private Method analyzeMethod(Class<?> clazz, String action) {
@@ -212,6 +222,15 @@ public class JournalingEngine {
 	 * From journal line, produce objects instances.
 	 */
 	private Object[] analyzeParameters(String line){
+		String[] lineSplit = line.split(";");
+		String fullParameters = lineSplit[lineSplit.length - 2];
+		
+		if(fullParameters.isEmpty() || fullParameters.equals("()")
+				|| fullParameters.equals("([])")) {
+			BBMLogger.infoln("No parameters found.");
+			return null;
+		}
+		
 		Pattern pattern = Pattern.compile("\\(.*\\)");
 		Matcher matcher = pattern.matcher(line);
 		matcher.find();
@@ -250,7 +269,7 @@ public class JournalingEngine {
 			}
 		}
 		
-		return parametersArray;
+		return parametersArray[0] == null ? null : parametersArray;
 	}
 	
 	/**
@@ -262,17 +281,18 @@ public class JournalingEngine {
 	 * @return journaling id
 	 */
 	public synchronized long journal(String service, String className, String action, Object... parameters){
-		checkCreate();
-		
 		if(!safeStart) {
 			BBMLogger.infoln("Could not log on closed journal");
 			return ERROR_CODE;
 		}
+
+		// TODO to be removed as we would like to journal for anywhere
+//		if(!OFFERS_SERVICE.equals(service) && (!USERS_SERVICE.equals(service))) {
+//			BBMLogger.infoln("Could not journal for service \"" + service + "\".");
+//			return ERROR_CODE;
+//		}
 		
-		if(!OFFERS_SERVICE.equals(service) && (!USERS_SERVICE.equals(service))) {
-			BBMLogger.infoln("Could not journal for service \"" + service + "\".");
-			return ERROR_CODE;
-		}
+		checkCreate();
 		
 		String parametersRepresentation = formatParameters(parameters);
 		long id = getIdAndIncrement();
@@ -330,6 +350,9 @@ public class JournalingEngine {
 	}
 	
 	private static String formatParameters(Object... parameters) {
+		if(parameters == null || parameters.length == 0)
+			return null;
+		
 		StringBuilder sb = new StringBuilder();
 		sb.append("(");
 		
@@ -369,13 +392,19 @@ public class JournalingEngine {
 		StringBuilder sb = new StringBuilder();
 		sb.append(id);
 		sb.append(";");
-		sb.append(service);
+		
+		if(service != null && !service.isEmpty())
+			sb.append(service);
+		
 		sb.append(";");
 		sb.append(className);
 		sb.append(";");
 		sb.append(action);
 		sb.append(";");
-		sb.append(parameters);
+		
+		if(parameters != null)
+			sb.append(parameters);
+		
 		sb.append(";");
 		sb.append(TODO_STATE);
 		
