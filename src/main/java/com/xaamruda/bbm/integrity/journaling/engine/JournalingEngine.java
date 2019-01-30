@@ -20,12 +20,15 @@ import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 public class JournalingEngine {
 
 	private static JournalingEngine usersJournalEngine;
-	private static JournalingEngine offersJournalEngine; 
+	private static JournalingEngine offersJournalEngine;
+	private static JournalingEngine billingJournalEngine;
 	
-	public final static String OFFERS_SERVICE = "offers";
-	public final static String USERS_SERVICE = "users";
+	public final static String OFFERS_MODULE = "offers";
+	public final static String USERS_MODULE = "users";
+	public final static String BILLING_MODULE = "billing";
 	private final static String OFFERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.offers.dbaccess.service.";
 	private final static String USERS_SERVICE_MODULE_PATH = "com.xaamruda.bbm.users.dbaccess.service.";
+	private final static String BILLING_MODULE_PATH = "com.xaamruda.bbm.billing.";
 	
 	public final static long ERROR_CODE = -1L;
 	public final static String TODO_STATE = "TODO";
@@ -38,13 +41,16 @@ public class JournalingEngine {
 	public static void init() {
 		usersJournalEngine = new JournalingEngine("./src/main/resources/journaling/usersJournal.ddb").start();
 		offersJournalEngine = new JournalingEngine("./src/main/resources/journaling/offersJournal.ddb").start();
+		billingJournalEngine = new JournalingEngine("./src/main/resources/journaling/billingJournal.ddb").start();
 	}
 	
-	public synchronized static JournalingEngine get(String service) {
-		if(OFFERS_SERVICE.equals(service)) {
+	public synchronized static JournalingEngine get(String module) {
+		if(OFFERS_MODULE.equals(module)) {
 			return offersJournalEngine;
-		} else if(USERS_SERVICE.equals(service)) {
+		} else if(USERS_MODULE.equals(module)) {
 			return usersJournalEngine;
+		} else if(BILLING_MODULE.equals(module)) {
+			return billingJournalEngine;
 		}
 		
 		return null;
@@ -184,18 +190,23 @@ public class JournalingEngine {
 	}
 	
 	private Class<?> analyzeService(String service, String className){
-		if(OFFERS_SERVICE.equals(service)) {
+		if(OFFERS_MODULE.equals(service)) {
 			try {
 				if(!className.contains(".")) {
 					return Class.forName(OFFERS_SERVICE_MODULE_PATH + className);
 				}
 			} catch (ClassNotFoundException e) {
 			}
-		} else if(USERS_SERVICE.equals(service)) {
+		} else if(USERS_MODULE.equals(service)) {
 			try {
 				if(!className.contains(".")) {
 					return Class.forName(USERS_SERVICE_MODULE_PATH + className);
 				}
+			} catch (ClassNotFoundException e) {
+			}
+		} else if(BILLING_MODULE.equals(service)) {
+			try {
+				return Class.forName(BILLING_MODULE_PATH + className);
 			} catch (ClassNotFoundException e) {
 			}
 		}

@@ -2,11 +2,13 @@ package com.xaamruda.bbm.billing;
 
 import com.google.gson.JsonObject;
 import com.xaamruda.bbm.commons.json.JsonUtils;
+import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.utils.Range;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.billing.calculator.Calculator;
@@ -20,26 +22,12 @@ public class BillingIOHandler {
 	
 	private Calculator facturation = new Calculator();
 	
+	@Autowired
+	private IntegrityIOHandler integrityIOHandler;
+	
 	public BillingIOHandler() {
 		//
 	}
-
-	/**
-	 * do work depending of event
-	 * 
-	 * @param workData Json containing data for the calculator
-	 * @return the calculation of point for user
-	 */
-//	public String mainHandler(String workData) {
-//		JsonObject data = JsonUtils.getFromJson(workData);
-//		if (data.get("event").getAsString().equals("calcul_without_offer")) {
-//			return calcul_without_offer(data);
-//		} else if (JsonUtils.getFromJson(workData).get("event").getAsString().equals("calcul_with_offer")) {
-//			return calcul_with_offer(data);
-//		} else {
-//			return "error : Wrong event";
-//		}
-//	}
 
 	//TODO 
 	/**
@@ -49,10 +37,16 @@ public class BillingIOHandler {
 	 * @return the calculation of point for user
 	 */
 	public int calcul_without_offer(String workData, int distance) {
+		long journalId = integrityIOHandler.addBillingJournalEntry("calcul_without_offer", this.getClass().getSimpleName(), workData, distance);
+		
 		JsonObject data =  JsonUtils.getFromJson(workData);
 		facturation.calcul_price_base(data.get("weight").getAsInt(), distance,
 				data.get("volume").getAsInt(), data.get("date").getAsInt());
-		return  (int) facturation.getUserPoints();
+		
+		integrityIOHandler.endBillingJournalEntry(journalId);
+		int userPoints = (int) facturation.getUserPoints();
+		integrityIOHandler.endBillingJournalEntry(journalId);
+		return userPoints;
 //				JsonUtils.toJson(
 //				"{ userPoint : " + facturation.getUserPoints() + ", socityPoint : " + facturation.getCompanyPoints());
 	}
@@ -64,13 +58,17 @@ public class BillingIOHandler {
 	 * @return the calculation of point for user
 	 */
 	public String calcul_with_offer(String workData) {
+		long journalId = integrityIOHandler.addBillingJournalEntry("calcul_with_offer", this.getClass().getSimpleName(), workData);
+		
 		JsonObject data =  JsonUtils.getFromJson(workData);
 		facturation.advance_date_with_offer(data.get("date").getAsInt(), data.get("offerPrice").getAsInt());
-		return JsonUtils.toJson(
-				"{ userPoints : " + facturation.getUserPoints() + ", companyPoints : " + facturation.getCompanyPoints());
+		String json = JsonUtils.toJson("{ userPoints : " + facturation.getUserPoints() + ", companyPoints : " + facturation.getCompanyPoints());
+		
+		integrityIOHandler.endBillingJournalEntry(journalId);
+		return json;
 	}
 	
-	public Range checkPrice(List<PostedOffer> offers,int distance){
+	public Range checkPrice(List<PostedOffer> offers, int distance){
 		return MediumCalculator.getInstance().compute(offers, distance);
 	}
 	
