@@ -153,6 +153,7 @@ public class JournalingEngine {
 			return false;
 
 		String[] data = line.split(";");
+		long id = Long.parseLong(data[0]);
 		String service = data[1].trim();
 		String className = data[2].trim();
 		String action = data[3].trim();
@@ -182,6 +183,7 @@ public class JournalingEngine {
 				method.invoke(callerInstance);
 			}
 			
+			endJournal(id);
 			return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method-invocation_error]");

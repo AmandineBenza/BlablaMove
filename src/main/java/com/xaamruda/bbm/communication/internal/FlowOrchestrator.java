@@ -339,7 +339,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 
 	private Object callAskOffer(String string) {
-		return offerIO.askValidate(string);
+		return offerIO.askForValidation(string);
 	}
 
 

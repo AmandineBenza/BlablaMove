@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.users.data.IUserDataManager;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.IUserIdentificator;
@@ -28,6 +29,9 @@ public class UsersIOHandler {
 
 	@Autowired
 	private IUserDataManager dataManager;
+	
+	@Autowired
+	private IntegrityIOHandler integrityIOHandler;
 
 	public UsersIOHandler() {
 	}
@@ -75,17 +79,25 @@ public class UsersIOHandler {
 	public void makeTransaction(String ownerID, String buyerID, Integer finalPrice) {
 		User buyer = null;
 		User owner = null;
+		
 		try {
 			buyer = service.getUserByMail(buyerID).get(0);
 			owner = service.getUserByMail(ownerID).get(0);
 		} catch (Exception ex) {
-			// TODO journalisation
-			System.out.println(ex.toString());
+			integrityIOHandler.addUserJournalEntry("makeTransaction", this.getClass().getSimpleName(),
+					ownerID, buyerID, finalPrice);
+			BBMLogger.errorln("Transaction failed. New entry added to user journal.");
+			return;
 		}
 		
-		// TODO Check negative amount and associated test
+		int newBuyerPoints = buyer.getPointsAmount() - finalPrice;
+		if(newBuyerPoints < 0) {
+			newBuyerPoints = 0;
+		}
+		
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
-		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
+		buyer.setPointsAmount(newBuyerPoints);
+
 		ArrayList<User> users = new ArrayList<>();
 		users.add(owner);
 		users.add(buyer);
@@ -93,20 +105,52 @@ public class UsersIOHandler {
 	}
 
 	public void debit(String buyerID, Integer finalPrice) {
-		User buyer = service.getUserByMail(buyerID).get(0);
-		// service.delete(buyer);
+		User buyer = null;
+		
+		try {
+			buyer = service.getUserByMail(buyerID).get(0);
+		} catch(Exception e) {
+			integrityIOHandler.addUserJournalEntry("debit", this.getClass().getSimpleName(), buyer, finalPrice);
+			BBMLogger.errorln("Debit failed. New entry added to user journal.");
+			return;
+		}
+		
 		if (buyer.getPointsAmount() == null)
 			buyer.setPointsAmount(0);
+		
 		buyer.setPointsAmount(buyer.getPointsAmount() - finalPrice);
-		service.store(buyer);
+		
+		try {
+			service.store(buyer);
+		} catch(Exception e) {
+			integrityIOHandler.addUserJournalEntry("debit", this.getClass().getSimpleName(), buyer, finalPrice);
+			BBMLogger.errorln("Debit: buyer storing failed. New entry added to user journal.");
+			return;
+		}
 	}
 
 	public void credit(String ownerID, Integer finalPrice) {
-		User owner = service.getUserByMail(ownerID).get(0);
-		// service.delete(owner);
+		User owner = null;
+		
+		try {
+			owner = service.getUserByMail(ownerID).get(0);
+		} catch(Exception e) {
+			integrityIOHandler.addUserJournalEntry("credit", this.getClass().getSimpleName(), ownerID, finalPrice);
+			BBMLogger.errorln("Credit: owner retrieving failed. New entry added to user journal.");
+			return;
+		}
+		
 		if (owner.getPointsAmount() == null)
 			owner.setPointsAmount(0);
+		
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
-		service.store(owner);
+		
+		try {
+			service.store(owner);
+		} catch(Exception e) {
+			integrityIOHandler.addUserJournalEntry("credit", this.getClass().getSimpleName(), ownerID, finalPrice);
+			BBMLogger.errorln("Credit: owner storing failed. New entry added to user journal.");
+			return;
+		}
 	}
 }

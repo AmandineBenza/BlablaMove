@@ -99,7 +99,7 @@ public class TestFlowOrchestratorOffers {
 		String dataString = data.toString();
 		
 		when(userIO.isIdentified(jsonObject.get("identification").getAsJsonObject().get("userID").getAsString())).thenReturn(true);
-		when(offerIO.askValidate(dataString)).thenReturn("OK");
+		when(offerIO.askForValidation(dataString)).thenReturn("OK");
 
 		FlowOrchestrationResult res = flowOrchestrator.orchestrateOffersEntryPoint(jsonString);
 		

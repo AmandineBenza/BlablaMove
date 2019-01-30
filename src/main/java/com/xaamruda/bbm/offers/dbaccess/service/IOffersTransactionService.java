@@ -6,9 +6,9 @@ import com.xaamruda.bbm.offers.model.OffersTransaction;
 
 public interface IOffersTransactionService {
 
-	boolean createNewOffer(OffersTransaction offer);
+	boolean saveOffer(OffersTransaction offer);
 
-	List<OffersTransaction> getOffersBy(String userID);
+	List<OffersTransaction> getOffersByOwnerId(String userID);
     List<OffersTransaction> getOffersByTransactionID(String transactionID);
 
 	void remove(OffersTransaction offer);
