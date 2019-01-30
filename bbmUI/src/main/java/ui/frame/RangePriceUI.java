@@ -90,7 +90,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -264,7 +264,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         }
     }
 
-    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
         cancelButton.setSelected(false);
         frame.dispose();
         new MainMenuUI(connectedUser);
