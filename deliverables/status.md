@@ -318,3 +318,26 @@ WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 - Time
 
 --------------------
+
+--------------------
+
+WEEK 5 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
+(30/01/2019)
+
+>>>>> What was achieved this week ?
+- Unit testing of Flow Orchestrator, Integrity, Users, Offers
+- Link between differents UI Components (Visual improvement)
+- Beginning of the Chaos Engine (Creation of arbitrary and controllable failures, DDOS simulation...) 
+- Taking in account multi threads in journaling engine
+- Adding journaling calls at database service level (without business context)
+
+>>>>> What is planned for the following week 
+- Continue unit testing of untested parts
+- Continue on Chaos Engine creation 
+- Finalizing integration of the journaling system in BlablaMove
+- Continue to search for a simple DDOS prevention mechanism
+
+>>>>> What are the blockers and risks ?
+- Time
+
+--------------------
