@@ -32,12 +32,16 @@ public class UserService implements IUserService {
 
 	@Override
 	public void store(User user) {
+		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);
 		repository.save(user);
+		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 	@Override
-	public void store(List<User> user) {
-		repository.saveAll(user);
+	public void store(List<User> users) {
+		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), users);
+		repository.saveAll(users);
+		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 	@Override
@@ -49,7 +53,9 @@ public class UserService implements IUserService {
 	@Override
 	public void delete(User user) {
 		BBMLogger.infoln("Deleting user " + user.getMail() + ".");
+		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);
 		repository.delete(user);
+		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 }
