@@ -93,7 +93,7 @@ public class TestOffersIOHandler {
 
 		String result = offersIOHandler.postNewOffer(parameter);
 		PostedOffer offer = JsonUtils.getFromJson(result, PostedOffer.class);
-		verify(offerService,Mockito.times(1)).createNewOffer(Mockito.any());
+		verify(offerService,Mockito.times(1)).saveOffer(Mockito.any());
 		assertEquals((Integer)20,offer.getCapacity());
 		assertEquals(OfferStatus.POSTED,offer.getStatus());
 		assertEquals(10,offer.getDistance());
@@ -169,7 +169,7 @@ public class TestOffersIOHandler {
 		Mockito.when(offerService.getOfferByID("1")).thenReturn( Collections.singletonList(offerMock));
 
 		offerMock.setStatus(OfferStatus.ABORTED);
-		String res = offersIOHandler.askValidate(workData);
+		String res = offersIOHandler.askForValidation(workData);
 		assertEquals("INVALID OPERATION\n",res);
 		
 		offerMock.setStatus(OfferStatus.POSTED);
@@ -177,7 +177,7 @@ public class TestOffersIOHandler {
 		offerMock.setDistance(10);
 		offerMock.setPrice(10);
 		Mockito.when(calculatorHandler.calcul_without_offer(workData, 10)).thenReturn(20);
-		res = offersIOHandler.askValidate(workData);
+		res = offersIOHandler.askForValidation(workData);
 		OffersTransaction resOffer = JsonUtils.getFromJson(res, OffersTransaction.class);
 		
 		assertEquals(resOffer.getBuyerID(),"user@mail.com");
@@ -197,9 +197,8 @@ public class TestOffersIOHandler {
 	public void testConsultAwaitingOffers() {
 
 		String workData = "{\"ownerID\": \"user@mail.com\"}";
-		
 		OffersTransaction offerMock = new OffersTransaction();
-		Mockito.when(offerTransactionService.getOffersBy("user@mail.com")).thenReturn( Collections.singletonList(offerMock));
+		Mockito.when(offerTransactionService.getOffersByOwnerId("user@mail.com")).thenReturn( Collections.singletonList(offerMock));
 		offerMock.setStatus(OfferStatus.ABORTED);
 		String res = offersIOHandler.consultAwaitingOffers(workData);
 		assertEquals("No offers waiting for confirmation.\n",res);

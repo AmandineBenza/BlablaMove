@@ -25,6 +25,7 @@ public interface IOfferService {
 
 	List<PostedOffer> getAvailableOffers(Specification<PostedOffer> query);
 
+
 	public	void shutDown();
 
 	}
