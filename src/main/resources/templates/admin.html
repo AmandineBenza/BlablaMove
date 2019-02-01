@@ -13,6 +13,9 @@
         <input id="Com" type="=text">
         <button text="Run" onclick="runCommand( $('#Com').val())">Run</button>
 		 <div><a href="javascript:{shutdown();}">run SHUTDOWN</a></div>
+		  <div><a href="javascript:{toggle();}">run Toogle</a></div>
+		   <input id="Com2" type="=text">
+        <button text="Run change" onclick="runLevel($('#Com2').val())">Run</button>
       </div>
       <div>Results</div>
       <div id="Result">ok</div>
@@ -52,6 +55,43 @@
             }
           })
         };
+        
+        function toggle() {
+          console.log("z")
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "toggle" }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+     function runLevel(payload) {
+          console.log("x")
+          var data2 = payload || "ls"
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "change", data: data2 }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+        
       </script>
 </body>
 </html>

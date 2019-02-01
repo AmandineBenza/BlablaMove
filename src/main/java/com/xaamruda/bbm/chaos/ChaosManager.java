@@ -53,11 +53,22 @@ public class ChaosManager {
 		case "runCommand":{
 			JsonElement data = jsonObject.get("data");
 			runCommand(data.getAsString());
+			break;
 		}
 		case "shutDownDB":{
 			//JsonElement data = jsonObject.get("data");
 			//runCommand(data.getAsString());
 			this.offersIOHandler.shutDownDB();;
+			break;
+		}
+		case "toggle":{
+			this.toggleChaos();
+			break;
+		}
+		case "change":{
+			JsonElement data = jsonObject.get("data");
+			this.changeChaos(data.getAsInt());
+			break;
 		}
 		default:{
 			BBMLogger.errorln("No Admin event");
@@ -100,6 +111,13 @@ public class ChaosManager {
 				}
 			}
 		}).start();
+	}
+	
+	public void toggleChaos() throws IOException {
+		this.chaosActivated  = !chaosActivated;
+	}
+	public void changeChaos(int level) throws IOException {
+		this.chaosLevel  = level;
 	}
 	public static void ShutDownDataBase() {
 		if(ChaosManager.chaosActivated && chaosProvider.nextInt(1000) < chaosLevel) {
