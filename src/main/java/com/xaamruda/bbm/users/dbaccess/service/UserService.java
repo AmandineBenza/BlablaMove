@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 		BBMLogger.infoln("Retrieving user given mail " + mail + ".");
 		return repository.findByMail(mail);
 	}
-
+	
 	@Override
 	public void store(User user) {
 		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);

@@ -1,5 +1,7 @@
 package com.xaamruda.bbm.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ public interface IWebServiceController {
 	
 	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request);
 	public ResponseEntity offersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request);
+	void adminEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) throws IOException;
 	
 }
 

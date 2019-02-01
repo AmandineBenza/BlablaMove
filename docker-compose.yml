@@ -7,7 +7,6 @@ services:
     #         SA_PASSWORD: "Bl@bl@Move2018P*sword"
     #         ACCEPT_EULA: "Y"
     #         MSSQL_MEMORY_LIMIT_MB : "1024"
-
     #     depends_on:
     #         - mongo
     #mongodbar:
@@ -34,19 +33,38 @@ services:
         restart: always
         ports: 
           - "3306:3306"
-        
         environment:
-            MYSQL_ROOT_PASSWORD: mdp
-            MYSQL_DATABASE: test
-            MYSQL_USER: damien
-            MYSQL_PASSWORD: mdp
-       # volumes:
-         #  - /data/mysql:/var/lib/mysql
-         #  - /data/pgsql:/var/lib/postgresql
-         #  - /data/maria:/var/lib/mariadb
-         #  - /data/redis:/var/lib/redis
-         #  - /data/memcached:/var/lib/memcached
-         #  - /data/neo4j:/var/lib/neo4j/data
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: blablamove_master
+            MYSQL_USER: 176203_admin
+            MYSQL_PASSWORD: admin
+        volumes:
+           - /data/mysql:/var/lib/mysql
+           - /data/pgsql:/var/lib/postgresql
+           - /data/maria:/var/lib/mariadb
+           - /data/redis:/var/lib/redis
+           - /data/memcached:/var/lib/memcached
+           - /data/neo4j:/var/lib/neo4j/data
+    #dbnouveau2:
+    #    container_name: dbnouveau2
+    #    image: mysql
+    #    command: --default-authentication-plugin=mysql_native_password
+    #    restart: always
+    #    ports: 
+    #      - "3307:3306"
+    #    
+    #    environment:
+    #        MYSQL_ROOT_PASSWORD: mdp
+    #        MYSQL_DATABASE: test
+    #        MYSQL_USER: damien
+    #        MYSQL_PASSWORD: mdp
+    #    volumes:
+    #       - /data/mysql:/var/lib/mysql
+    #       - /data/pgsql:/var/lib/postgresql
+    #       - /data/maria:/var/lib/mariadb
+    #       - /data/redis:/var/lib/redis
+    #       - /data/memcached:/var/lib/memcached
+    #       - /data/neo4j:/var/lib/neo4j/data
     myadm:
         image : phpmyadmin/phpmyadmin
         ports : 
@@ -56,8 +74,6 @@ services:
            - "dbnouveau:db"
         environment:
             MYSQL_USERNAME: root
-            MYSQL_ROOT_PASSWORD: mdp
+            MYSQL_ROOT_PASSWORD: admin
         restart: always
         
-    
-

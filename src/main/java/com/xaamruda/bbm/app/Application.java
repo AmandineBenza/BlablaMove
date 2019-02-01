@@ -31,6 +31,7 @@ import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
 		"com.xaamruda.bbm.offers",
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
+		"com.xaamruda.bbm.chaos"
 })
 @ComponentScan(basePackages= {
 		"com.xaamruda.bbm.app",
@@ -42,6 +43,7 @@ import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
 		"com.xaamruda.bbm.offers",
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
+		"com.xaamruda.bbm.chaos"
 })
 @EntityScan(basePackages= {
 		"com.xaamruda.bbm.app",
@@ -53,6 +55,7 @@ import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
 		"com.xaamruda.bbm.offers",
 		"com.xaamruda.bbm.roads",
 		"com.xaamruda.bbm.users",
+		"com.xaamruda.bbm.chaos"
 })
 public class Application {
 	

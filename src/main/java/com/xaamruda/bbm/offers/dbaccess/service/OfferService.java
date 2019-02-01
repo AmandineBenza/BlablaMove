@@ -60,12 +60,12 @@ public class OfferService implements IOfferService {
 	}
 
 	@Override
-	public boolean createNewOffer(PostedOffer offer){
+	public boolean saveOffer(PostedOffer offer){
 		long journalId = integrityIOHandler.addOfferJournalEntry("createNewOffer", this.getClass().getSimpleName(), offer);
 		BBMLogger.infoln("Storing new offer...");
 		
 		if(offer != null){
-			offerRepository.save(offer);
+			offer = offerRepository.save(offer);
 		}
 		
 		integrityIOHandler.endOfferJournalEntry(journalId);
@@ -90,11 +90,19 @@ public class OfferService implements IOfferService {
 	}
 
 	@Override
-	public void remove(PostedOffer offer) {
+	public void removeOffer(PostedOffer offer) {
 		long journalId = integrityIOHandler.addOfferJournalEntry("remove", this.getClass().getSimpleName(), offer);
 		BBMLogger.infoln("Removing offer...");
 		offerRepository.delete(offer);
 		integrityIOHandler.endOfferJournalEntry(journalId);
 	}
+	
+	@Override
+	public void shutDown() {
+		offerRepository.shutDown();
+	}
+
+	
+
 
 }
