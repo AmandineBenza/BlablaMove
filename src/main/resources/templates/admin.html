@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Administation page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+</head>
+<body>
+    <h1>Fast and fast administration call</h1>
+      <div>
+        <div><a href="javascript:{runCommand('ls');}">run ls</a></div>
+        <div>Entrez une commande</div>
+        <input id="Com" type="=text">
+        <button text="Run" onclick="runCommand( $('#Com').val())">Run</button>
+		 <div><a href="javascript:{shutdown();}">run SHUTDOWN</a></div>
+      </div>
+      <div>Results</div>
+      <div id="Result">ok</div>
+      <script type="application/javascript">
+        function runCommand(payload) {
+          console.log("x")
+          var data2 = payload || "ls"
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "runCommand", data: data2 }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+         function shutdown() {
+          console.log("y")
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "shutDownDB" }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+      </script>
+</body>
+</html>
+
+ 

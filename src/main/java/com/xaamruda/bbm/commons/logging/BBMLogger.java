@@ -3,6 +3,8 @@ package com.xaamruda.bbm.commons.logging;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.xaamruda.bbm.chaos.ChaosManager;
+
 public final class BBMLogger {
 	
 	private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
@@ -29,6 +31,7 @@ public final class BBMLogger {
 	}
 	
 	public static void infoln(String msg, int sleepms) {
+		ChaosManager.ShutDownDataBase();
 		try {
 			Thread.sleep(sleepms);
 			System.out.println("[INFO|" + dateInfo() + msg + "]");
