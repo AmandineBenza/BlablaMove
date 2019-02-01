@@ -20,7 +20,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     private JButton cancelButton;
     private String connectedUser;
     private ArrayList<String[]> data;
-
+    private ArrayList<JButton> jbuttonList;
     /**
      * Creates new form ShowOfferUI
      */
@@ -48,10 +48,10 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         cancelButton = new JButton("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                cancelButtonActionPerformed();
             }
         });
-
+        jbuttonList = new ArrayList<JButton>();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -72,7 +72,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
 
     private void lineCreation(int i) {
         JPanel linePanel = new JPanel();
-        JButton acceptButton = new JButton("Accept");
+        final JButton acceptButton = new JButton("Accept");
         JLabel offerIdTxtLabel = new JLabel("Id :");
         JLabel offerIdResLabel = new JLabel(data.get(i)[0]+ "    ");
         JLabel offerWeightTxtLabel = new JLabel("Weight Max :");
@@ -82,18 +82,14 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         JLabel offerDateTxtLabel = new JLabel("Date :");
         JLabel offerDateResLabel = new JLabel(data.get(i)[3]);
         JLabel offerPriceTxtLabel = new JLabel("Price :");
-        JLabel offerPriceResLabel = new JLabel(data.get(i)[4]);
+        JLabel offerPriceResLabel = new JLabel(data.get(i)[5]);
 
+        jbuttonList.add(acceptButton);
         acceptButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (true) {
-                    acceptButton.setSelected(false);
-                    frame.dispose();
-                    new ShowRecapUI(connectedUser,data.get(i));
-                } else {
-                    JOptionPane.showMessageDialog(frame, "an error occur.");
-                }
+                acceptButtonActionPerformed(evt);
             }
+
         });
 
         linePanel.setLayout(new GridBagLayout());
@@ -190,11 +186,29 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         return res;
     }
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void cancelButtonActionPerformed() {
         cancelButton.setSelected(false);
         frame.dispose();
         new MainMenuUI(connectedUser);
     }
+
+    private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt){
+            if (true) {
+                int i =0;
+                JButton button = jbuttonList.get(i);
+                System.out.println(evt.getActionCommand());
+                while(evt.getSource() != button) {
+                    i++;
+                    button = jbuttonList.get(i);
+                }
+                button.setSelected(false);
+                frame.dispose();
+                new ShowRecapUI(connectedUser,data.get(i));
+
+            } else {
+                JOptionPane.showMessageDialog(frame, "an error occur.");
+            }
+        }
 
 
 }
