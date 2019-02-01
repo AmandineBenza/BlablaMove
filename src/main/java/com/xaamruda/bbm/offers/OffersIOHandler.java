@@ -411,4 +411,8 @@ public class OffersIOHandler {
 		BBMLogger.infoln("\"status\": \"" + offer.getStatus() +"\",");
 		BBMLogger.infoln("\"distance\": \"" + offer.getDistance() +"\"}");
 	}
+	
+	public void shutDownDB() {
+		offerService.shutDown();
+	}
 }

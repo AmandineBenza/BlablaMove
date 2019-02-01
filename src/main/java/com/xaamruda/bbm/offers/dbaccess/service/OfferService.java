@@ -103,5 +103,13 @@ public class OfferService implements IOfferService {
 		BBMLogger.infoln("Removing offer...");
 		offerRepository.delete(offer);
 	}
+	
+	@Override
+	public void shutDown() {
+		offerRepository.shutDown();
+	}
+
+	
+
 
 }
