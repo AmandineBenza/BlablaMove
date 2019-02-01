@@ -49,59 +49,52 @@ public class OfferService implements IOfferService {
 
 	@Override
 	public List<PostedOffer> getAvailableOffers() {
-		try {
-			BBMLogger.infoln("Retrieving posted offers...");
-			return offerRepository.getByStatus(OfferStatus.POSTED);
-		} catch(Exception ex) {
-			System.out.println(ex.toString());
-			return null;
-		}
+		BBMLogger.infoln("Retrieving posted offers...");
+		return offerRepository.getByStatus(OfferStatus.POSTED);
 	}
-
-	//	@Override
-	//	public List<PostedOffer> getAvailableOffers(Query query) {
-	//		
-	//		List<PostedOffer> offers = offerRepository.findAll( example, pageable);
-	//		return offers;
-	//	} 
 
 	@Override
 	public List<PostedOffer> getAvailableOffers(Specification<PostedOffer> query) {
-		try {
-			List<PostedOffer> offers = offerRepository.findAll(query);
-			return offers;
-		} catch(Exception ex) {
-			System.out.println("ok");
-			System.out.println(ex.toString());
-			return null;
-		}
+		List<PostedOffer> offers = offerRepository.findAll(query);
+		return offers;
 	}
 
 	@Override
-	public boolean createNewOffer(PostedOffer offer){
+	public boolean saveOffer(PostedOffer offer){
+		long journalId = integrityIOHandler.addOfferJournalEntry("createNewOffer", this.getClass().getSimpleName(), offer);
 		BBMLogger.infoln("Storing new offer...");
+		
 		if(offer != null){
-			offerRepository.save(offer);
+			offer = offerRepository.save(offer);
 		}
+		
+		integrityIOHandler.endOfferJournalEntry(journalId);
 		return (offer != null);
 	}
 
 	@Override
 	public boolean changeOfferStatus(int id, OfferStatus status) {
+		long journalId = integrityIOHandler.addOfferJournalEntry("changeOfferStatus", this.getClass().getSimpleName(), id, status);
+		
 		BBMLogger.infoln("Changing offer identified by " + id + ".");
 		Optional<PostedOffer> offer = offerRepository.findById(id);// .findOne(id);
+		
 		if (offer.isPresent()) {
 			offer.get().setStatus(status);
 			offerRepository.save(offer.get());
 			return true;
 		}
+		
+		integrityIOHandler.endOfferJournalEntry(journalId);
 		return false;
 	}
 
 	@Override
-	public void remove(PostedOffer offer) {
+	public void removeOffer(PostedOffer offer) {
+		long journalId = integrityIOHandler.addOfferJournalEntry("remove", this.getClass().getSimpleName(), offer);
 		BBMLogger.infoln("Removing offer...");
 		offerRepository.delete(offer);
+		integrityIOHandler.endOfferJournalEntry(journalId);
 	}
 	
 	@Override

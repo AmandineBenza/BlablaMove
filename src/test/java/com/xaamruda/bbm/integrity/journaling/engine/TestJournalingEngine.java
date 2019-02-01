@@ -97,6 +97,10 @@ public class TestJournalingEngine {
 
 		// check call has been made
 		assertEquals(user.getName(), USER_NAME);
+		
+		// check journal state
+		String journalContent = FileUtils.fileContentToString(journalingEngine.getJournalFilePath());
+		assertEquals(journalContent.trim(), "0;;com.xaamruda.bbm.integrity.journaling.engine.TestJournalingEngine;setUserTitleTest;;DONE");
 	}
 	
 	// Tool method to be used in reflection testing
