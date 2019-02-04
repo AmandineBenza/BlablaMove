@@ -60,7 +60,7 @@ public class OfferService implements IOfferService {
 	}
 
 	@Override
-	public boolean saveOffer(PostedOffer offer){
+	public synchronized boolean saveOffer(PostedOffer offer){
 		long journalId = integrityIOHandler.addOfferJournalEntry("createNewOffer", this.getClass().getSimpleName(), offer);
 		BBMLogger.infoln("Storing new offer...");
 		
@@ -73,7 +73,7 @@ public class OfferService implements IOfferService {
 	}
 
 	@Override
-	public boolean changeOfferStatus(int id, OfferStatus status) {
+	public synchronized boolean changeOfferStatus(int id, OfferStatus status) {
 		long journalId = integrityIOHandler.addOfferJournalEntry("changeOfferStatus", this.getClass().getSimpleName(), id, status);
 		
 		BBMLogger.infoln("Changing offer identified by " + id + ".");
@@ -90,7 +90,7 @@ public class OfferService implements IOfferService {
 	}
 
 	@Override
-	public void removeOffer(PostedOffer offer) {
+	public synchronized void removeOffer(PostedOffer offer) {
 		long journalId = integrityIOHandler.addOfferJournalEntry("remove", this.getClass().getSimpleName(), offer);
 		BBMLogger.infoln("Removing offer...");
 		offerRepository.delete(offer);
@@ -101,8 +101,6 @@ public class OfferService implements IOfferService {
 	public void shutDown() {
 		offerRepository.shutDown();
 	}
-
-	
 
 
 }

@@ -30,6 +30,9 @@ public class WebServiceController implements IWebServiceController {
 	@Autowired
 	public ChaosManager chaosManager;
 	
+//	@Autowired
+//	private DDOSChecker ddosChecker;
+	
 	public WebServiceController() {}
 	
 	
@@ -44,6 +47,11 @@ public class WebServiceController implements IWebServiceController {
 	@Override
 	@RequestMapping(value = "USERS", method = RequestMethod.POST)
 	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) {
+//		if(!ddosChecker.checkNewRequestAuthorization(request.getRemoteAddr())) {
+//			BBMLogger.infoln(request.getRemoteAddr() + " bloked by DDOS engine.");
+//			return new ResponseEntity("DDOS analyze prevent you from accessing BlablaMove.\n", HttpStatus.FORBIDDEN);
+//		}
+		
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
 		BBMLogger.infoln("From " + NetworkUtils.getRemoteIpAddress(request));
@@ -70,14 +78,9 @@ public class WebServiceController implements IWebServiceController {
 	public void adminEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) throws IOException {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/Admin\".");
-		//BBMLogger.infoln("From " + NetworkUtils.getRemoteIpAddress(request));
-		//ChaosManager.changeChaosState()
-		System.out.println(jsonEvents);
 		chaosManager.handle(jsonEvents);
 		chaosManager.lsPrint();
-		
 		BBMLogger.infoln("Response received.");
-		//return new Object();
 	}
 	
 	@CrossOrigin
@@ -85,16 +88,10 @@ public class WebServiceController implements IWebServiceController {
 	public String adminEntryPoint(HttpServletRequest request, Model model) throws IOException {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Access to html admin page on \"BBM/Admin\".");
-		//BBMLogger.infoln("From " + NetworkUtils.getRemoteIpAddress(request));
-		//ChaosManager.changeChaosState()
-		
 		model.addAttribute("x", "x");
 		BBMLogger.infoln("Response received.");
 		return "admin";
 		
 	}
-	
-	
-	
 
 }

@@ -15,7 +15,7 @@ public class OfferTransactionService implements IOffersTransactionService {
 	IOffersTransactionRepository offerRepository;
 	
 	@Override
-	public boolean saveOffer(OffersTransaction offer) {
+	public synchronized boolean saveOffer(OffersTransaction offer) {
 		offerRepository.save(offer);
 		return (offer != null);
 	}
@@ -26,7 +26,7 @@ public class OfferTransactionService implements IOffersTransactionService {
 	}
 	
 	@Override
-	public void remove(OffersTransaction offer) {
+	public synchronized void remove(OffersTransaction offer) {
 		 offerRepository.delete(offer);
 	}
 
