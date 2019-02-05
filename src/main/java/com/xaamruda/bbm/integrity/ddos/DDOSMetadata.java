@@ -21,6 +21,23 @@ public class DDOSMetadata {
 		
 	}
 	
+	public DDOSMetadata(Integer metadataID, String requestRemoteAddress, boolean banned, long bannedTimeMs,
+			int requestsCount) {
+		this.metadataID = metadataID;
+		this.requestRemoteAddress = requestRemoteAddress;
+		this.banned = banned;
+		this.bannedTimeMs = bannedTimeMs;
+		this.requestsCount = requestsCount;
+	}
+	
+	public DDOSMetadata(String requestRemoteAddress, boolean banned, long bannedTimeMs,
+			int requestsCount) {
+		this.requestRemoteAddress = requestRemoteAddress;
+		this.banned = banned;
+		this.bannedTimeMs = bannedTimeMs;
+		this.requestsCount = requestsCount;
+	}
+
 	public Integer getMetadataID() {
 		return metadataID;
 	}

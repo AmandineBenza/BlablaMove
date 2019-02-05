@@ -46,7 +46,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		BBMLogger.infoln("Retrieving all users..");
+		// BBMLogger.infoln("Retrieving all users..");
 		return repository.findAll();
 	}
 

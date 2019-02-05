@@ -9,7 +9,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
-import com.xaamruda.bbm.integrity.ddos.DDOSChecker.DDOSThread.DDOSThreadType;
+import com.xaamruda.bbm.commons.spring.context.ContextProvider;
+import com.xaamruda.bbm.integrity.ddos.DDOSGuard.DDOSThread.DDOSThreadType;
 import com.xaamruda.bbm.integrity.ddos.dbaccess.IAuthorizationService;
 
 /**
@@ -20,7 +21,7 @@ import com.xaamruda.bbm.integrity.ddos.dbaccess.IAuthorizationService;
  * TODO ADD journaling ?
  */
 @Component
-public class DDOSChecker {
+public class DDOSGuard {
 
 	public static final int STANDARD_BAN_BOUND_REQUESTS_COUNT = 30;
 	public final static long STANDARD_THREAD_SLEEP_MS = 3600;
@@ -34,27 +35,31 @@ public class DDOSChecker {
 	@Autowired
 	private IAuthorizationService ddosService;
 	
-	private static Map<String, DDOSMetadata> cache;
+	private static Map<String, DDOSMetadata> cache = new HashMap<>();
 	
 	private int boundRequestBeforeBanInOneMinute;
 	
-	public DDOSChecker() {
-		cache = new HashMap<>();
+	@Autowired
+	public DDOSGuard() {
 		this.boundRequestBeforeBanInOneMinute = STANDARD_BAN_BOUND_REQUESTS_COUNT;
+		BBMLogger.infoln("DDOS Guard instance created.");
 	}
 	
-	public DDOSChecker loadCacheFromDatabase() {
+	public DDOSGuard loadCacheFromDatabase() {
 		List<DDOSMetadata> databaseContent = null;
 		
 		try {
 			databaseContent = ddosService.getAll();
 		} catch(Exception e) {
-			BBMLogger.errorln("DDOS checker: Could not load database content.");
+			BBMLogger.errorln("DDOS Guard: Could not load database content.");
 			return this;
 		}
 		
 		if(databaseContent != null && !databaseContent.isEmpty()) {
 			databaseContent.forEach(d -> cache.put(d.getRequestRemoteAddress(), d));
+			BBMLogger.infoln("DDOS cache loaded from database.");
+		} else {
+			BBMLogger.infoln("DDOS cache not loaded from database because database is empty.");
 		}
 		
 		return this;
@@ -91,11 +96,16 @@ public class DDOSChecker {
 	
 	// shared sleep time
 	public static void start(IAuthorizationService service, long sleepTimeMs) {
-		BBMLogger.infoln("Starting ddos checking...");
+		BBMLogger.infoln("Starting ddos guarding...");
 		resetTread = new DDOSThread(DDOSThreadType.REQUEST_COUNT_RESET, service, sleepTimeMs, cache);
 		uploaderTread = new DDOSThread(DDOSThreadType.DATABASE_UPLOADER, service, sleepTimeMs, cache);
 		resetTread.start();
 		uploaderTread.start();
+		
+		DDOSGuard checker = ContextProvider.getBean(DDOSGuard.class);
+		if(checker != null) {
+			checker.loadCacheFromDatabase();
+		}
 	}
 
 	public final void stop() {
@@ -175,7 +185,11 @@ public class DDOSChecker {
 		private void runDatabaseUploader() {
 			while (running) {
 				try {
-					service.save(cache.values());
+					try {
+						service.save(cache.values());
+					} catch(Exception e) {
+						// hum, maybe not journaling here
+					}
 					Thread.sleep(sleepTimeMs);
 				} catch (InterruptedException e) {
 					BBMLogger.errorln("DDOS Checker Uploader Thread failed to sleep.");
