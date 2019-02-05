@@ -82,9 +82,9 @@ public class Application {
 		JournalingEngine.init();
 	}
 	
-//	@Bean
-//	public DDOSChecker generateDDOSChecker() {
-//		return new DDOSChecker(DDOSChecker.STANDARD_BAN_BOUND_REQUESTS_COUNT).loadCacheFromDatabase();
-//	}
+	@Bean
+	public DDOSChecker generateDDOSChecker() {
+		return new DDOSChecker().loadCacheFromDatabase();
+	}
 	
 }

@@ -38,9 +38,9 @@ public class DDOSChecker {
 	
 	private int boundRequestBeforeBanInOneMinute;
 	
-	public DDOSChecker(int boundRequestBeforeBanInOneMinute) {
+	public DDOSChecker() {
 		cache = new HashMap<>();
-		this.boundRequestBeforeBanInOneMinute = boundRequestBeforeBanInOneMinute;
+		this.boundRequestBeforeBanInOneMinute = STANDARD_BAN_BOUND_REQUESTS_COUNT;
 	}
 	
 	public DDOSChecker loadCacheFromDatabase() {
