@@ -319,6 +319,8 @@ WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 
 --------------------
 
+--------------------
+
 WEEK 5 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (30/01/2019)
 
@@ -354,7 +356,7 @@ WEEK 6 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 - DDOS engine integration and unit testing
 - Keep implementing Chaos Engine
 - Chaos Engine testing
-- Creation of chaos scripts
+- Creation of chaos scripts (chaos  + ddos)
 
 >>>>> What are the blockers and risks ?
 - Multi-threading (Chaos, Spring-threads, DDOS, identification..) making the application instable
