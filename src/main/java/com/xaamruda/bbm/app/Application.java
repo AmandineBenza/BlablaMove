@@ -73,7 +73,7 @@ public class Application {
 	
 	private static void launch(ConfigurableApplicationContext context) {
 		ContextProvider.init(context);
-		DDOSGuard.start(context.getBean(AuthorizationService.class), DDOSGuard.STANDARD_THREAD_SLEEP_MS);
+		// DDOSGuard.start(context.getBean(AuthorizationService.class), DDOSGuard.STANDARD_THREAD_SLEEP_MS);
 		DatabaseConnectionChecker.start();
 		UserIdentificationChecker.start(context.getBean(UserService.class), 30000);
 		JournalingEngine.init();
