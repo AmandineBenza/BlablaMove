@@ -17,9 +17,19 @@
 		   <input id="Com2" type="=text">
         <button text="Run change" onclick="runLevel($('#Com2').val())">Run</button>
       </div>
+      
       <div>Results</div>
       <div id="Result">ok</div>
+      <div><h1>Ci dessous le ddos</h1>
+      <div><label>IP : </label> <input id="IPDdos" type="text" value="192.168.0.2"></div>
+      <div><label>JSON PAYLOAD : </label> <input id="JsonDdos" type="text" ></div>
+	  <div><label>URL : </label> <input id="URLDdos" type="text" value="http://localhost:8080/BBM/USERS"></div>
+	   <button text="ddos" onclick="ddos($('#IPDdos').val(),$('#JsonDdos').val(),$('#URLDdos').val())">Run DDOS</button>
+		</div>           
       <script type="application/javascript">
+        
+        $('#JsonDdos').val('{"event": "identify-user" ,"data":{"mail":"grouuu","password":"nia"}}');
+        
         function runCommand(payload) {
           console.log("x")
           var data2 = payload || "ls"
@@ -91,6 +101,30 @@
             }
           })
         };
+      function ddos(ip,request,url) {
+      //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
+          console.log("x")
+          console.log(ip)
+          console.log(request)
+          console.log(url)
+          $.ajax({
+            url: url,
+            type: "POST",
+            data: request,
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", "application/json");
+              xhr.setRequestHeader("X-Forwarded-For", ip )
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            },
+            error: function (data){console.log(data)}
+          })
+        };
+        
         
       </script>
 </body>

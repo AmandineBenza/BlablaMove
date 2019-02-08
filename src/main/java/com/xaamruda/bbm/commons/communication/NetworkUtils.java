@@ -1,14 +1,22 @@
 package com.xaamruda.bbm.commons.communication;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 
 public final class NetworkUtils {
 
 	public static String getRemoteIpAddress(HttpServletRequest request) {
-	    String ip = request.getRemoteAddr();
+	    String ip = "";
+	   
+	    Enumeration<String> v = request.getHeaderNames();
+	    while(v.hasMoreElements()) {
+	    	System.out.println(v.nextElement());
+	    }
 	    
+	    System.out.println(ip);
 	    if (null == ip || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
-	        ip = request.getHeader("X-Forwarded-For");
+	    	ip = request.getHeader("x-forwarded-for");
 	    }
 	    if (null == ip || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
 	        ip = request.getHeader("Proxy-Client-IP");
@@ -23,7 +31,8 @@ public final class NetworkUtils {
 	        ip = request.getHeader("HTTP_X_FORWARDED_FOR");
 	    }
 	    if (null == ip || ip.isEmpty() || "unknown".equalsIgnoreCase(ip)) {
-	        ip = request.getRemoteAddr();
+	       System.out.println("ok");
+	    	ip = request.getRemoteAddr();
 	    }
 	    return ip;
 	}

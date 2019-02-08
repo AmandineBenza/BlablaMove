@@ -47,6 +47,7 @@ public class WebServiceController implements IWebServiceController {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/USERS\".");
 		BBMLogger.infoln("From " + NetworkUtils.getRemoteIpAddress(request));
+		System.out.println(jsonEvents);
 		FlowOrchestrationResult result = flowOrchestrator.orchestrateUsersEntryPoint(jsonEvents);
 		BBMLogger.infoln("Response Received.");
 		return new ResponseEntity(result.getContent(), result.getHttpStatus());

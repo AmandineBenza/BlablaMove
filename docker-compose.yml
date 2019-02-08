@@ -26,6 +26,9 @@ services:
           - dbnouveau
        links:
           - dbnouveau
+       networks :
+            web_net :
+                ipv4_address : 192.168.99.10
     dbnouveau:
         container_name: dbnouveau
         image: mysql
@@ -39,32 +42,32 @@ services:
             MYSQL_USER: 176203_admin
             MYSQL_PASSWORD: admin
         volumes:
-           - /data/mysql:/var/lib/mysql
-           - /data/pgsql:/var/lib/postgresql
-           - /data/maria:/var/lib/mariadb
-           - /data/redis:/var/lib/redis
-           - /data/memcached:/var/lib/memcached
-           - /data/neo4j:/var/lib/neo4j/data
-    #dbnouveau2:
-    #    container_name: dbnouveau2
-    #    image: mysql
-    #    command: --default-authentication-plugin=mysql_native_password
-    #    restart: always
-    #    ports: 
-    #      - "3307:3306"
-    #    
-    #    environment:
-    #        MYSQL_ROOT_PASSWORD: mdp
-    #        MYSQL_DATABASE: test
-    #        MYSQL_USER: damien
-    #        MYSQL_PASSWORD: mdp
-    #    volumes:
-    #       - /data/mysql:/var/lib/mysql
-    #       - /data/pgsql:/var/lib/postgresql
-    #       - /data/maria:/var/lib/mariadb
-    #       - /data/redis:/var/lib/redis
-    #       - /data/memcached:/var/lib/memcached
-    #       - /data/neo4j:/var/lib/neo4j/data
+           - ./data/mysql:/var/lib/mysql
+           - ./master.cnf:/etc/mysql/conf.d/master.cnf
+           - ./MasterConfig:/docker-entrypoint-initdb.d
+        networks :
+            web_net :
+                ipv4_address : 192.168.99.11
+           
+    dbnouveau2:
+        container_name: dbnouveau2
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports: 
+          - "3307:3306"
+        environment:
+             MYSQL_ROOT_PASSWORD: admin
+        #     MYSQL_DATABASE: blablamove_master
+        #     MYSQL_USER: 176203_admin
+        #     MYSQL_PASSWORD: admin
+        volumes:
+           - ./data2/mysql:/var/lib/mysql
+           - ./slave.cnf:/etc/mysql/conf.d/slave.cnf
+           - ./SlaveConfig:/docker-entrypoint-initdb.d
+        networks :
+            web_net :
+                ipv4_address : 192.168.99.12
     myadm:
         image : phpmyadmin/phpmyadmin
         ports : 
@@ -73,7 +76,16 @@ services:
         links:
            - "dbnouveau:db"
         environment:
-            MYSQL_USERNAME: root
+            MYSQL_USERNAME: 176203_admin
             MYSQL_ROOT_PASSWORD: admin
         restart: always
+        networks :
+            web_net :
+                ipv4_address : 192.168.99.13
+networks:
+  web_net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 192.168.99.0/25
         

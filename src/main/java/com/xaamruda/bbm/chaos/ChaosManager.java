@@ -3,6 +3,7 @@ package com.xaamruda.bbm.chaos;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ChaosManager {
 
 	static private volatile int chaosLevel = 10;
 	static private volatile boolean chaosActivated = false;
-	final static private Random  chaosProvider = new Random();
+	final static private Random  chaosProvider = new Random(new Date().getTime());
 	
 	public ChaosManager() {}
 	
@@ -114,12 +115,16 @@ public class ChaosManager {
 	}
 	
 	public void toggleChaos() throws IOException {
-		this.chaosActivated  = !chaosActivated;
+		chaosActivated  = !chaosActivated;
+		System.out.println(chaosActivated);
 	}
+	
 	public void changeChaos(int level) throws IOException {
 		this.chaosLevel  = level;
 	}
+	
 	public static void ShutDownDataBase() {
+		System.out.println("Testing chaos order");
 		if(ChaosManager.chaosActivated && chaosProvider.nextInt(1000) < chaosLevel) {
 			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();
 		}
