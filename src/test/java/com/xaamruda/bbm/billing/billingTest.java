@@ -47,8 +47,10 @@ public class billingTest {
                 data.get("volume").getAsDouble(), data.get("date").getAsInt());
         assertEquals(expected, calculator.getUserPoints(),0.1);
         calculator.finalConfirmation(calculator.getUserPoints());
-        assertEquals((expected/100)*90.0, calculator.getUserPoints(),0.1);
-        assertEquals((expected/100)*10.0, calculator.getCompanyPoints(),0.1);
+        double userPoint = Math.floor((expected/100)*90.0);
+        double companyPoint = expected-userPoint;
+        assertEquals(userPoint, calculator.getUserPoints(),0.1);
+        assertEquals(companyPoint, calculator.getCompanyPoints(),0.1);
     }
 
     @Test
@@ -59,8 +61,10 @@ public class billingTest {
                 data.get("volume").getAsDouble(), data.get("date").getAsInt());
         assertEquals(expected, calculator.getUserPoints(),0.1);
         calculator.finalConfirmation(calculator.getUserPoints());
-        assertEquals((expected/100)*90.0, calculator.getUserPoints(),0.1);
-        assertEquals((expected/100)*10.0, calculator.getCompanyPoints(),0.1);
+        double userPoint = Math.floor((expected/100)*90.0);
+        double companyPoint = expected-userPoint;
+        assertEquals(userPoint, calculator.getUserPoints(),0.1);
+        assertEquals(companyPoint, calculator.getCompanyPoints(),0.1);
     }
 
     @Test
@@ -69,7 +73,9 @@ public class billingTest {
         calculator.advance_date_with_offer(nearDate,offer);
         assertEquals(expected, calculator.getUserPoints(),0.1);
         calculator.finalConfirmation(calculator.getUserPoints());
-        assertEquals((expected/100)*90.0, calculator.getUserPoints(),0.1);
-        assertEquals((expected/100)*10.0, calculator.getCompanyPoints(),0.1);
+        double userPoint = Math.floor((expected/100)*90.0);
+        double companyPoint = expected-userPoint;
+        assertEquals(userPoint, calculator.getUserPoints(),0.1);
+        assertEquals(companyPoint, calculator.getCompanyPoints(),0.1);
     }
 }
