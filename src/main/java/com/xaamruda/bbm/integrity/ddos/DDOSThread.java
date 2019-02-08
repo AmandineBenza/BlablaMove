@@ -9,7 +9,7 @@ import com.xaamruda.bbm.integrity.ddos.dbaccess.IAuthorizationService;
 public class DDOSThread implements Runnable {
 
 	public enum DDOSThreadType {
-		REQUEST_COUNT_RESET, DATABASE_UPLOADER
+		REQUEST_COUNT_RESET, DATABASE_UPLOADER, IP_UNBANNER
 	}
 
 	public final static long STANDARD_THREAD_SLEEP_MS = 3600;
@@ -52,6 +52,10 @@ public class DDOSThread implements Runnable {
 		case DATABASE_UPLOADER:
 			runDatabaseUploader();
 			break;
+			
+		case IP_UNBANNER:
+			runIpUbanner();
+			break;
 		default:
 			break;
 		}
@@ -71,7 +75,7 @@ public class DDOSThread implements Runnable {
 			try {
 				Thread.sleep(sleepTimeMs);
 			} catch (InterruptedException e) {
-				BBMLogger.errorln("DDOS Checker Reset Thread failed to sleep.");
+				BBMLogger.errorln("DDOS Guard Reset Thread failed to sleep.");
 			}
 		}
 	}
@@ -82,11 +86,30 @@ public class DDOSThread implements Runnable {
 				try {
 					service.save(cache.values());
 				} catch(Exception e) {
-					// hum, maybe not journaling here
 				}
 				Thread.sleep(sleepTimeMs);
 			} catch (InterruptedException e) {
-				BBMLogger.errorln("DDOS Checker Uploader Thread failed to sleep.");
+				BBMLogger.errorln("DDOS Guard Uploader Thread failed to sleep.");
+			}
+		}
+	}
+	
+	private void runIpUbanner() {
+		while (running) {
+			try {
+				try {
+					List<DDOSMetadata> metadatas = service.getAll();
+
+					for (DDOSMetadata metadata : metadatas) {
+						metadata.setBanned(false);
+					}
+					
+					service.save(metadatas);
+				} catch(Exception e) {
+				}
+				Thread.sleep(sleepTimeMs);
+			} catch (InterruptedException e) {
+				BBMLogger.errorln("DDOS Guard Ubanner Thread failed to sleep.");
 			}
 		}
 	}

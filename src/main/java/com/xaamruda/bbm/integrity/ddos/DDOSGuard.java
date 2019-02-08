@@ -16,11 +16,8 @@ import com.xaamruda.bbm.integrity.ddos.dbaccess.IAuthorizationService;
 /**
  * Bad design but functionalities to be tested.
  * 
- * TODO add unbanner thread.
- * TODO CHECKs and tests
- * TODO ADD journaling ?
+ * TODO Validation
  */
-
 @Component
 public class DDOSGuard {
 
@@ -32,6 +29,8 @@ public class DDOSGuard {
 	private static DDOSThread resetTread;
 	// to upload cache to database
 	private static DDOSThread uploaderTread;
+	// to unban IPs
+	private static DDOSThread unbannerThread;
 	
 	@Autowired
 	private IAuthorizationService ddosService;
@@ -100,12 +99,16 @@ public class DDOSGuard {
 		BBMLogger.infoln("Starting ddos guarding...");
 		resetTread = new DDOSThread(DDOSThreadType.REQUEST_COUNT_RESET, service, sleepTimeMs, cache);
 		uploaderTread = new DDOSThread(DDOSThreadType.DATABASE_UPLOADER, service, sleepTimeMs, cache);
+		unbannerThread = new DDOSThread(DDOSThreadType.IP_UNBANNER, service, sleepTimeMs, cache);
+		
 		resetTread.start();
 		uploaderTread.start();
+		unbannerThread.start();
 		
-		DDOSGuard checker = ContextProvider.getBean(DDOSGuard.class);
-		if(checker != null) {
-			checker.loadCacheFromDatabase();
+		DDOSGuard guard = ContextProvider.getBean(DDOSGuard.class);
+		
+		if(guard != null) {
+			guard.loadCacheFromDatabase();
 		}
 	}
 
