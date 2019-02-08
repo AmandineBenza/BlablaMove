@@ -51,6 +51,7 @@ public class DDOSThread implements Runnable {
 			break;
 		case DATABASE_UPLOADER:
 			runDatabaseUploader();
+			break;
 		default:
 			break;
 		}
