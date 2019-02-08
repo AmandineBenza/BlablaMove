@@ -41,35 +41,35 @@ public class billingTest {
 
     @Test
     public void basicCalculTest (){
-        double expected = distance + weight + volume + (farDate > 3 ? 3.0 : 1.0);
+        double expected = distance + weight + volume + (farDate > 3 ? 1.0 : 3.0);
         JsonObject data =  JsonUtils.getFromJson(offerA);
         calculator.calcul_price_base(data.get("weight").getAsDouble(), distance,
                 data.get("volume").getAsDouble(), data.get("date").getAsInt());
-        assertTrue(expected == calculator.getUserPoints());
+        assertEquals(expected, calculator.getUserPoints(),0.1);
         calculator.finalConfirmation(calculator.getUserPoints());
-        assertTrue((expected/100)*90.0 == calculator.getUserPoints());
-        assertTrue((expected/100)*10.0 == calculator.getCompanyPoints());
+        assertEquals((expected/100)*90.0, calculator.getUserPoints(),0.1);
+        assertEquals((expected/100)*10.0, calculator.getCompanyPoints(),0.1);
     }
 
     @Test
     public void floatCalculTest(){
-        double expected = floatDistance + floatWeight + floatVolume + (farDate > 3 ? 3.0 : 1.0);
+        double expected = Math.floor(floatDistance + floatWeight + floatVolume + (farDate > 3 ? 1.0 : 3.0));
         JsonObject data =  JsonUtils.getFromJson(offerFloat);
         calculator.calcul_price_base(data.get("weight").getAsDouble(), floatDistance,
                 data.get("volume").getAsDouble(), data.get("date").getAsInt());
-        assertTrue(Math.floor(expected) == calculator.getUserPoints());
+        assertEquals(expected, calculator.getUserPoints(),0.1);
         calculator.finalConfirmation(calculator.getUserPoints());
-        assertTrue((expected/100)*90.0 == calculator.getUserPoints());
-        assertTrue((expected/100)*10.0 == calculator.getCompanyPoints());
+        assertEquals((expected/100)*90.0, calculator.getUserPoints(),0.1);
+        assertEquals((expected/100)*10.0, calculator.getCompanyPoints(),0.1);
     }
 
     @Test
     public void calculOfferTest(){
-        double expected = offer + (nearDate > 3 ? 3.0 : 1.0);
+        double expected = offer + (nearDate > 3 ? 1.0 : 3.0);
         calculator.advance_date_with_offer(nearDate,offer);
-        assertTrue(Math.floor(expected) == calculator.getUserPoints());
+        assertEquals(expected, calculator.getUserPoints(),0.1);
         calculator.finalConfirmation(calculator.getUserPoints());
-        assertTrue((expected/100)*90.0 == calculator.getUserPoints());
-        assertTrue((expected/100)*10.0 == calculator.getCompanyPoints());
+        assertEquals((expected/100)*90.0, calculator.getUserPoints(),0.1);
+        assertEquals((expected/100)*10.0, calculator.getCompanyPoints(),0.1);
     }
 }
