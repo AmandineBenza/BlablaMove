@@ -224,11 +224,11 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     private void setRecap(){
-        offerIdResLabel.setText(data[0]);
-        priceResLabel.setText(data[5]);
-        dateResLabel.setText(data[3]);
-        startLocationResLabel.setText(data[6]);
-        arrivalLocationResLabel.setText(data[7]);
+        offerIdResLabel.setText(data[4]);
+        priceResLabel.setText(data[3]);
+        dateResLabel.setText(data[0]);
+        startLocationResLabel.setText(data[1]);
+        arrivalLocationResLabel.setText(data[2]);
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {

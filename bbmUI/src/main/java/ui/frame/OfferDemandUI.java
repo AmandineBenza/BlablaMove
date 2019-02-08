@@ -5,6 +5,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,6 +27,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
     private JTextField weightField;
     private JLabel weightLabel;
     private JFrame frame;
+    private ArrayList response;
 
     private String connectedUser;
 
@@ -34,6 +36,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
      */
     public OfferDemandUI(String user) {
         connectedUser = user;
+        response = new ArrayList<String[]>();
         initialisation();
     }
 
@@ -212,6 +215,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
                         sb.append(line + "\n");
                     }
                     br.close();
+                    setResponses(sb.toString());
                     return !("" + sb.toString()).equals(null);
                 } else {
                     return !("" + sb.toString()).equals(null);
@@ -241,13 +245,23 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         return res;
     }
 
+    private void setResponses(String data){
+        String[] data1 = {"056402864","61","15","10/02/2019","0125678","125","Sophia","Nice"};
+        String[] data2 = {"045408964","42","12","10/02/2019","0167954","100","Sophia","Nice"};
+        String[] data3 = {"026076584","12","10","10/02/2019","0236125","200","Sophia","Nice"};
+        response.add(data1);
+        response.add(data2);
+        response.add(data3);
+    }
+
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(curlAction()) {
         //if(true){
             acceptButton.setSelected(false);
             frame.dispose();
-            String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
-            new ShowRecapUI(connectedUser,newData);
+            setResponses("");
+            //String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
+            new ShowOfferUI(connectedUser,response);
         }else{
             JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
         }
