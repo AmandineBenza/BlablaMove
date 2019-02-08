@@ -55,28 +55,31 @@ public class Calculator implements ICalculator {
 		return this.userPoints;
 	}
 
+
+
 	private double fullAddition(double weight, double distance, double volume, double day) {
 		double weightPoint = conversionWeight(weight);
 		double distancePoint = conversionDistance(distance);
 		double volumePoint = conversionVolume(volume);
 		double reservationPoint = conversionDay(day);
-		return (weightPoint + distancePoint + volumePoint + reservationPoint);
+		return Math.floor(weightPoint + distancePoint + volumePoint + reservationPoint);
 	}
 
 	//////////// CONVERTER ////////////
+
 	private double conversionWeight(double weight) {
-		return Math.floor(weight/1.0);
+		return (weight/1.0);
 	}
 
 	private double conversionDistance(double distance) {
-		return Math.floor(distance/1.0);
+		return (distance/1.0);
 	}
 
 	private double conversionVolume(double volume) {
-		return Math.floor(volume/1.0);
+		return (volume/1.0);
 	}
 
 	private double conversionDay(double day) {
-		return day > 3 ? 10.0 : 5.0;
+		return day > 3 ? 3.0 : 1.0;
 	}
 }
