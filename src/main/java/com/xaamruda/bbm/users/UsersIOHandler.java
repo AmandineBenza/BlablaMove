@@ -3,9 +3,13 @@ package com.xaamruda.bbm.users;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.xaamruda.bbm.chaos.ChaosManager;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.IntegrityIOHandler;
@@ -75,7 +79,8 @@ public class UsersIOHandler {
 	public boolean sendMail(String mail, int price, String from) {
 		return MailSender.sendEmail(mail);
 	}
-
+	
+	@Transactional(value=TxType.MANDATORY)
 	public void makeTransaction(String ownerID, String buyerID, Integer finalPrice) {
 		User buyer = null;
 		User owner = null;
@@ -98,10 +103,11 @@ public class UsersIOHandler {
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
 		buyer.setPointsAmount(newBuyerPoints);
 
-		ArrayList<User> users = new ArrayList<>();
-		users.add(owner);
-		users.add(buyer);
-		service.store(users);
+		service.store(owner);
+		
+		ChaosManager.shutDownDataBase();
+		
+		service.store(buyer);
 	}
 
 	public void debit(String buyerID, Integer finalPrice) {
