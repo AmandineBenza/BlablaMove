@@ -123,7 +123,7 @@ public class ChaosManager {
 		this.chaosLevel  = level;
 	}
 	
-	public static void ShutDownDataBase() {
+	public static void shutDownDataBase() {
 		System.out.println("Testing chaos order");
 		if(ChaosManager.chaosActivated && chaosProvider.nextInt(1000) < chaosLevel) {
 			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();

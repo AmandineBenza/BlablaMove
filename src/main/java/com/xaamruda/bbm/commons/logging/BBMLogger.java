@@ -31,7 +31,7 @@ public final class BBMLogger {
 	}
 	
 	public static void infoln(String msg, int sleepms) {
-		ChaosManager.ShutDownDataBase();
+		ChaosManager.shutDownDataBase();
 		try {
 			Thread.sleep(sleepms);
 			System.out.println("[INFO|" + dateInfo() + msg + "]");
