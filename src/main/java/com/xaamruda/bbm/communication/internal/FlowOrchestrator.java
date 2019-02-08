@@ -40,7 +40,6 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public FlowOrchestrationResult orchestrateUsersEntryPoint(String jsonEvents) {
-		
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");

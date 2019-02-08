@@ -31,14 +31,14 @@ public class UserService implements IUserService {
 	}
 	
 	@Override
-	public void store(User user) {
+	public synchronized void store(User user) {
 		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);
 		repository.save(user);
 		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 	@Override
-	public void store(List<User> users) {
+	public synchronized void store(List<User> users) {
 		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), users);
 		repository.saveAll(users);
 		integrityIOHandler.endUserJournalEntry(journalId);
@@ -46,12 +46,12 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		BBMLogger.infoln("Retrieving all users..");
+		// BBMLogger.infoln("Retrieving all users..");
 		return repository.findAll();
 	}
 
 	@Override
-	public void delete(User user) {
+	public synchronized void delete(User user) {
 		BBMLogger.infoln("Deleting user " + user.getMail() + ".");
 		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);
 		repository.delete(user);

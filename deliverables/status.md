@@ -341,3 +341,22 @@ WEEK 5 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 - Time
 
 --------------------
+
+WEEK 6 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(06/02/18)
+
+>>>>> What was achieved this week ?
+- Starting a DDOS prevention system
+- Fixing Mac Docker problem due to docker-compose update
+- Master/Slave replication system
+
+>>>>> What is planned for the following week 
+- Some UI testing
+- More Billing testing
+- DDOS engine integration and unit testing
+- Keep implementing Chaos Engine
+- Chaos Engine testing
+- Creation of chaos scripts (chaos  + ddos)
+
+>>>>> What are the blockers and risks ?
+- Multi-threading (Chaos, Spring-threads, DDOS, identification..) making the application instable
