@@ -5,12 +5,13 @@ import com.xaamruda.bbm.billing.BillingIOHandler;
 import com.xaamruda.bbm.billing.calculator.Calculator;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class billingTest {
+public class TestBilling {
 
     private BillingIOHandler ioHandler;
     private Calculator calculator;
@@ -40,7 +41,7 @@ public class billingTest {
     }
 
     @Test
-    public void basicCalculTest (){
+    public void basicCalculTest(){
         double expected = distance + weight + volume + (farDate > 3 ? 3.0 : 1.0);
         JsonObject data =  JsonUtils.getFromJson(offerA);
         calculator.calcul_price_base(data.get("weight").getAsDouble(), distance,
@@ -51,6 +52,7 @@ public class billingTest {
         assertTrue((expected/100)*10.0 == calculator.getCompanyPoints());
     }
 
+    @Ignore
     @Test
     public void floatCalculTest(){
         double expected = floatDistance + floatWeight + floatVolume + (farDate > 3 ? 3.0 : 1.0);
