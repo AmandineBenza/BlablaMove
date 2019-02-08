@@ -2,7 +2,6 @@ package com.xaamruda.bbm.billing;
 
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.integrity.IntegrityIOHandler;
-import com.xaamruda.bbm.offers.dbaccess.service.IOffersTransactionService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -11,7 +10,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 
 import static org.junit.Assert.assertEquals;
 
-public class IOHandlerTest {
+public class TestIOHandler {
 
     public BillingIOHandler billingIOHandler;
     public int distance;

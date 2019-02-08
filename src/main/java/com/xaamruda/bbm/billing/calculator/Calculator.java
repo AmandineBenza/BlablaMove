@@ -56,8 +56,6 @@ public class Calculator implements ICalculator {
 		return this.userPoints;
 	}
 
-
-
 	private double fullAddition(double weight, double distance, double volume, double day) {
 		double weightPoint = conversionWeight(weight);
 		double distancePoint = conversionDistance(distance);
