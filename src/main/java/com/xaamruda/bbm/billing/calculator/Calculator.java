@@ -21,14 +21,15 @@ public class Calculator implements ICalculator {
 
 	@Override
 	public void advance_date_with_offer(double date, int offer){
-		double res = offer + conversionDay(date);
+		double res = Math.floor(offer + conversionDay(date));
 		this.userPoints = (res);
 	}
 
 	@Override
 	public void finalConfirmation(double point){
-		this.userPoints = (point/100.0) * 90.0;
-		this.companyPoints = (point/100.0) * 10.0;
+		double total = this.userPoints;
+		this.userPoints = Math.floor((point/100.0) * 90.0);
+		this.companyPoints = total - this.userPoints;
 	}
 
 	@Override
@@ -80,6 +81,6 @@ public class Calculator implements ICalculator {
 	}
 
 	private double conversionDay(double day) {
-		return day > 3 ? 3.0 : 1.0;
+		return day > 3 ? 1.0 : 3.0;
 	}
 }
