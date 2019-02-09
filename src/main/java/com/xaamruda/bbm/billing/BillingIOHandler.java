@@ -40,9 +40,8 @@ public class BillingIOHandler {
 		long journalId = integrityIOHandler.addBillingJournalEntry("calcul_without_offer", this.getClass().getSimpleName(), workData, distance);
 		
 		JsonObject data =  JsonUtils.getFromJson(workData);
-		facturation.calcul_price_base(data.get("weight").getAsInt(), distance,
-				data.get("volume").getAsInt(), data.get("date").getAsInt());
-		
+		facturation.calcul_price_base(data.get("weight").getAsDouble(), distance,
+				data.get("volume").getAsDouble(), data.get("date").getAsInt());
 		integrityIOHandler.endBillingJournalEntry(journalId);
 		int userPoints = (int) facturation.getUserPoints();
 		integrityIOHandler.endBillingJournalEntry(journalId);
@@ -62,7 +61,8 @@ public class BillingIOHandler {
 		
 		JsonObject data =  JsonUtils.getFromJson(workData);
 		facturation.advance_date_with_offer(data.get("date").getAsInt(), data.get("offerPrice").getAsInt());
-		String json = JsonUtils.toJson("{ userPoints : " + facturation.getUserPoints() + ", companyPoints : " + facturation.getCompanyPoints());
+		facturation.finalConfirmation(facturation.getUserPoints());
+		String json = JsonUtils.toJson("{\"userPoints\":\"" + facturation.getUserPoints() + "\",\"companyPoints\":\"" + facturation.getCompanyPoints() + "\"}");
 		
 		integrityIOHandler.endBillingJournalEntry(journalId);
 		return json;

@@ -24,6 +24,7 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
     private JTextField startLocationField;
     private JLabel startLocationLabel;
     private JFrame frame;
+    private int[] minMax;
 
     private String connectedUser;
     /**
@@ -31,6 +32,7 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
      */
     public OfferCreationUI(String user) {
         connectedUser = user;
+        minMax = new int[2];
         initialisation();
     }
 
@@ -188,7 +190,9 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
                         sb.append(line + "\n");
                     }
                     br.close();
+                    responseParser(sb.toString());
                     return !("" + sb.toString()).equals(null);
+
                 } else {
                     return !("" + sb.toString()).equals(null);
                 }
@@ -203,6 +207,14 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         } else {
             return false;
         }
+    }
+
+    private void responseParser(String rep){
+        String third [] = rep.split("\\[");
+        String fourth[] = third[1].split("]");
+        minMax[0] = Integer.parseInt(fourth[0].split(":")[0].split(" ")[0]);
+        minMax[1] = Integer.parseInt(fourth[0].split(":")[1].split(" ")[1]);
+
     }
 
     //priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
@@ -225,9 +237,11 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         acceptButton.setSelected(false);
         if(curlAction()){
         //if (true) {
+            //responseParser("For this distance (13) the authorized points amount is within [6 : 39]");
+           // responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
             frame.dispose();
             String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText()};
-            new RangePriceUI(connectedUser,data);
+            new RangePriceUI(connectedUser,data,minMax);
         } else {
             JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
         }

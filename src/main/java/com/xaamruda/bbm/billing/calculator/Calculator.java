@@ -21,14 +21,15 @@ public class Calculator implements ICalculator {
 
 	@Override
 	public void advance_date_with_offer(double date, int offer){
-		double res = offer + conversionDay(date);
+		double res = Math.floor(offer + conversionDay(date));
 		this.userPoints = (res);
 	}
 
 	@Override
 	public void finalConfirmation(double point){
-		this.userPoints = (point/100.0) * 90.0;
-		this.companyPoints = (point/100.0) * 10.0;
+		double total = this.userPoints;
+		this.userPoints = Math.floor((point/100.0) * 90.0);
+		this.companyPoints = total - this.userPoints;
 	}
 
 	@Override
@@ -60,23 +61,24 @@ public class Calculator implements ICalculator {
 		double distancePoint = conversionDistance(distance);
 		double volumePoint = conversionVolume(volume);
 		double reservationPoint = conversionDay(day);
-		return (weightPoint + distancePoint + volumePoint + reservationPoint);
+		return Math.floor(weightPoint + distancePoint + volumePoint + reservationPoint);
 	}
 
 	//////////// CONVERTER ////////////
+
 	private double conversionWeight(double weight) {
-		return Math.floor(weight/1.0);
+		return (weight/1.0);
 	}
 
 	private double conversionDistance(double distance) {
-		return Math.floor(distance/1.0);
+		return (distance/1.0);
 	}
 
 	private double conversionVolume(double volume) {
-		return Math.floor(volume/1.0);
+		return (volume/1.0);
 	}
 
 	private double conversionDay(double day) {
-		return day > 3 ? 10.0 : 5.0;
+		return day > 3 ? 1.0 : 3.0;
 	}
 }

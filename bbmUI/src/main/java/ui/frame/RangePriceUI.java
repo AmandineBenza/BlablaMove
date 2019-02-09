@@ -38,13 +38,15 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private int minPrice;
     private String connectedUser;
     private String[] offerData;
+    private int[] minMax;
 
     /**
      * Creates new form RangePriceUI
      */
-    public RangePriceUI(String user,String[] data) {
+    public RangePriceUI(String user,String[] data,int[] minMaximum) {
         offerData = data;
         connectedUser = user;
+        minMax = minMaximum;
         initialisation();
     }
 
@@ -75,15 +77,15 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
         minimumPriceTxtLabel.setText("Minimum Price");
 
-        minimumPriceResLabel.setText("100");
-
-        maximumPriceResLabel.setText("250");
-
-        mediumPriceTxtLabel.setText("Medium Price");
+        minimumPriceResLabel.setText(String.valueOf(minMax[0]));
 
         maximumPriceTxtLabel.setText("Maximum Price");
 
-        mediumPriceResLabel.setText("175");
+        maximumPriceResLabel.setText(String.valueOf(minMax[1]));
+
+        mediumPriceTxtLabel.setText("Medium Price");
+
+        mediumPriceResLabel.setText(String.valueOf(minMax[0]+((minMax[1]-minMax[0])/2)));
 
         yourNewPriceTxtLabel.setText("Choose your final price : ");
 
@@ -116,15 +118,15 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                                                 .addComponent(acceptButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addComponent(maximumPriceResLabel)
+                                                .addComponent(mediumPriceResLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                                                .addComponent(maximumPriceTxtLabel)
+                                                .addComponent(mediumPriceTxtLabel)
                                                 .addGap(87, 87, 87)))
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(mediumPriceTxtLabel)
+                                        .addComponent(maximumPriceTxtLabel)
                                         .addComponent(cancelButton)
-                                        .addComponent(mediumPriceResLabel))
+                                        .addComponent(maximumPriceResLabel))
                                 .addGap(13, 13, 13))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(mainPanelLayout.createSequentialGroup()

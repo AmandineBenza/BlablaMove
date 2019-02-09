@@ -21,12 +21,15 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     private String connectedUser;
     private ArrayList<String[]> data;
     private ArrayList<JButton> jbuttonList;
+    private String response;
+    private int click = -1;
     /**
      * Creates new form ShowOfferUI
      */
     public ShowOfferUI(String user, ArrayList<String[]> getListOffer) {
         this.connectedUser = user;
         this.listOfferId = getListId(getListOffer);
+        this.response = null;
         this.data = getListOffer;
         initialisation();
     }
@@ -165,6 +168,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
                     sb.append(line + "\n");
                 }
                 br.close();
+                response = sb.toString();
                 return !("" + sb.toString()).equals(null);
             } else {
                 return !("" + sb.toString()).equals(null);
@@ -181,8 +185,19 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
 
     @Override
     public String curlJsonParser() {
-        String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+",\"buyerID\": \""+"\",\"weight\": \""+"\", \"volume\":\""+"\", \"date\":\""+"\" }," +
-                " \"identification\":{\"userID\":\""+"\"}}";
+        String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ data.get(click)[0] +",\"buyerID\": \""+ data.get(click)[1] +
+                "\",\"weight\": \""+ data.get(click)[2] +"\", \"volume\":\""+ data.get(click)[3] +"\", \"date\":\""+ data.get(click)[4] +
+                "\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
+        return res;
+    }
+
+    private String[] parseResponse(){
+        String[] first = response.split(",");
+        String date = first[0].split(":")[1];
+        String start = first[1].split(":")[1];
+        String end = first[2].split(":")[1];
+        String price = first[3].split(":")[1];
+        String[] res = {price,date,start,end,data.get(click)[0]};
         return res;
     }
 
@@ -193,22 +208,26 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt){
-            if (true) {
-                int i =0;
-                JButton button = jbuttonList.get(i);
-                System.out.println(evt.getActionCommand());
-                while(evt.getSource() != button) {
-                    i++;
-                    button = jbuttonList.get(i);
-                }
-                button.setSelected(false);
-                frame.dispose();
-                new ShowRecapUI(connectedUser,data.get(i));
-
-            } else {
-                JOptionPane.showMessageDialog(frame, "an error occur.");
-            }
+        int i =0;
+        JButton button = jbuttonList.get(i);
+        System.out.println(evt.getActionCommand());
+        while(evt.getSource() != button) {
+            i++;
+            button = jbuttonList.get(i);
         }
+        button.setSelected(false);
+        click = i;
+        //if (true) {
+        if (curlAction()) {
+            //response = "{ \"date\": \"5\", \"startAddress\": \"Nice\", \"endAddress\": \"Sophia\", \"price\": \"10\" }";
+            frame.dispose();
+            new ShowRecapUI(connectedUser,parseResponse());
+
+        } else {
+            click = -1;
+            JOptionPane.showMessageDialog(frame, "an error occur.");
+        }
+    }
 
 
 }
