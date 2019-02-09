@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Administation page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" ></script>
+</head>
+<body>
+    <h1>Fast and fast administration call</h1>
+      <div>
+        <div><a href="javascript:{runCommand('ls');}">run ls</a></div>
+        <div>Entrez une commande</div>
+        <input id="Com" type="=text">
+        <button text="Run" onclick="runCommand( $('#Com').val())">Run</button>
+		 <div><a href="javascript:{shutdown();}">run SHUTDOWN</a></div>
+		  <div><a href="javascript:{toggle();}">run Toogle</a></div>
+		   <input id="Com2" type="=text">
+        <button text="Run change" onclick="runLevel($('#Com2').val())">Run</button>
+      </div>
+      <div>Results</div>
+      <div id="Result">ok</div>
+      <div><h1>Ci dessous le ddos</h1>
+      <div><label>IP : </label> <input id="IPDdos" type="text" value="192.168.0.2"></div>
+      <div><label>JSON PAYLOAD : </label> <input id="JsonDdos" type="text" ></div>
+	  <div><label>URL : </label> <input id="URLDdos" type="text" value="http://localhost:8080/BBM/USERS"></div>
+	   <button text="ddos" onclick="ddos($('#IPDdos').val(),$('#JsonDdos').val(),$('#URLDdos').val())">Run DDOS</button>
+	</div>   
+		
+	<div><h1>Ci Les appels generique c'est là</h1>
+      <div><label>event : </label> <input id="Gen1" type="text" value="192.168.0.2"></div>
+      <div><label>data : </label> <input id="Gen2" type="text" ></div>
+	  <div><label> TBD : </label> <input id="Gen3" type="text" value="http://localhost:8080/BBM/USERS"></div>
+	   <button text="ULTIMATE GENERIC CALLU" onclick="genericFun($('#Gen1').val(),$('#Gen2').val(),$('#Gen3').val())">Run DDOS</button>
+	  </div>
+	  <div id="GenRes">
+	  Run a command to see the result
+	  </div>           
+      <script type="application/javascript">
+        
+        $('#JsonDdos').val('{"event": "identify-user" ,"data":{"mail":"grouuu","password":"nia"}}');
+        
+        function runCommand(payload) {
+          console.log("x")
+          var data2 = payload || "ls"
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "runCommand", data: data2 }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+         function shutdown() {
+          console.log("y")
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "shutDownDB" }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+        
+        function toggle() {
+          console.log("z")
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "toggle" }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+     function runLevel(payload) {
+          console.log("x")
+          var data2 = payload || "ls"
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: "change", data: data2 }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", " application/json");
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            }
+          })
+        };
+      function ddos(ip,request,url) {
+      //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
+          console.log("x")
+          console.log(ip)
+          console.log(request)
+          console.log(url)
+          $.ajax({
+            url: url,
+            type: "POST",
+            data: request,
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", "application/json");
+              xhr.setRequestHeader("X-Forwarded-For", ip )
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#Result").text(data);
+            },
+            error: function (data){console.log(data)}
+          })
+        };
+        
+        function genericFun(one,two,three) {
+      //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
+          console.log("x")
+          
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: one, data: two }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", "application/json");
+             
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#GenRes").text(data);
+            },
+            error: function (data){
+             $("#GenRes").text(data.responseText);
+            console.log(data)}
+          })
+        };
+        
+      </script>
+</body>
+</html>
+
+ 

@@ -27,5 +27,6 @@ hs_err_pid*
 *.xml
 /data
 /data2
+*/node_modules
 
 bbm.iml
