@@ -12,7 +12,7 @@ public interface IWebServiceController {
 	
 	public ResponseEntity usersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request);
 	public ResponseEntity offersEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request);
-	void adminEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) throws IOException;
+	public ResponseEntity adminEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) throws IOException;
 	
 }
 

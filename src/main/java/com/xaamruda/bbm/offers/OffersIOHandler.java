@@ -3,6 +3,9 @@ package com.xaamruda.bbm.offers;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.google.gson.JsonObject;
@@ -152,7 +155,7 @@ public class OffersIOHandler {
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String offerID = json.get("offerID").getAsString();
 		String buyerID = json.get("buyerID").getAsString();
-
+		
 		List<PostedOffer> offers = null;
 
 		try {
@@ -383,7 +386,7 @@ public class OffersIOHandler {
 
 		return "INVALID OPERATION\n";
 	}
-
+	@Transactional()
 	public String confirmDeposit(String workData) {
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
