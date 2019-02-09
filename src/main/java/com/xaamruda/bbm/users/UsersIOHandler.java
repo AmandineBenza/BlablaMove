@@ -35,6 +35,9 @@ public class UsersIOHandler {
 	private IUserDataManager dataManager;
 	
 	@Autowired
+	private MailSender mailsender;
+	
+	@Autowired
 	private IntegrityIOHandler integrityIOHandler;
 
 	public UsersIOHandler() {
@@ -76,8 +79,8 @@ public class UsersIOHandler {
 		return user;
 	}
 
-	public boolean sendMail(String mail, int price, String from) {
-		return MailSender.sendEmail(mail);
+	public boolean sendMail(String ownerMail, int price, String buyerMail, String subject) {
+		return mailsender.sendEmail(ownerMail, buyerMail, subject);
 	}
 	
 	@Transactional(value=TxType.MANDATORY)
