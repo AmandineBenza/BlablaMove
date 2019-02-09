@@ -22,6 +22,7 @@ import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.roads.RoadsIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
+import com.xaamruda.bbm.users.mailing.BlablaMailContants;
 import com.xaamruda.bbm.offers.search.engine.Filters;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 
@@ -168,6 +169,7 @@ public class OffersIOHandler {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("askForValidation", this.getClass().getSimpleName(), workData);
 		
+		String mailSubject = BlablaMailContants.BLABLA_SUBJECT_ASK_VALIDATION;
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String offerID = json.get("offerID").getAsString();
 		String buyerID = json.get("buyerID").getAsString();
@@ -185,7 +187,7 @@ public class OffersIOHandler {
 
 			PostedOffer offer = offers.get(0);
 			int newPrice = offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance());
-			usersHandler.sendMail(offer.getOwnerID(), newPrice, buyerID);
+			usersHandler.sendMail(offer.getOwnerID(), newPrice, buyerID, mailSubject);
 
 			OffersTransaction offerTransaction = new OffersTransaction();
 			BBMLogger.infoln("Creating offer transaction...");
@@ -222,7 +224,7 @@ public class OffersIOHandler {
 		}
 	}
 
-	// this is the method where Alicia accept an offer
+	// this is the method where Alice accepts an offer
 	public String consultAwaitingOffers(String workData) throws DatabaseException {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("consultAwaitingOffers",
@@ -251,10 +253,12 @@ public class OffersIOHandler {
 		return "No offers waiting for confirmation.\n";
 	}
 
-	// Alicia accepts an offer
+	// Alice accepts an offer
 	public String confirmAwaitingOffer(String workData) throws DatabaseException {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("confirmAwaitingOffer", this.getClass().getSimpleName(), workData);
+		
+		String mailSubject = BlablaMailContants.BLABLA_SUBJECT_CONFIRM_OFFER;
 		
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
@@ -276,7 +280,7 @@ public class OffersIOHandler {
 			offer.setConfirmationDate(new Date().toString());
 
 			// TODO mailing plus fin ? (genre autre method)
-			usersHandler.sendMail(offer.getBuyerID(), offer.getFinalPrice(), offer.getOwnerID());
+			usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(),offer.getBuyerID(), mailSubject);
 
 			try {
 				offerTransactionService.saveOffer(offer);
