@@ -83,18 +83,20 @@ public class WebServiceController implements IWebServiceController {
 	@CrossOrigin
 	@Override
 	@RequestMapping(value = "ADMIN", method = RequestMethod.POST)
-	public void adminEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) throws IOException {
+	public ResponseEntity adminEntryPoint(@RequestBody String jsonEvents, HttpServletRequest request) throws IOException {
 		// remove ? user should not be able to shoot admin entry
 		if(!ddosChecker.checkNewRequestAuthorization(request.getRemoteAddr())) {
 			BBMLogger.infoln(request.getRemoteAddr() + " blocked by DDOS engine.");
-			return;
+			return new ResponseEntity("DDOS analyze prevent you from accessing BlablaMove.\n", HttpStatus.FORBIDDEN);
 		}
 		
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/Admin\".");
-		chaosManager.handle(jsonEvents);
+		String result = chaosManager.handle(jsonEvents);
 		chaosManager.lsPrint();
 		BBMLogger.infoln("Response received.");
+		
+		return new ResponseEntity(result,HttpStatus.OK);
 	}
 	
 	@CrossOrigin

@@ -17,7 +17,6 @@
 		   <input id="Com2" type="=text">
         <button text="Run change" onclick="runLevel($('#Com2').val())">Run</button>
       </div>
-      
       <div>Results</div>
       <div id="Result">ok</div>
       <div><h1>Ci dessous le ddos</h1>
@@ -25,7 +24,17 @@
       <div><label>JSON PAYLOAD : </label> <input id="JsonDdos" type="text" ></div>
 	  <div><label>URL : </label> <input id="URLDdos" type="text" value="http://localhost:8080/BBM/USERS"></div>
 	   <button text="ddos" onclick="ddos($('#IPDdos').val(),$('#JsonDdos').val(),$('#URLDdos').val())">Run DDOS</button>
-		</div>           
+	</div>   
+		
+	<div><h1>Ci Les appels generique c'est là</h1>
+      <div><label>event : </label> <input id="Gen1" type="text" value="192.168.0.2"></div>
+      <div><label>data : </label> <input id="Gen2" type="text" ></div>
+	  <div><label> TBD : </label> <input id="Gen3" type="text" value="http://localhost:8080/BBM/USERS"></div>
+	   <button text="ULTIMATE GENERIC CALLU" onclick="genericFun($('#Gen1').val(),$('#Gen2').val(),$('#Gen3').val())">Run DDOS</button>
+	  </div>
+	  <div id="GenRes">
+	  Run a command to see the result
+	  </div>           
       <script type="application/javascript">
         
         $('#JsonDdos').val('{"event": "identify-user" ,"data":{"mail":"grouuu","password":"nia"}}');
@@ -125,6 +134,29 @@
           })
         };
         
+        function genericFun(one,two,three) {
+      //curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
+          console.log("x")
+          
+          $.ajax({
+            url: 'http://localhost:8080/BBM/ADMIN',
+            type: "POST",
+            data: JSON.stringify({ event: one, data: two }),
+            dataType: "json",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader("Accept", " application/json");
+              xhr.setRequestHeader("Content-type", "application/json");
+             
+            }, success: function (data) {
+              // alert(data);
+              console.log(data)
+              $("#GenRes").text(data);
+            },
+            error: function (data){
+             $("#GenRes").text(data.responseText);
+            console.log(data)}
+          })
+        };
         
       </script>
 </body>

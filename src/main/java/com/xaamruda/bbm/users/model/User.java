@@ -25,7 +25,6 @@ public class User {
 	private boolean identified;
 	private Timestamp identificationTime;
 	
-
 	public User(){}
 	
 	public User(String mail, String name, String address, String phone, String password, Integer pointsAmount) {
