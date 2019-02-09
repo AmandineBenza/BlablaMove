@@ -22,7 +22,7 @@ import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.roads.RoadsIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
-import com.xaamruda.bbm.users.mailing.BlablaMailContants;
+import com.xaamruda.bbm.users.mailing.BlablaMailConstants;
 import com.xaamruda.bbm.offers.search.engine.Filters;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 
@@ -169,7 +169,7 @@ public class OffersIOHandler {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("askForValidation", this.getClass().getSimpleName(), workData);
 		
-		String mailSubject = BlablaMailContants.BLABLA_SUBJECT_ASK_VALIDATION;
+		String mailSubject = BlablaMailConstants.BLABLA_SUBJECT_ASK_VALIDATION;
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String offerID = json.get("offerID").getAsString();
 		String buyerID = json.get("buyerID").getAsString();
@@ -258,7 +258,7 @@ public class OffersIOHandler {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("confirmAwaitingOffer", this.getClass().getSimpleName(), workData);
 		
-		String mailSubject = BlablaMailContants.BLABLA_SUBJECT_CONFIRM_OFFER;
+		String mailSubject = BlablaMailConstants.BLABLA_SUBJECT_CONFIRM_OFFER;
 		
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();

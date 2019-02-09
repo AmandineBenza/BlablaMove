@@ -1,6 +1,6 @@
 package com.xaamruda.bbm.users.mailing;
 
-public class BlablaMailContants {
+public class BlablaMailConstants {
  
     public static final String BLABLA_MAIL = "blablablamove@gmail.com";
  

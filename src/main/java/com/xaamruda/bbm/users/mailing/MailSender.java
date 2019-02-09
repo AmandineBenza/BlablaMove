@@ -59,14 +59,14 @@ public class MailSender {
 		
 		switch (subject) {
 		
-		case BlablaMailContants.BLABLA_SUBJECT_CONFIRM_OFFER:
+		case BlablaMailConstants.BLABLA_SUBJECT_CONFIRM_OFFER:
 			
 			sendEmailConfirmAwaitingOffer(ownerMail,buyerMail);
 			BBMLogger.infoln("Email successfully sent to : " + ownerMail);
 			
 			break;
 		
-		case BlablaMailContants.BLABLA_SUBJECT_ASK_VALIDATION :
+		case BlablaMailConstants.BLABLA_SUBJECT_ASK_VALIDATION :
 			
 			sendEmailAskValidation(ownerMail,buyerMail);
 			BBMLogger.infoln("Email successfully sent to : " + buyerMail);
