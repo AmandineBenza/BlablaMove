@@ -1,6 +1,5 @@
 package com.xaamruda.bbm.users;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -9,7 +8,7 @@ import javax.transaction.Transactional.TxType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xaamruda.bbm.chaos.ChaosManager;
+import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.IntegrityIOHandler;
@@ -81,7 +80,11 @@ public class UsersIOHandler {
 	}
 	
 	@Transactional(value=TxType.MANDATORY)
-	public void makeTransaction(String ownerID, String buyerID, Integer finalPrice) {
+	public void makeTransaction(String ownerID, String buyerID, Integer finalPrice) throws DatabaseException {
+		// add journaling entry to user journal file
+		long journalId = integrityIOHandler.addUserJournalEntry("makeTransaction", this.getClass().getSimpleName(),
+				ownerID, buyerID, finalPrice);
+		
 		User buyer = null;
 		User owner = null;
 		
@@ -89,13 +92,13 @@ public class UsersIOHandler {
 			buyer = service.getUserByMail(buyerID).get(0);
 			owner = service.getUserByMail(ownerID).get(0);
 		} catch (Exception ex) {
-			integrityIOHandler.addUserJournalEntry("makeTransaction", this.getClass().getSimpleName(),
-					ownerID, buyerID, finalPrice);
-			BBMLogger.errorln("Transaction failed. New entry added to user journal.");
-			return;
+			throw new DatabaseException("Transaction failed.", "Owner: " + ownerID,
+					"Buyer: " + buyerID, "Price: " + finalPrice);
 		}
 		
 		int newBuyerPoints = buyer.getPointsAmount() - finalPrice;
+		
+		// inferior bound
 		if(newBuyerPoints < 0) {
 			newBuyerPoints = 0;
 		}
@@ -104,21 +107,21 @@ public class UsersIOHandler {
 		buyer.setPointsAmount(newBuyerPoints);
 
 		service.store(owner);
-		
-		ChaosManager.shutDownDataBase();
-		
 		service.store(buyer);
+		
+		// end journaling entry
+		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
-	public void debit(String buyerID, Integer finalPrice) {
+	public void debit(String buyerID, Integer finalPrice) throws DatabaseException {
+		// add journaling entry to user journal file
+		long journalId = integrityIOHandler.addUserJournalEntry("debit", this.getClass().getSimpleName(), buyerID, finalPrice);
 		User buyer = null;
 		
 		try {
 			buyer = service.getUserByMail(buyerID).get(0);
 		} catch(Exception e) {
-			integrityIOHandler.addUserJournalEntry("debit", this.getClass().getSimpleName(), buyer, finalPrice);
-			BBMLogger.errorln("Debit failed. New entry added to user journal.");
-			return;
+			throw new DatabaseException("Debit failed.", "Buyer: " + buyerID, "Price: " + finalPrice);
 		}
 		
 		if (buyer.getPointsAmount() == null)
@@ -129,21 +132,23 @@ public class UsersIOHandler {
 		try {
 			service.store(buyer);
 		} catch(Exception e) {
-			integrityIOHandler.addUserJournalEntry("debit", this.getClass().getSimpleName(), buyer, finalPrice);
-			BBMLogger.errorln("Debit: buyer storing failed. New entry added to user journal.");
-			return;
+			throw new DatabaseException("Debit: buyer storing failed.", "Buyer: " + buyerID, "Price: " + finalPrice);
 		}
+		
+		// end journaling entry
+		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
-	public void credit(String ownerID, Integer finalPrice) {
+	public void credit(String ownerID, Integer finalPrice) throws DatabaseException {
+		// add journaling entry to user journal file
+		long journalId = integrityIOHandler.addUserJournalEntry("credit", this.getClass().getSimpleName(), ownerID, finalPrice);
 		User owner = null;
 		
 		try {
 			owner = service.getUserByMail(ownerID).get(0);
 		} catch(Exception e) {
-			integrityIOHandler.addUserJournalEntry("credit", this.getClass().getSimpleName(), ownerID, finalPrice);
-			BBMLogger.errorln("Credit: owner retrieving failed. New entry added to user journal.");
-			return;
+			throw new DatabaseException("Credit: owner retrieving failed.",
+					"Owner: " + ownerID, "Price: " + finalPrice);
 		}
 		
 		if (owner.getPointsAmount() == null)
@@ -154,9 +159,11 @@ public class UsersIOHandler {
 		try {
 			service.store(owner);
 		} catch(Exception e) {
-			integrityIOHandler.addUserJournalEntry("credit", this.getClass().getSimpleName(), ownerID, finalPrice);
-			BBMLogger.errorln("Credit: owner storing failed. New entry added to user journal.");
-			return;
+			throw new DatabaseException("Credit: owner storing failed.",
+					"Owner: " + ownerID, "Price: " + finalPrice);
 		}
+		
+		// end journaling entry
+		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 }

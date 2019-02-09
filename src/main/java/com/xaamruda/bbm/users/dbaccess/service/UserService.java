@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xaamruda.bbm.commons.logging.BBMLogger;
-import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.users.dbaccess.repository.IUserRepository;
 import com.xaamruda.bbm.users.model.User;
 
@@ -17,9 +16,6 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private IUserRepository repository;
-
-	@Autowired
-	private IntegrityIOHandler integrityIOHandler;
 
 	public UserService() {
 	}
@@ -32,16 +28,12 @@ public class UserService implements IUserService {
 	
 	@Override
 	public synchronized void store(User user) {
-		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);
 		repository.save(user);
-		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 	@Override
 	public synchronized void store(List<User> users) {
-		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), users);
 		repository.saveAll(users);
-		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 	@Override
@@ -53,9 +45,7 @@ public class UserService implements IUserService {
 	@Override
 	public synchronized void delete(User user) {
 		BBMLogger.infoln("Deleting user " + user.getMail() + ".");
-		long journalId = integrityIOHandler.addUserJournalEntry("store", this.getClass().getSimpleName(), user);
 		repository.delete(user);
-		integrityIOHandler.endUserJournalEntry(journalId);
 	}
 
 }

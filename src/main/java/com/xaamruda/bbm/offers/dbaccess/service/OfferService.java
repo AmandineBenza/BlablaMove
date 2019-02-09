@@ -99,6 +99,7 @@ public class OfferService implements IOfferService {
 	
 	@Override
 	public void shutDown() {
+		BBMLogger.infoln("Shutting down database...");
 		offerRepository.shutDown();
 	}
 

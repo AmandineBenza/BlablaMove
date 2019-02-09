@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.offers.model.PostedOffer;
@@ -43,6 +44,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
+		
 		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
 		BBMLogger.infoln("Handling request...");
 
@@ -122,6 +124,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		JsonElement event = jsonObject.get("event");
 		JsonElement data = jsonObject.get("data");
 		JsonElement identification = jsonObject.get("identification");
+		
 		BBMLogger.infoln("Event is: \"" + event.getAsString() + "\".");
 		BBMLogger.infoln("Handling request...");
 
@@ -138,10 +141,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = "Please login to your account.\n";
 			} else {
 				BBMLogger.infoln("Validating pricing...");
-				content = callValidatePrice(data.toString(), jsonObject.get("filters").toString());
-				BBMLogger.infoln("DATA :" + data.toString());
-				BBMLogger.infoln("FILTER :" + jsonObject.get("filters").toString());
+				try {
+					content = callValidatePrice(data.toString(), jsonObject.get("filters").toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = Boolean.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -154,7 +163,14 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = "Please login to your account.\n";
 			} else {
 				BBMLogger.infoln("Creating an offer...");
-				content = callMakeOffer(data.toString());
+				try {
+					content = callMakeOffer(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
 
 			clazz = Boolean.class;
@@ -169,8 +185,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = "Please login to your account.\n";
 			} else {
 				BBMLogger.infoln("Consulting offers...");
-				content = callGetFilteredOffers(jsonObject.get("filters").toString(), data.toString());		
+				try {
+					content = callGetFilteredOffers(jsonObject.get("filters").toString(), data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}		
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -184,8 +208,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = "Please login to your account.\n";
 			} else {
 				BBMLogger.infoln("Requesting for an offer...");
-				content = callAskOffer(data.toString());
+				try {
+					content = callAskOffer(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -199,8 +231,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				BBMLogger.infoln("Unindentified user tried to consult his awaiting offers.");
 				content = "Please login to your account.\n";
 			} else {
-				content = callConsultAwaitingOffers(data.toString());
+				try {
+					content = callConsultAwaitingOffers(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -214,8 +254,16 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				BBMLogger.infoln("Unindentified user tried to confirm his awaiting offers.");
 				content = "Please login to your account.\n";
 			} else {
-				content = callConfirmAwaitingOffers(data.toString());
+				try {
+					content = callConfirmAwaitingOffers(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -225,12 +273,21 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		case "claim-receipt":{
 			BBMLogger.infoln("Claiming items reception...");
 			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to claim that his items has been sent.");
 				content = "Please login to your account.\n";
 			} else {
-			content = callClaimReceipt(data.toString());
+				try {
+					content = callClaimReceipt(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -240,12 +297,21 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		case "confirm-receipt":{
 			BBMLogger.infoln("Confirming items reception...");
 			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to confirms he received an item");
 				content = "Please login to your account.\n";
 			} else {
-				content = callConfirmReceipt(data.toString());
+				try {
+					content = callConfirmReceipt(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -255,12 +321,21 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		case "claim-deposit":{
 			BBMLogger.infoln("Claiming items deposit...");
 			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to claim that an item has been delivered.");
 				content = "Please login to your account.\n";
 			} else {
-			content = callClaimDeposit(data.toString());
+				try {
+					content = callClaimDeposit(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+			
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			break;
@@ -270,14 +345,24 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		case "confirm-deposit":{
 			BBMLogger.infoln("Confirming items deposit...");
 			boolean identifed = userIO.isIdentified(identification.getAsJsonObject().get("userID").getAsString());
+			
 			if(!identifed) {
 				BBMLogger.infoln("Unindentified user tried to confirm that an item has been delivered.");
 				content = "Please login to your account.\n";
 			} else {
-				content = callConfirmDeposits(data.toString());
+				try {
+					content = callConfirmDeposits(data.toString());
+				} catch (DatabaseException e) {
+					content = e.getWholeMessage();
+					clazz = String.class;
+					status = e.getRelatedHttpStatus();
+					break;
+				}
 			}
+
 			clazz = List.class;
 			status = identifed ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+			
 			break;
 		}
 
@@ -299,7 +384,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return new FlowOrchestrationResult(status, content, clazz);
 	}
 
-	private String callValidatePrice(String string,String filters) {
+	private String callValidatePrice(String string,String filters) throws DatabaseException {
 		return offerIO.validatePrice(filters, string);
 	}
 
@@ -307,47 +392,47 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return JsonUtils.toJson(JsonUtils.getFromJson(string, CommandResume.class));
 	}
 
-	private Object callConfirmDeposits(String string) {
+	private Object callConfirmDeposits(String string) throws DatabaseException {
 		return offerIO.confirmDeposit(string);
 	}
 
 
-	private Object callClaimDeposit(String string) {
+	private Object callClaimDeposit(String string) throws DatabaseException {
 		return offerIO.claimDeposit(string);
 	}
 
 
-	private Object callConfirmReceipt(String string) {
+	private Object callConfirmReceipt(String string) throws DatabaseException {
 		return offerIO.confirmReceipt(string);
 	}
 
 
-	private Object callClaimReceipt(String string) {
+	private Object callClaimReceipt(String string) throws DatabaseException {
 		return offerIO.claimReceipt(string);
 	}
 
 
-	private Object callConfirmAwaitingOffers(String workData) {
+	private Object callConfirmAwaitingOffers(String workData) throws DatabaseException {
 		return offerIO.confirmAwaitingOffer(workData);
 	}
 
 
-	private Object callConsultAwaitingOffers(String workData) {
+	private Object callConsultAwaitingOffers(String workData) throws DatabaseException {
 		return offerIO.consultAwaitingOffers(workData);
 	}
 
 
-	private Object callAskOffer(String string) {
+	private Object callAskOffer(String string) throws DatabaseException {
 		return offerIO.askForValidation(string);
 	}
 
 
-	private String callMakeOffer(String offerJson) {
+	private String callMakeOffer(String offerJson) throws DatabaseException {
 		return offerIO.postNewOffer(offerJson);
 	}
 
 	// data are data used for calculation
-	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) {
+	private List<PostedOffer> callGetFilteredOffers(String filters, String calculationData) throws DatabaseException {
 		return offerIO.retrieveOffers(filters, calculationData);
 	}
 

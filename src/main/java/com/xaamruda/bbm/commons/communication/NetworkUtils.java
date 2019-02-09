@@ -1,7 +1,5 @@
 package com.xaamruda.bbm.commons.communication;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 
 public final class NetworkUtils {

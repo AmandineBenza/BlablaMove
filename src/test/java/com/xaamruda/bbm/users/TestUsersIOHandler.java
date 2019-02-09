@@ -17,7 +17,9 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
+import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.users.data.IUserDataManager;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.IUserIdentificator;
@@ -37,6 +39,9 @@ public class TestUsersIOHandler {
 	@Mock
 	private IUserIdentificator identificator;
 	
+	@Mock
+	private IntegrityIOHandler integrityIOHandler;
+	
 	@Before
 	@Test
 	public void setup() {
@@ -46,6 +51,7 @@ public class TestUsersIOHandler {
 		Whitebox.setInternalState(usersIOHandler, "service", service);
 		Whitebox.setInternalState(usersIOHandler, "identificator", identificator);
 		Whitebox.setInternalState(usersIOHandler, "dataManager", dataManager);
+		Whitebox.setInternalState(usersIOHandler, "integrityIOHandler", integrityIOHandler);
 
 		assertNotNull(service);
 		assertNotNull(identificator);
@@ -178,7 +184,7 @@ public class TestUsersIOHandler {
 	}
 	
 	@Test
-	public void makeTransactionTest() {
+	public void makeTransactionTest() throws DatabaseException {
 		String ownerID = "owner@mail";
 		String buyerID = "buyer@mail";
 		int finalPrice = 10;
@@ -207,8 +213,15 @@ public class TestUsersIOHandler {
 		assertEquals(buyer.getPointsAmount().intValue(), buyerPoints - finalPrice);
 	}
 	
+	// checking exception is raised
+	@Test(expected = DatabaseException.class)
+	public void testMakeTransaction_databaseException() throws DatabaseException {
+		Mockito.when(service.getUserByMail(Mockito.anyString())).thenThrow(new IllegalStateException());
+		usersIOHandler.makeTransaction("id1", "id2", 5);
+	}
+	
 	@Test
-	public void testDebit() {
+	public void testDebit() throws DatabaseException {
 		String mail = "mail@mail";
 		int finalPrice = 10;
 		
@@ -225,8 +238,15 @@ public class TestUsersIOHandler {
 		assertEquals(user.getPointsAmount().intValue(), userPoints - finalPrice);
 	}
 	
+	// checking exception is raised
+	@Test(expected = DatabaseException.class)
+	public void testDebit_databaseException() throws DatabaseException {
+		Mockito.when(service.getUserByMail(Mockito.anyString())).thenThrow(new IllegalStateException());
+		usersIOHandler.debit("id1", 5);
+	}
+	
 	@Test
-	public void testCredit() {
+	public void testCredit() throws DatabaseException {
 		String mail = "mail@mail";
 		int finalPrice = 10;
 		
@@ -241,6 +261,13 @@ public class TestUsersIOHandler {
 		
 		usersIOHandler.credit(mail, finalPrice);
 		assertEquals(user.getPointsAmount().intValue(), userPoints + finalPrice);
+	}
+	
+	// checking exception is raised
+	@Test(expected = DatabaseException.class)
+	public void testCredit_databaseException() throws DatabaseException {
+		Mockito.when(service.getUserByMail(Mockito.anyString())).thenThrow(new IllegalStateException());
+		usersIOHandler.credit("id2", 5);
 	}
 	
 }

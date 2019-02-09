@@ -11,8 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 import com.xaamruda.bbm.integrity.dbcommunication.DatabaseConnectionChecker;
-import com.xaamruda.bbm.integrity.ddos.DDOSGuard;
-import com.xaamruda.bbm.integrity.ddos.dbaccess.AuthorizationService;
 import com.xaamruda.bbm.integrity.journaling.engine.JournalingEngine;
 import com.xaamruda.bbm.users.dbaccess.service.UserService;
 import com.xaamruda.bbm.users.identification.UserIdentificationChecker;
