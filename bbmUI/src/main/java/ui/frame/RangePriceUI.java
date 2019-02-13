@@ -73,7 +73,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         yourPriceTxtLabel.setText("Your Price is : ");
-        yourPriceResLabel.setText(offerData[2]);
+        yourPriceResLabel.setText(offerData[3]);
 
         minimumPriceTxtLabel.setText("Minimum Price");
 
@@ -224,10 +224,13 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
                     }
+                    System.out.println( "response is : " + sb.toString());
                     br.close();
-                    return !("" + sb.toString()).equals(null);
+                    return !("" + sb.toString()).equals("");
                 } else {
-                    return !("" + sb.toString()).equals(null);
+                    System.out.println( "HTTP result : " + HttpResult);
+                    System.out.println( "response is : " + sb.toString());
+                    return !("" + sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -244,8 +247,8 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public String curlJsonParser() {
-        String res= "{\"event\" : \"create-offer\" , \"data\" : {\"ownerID\" : \""+ connectedUser + "\", \"price\": \""+yourNewPriceField.getText()+"\"" +
-                ", \"startCity\":\""+ offerData[0] +"\", \"endCity\":\""+ offerData[1] + "\", \"capacity\":\""+ offerData[2]+"\" }}";
+        String res= "{\"event\":\"consult-offers\",\"data\":{\"ownerID\":\""+ connectedUser + "\r\", \"price\": \""+yourNewPriceField.getText()+"\r\"" +
+                ", \"startCity\":\""+ offerData[0] +"\r\", \"endCity\":\""+ offerData[1] + "\r\", \"capacity\":\""+ offerData[2]+"\r\" }, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}";
         return res;
     }
 

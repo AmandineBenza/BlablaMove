@@ -180,11 +180,11 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
 
     @Override
     public boolean curlAction() {
-        System.out.println("Start Location : " + startLocationField.getText());
-        System.out.println("Arrival Location : " + arrivalLocationField.getText());
-        System.out.println("Max Price : " + maximumPointSpendField.getText());
-        System.out.println("Weight : " + weightField.getText());
-        System.out.println("Size : " + sizeField.getText());
+        //System.out.println("Start Location : " + startLocationField.getText());
+        //System.out.println("Arrival Location : " + arrivalLocationField.getText());
+        //System.out.println("Max Price : " + maximumPointSpendField.getText());
+        //System.out.println("Weight : " + weightField.getText());
+        //System.out.println("Size : " + sizeField.getText());
         //searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
         // "{"event":"consult-offers","data": {"weight": "$bedW", "volume":"$bedV", "date":"$inDays" },
         // "filters": {"weight": "$bedV","startAddress": "$startAddress","endAddress": "$endAddress","maxPrice": "10000"}}"
@@ -200,6 +200,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
                 con.setDoInput(true);
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setRequestProperty("Accept", "application/json");
+                con.setRequestMethod("POST");
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
                 wr.write(curlJsonParser());
                 wr.flush();
@@ -214,11 +215,14 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
                     }
+                    System.out.println( "response is : " + sb.toString());
                     br.close();
                     setResponses(sb.toString());
-                    return !("" + sb.toString()).equals(null);
+                    return !("" + sb.toString()).equals("");
                 } else {
-                    return !("" + sb.toString()).equals(null);
+                    System.out.println( "HTTP result : " + HttpResult);
+                    System.out.println( "response is : " + sb.toString());
+                    return !("" + sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -235,23 +239,26 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
     public String curlJsonParser() {
         String weight = this.weightField.getText();
         String volume = this.sizeField.getText();
-        String date = "00";
+        int date = 5;
         String startAddress = this.startLocationField.getText();
         String endAddress = this.arrivalLocationField.getText();
         String maxPrice = this.maximumPointSpendField.getText();
-        String res = "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"" + weight + "\", \"volume\":\"" + volume +
-                "\", \"date\":\"" + date +"\" },\"filters\": {\"weight\": \"" + volume + "\",\"startAddress\": \"" +
-                startAddress +"\",\"endAddress\": \""+ endAddress +"\",\"maxPrice\": \"" + maxPrice +"\"}}";
+        String res = "{\"event\":\"consult-offers\",\"data\":{\"weight\":\"" + weight + "\",\"volume\":\""+volume+
+                "\",\"date\":\""+ date+"\"},\"filters\":{\"weight\":\""+volume+"\",\"startAddress\":\""+startAddress+
+                "\r\",\"endAddress\":\""+endAddress+"\r\",\"maxPrice\":\""+maxPrice+"\"},\"identification\":{\"userID\":\""+connectedUser+"\r\"}}";
         return res;
     }
 
     private void setResponses(String data){
+        String[] res = {};
+        
         String[] data1 = {"056402864","61","15","10/02/2019","0125678","125","Sophia","Nice"};
         String[] data2 = {"045408964","42","12","10/02/2019","0167954","100","Sophia","Nice"};
         String[] data3 = {"026076584","12","10","10/02/2019","0236125","200","Sophia","Nice"};
         response.add(data1);
         response.add(data2);
         response.add(data3);
+        response.add(res);
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,7 +266,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         //if(true){
             acceptButton.setSelected(false);
             frame.dispose();
-            setResponses("");
+            //setResponses("");
             //String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
             new ShowOfferUI(connectedUser,response);
         }else{

@@ -159,11 +159,6 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
 
     @Override
     public boolean curlAction() {
-        System.out.println("Start Location : " + startLocationField.getText());
-        System.out.println("Arrival Location : " + arrivalLocationField.getText());
-        System.out.println("Price : " + priceField.getText());
-        System.out.println("Car Capacity : " + carCapacityField.getText());
-
         if (!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("")
                 && !priceField.getText().equals("") && !carCapacityField.getText().equals("")) {
             String url = "http://localhost:8080/BBM/OFFERS";
@@ -191,10 +186,13 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
                     }
                     br.close();
                     responseParser(sb.toString());
-                    return !("" + sb.toString()).equals(null);
+                    System.out.println( "response is : " + sb.toString());
+                    return !(sb.toString()).equals("");
 
                 } else {
-                    return !("" + sb.toString()).equals(null);
+                    System.out.println( "HTTP result : " + HttpResult);
+                    System.out.println( "response is : " + sb.toString());
+                    return !(sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -228,8 +226,8 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         String price  = priceField.getText();
         String carCapacity = carCapacityField.getText();
         String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
-                "\"filters\": {\"startAddress\": \""+startLocation+"\",\"endAddress\": \""+arrivalLocation+"\"," +
-                "\"maxPrice\": \""+price+"\"}}";
+                "\"filters\": {\"startAddress\": \""+startLocation+"\r\",\"endAddress\": \""+arrivalLocation+"\r\"," +
+                "\"maxPrice\": \""+price+"\r\"}, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}";
         return res;
     }
 
@@ -240,7 +238,7 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
             //responseParser("For this distance (13) the authorized points amount is within [6 : 39]");
            // responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
             frame.dispose();
-            String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText()};
+            String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText(),priceField.getText()};
             new RangePriceUI(connectedUser,data,minMax);
         } else {
             JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");

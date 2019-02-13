@@ -71,7 +71,6 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
 
         yourPointTxtLabel.setText("Your Point");
 
-        yourPointResLabel.setText("5800");
         int pointResSize = yourPointResLabel.getText().length();
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);

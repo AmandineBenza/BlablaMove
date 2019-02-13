@@ -58,7 +58,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
             }
         });
 
-        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png")));
+        //img.setIcon(new javax.swing.ImageIcon(getClass().getResource("./bbmUI/src/main/ressources/img/01.png")));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -126,12 +126,12 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
             String url = "http://localhost:8080/BBM/USERS";
             try {
                 URL object = new URL(url);
-
                 HttpURLConnection con = (HttpURLConnection) object.openConnection();
                 con.setDoOutput(true);
                 con.setDoInput(true);
                 con.setRequestProperty("Content-Type", "application/json");
                 con.setRequestProperty("Accept", "application/json");
+                con.setRequestMethod("POST");
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
                 wr.write(curlJsonParser());
                 wr.flush();
@@ -146,10 +146,13 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
                     }
+                    System.out.println( "response is : " + sb.toString());
                     br.close();
-                    return !("" + sb.toString()).equals(null);
+                    return !(sb.toString()).equals("");
                 } else {
-                    return !("" + sb.toString()).equals(null);
+                    System.out.println( "HTTP result : " + HttpResult);
+                    System.out.println( "response is : " + sb.toString());
+                    return !(sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -166,7 +169,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     public String curlJsonParser() {
         String mailUser = identifiantField.getText();
         String passwordUser  = passwordField.getText();
-        String res= "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"" + mailUser + "\" , \"password\" : \"" + passwordUser + "\"}}";
+        String res= "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"" + mailUser + "\r\" , \"password\" : \"" + passwordUser + "\r\"}}";
         return res;
     }
 

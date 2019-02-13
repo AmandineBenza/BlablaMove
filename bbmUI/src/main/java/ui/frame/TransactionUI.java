@@ -154,9 +154,12 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
                     sb.append(line + "\n");
                 }
                 br.close();
-                return !("" + sb.toString()).equals(null);
+                System.out.println( "response is : " + sb.toString());
+                return !("" + sb.toString()).equals("");
             } else {
-                return !("" + sb.toString()).equals(null);
+                System.out.println( "HTTP result : " + HttpResult);
+                System.out.println( "response is : " + sb.toString());
+                return !("" + sb.toString()).equals("");
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -183,6 +186,7 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
         } else if(statutTransactionResLabel.getText().equals("Waiting confirmation for Payment")){
             res = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": "+ "" +"}}";
         }
+        System.out.println("Request : " + res);
         return res;
     }
 

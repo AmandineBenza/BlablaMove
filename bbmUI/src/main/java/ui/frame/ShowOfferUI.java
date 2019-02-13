@@ -167,11 +167,14 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
                 while ((line = br.readLine()) != null) {
                     sb.append(line + "\n");
                 }
+                System.out.println( "response is : " + sb.toString());
                 br.close();
                 response = sb.toString();
-                return !("" + sb.toString()).equals(null);
+                return !("" + sb.toString()).equals("");
             } else {
-                return !("" + sb.toString()).equals(null);
+                System.out.println( "HTTP result : " + HttpResult);
+                System.out.println( "response is : " + sb.toString());
+                return !("" + sb.toString()).equals("");
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -188,6 +191,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ data.get(click)[0] +",\"buyerID\": \""+ data.get(click)[1] +
                 "\",\"weight\": \""+ data.get(click)[2] +"\", \"volume\":\""+ data.get(click)[3] +"\", \"date\":\""+ data.get(click)[4] +
                 "\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
+        System.out.println("Request : " + res);
         return res;
     }
 
