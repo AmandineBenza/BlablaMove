@@ -1,0 +1,1 @@
+curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d  "{\"event\": \"create-user\" ,\"data\": {\"name\":\"Test\", \"mail\":\"test@test.com\",\"phone\":\"0675767778\",\"password\":\"testmdpnoukoutou\"}}" http://localhost:8080/BBM/USERS

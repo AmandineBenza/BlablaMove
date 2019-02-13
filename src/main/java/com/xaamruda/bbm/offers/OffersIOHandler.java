@@ -66,7 +66,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(distance));
 		} catch (Exception ex) {
-			throw new DatabaseException("Posting new offer failed while trying to retrieve available offers.");
+			throw new DatabaseException("Posting new offer failed while trying to retrieve available offers.\n");
 		}
 
 		Range range = calculatorHandler.checkPrice(offers, distance);
@@ -84,7 +84,7 @@ public class OffersIOHandler {
 			try {
 				offerService.saveOffer(offer);
 			} catch (Exception e) {
-				throw new DatabaseException("Posting new offer failed while trying to create new posted offer.");
+				throw new DatabaseException("Posting new offer failed while trying to create new posted offer.\n");
 			}
 
 			BBMLogger.infoln("Offer created. Content:");
@@ -114,7 +114,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(filtersObject));
 		} catch (Exception ex) {
-			throw new DatabaseException("Retrieving offers failed while trying to get available offers.");
+			throw new DatabaseException("Retrieving offers failed while trying to get available offers.\n");
 		}
 
 		BBMLogger.infoln("Calculating offers prices...");
@@ -147,7 +147,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(distance));
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: validating price failed while trying to retrieve available offers");
+			throw new DatabaseException("Offers: validating price failed while trying to retrieve available offers.\n");
 		}
 
 		BBMLogger.infoln("Checking offers price...");
@@ -179,7 +179,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerService.getOfferByID(offerID);
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: ask for validation failed while trying to retrieve offer.");
+			throw new DatabaseException("Offers: ask for validation failed while trying to retrieve offer.\n");
 		}
 
 		if (!offers.isEmpty() && offers.get(0).getStatus() == OfferStatus.POSTED) {
@@ -209,7 +209,7 @@ public class OffersIOHandler {
 				offerService.saveOffer(offer);
 				offerTransactionService.saveOffer(offerTransaction);
 			} catch (Exception ex) {
-				throw new DatabaseException("Offers: ask for validation failed while trying to create new offer.");
+				throw new DatabaseException("Offers: ask for validation failed while trying to create new offer.\n");
 			}
 
 			String offersTransactionJson = JsonUtils.toJson(offerTransaction);
@@ -238,7 +238,7 @@ public class OffersIOHandler {
 			offers = offerTransactionService.getOffersByOwnerId(ownerID).stream()
 					.filter(item -> item.getStatus() == OfferStatus.AWAITING_CONFIRMATION).collect(Collectors.toList());
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: consult awaiting offers failed.");
+			throw new DatabaseException("Offers: consult awaiting offers failed.\n");
 		}
 
 		if (!offers.isEmpty()) {
@@ -267,7 +267,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerTransactionService.getOffersByTransactionID(transactionID);
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: confirm awaiting offer failed while trying to retrieve offers.");
+			throw new DatabaseException("Offers: confirm awaiting offer failed while trying to retrieve offers.\n");
 		}
 
 		if (!offers.isEmpty()) {
@@ -285,7 +285,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				throw new DatabaseException("Offers: confirm awaiting offer failed while setting offer status.");
+				throw new DatabaseException("Offers: confirm awaiting offer failed while setting offer status.\n");
 			}
 
 			String offersJson = JsonUtils.toJson(offers); 
@@ -313,7 +313,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerTransactionService.getOffersByTransactionID(transactionID);
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: claim reception failed while trying to retrieve transactions.");
+			throw new DatabaseException("Offers: claim reception failed while trying to retrieve transactions.\n");
 		}
 
 		if (!offers.isEmpty()) {
@@ -329,7 +329,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				throw new DatabaseException("Offers: claim reception failed while trying to update transaction.");
+				throw new DatabaseException("Offers: claim reception failed while trying to update transaction.\n");
 			}
 
 			String offerJson = JsonUtils.toJson(offer); 
@@ -355,7 +355,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerTransactionService.getOffersByTransactionID(transactionID);
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: confirm reception failed while trying to retrieve transactions.");
+			throw new DatabaseException("Offers: confirm reception failed while trying to retrieve transactions.\n");
 		}
 
 		if (!offers.isEmpty()) {
@@ -371,7 +371,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				throw new DatabaseException("Offers: confirm reception failed while trying to update transaction.");
+				throw new DatabaseException("Offers: confirm reception failed while trying to update transaction.\n");
 			}
 
 			String jsonOffers = JsonUtils.toJson(offers); 
@@ -397,7 +397,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerTransactionService.getOffersByTransactionID(transactionID);
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: claim deposit failed while trying to retrieve transactions.");
+			throw new DatabaseException("Offers: claim deposit failed while trying to retrieve transactions.\n");
 		}
 
 		if (!offers.isEmpty()) {
@@ -412,7 +412,7 @@ public class OffersIOHandler {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception ex) {
 				integrityIOHandler.addOfferJournalEntry("claimDeposit", this.getClass().getSimpleName(), workData);
-				throw new DatabaseException("Offers: claim deposit failed while trying to update transaction.");
+				throw new DatabaseException("Offers: claim deposit failed while trying to update transaction.\n");
 			}
 
 			String offersJson = JsonUtils.toJson(offers);
@@ -439,7 +439,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerTransactionService.getOffersByTransactionID(transactionID);
 		} catch (Exception ex) {
-			throw new DatabaseException("Offers: confirm deposit failed while trying to retrieve transactions.");
+			throw new DatabaseException("Offers: confirm deposit failed while trying to retrieve transactions.\n");
 		}
 
 		if (!offers.isEmpty()) {
@@ -454,10 +454,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				integrityIOHandler.addOfferJournalEntry("confirmDeposit", this.getClass().getSimpleName(), workData);
-				BBMLogger.errorln("Offers: confirm deposit failed while trying update offer."
-						+ "New entry added to offer journal.");
-				return null;
+				throw new DatabaseException("Offers: confirm deposit failed while trying to update offer.\n");
 			}
 
 			BBMLogger.infoln("Performing transaction, withdrawal account: " + offer.getBuyerID() + ", deposit account: "
@@ -471,10 +468,7 @@ public class OffersIOHandler {
 			try {
 				offersI = offerService.getOfferByID(offer.getOfferID());
 			} catch (Exception ex) {
-				integrityIOHandler.addOfferJournalEntry("confirmDeposit", this.getClass().getSimpleName(), workData);
-				BBMLogger.errorln("Offers: confirm deposit failed while trying to retrieve offer."
-						+ "New entry added to offer journal.");
-				return null;
+				throw new DatabaseException("Offers: confirm deposit failed while trying to retrieve offer.\n");
 			}
 
 			// Set the offer status to closed
@@ -484,10 +478,7 @@ public class OffersIOHandler {
 			try {
 				offerService.saveOffer(postoff);
 			} catch (Exception e) {
-				integrityIOHandler.addOfferJournalEntry("confirmDeposit", this.getClass().getSimpleName(), workData);
-				BBMLogger.errorln("Offers: confirm deposit failed while trying to update offer."
-						+ "New entry added to offer journal.");
-				return null;
+				throw new DatabaseException("Offers: confirm deposit failed while trying to update offer.\n");
 			}
 
 			String offersJson = JsonUtils.toJson(offers); 

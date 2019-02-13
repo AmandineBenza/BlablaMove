@@ -18,7 +18,6 @@ import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.xaamruda.bbm.commons.exceptions.DatabaseException;
-import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.users.data.IUserDataManager;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
@@ -60,10 +59,11 @@ public class TestUsersIOHandler {
 		assertEquals(Whitebox.getInternalState(usersIOHandler, "service"), service);
 		assertEquals(Whitebox.getInternalState(usersIOHandler, "identificator"), identificator);
 		assertEquals(Whitebox.getInternalState(usersIOHandler, "dataManager"), dataManager);
+		assertEquals(Whitebox.getInternalState(usersIOHandler, "integrityIOHandler"), integrityIOHandler);
 	}
 	
 	@Test
-	public void testIdentifyUserByMailPlusPassword_success() {
+	public void testIdentifyUserByMailPlusPassword_success() throws DatabaseException {
 		String mail = "mail@mail";
 		String pass = "pass";
 		
@@ -82,8 +82,27 @@ public class TestUsersIOHandler {
 		assertTrue(user.isIdentified());
 	}
 	
+	@Test(expected = DatabaseException.class)
+	public void testIdentifyUserByMailPlusPassword_databaseException() throws DatabaseException {
+		String mail = "mail@mail";
+		String pass = "pass";
+		
+		List<User> users = new ArrayList<>();
+		User user = new User();
+		user.setMail(mail);
+		user.setPassword(pass);
+		user.setIdentified(false);
+		users.add(user);
+		
+		Mockito.when(identificator.identify(mail, pass)).thenReturn(true);
+		Mockito.when(service.getUserByMail(mail)).thenReturn(users);
+		Mockito.doThrow(IllegalStateException.class).when(service).store(Mockito.any(User.class));
+		
+		usersIOHandler.identifyUserByMailPlusPassword(mail, pass);
+	}
+	
 	@Test
-	public void testIdentifyUserByMailPlusPassword_fail() {
+	public void testIdentifyUserByMailPlusPassword_fail() throws DatabaseException {
 		String mail = "mail@mail";
 		String pass = "pass";
 		
@@ -160,12 +179,6 @@ public class TestUsersIOHandler {
 		
 		Mockito.when(service.getAllUsers()).thenReturn(users);
 		assertEquals(users, usersIOHandler.retrieveUsers());
-	}
-	
-	public User retrieveUser(String mail) {
-		BBMLogger.infoln("Processing...");
-		User user = service.getUserByMail(mail).get(0);
-		return user;
 	}
 	
 	@Test

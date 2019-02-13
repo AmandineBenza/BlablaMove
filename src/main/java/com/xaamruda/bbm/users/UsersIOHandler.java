@@ -42,13 +42,23 @@ public class UsersIOHandler {
 	public UsersIOHandler() {
 	}
 
-	public boolean identifyUserByMailPlusPassword(String userMail, String userPassword) {
+	public boolean identifyUserByMailPlusPassword(String userMail, String userPassword) throws DatabaseException {
+		long journalId = integrityIOHandler.addUserJournalEntry("identifyUserByMailPlusPassword",
+				this.getClass().getSimpleName(), userMail, userPassword);
+		
 		boolean exists = identificator.identify(userMail, userPassword);
+		
 		if (exists) {
 			User user = service.getUserByMail(userMail).get(0);
 			user.setIdentified(true);
-			service.store(user);
+			try {
+				service.store(user);
+			} catch(Exception e) {
+				throw new DatabaseException("User identification failed because database is down.\n");
+			}
 		}
+		
+		integrityIOHandler.endUserJournalEntry(journalId);
 		return exists;
 	}
 
@@ -61,8 +71,18 @@ public class UsersIOHandler {
 		return false;
 	}
 
-	public void postNewUser(String userJson) {
-		dataManager.storeNewUser(JsonUtils.getFromJson(userJson, User.class));
+	public void postNewUser(String userJson) throws DatabaseException {
+		long journalId = integrityIOHandler.addUserJournalEntry("postNewUser",
+				this.getClass().getSimpleName(), userJson);
+		User user = JsonUtils.getFromJson(userJson, User.class);
+		
+		try {
+			dataManager.storeNewUser(user);
+		} catch(Exception e) {
+			throw new DatabaseException("User creation failed because database is down.\n");
+		}
+		
+		integrityIOHandler.endUserJournalEntry(journalId);
 		BBMLogger.infoln("User created.");
 	}
 
@@ -96,7 +116,7 @@ public class UsersIOHandler {
 			owner = service.getUserByMail(ownerID).get(0);
 		} catch (Exception ex) {
 			throw new DatabaseException("Transaction failed.", "Owner: " + ownerID,
-					"Buyer: " + buyerID, "Price: " + finalPrice);
+					"Buyer: " + buyerID, "Price: " + finalPrice + "\n");
 		}
 		
 		int newBuyerPoints = buyer.getPointsAmount() - finalPrice;
@@ -135,7 +155,7 @@ public class UsersIOHandler {
 		try {
 			service.store(buyer);
 		} catch(Exception e) {
-			throw new DatabaseException("Debit: buyer storing failed.", "Buyer: " + buyerID, "Price: " + finalPrice);
+			throw new DatabaseException("Debit: buyer storing failed.", "Buyer: " + buyerID, "Price: " + finalPrice + "\n");
 		}
 		
 		// end journaling entry
@@ -151,7 +171,7 @@ public class UsersIOHandler {
 			owner = service.getUserByMail(ownerID).get(0);
 		} catch(Exception e) {
 			throw new DatabaseException("Credit: owner retrieving failed.",
-					"Owner: " + ownerID, "Price: " + finalPrice);
+					"Owner: " + ownerID, "Price: " + finalPrice + "\n");
 		}
 		
 		if (owner.getPointsAmount() == null)
@@ -163,7 +183,7 @@ public class UsersIOHandler {
 			service.store(owner);
 		} catch(Exception e) {
 			throw new DatabaseException("Credit: owner storing failed.",
-					"Owner: " + ownerID, "Price: " + finalPrice);
+					"Owner: " + ownerID, "Price: " + finalPrice + "\n");
 		}
 		
 		// end journaling entry
