@@ -360,3 +360,25 @@ WEEK 6 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 
 >>>>> What are the blockers and risks ?
 - Multi-threading (Chaos, Spring-threads, DDOS, identification..) making the application instable
+
+--------------------
+
+WEEK 7 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(13/02/18)
+
+>>>>> What was achieved this week ?
+- DDOS Engine integration/unit testing
+- Scripts creation for the final demo 
+- Start of the preparation for the oral defense
+- Refactoring of the journaling engine 
+- Exception system to be able to deal with database related errors   
+
+>>>>> What is planned for the following week ?
+- Testing the exception engine
+- Prepare the demo scripts
+    -- Prepare the nodejs server
+    -- Prepare proper demo interfaces
+- Continue the slides for the oral defense
+
+>>>>> What are the blockers and risks ?
+- Failing to establish our scripts would be critical for the demo
