@@ -57,7 +57,15 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 		case "create-user" : {
 			BBMLogger.infoln("Creating user...");
-			callCreateUser(data.toString());
+			try {
+				callCreateUser(data.toString());
+			} catch (DatabaseException e) {
+				content = e.getWholeMessage();
+				clazz = String.class;
+				status = e.getRelatedHttpStatus();
+				break;
+			}
+			
 			clazz = String.class;
 			content = "User created.\n";
 			status = HttpStatus.OK;
@@ -66,9 +74,18 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 		case "identify-user" : {
 			BBMLogger.infoln("Identifying a user...");
-			boolean userExists = userIO.identifyUserByMailPlusPassword
-					(data.getAsJsonObject().get("mail").getAsString(), 
-							data.getAsJsonObject().get("password").getAsString()); 
+			boolean userExists;
+			try {
+				userExists = userIO.identifyUserByMailPlusPassword
+						(data.getAsJsonObject().get("mail").getAsString(), 
+								data.getAsJsonObject().get("password").getAsString());
+			} catch (DatabaseException e) {
+				content = e.getWholeMessage();
+				clazz = String.class;
+				status = e.getRelatedHttpStatus();
+				break;
+			} 
+			
 			clazz = Boolean.class;
 			status = userExists ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
 			content = userExists ? "Successfully identified.\n" : "Wrong identifiers ! Please retry.\n";
@@ -436,7 +453,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 		return offerIO.retrieveOffers(filters, calculationData);
 	}
 
-	private void callCreateUser(String userJson) {
+	private void callCreateUser(String userJson) throws DatabaseException {
 		userIO.postNewUser(userJson);
 	}
 

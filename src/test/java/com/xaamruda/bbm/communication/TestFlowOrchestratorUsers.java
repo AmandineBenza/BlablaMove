@@ -15,7 +15,7 @@ import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 
-
+import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrationResult;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrator;
 import com.xaamruda.bbm.offers.OffersIOHandler;
@@ -36,7 +36,7 @@ public class TestFlowOrchestratorUsers {
 	
 	@Before
 	@Test
-	public void setup() {
+	public void setup() throws DatabaseException {
 		MockitoAnnotations.initMocks(this);
 		flowOrchestrator = new FlowOrchestrator();
 		
