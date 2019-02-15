@@ -15,7 +15,7 @@ import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.users.data.IUserDataManager;
 import com.xaamruda.bbm.users.dbaccess.service.IUserService;
 import com.xaamruda.bbm.users.identification.IUserIdentificator;
-import com.xaamruda.bbm.users.mailing.MailSender;
+import com.xaamruda.bbm.commons.mailing.MailSender;
 import com.xaamruda.bbm.users.model.User;
 
 /**
@@ -98,7 +98,7 @@ public class UsersIOHandler {
 		return user;
 	}
 
-	public boolean sendMail(String ownerMail, int price, String buyerMail, String subject) {
+	public boolean sendMail(String ownerMail, String buyerMail, String subject) {
 		return mailsender.sendEmail(ownerMail, buyerMail, subject);
 	}
 	

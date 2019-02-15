@@ -144,6 +144,7 @@ Brainstorming RoadMap :
 
 ----------------------
 
+
 - WEEK 40 & 41 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (10/10/18)
 
@@ -185,6 +186,7 @@ Brainstorming RoadMap :
 
 ----------------------
 
+
  WEEK 43 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 (24/10/18)
 
@@ -203,6 +205,7 @@ Brainstorming RoadMap :
  - Late on code content
 
  ----------------------
+
 
 WEEK 44 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 (24/10/18)
@@ -224,6 +227,7 @@ WEEK 44 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 
 ----------------------
 
+
 WEEK 45 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (07/11/18)
 
@@ -235,9 +239,12 @@ WEEK 45 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
  
 ----------------------
 
+
 POC DEMO 
 
+
 ----------------------
+
 
 WEEK 51 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (21/12/2018) 
@@ -263,6 +270,7 @@ Happy new year !
 
 ----------------------
 
+
 WEEK 2 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (11/01/2019)
 
@@ -279,6 +287,7 @@ WEEK 2 :  ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 - There's a risk that the transition from Mongo to MySQL breaks our current use cases
 
 ----------------------
+
 
 WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (18/01/2019)
@@ -297,6 +306,7 @@ WEEK 3 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 --
 
 --------------------
+
 
 WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (25/01/2019)
@@ -317,9 +327,9 @@ WEEK 4 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 >>>>> What are the blockers and risks ?
 - Time
 
---------------------
 
 --------------------
+
 
 WEEK 5 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 (30/01/2019)
@@ -340,7 +350,9 @@ WEEK 5 : ![#c5f015](https://placehold.it/15/c5f015/000000?text=+)
 >>>>> What are the blockers and risks ?
 - Time
 
+
 --------------------
+
 
 WEEK 6 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 (06/02/18)
@@ -361,7 +373,9 @@ WEEK 6 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 >>>>> What are the blockers and risks ?
 - Multi-threading (Chaos, Spring-threads, DDOS, identification..) making the application instable
 
+
 --------------------
+
 
 WEEK 7 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 (13/02/18)
@@ -382,3 +396,25 @@ WEEK 7 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 
 >>>>> What are the blockers and risks ?
 - Failing to establish our scripts would be critical for the demo
+
+
+--------------------
+
+
+WEEK 8 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(15/02/18)
+
+>>>>> What was achieved this week ?
+- Fix on the UI
+- Finishing server-node for the demo
+- Refactor entry points (Refactor two users entry points to administration, add new entry points) 
+- Finishing mailing system
+- Exceptions system improvements
+
+>>>>> What is planned for the following week ?
+
+
+
+
+>>>>> What are the blockers and risks ?
+

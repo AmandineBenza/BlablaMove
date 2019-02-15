@@ -1,4 +1,4 @@
-package com.xaamruda.bbm.users.mailing;
+package com.xaamruda.bbm.commons.mailing;
 
 import java.util.Properties;
 
