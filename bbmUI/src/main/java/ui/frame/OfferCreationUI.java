@@ -225,9 +225,12 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         String arrivalLocation  = arrivalLocationField.getText();
         String price  = priceField.getText();
         String carCapacity = carCapacityField.getText();
-        String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
+        /* String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
                 "\"filters\": {\"startAddress\": \""+startLocation+"\r\",\"endAddress\": \""+arrivalLocation+"\r\"," +
-                "\"maxPrice\": \""+price+"\r\"}, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}";
+                "\"maxPrice\": \""+price+"\r\"}, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}"; */
+        String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
+                "\"filters\": {\"startAddress\": \""+startLocation+"\",\"endAddress\": \""+arrivalLocation+"\"," +
+                "\"maxPrice\": \""+price+"\"}, \"identification\":{\"userID\":\""+ connectedUser+"\"}}";
         return res;
     }
 

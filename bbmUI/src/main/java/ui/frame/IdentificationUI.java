@@ -169,7 +169,8 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     public String curlJsonParser() {
         String mailUser = identifiantField.getText();
         String passwordUser  = passwordField.getText();
-        String res= "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"" + mailUser + "\r\" , \"password\" : \"" + passwordUser + "\r\"}}";
+        // String res= "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"" + mailUser + "\r\" , \"password\" : \"" + passwordUser + "\r\"}}";
+        String res= "{\"event\" : \"identify-user\" , \"data\" : {\"mail\" : \"" + mailUser + "\" , \"password\" : \"" + passwordUser + "\"}}";
         return res;
     }
 
