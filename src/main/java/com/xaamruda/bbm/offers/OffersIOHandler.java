@@ -22,7 +22,7 @@ import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.utils.Range;
 import com.xaamruda.bbm.roads.RoadsIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
-import com.xaamruda.bbm.users.mailing.BlablaMailConstants;
+import com.xaamruda.bbm.commons.mailing.BlablaMailConstants;
 import com.xaamruda.bbm.offers.search.engine.Filters;
 import com.xaamruda.bbm.offers.search.engine.QueryEngine;
 
@@ -431,6 +431,8 @@ public class OffersIOHandler {
 	public String confirmDeposit(String workData) throws DatabaseException {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("confirmDeposit", this.getClass().getSimpleName(), workData);
+		String mailSubject = BlablaMailConstants.BLABLA_SUBJECT_PROBLEM_OCCURED_WITH_DEPOSIT_CONFIRMATION;
+
 		
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();
@@ -454,6 +456,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
+				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubject);
 				throw new DatabaseException("Offers: confirm deposit failed while trying to update offer.\n");
 			}
 
@@ -468,6 +471,7 @@ public class OffersIOHandler {
 			try {
 				offersI = offerService.getOfferByID(offer.getOfferID());
 			} catch (Exception ex) {
+				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubject);
 				throw new DatabaseException("Offers: confirm deposit failed while trying to retrieve offer.\n");
 			}
 
@@ -478,6 +482,7 @@ public class OffersIOHandler {
 			try {
 				offerService.saveOffer(postoff);
 			} catch (Exception e) {
+				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubject);
 				throw new DatabaseException("Offers: confirm deposit failed while trying to update offer.\n");
 			}
 
