@@ -1,8 +1,5 @@
 package ui.frame;
 
-import netscape.javascript.JSObject;
-import ui.UIIOHandler;
-
 import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -23,7 +20,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     private JTextField passwordField;
     private JLabel passwordLabel;
     private JFrame frame;
-    private UIIOHandler ioHandler;
 
     /**
      * Creates new form IdentificationUI
