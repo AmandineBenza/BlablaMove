@@ -49,10 +49,14 @@ public class UsersIOHandler {
 		boolean exists = identificator.identify(userMail, userPassword);
 		
 		if (exists) {
-			User user = service.getUserByMail(userMail).get(0);
-			user.setIdentified(true);
 			try {
-				service.store(user);
+				List<User> users = service.getUserByMail(userMail);
+
+				if(users != null && !users.isEmpty()) {
+					User user = users.get(0);
+					user.setIdentified(true);
+					service.store(user);
+				}
 			} catch(Exception e) {
 				throw new DatabaseException("User identification failed because database is down.\n");
 			}
@@ -62,12 +66,20 @@ public class UsersIOHandler {
 		return exists;
 	}
 
-	public boolean isIdentified(String userMail) {
-		List<User> userList = service.getUserByMail(userMail);
+	public boolean isIdentified(String userMail) throws DatabaseException {
+		List<User> userList = null;
+		
+		try {
+			userList = service.getUserByMail(userMail);
+		} catch(Exception e) {
+			throw new DatabaseException("User identification failed as database is down.\n");
+		}
+		
 		if (userList != null && !userList.isEmpty()) {
 			User user = userList.get(0);
 			return user.isIdentified();
 		}
+		
 		return false;
 	}
 
@@ -86,15 +98,33 @@ public class UsersIOHandler {
 		BBMLogger.infoln("User created.");
 	}
 
-	public List<User> retrieveUsers() {
+	public List<User> retrieveUsers() throws DatabaseException {
 		BBMLogger.infoln("Processing...");
-		List<User> users = service.getAllUsers();
+		
+		List<User> users = null;
+		try {
+			users = service.getAllUsers();
+		} catch(Exception e) {
+			throw new DatabaseException("User recovery failed because database is down.\n");
+		}
+		
 		return users;
 	}
 
-	public User retrieveUser(String mail) {
+	public User retrieveUser(String mail) throws DatabaseException {
 		BBMLogger.infoln("Processing...");
-		User user = service.getUserByMail(mail).get(0);
+		User user = null;
+		
+		try {
+			List<User> users = service.getUserByMail(mail); 
+			if(users != null && !users.isEmpty()) {
+				users = service.getUserByMail(mail);
+				user = users.get(0);
+			}
+		} catch(Exception e) {
+			throw new DatabaseException("User recovery failed because database is down.\n");
+		}
+		
 		return user;
 	}
 

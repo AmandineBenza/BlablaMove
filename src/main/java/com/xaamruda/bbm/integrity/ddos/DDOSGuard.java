@@ -115,6 +115,7 @@ public class DDOSGuard {
 	public final void stop() {
 		resetTread.stop();
 		uploaderTread.stop();
+		unbannerThread.stop();
 	}
 	
 }

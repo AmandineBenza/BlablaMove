@@ -121,7 +121,7 @@ public class TestUsersIOHandler {
 	}
 	
 	@Test
-	public void testIdentify_success() {
+	public void testIdentify_success() throws DatabaseException {
 		String mail = "mail@mail";
 		String pass = "pass";
 		
@@ -140,7 +140,7 @@ public class TestUsersIOHandler {
 	}
 	
 	@Test
-	public void testIdentify_fail() {
+	public void testIdentify_fail() throws DatabaseException {
 		String mail = "mail@mail";
 		String pass = "pass";
 		
@@ -159,7 +159,7 @@ public class TestUsersIOHandler {
 	}
 	
 	@Test
-	public void testIdentify_empty() {
+	public void testIdentify_empty() throws DatabaseException {
 		String mail = "mail@mail";
 		Mockito.when(service.getUserByMail(mail)).thenReturn(null);
 		boolean identified = usersIOHandler.isIdentified(mail);  
@@ -167,7 +167,7 @@ public class TestUsersIOHandler {
 	}
 	
 	@Test
-	public void testRetrieveUsers() {
+	public void testRetrieveUsers() throws DatabaseException {
 		String mail = "mail@mail";
 		String pass = "pass";
 		List<User> users = new ArrayList<>();
@@ -182,7 +182,7 @@ public class TestUsersIOHandler {
 	}
 	
 	@Test
-	public void testRetrieveUser() {
+	public void testRetrieveUser() throws DatabaseException {
 		String mail = "mail@mail";
 		String pass = "pass";
 		List<User> users = new ArrayList<>();

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.commons.spring.context.ContextProvider;
@@ -74,7 +75,12 @@ public class ChaosManager {
 		case "consult-users" : {
 			BBMLogger.infoln("Administrator consults database users...");
 			
-			List<User> users = usersIOHandler.retrieveUsers();
+			List<User> users;
+			try {
+				users = usersIOHandler.retrieveUsers();
+			} catch (DatabaseException e) {
+				return "Database is down.\n";
+			}
 			
 			if(users == null || users.isEmpty()) {
 				return "No user found in database.\n";
@@ -86,7 +92,12 @@ public class ChaosManager {
 			JsonElement data = jsonObject.get("data");
 			String userMail = data.getAsJsonObject().get("mail").getAsString();
 			BBMLogger.infoln("Administrator consults \"" + userMail + "\" user...");
-			User user = usersIOHandler.retrieveUser(userMail);
+			User user;
+			try {
+				user = usersIOHandler.retrieveUser(userMail);
+			} catch (DatabaseException e) {
+				return "Database is down.\n";
+			}
 			
 			if(user != null) {
 				return JsonUtils.toJson(user);
@@ -184,7 +195,7 @@ public class ChaosManager {
 	}
 
 	public void changeChaos(int level) throws IOException {
-		this.chaosLevel  = level;
+		chaosLevel = level;
 	}
 
 	public static void shutDownDataBase() {
@@ -193,6 +204,5 @@ public class ChaosManager {
 			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();
 		}
 	}
-
 
 }
