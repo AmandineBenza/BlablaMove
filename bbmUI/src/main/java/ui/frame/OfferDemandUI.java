@@ -190,7 +190,9 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         // "filters": {"weight": "$bedV","startAddress": "$startAddress","endAddress": "$endAddress","maxPrice": "10000"}}"
         // "localhost:8080/BBM/OFFERS")
         if(!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("") && !maximumPointSpendField.getText().equals("")
-                && !weightField.getText().equals("") && !sizeField.getText().equals("") ) {
+                && !weightField.getText().equals("") && !sizeField.getText().equals("") &&
+        maximumPointSpendField.getText().chars().allMatch( Character::isDigit ) &&  sizeField.getText().chars().allMatch( Character::isDigit )
+                && weightField.getText().chars().allMatch( Character::isDigit)) {
             String url = "http://localhost:8080/BBM/OFFERS";
             try {
                 URL object = new URL(url);
