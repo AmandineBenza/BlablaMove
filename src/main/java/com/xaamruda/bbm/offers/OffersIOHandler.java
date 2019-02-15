@@ -68,7 +68,7 @@ public class OffersIOHandler {
 		try {
 			offers = offerService.getAvailableOffers(QueryEngine.buildMySqlQuery(distance));
 		} catch (Exception ex) {
-			usersHandler.sendMail(offer.getOwnerID(), 42 ,"Noisette", mailSubjectProblem);
+			usersHandler.sendMail(offer.getOwnerID(), "Noisette", mailSubjectProblem);
 			throw new DatabaseException("Posting new offer failed while trying to retrieve available offers.\n");
 		}
 
@@ -87,7 +87,7 @@ public class OffersIOHandler {
 			try {
 				offerService.saveOffer(offer);
 			} catch (Exception e) {
-				usersHandler.sendMail(offer.getOwnerID(), 42 ,"Noisette", mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), "Noisette", mailSubjectProblem);
 				throw new DatabaseException("Posting new offer failed while trying to create new posted offer.\n");
 			}
 
@@ -194,7 +194,7 @@ public class OffersIOHandler {
 
 			PostedOffer offer = offers.get(0);
 			int newPrice = offer.getPrice() + calculatorHandler.calcul_without_offer(workData, offer.getDistance());
-			usersHandler.sendMail(offer.getOwnerID(), newPrice, buyerID, mailSubject);
+			usersHandler.sendMail(offer.getOwnerID(), buyerID, mailSubject);
 
 			OffersTransaction offerTransaction = new OffersTransaction();
 			BBMLogger.infoln("Creating offer transaction...");
@@ -216,7 +216,7 @@ public class OffersIOHandler {
 				offerService.saveOffer(offer);
 				offerTransactionService.saveOffer(offerTransaction);
 			} catch (Exception ex) {
-				usersHandler.sendMail(offer.getOwnerID(), 42, "Noisette", mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), "Noisette", mailSubjectProblem);
 				throw new DatabaseException("Offers: ask for validation failed while trying to create new offer.\n");
 			}
 
@@ -289,12 +289,12 @@ public class OffersIOHandler {
 			offer.setStatus(OfferStatus.CONFIRMED);
 			offer.setConfirmationDate(new Date().toString());
 
-			usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(),offer.getBuyerID(), mailSubject);
+			usersHandler.sendMail(offer.getOwnerID(),offer.getBuyerID(), mailSubject);
 
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(),offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(),offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: confirm awaiting offer failed while setting offer status.\n");
 			}
 
@@ -340,7 +340,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: claim reception failed while trying to update transaction.\n");
 			}
 
@@ -386,7 +386,7 @@ public class OffersIOHandler {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
 				
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: confirm reception failed while trying to update transaction.\n");
 			}
 
@@ -430,7 +430,7 @@ public class OffersIOHandler {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception ex) {
 				integrityIOHandler.addOfferJournalEntry("claimDeposit", this.getClass().getSimpleName(), workData);
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: claim deposit failed while trying to update transaction.\n");
 			}
 
@@ -475,7 +475,7 @@ public class OffersIOHandler {
 			try {
 				offerTransactionService.saveOffer(offer);
 			} catch (Exception e) {
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: confirm deposit failed while trying to update offer.\n");
 			}
 
@@ -490,7 +490,7 @@ public class OffersIOHandler {
 			try {
 				offersI = offerService.getOfferByID(offer.getOfferID());
 			} catch (Exception ex) {
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: confirm deposit failed while trying to retrieve offer.\n");
 			}
 
@@ -501,7 +501,7 @@ public class OffersIOHandler {
 			try {
 				offerService.saveOffer(postoff);
 			} catch (Exception e) {
-				usersHandler.sendMail(offer.getOwnerID(), offer.getFinalPrice(), offer.getBuyerID(), mailSubjectProblem);
+				usersHandler.sendMail(offer.getOwnerID(), offer.getBuyerID(), mailSubjectProblem);
 				throw new DatabaseException("Offers: confirm deposit failed while trying to update offer.\n");
 			}
 

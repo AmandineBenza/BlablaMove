@@ -98,7 +98,7 @@ public class UsersIOHandler {
 		return user;
 	}
 
-	public boolean sendMail(String ownerMail, int price, String buyerMail, String subject) {
+	public boolean sendMail(String ownerMail, String buyerMail, String subject) {
 		return mailsender.sendEmail(ownerMail, buyerMail, subject);
 	}
 	
