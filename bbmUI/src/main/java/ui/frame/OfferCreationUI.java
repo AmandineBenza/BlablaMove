@@ -160,7 +160,8 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
     @Override
     public boolean curlAction() {
         if (!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("")
-                && !priceField.getText().equals("") && !carCapacityField.getText().equals("")) {
+                && !priceField.getText().equals("") && !carCapacityField.getText().equals("") &&
+                carCapacityField.getText().chars().allMatch( Character::isDigit )  && priceField.getText().chars().allMatch(Character::isDigit) ) {
             String url = "http://localhost:8080/BBM/OFFERS";
             try {
                 URL object = new URL(url);
@@ -225,9 +226,12 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         String arrivalLocation  = arrivalLocationField.getText();
         String price  = priceField.getText();
         String carCapacity = carCapacityField.getText();
-        String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
+        /* String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
                 "\"filters\": {\"startAddress\": \""+startLocation+"\r\",\"endAddress\": \""+arrivalLocation+"\r\"," +
-                "\"maxPrice\": \""+price+"\r\"}, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}";
+                "\"maxPrice\": \""+price+"\r\"}, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}"; */
+        String res= "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, " +
+                "\"filters\": {\"startAddress\": \""+startLocation+"\",\"endAddress\": \""+arrivalLocation+"\"," +
+                "\"maxPrice\": \""+price+"\"}, \"identification\":{\"userID\":\""+ connectedUser+"\"}}";
         return res;
     }
 
@@ -236,12 +240,12 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         if(curlAction()){
         //if (true) {
             //responseParser("For this distance (13) the authorized points amount is within [6 : 39]");
-           // responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
+            //responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
             frame.dispose();
             String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText(),priceField.getText()};
             new RangePriceUI(connectedUser,data,minMax);
         } else {
-            JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
+            JOptionPane.showMessageDialog(frame, "You didn't fill all informations or give malformed information.");
         }
     }
 

@@ -4,7 +4,9 @@ ui/frame/ShowRecapUI$1.class
 ui/frame/RangePriceUI.class
 ui/frame/IGlobalUI.class
 ui/frame/TransactionUI.class
+ui/frame/ShowOfferUI$2.class
 ui/frame/OfferDemandUI$2.class
+ui/frame/ShowOfferUI$1.class
 ui/frame/TransactionUI$2.class
 ui/frame/MainMenuUI$1.class
 ui/frame/MainMenuUI.class

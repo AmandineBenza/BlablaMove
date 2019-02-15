@@ -202,7 +202,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public boolean curlAction() {
-        if(!this.yourNewPriceField.getText().equals("")) {
+        if(!this.yourNewPriceField.getText().equals("") && this.yourNewPriceField.getText().chars().allMatch(Character::isDigit)) {
             String url = "http://localhost:8080/BBM/OFFERS";
             try {
                 URL object = new URL(url);
@@ -247,8 +247,11 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public String curlJsonParser() {
-        String res= "{\"event\":\"consult-offers\",\"data\":{\"ownerID\":\""+ connectedUser + "\r\", \"price\": \""+yourNewPriceField.getText()+"\r\"" +
-                ", \"startCity\":\""+ offerData[0] +"\r\", \"endCity\":\""+ offerData[1] + "\r\", \"capacity\":\""+ offerData[2]+"\r\" }, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}";
+    	System.out.println("connectedUser: " + connectedUser);
+        /* String res= "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\""+ connectedUser + "\r\", \"price\": \""+yourNewPriceField.getText()+"\r\"" +
+                ", \"startCity\":\""+ offerData[0] +"\r\", \"endCity\":\""+ offerData[1] + "\r\", \"capacity\":\""+ offerData[2]+"\r\" }, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}"; */
+        String res= "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\""+ connectedUser + "\", \"price\": \""+yourNewPriceField.getText()+"\"" +
+                ", \"startCity\":\""+ offerData[0] +"\", \"endCity\":\""+ offerData[1] + "\", \"capacity\":\""+ offerData[2]+"\" }, \"identification\":{\"userID\":\""+ connectedUser + "\"}}";
         return res;
     }
 
@@ -261,6 +264,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(curlAction()){
         //if(true) {
+            JOptionPane.showMessageDialog(frame, "Your request has been granted.");
             acceptButton.setSelected(false);
             frame.dispose();
             new MainMenuUI(connectedUser);
