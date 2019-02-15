@@ -248,9 +248,9 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public String curlJsonParser() {
     	System.out.println("connectedUser: " + connectedUser);
-        /* String res= "{\"event\":\"consult-offers\",\"data\":{\"ownerID\":\""+ connectedUser + "\r\", \"price\": \""+yourNewPriceField.getText()+"\r\"" +
+        /* String res= "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\""+ connectedUser + "\r\", \"price\": \""+yourNewPriceField.getText()+"\r\"" +
                 ", \"startCity\":\""+ offerData[0] +"\r\", \"endCity\":\""+ offerData[1] + "\r\", \"capacity\":\""+ offerData[2]+"\r\" }, \"identification\":{\"userID\":\""+ connectedUser+"\r\"}}"; */
-        String res= "{\"event\":\"consult-offers\",\"data\":{\"ownerID\":\""+ connectedUser + "\", \"price\": \""+yourNewPriceField.getText()+"\"" +
+        String res= "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\""+ connectedUser + "\", \"price\": \""+yourNewPriceField.getText()+"\"" +
                 ", \"startCity\":\""+ offerData[0] +"\", \"endCity\":\""+ offerData[1] + "\", \"capacity\":\""+ offerData[2]+"\" }, \"identification\":{\"userID\":\""+ connectedUser + "\"}}";
         return res;
     }
