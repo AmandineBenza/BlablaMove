@@ -103,5 +103,14 @@ public class OfferService implements IOfferService {
 		offerRepository.shutDown();
 	}
 
+	@Override
+	public List<PostedOffer> getAllOffers() {
+		return offerRepository.findAll();
+	}
+	
+	@Override
+	public void delete(PostedOffer offer) {
+		offerRepository.delete(offer);
+	}
 
 }

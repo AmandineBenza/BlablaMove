@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.sql.DataSource;
@@ -18,6 +19,8 @@ import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 import com.xaamruda.bbm.offers.OffersIOHandler;
+import com.xaamruda.bbm.users.UsersIOHandler;
+import com.xaamruda.bbm.users.model.User;
 
 @Component
 public class ChaosManager {
@@ -31,9 +34,14 @@ public class ChaosManager {
 	@Autowired 
 	DataSource dataSource;
 
-
 	@Autowired
-	private/* static*/ OffersIOHandler offersIOHandler;
+	private OffersIOHandler offersIOHandler;
+	
+	@Autowired
+	private UsersIOHandler usersIOHandler;
+	
+	@Autowired
+	private DatabaseCleaner databaseCleaner;
 
 	public void lsPrint() throws IOException {
 		final Process p = Runtime.getRuntime().exec("ls");
@@ -53,11 +61,39 @@ public class ChaosManager {
 		}).start();
 	}
 
-
 	public String handle(String jsonEvents) throws IOException {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
+		
 		switch(event.getAsString()) {
+		case "clear-database" : {
+			databaseCleaner.cleanDatabase();
+			break;
+		}
+		
+		case "consult-users" : {
+			BBMLogger.infoln("Administrator consults database users...");
+			
+			List<User> users = usersIOHandler.retrieveUsers();
+			
+			if(users == null || users.isEmpty()) {
+				return "No user found in database.\n";
+			} else {
+				return JsonUtils.toJson(users);
+			}
+		}
+		case "consult-user" : {
+			JsonElement data = jsonObject.get("data");
+			String userMail = data.getAsJsonObject().get("mail").getAsString();
+			BBMLogger.infoln("Administrator consults \"" + userMail + "\" user...");
+			User user = usersIOHandler.retrieveUser(userMail);
+			
+			if(user != null) {
+				return JsonUtils.toJson(user);
+			} else {
+				return "No user \"" + userMail + "\" found in database.\n"; 
+			}
+		}
 		case "runCommand":{
 			JsonElement data = jsonObject.get("data");
 			runCommand(data.getAsString());

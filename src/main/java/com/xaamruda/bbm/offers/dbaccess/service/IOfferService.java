@@ -24,6 +24,10 @@ public interface IOfferService {
 	List<PostedOffer> getOffersByOwnerID(String OwnerID);
 
 	List<PostedOffer> getAvailableOffers(Specification<PostedOffer> query);
+	
+	List<PostedOffer> getAllOffers();
+	
+	public void delete(PostedOffer offer);
 
 	public void shutDown();
 

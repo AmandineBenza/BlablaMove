@@ -92,35 +92,6 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 			break;
 		}
 
-		case "consult-users" : {
-			BBMLogger.infoln("Consulting users...");
-			content = callGetUsers();
-			clazz = List.class;
-			List lcontent = (List) content;
-			if(content == null || lcontent == null || lcontent.isEmpty()) {
-				status = HttpStatus.NOT_FOUND;
-			}
-			else {
-				status = HttpStatus.OK;
-			}
-
-			break;	
-		}
-
-		case "consult-user" : {
-			BBMLogger.infoln("Consulting user...");
-			content = callGetUser(data.getAsJsonObject().get("mail").getAsString());
-			clazz = User.class;
-			if(content == null) {
-				status = HttpStatus.NOT_FOUND;		
-			}
-			else {
-				status = HttpStatus.OK;
-			}
-
-			break;	
-		}
-
 		default:
 			status = HttpStatus.NOT_ACCEPTABLE;
 			content = null;
@@ -455,14 +426,6 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 
 	private void callCreateUser(String userJson) throws DatabaseException {
 		userIO.postNewUser(userJson);
-	}
-
-	private List<User> callGetUsers() {
-		return userIO.retrieveUsers();
-	}
-
-	private User callGetUser(String mail) {
-		return userIO.retrieveUser(mail);
 	}
 
 	@SuppressWarnings("unused")

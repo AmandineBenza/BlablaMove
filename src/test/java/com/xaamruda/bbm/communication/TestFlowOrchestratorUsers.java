@@ -1,10 +1,7 @@
 package com.xaamruda.bbm.communication;
 
-import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +17,6 @@ import com.xaamruda.bbm.communication.internal.FlowOrchestrationResult;
 import com.xaamruda.bbm.communication.internal.FlowOrchestrator;
 import com.xaamruda.bbm.offers.OffersIOHandler;
 import com.xaamruda.bbm.users.UsersIOHandler;
-import com.xaamruda.bbm.users.model.User;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestFlowOrchestratorUsers {
@@ -69,7 +65,6 @@ public class TestFlowOrchestratorUsers {
 		assertEquals(resGood.getContent(),"Successfully identified.\n");	
 	}
 	
-	
 	@Test
 	public void testidentifyBadUser() {		
 		String badUser = "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"noisette@mail.com\",\"password\":\"!fabulousnoisette\"}}";
@@ -79,33 +74,5 @@ public class TestFlowOrchestratorUsers {
 		assertEquals(resBad.getContent(),"Wrong identifiers ! Please retry.\n");	
 	}
 	
-	
-	@Test
-	public void testConsultUsers() {	
-		User noisette = new User();
-		List<User> users = singletonList(noisette);
-		when(userIO.retrieveUsers()).thenReturn(users);
-
-		
-		String jsonString = "{'event':'consult-users','data':{}}";
-		FlowOrchestrationResult res = flowOrchestrator.orchestrateUsersEntryPoint(jsonString);
-		
-		assertEquals(res.getHttpStatus(),HttpStatus.OK);
-		assertEquals(res.getContent(),users);	
-	}
-	
-	
-	@Test
-	public void testConsultUser() {	
-		User noisette = new User();
-		when(userIO.retrieveUser("noisette@mail.com")).thenReturn(noisette);
-
-		
-		String jsonString = "{'event':'consult-user','data':{'mail':'noisette@mail.com'}}";
-		FlowOrchestrationResult res = flowOrchestrator.orchestrateUsersEntryPoint(jsonString);
-		
-		assertEquals(res.getHttpStatus(),HttpStatus.OK);
-		assertEquals(res.getContent(),noisette);	
-	}
 	
 }

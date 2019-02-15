@@ -11,6 +11,7 @@ public interface IOffersTransactionService {
 	List<OffersTransaction> getOffersByOwnerId(String userID);
     List<OffersTransaction> getOffersByTransactionID(String transactionID);
 
-	void remove(OffersTransaction offer);
+    void remove(OffersTransaction offer);
+    List<OffersTransaction> getAll();
 
 }
