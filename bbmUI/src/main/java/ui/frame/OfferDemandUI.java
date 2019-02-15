@@ -245,9 +245,13 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         String startAddress = this.startLocationField.getText();
         String endAddress = this.arrivalLocationField.getText();
         String maxPrice = this.maximumPointSpendField.getText();
+        //String res = "{\"event\":\"consult-offers\",\"data\":{\"weight\":\"" + weight + "\",\"volume\":\""+volume+
+        //        "\",\"date\":\""+ date+"\"},\"filters\":{\"weight\":\""+volume+"\",\"startAddress\":\""+startAddress+
+        //        "\r\",\"endAddress\":\""+endAddress+"\r\",\"maxPrice\":\""+maxPrice+"\"},\"identification\":{\"userID\":\""+connectedUser+"\r\"}}";
         String res = "{\"event\":\"consult-offers\",\"data\":{\"weight\":\"" + weight + "\",\"volume\":\""+volume+
                 "\",\"date\":\""+ date+"\"},\"filters\":{\"weight\":\""+volume+"\",\"startAddress\":\""+startAddress+
-                "\r\",\"endAddress\":\""+endAddress+"\r\",\"maxPrice\":\""+maxPrice+"\"},\"identification\":{\"userID\":\""+connectedUser+"\r\"}}";
+                "\",\"endAddress\":\""+endAddress+"\",\"maxPrice\":\""+maxPrice+"\"},\"identification\":{\"userID\":\""+connectedUser+"\"}}";
+
         return res;
     }
 

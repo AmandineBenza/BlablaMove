@@ -240,7 +240,7 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
         if(curlAction()){
         //if (true) {
             //responseParser("For this distance (13) the authorized points amount is within [6 : 39]");
-            responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
+            //responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
             frame.dispose();
             String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText(),priceField.getText()};
             new RangePriceUI(connectedUser,data,minMax);
