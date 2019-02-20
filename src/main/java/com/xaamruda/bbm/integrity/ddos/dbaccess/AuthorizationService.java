@@ -42,5 +42,10 @@ public class AuthorizationService implements IAuthorizationService {
 	public synchronized void save(Collection<DDOSMetadata> metadatas) {
 		repository.saveAll(metadatas);
 	}
+
+	@Override
+	public void delete(DDOSMetadata metada) {
+		repository.delete(metada);
+	}
 	
 }

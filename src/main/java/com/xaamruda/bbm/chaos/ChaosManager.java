@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.sql.DataSource;
@@ -14,10 +15,13 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 import com.xaamruda.bbm.offers.OffersIOHandler;
+import com.xaamruda.bbm.users.UsersIOHandler;
+import com.xaamruda.bbm.users.model.User;
 
 @Component
 public class ChaosManager {
@@ -31,9 +35,14 @@ public class ChaosManager {
 	@Autowired 
 	DataSource dataSource;
 
-
 	@Autowired
-	private/* static*/ OffersIOHandler offersIOHandler;
+	private OffersIOHandler offersIOHandler;
+	
+	@Autowired
+	private UsersIOHandler usersIOHandler;
+	
+	@Autowired
+	private DatabaseCleaner databaseCleaner;
 
 	public void lsPrint() throws IOException {
 		final Process p = Runtime.getRuntime().exec("ls");
@@ -53,11 +62,49 @@ public class ChaosManager {
 		}).start();
 	}
 
-
 	public String handle(String jsonEvents) throws IOException {
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonEvents);
 		JsonElement event = jsonObject.get("event");
+		
 		switch(event.getAsString()) {
+		case "clear-database" : {
+			databaseCleaner.cleanDatabase();
+			break;
+		}
+		
+		case "consult-users" : {
+			BBMLogger.infoln("Administrator consults database users...");
+			
+			List<User> users;
+			try {
+				users = usersIOHandler.retrieveUsers();
+			} catch (DatabaseException e) {
+				return "Database is down.\n";
+			}
+			
+			if(users == null || users.isEmpty()) {
+				return "No user found in database.\n";
+			} else {
+				return JsonUtils.toJson(users);
+			}
+		}
+		case "consult-user" : {
+			JsonElement data = jsonObject.get("data");
+			String userMail = data.getAsJsonObject().get("mail").getAsString();
+			BBMLogger.infoln("Administrator consults \"" + userMail + "\" user...");
+			User user;
+			try {
+				user = usersIOHandler.retrieveUser(userMail);
+			} catch (DatabaseException e) {
+				return "Database is down.\n";
+			}
+			
+			if(user != null) {
+				return JsonUtils.toJson(user);
+			} else {
+				return "No user \"" + userMail + "\" found in database.\n"; 
+			}
+		}
 		case "runCommand":{
 			JsonElement data = jsonObject.get("data");
 			runCommand(data.getAsString());
@@ -148,7 +195,7 @@ public class ChaosManager {
 	}
 
 	public void changeChaos(int level) throws IOException {
-		this.chaosLevel  = level;
+		chaosLevel = level;
 	}
 
 	public static void shutDownDataBase() {
@@ -157,6 +204,5 @@ public class ChaosManager {
 			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();
 		}
 	}
-
 
 }

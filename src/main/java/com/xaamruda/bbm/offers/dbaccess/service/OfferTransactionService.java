@@ -34,4 +34,9 @@ public class OfferTransactionService implements IOffersTransactionService {
 	public List<OffersTransaction> getOffersByTransactionID(String transactionID) {
 		return offerRepository.getByTransactionID(Integer.parseInt(transactionID));
 	}
+	
+	@Override
+	public List<OffersTransaction> getAll() {
+		return offerRepository.findAll();
+	}
 }

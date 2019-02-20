@@ -71,6 +71,7 @@ public class DDOSThread implements Runnable {
 				}
 			}
 
+			metadatas.forEach(metada -> service.delete(metada));
 			service.save(metadatas);
 			try {
 				Thread.sleep(sleepTimeMs);
@@ -84,7 +85,7 @@ public class DDOSThread implements Runnable {
 		while (running) {
 			try {
 				try {
-					service.save(cache.values());
+					// service.save(cache.values());
 				} catch(Exception e) {
 				}
 				Thread.sleep(sleepTimeMs);
@@ -104,6 +105,7 @@ public class DDOSThread implements Runnable {
 						metadata.setBanned(false);
 					}
 					
+					metadatas.forEach(metada -> service.delete(metada));
 					service.save(metadatas);
 				} catch(Exception e) {
 				}

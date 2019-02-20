@@ -1,7 +1,5 @@
 package ui.frame;
 
-import ui.UIIOHandler;
-
 import javax.swing.*;
 
 /**
@@ -18,7 +16,6 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
     private JLabel yourPointResLabel;
     private JLabel yourPointTxtLabel;
     private JFrame frame;
-    private UIIOHandler ioHandler;
 
     private String connectedUser;
 

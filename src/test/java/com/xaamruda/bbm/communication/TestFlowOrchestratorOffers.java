@@ -255,7 +255,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testValidatePriceByUnidentifierUser() {		
+	public void testValidatePriceByUnidentifierUser() throws DatabaseException {		
 		String jsonString = "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"Nice\",\"endAddress\": \"Sophia\",\"maxPrice\": \"0\"}, \"identification\":{\"userID\":\"noisette@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 		
@@ -269,7 +269,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testCreateOfferByUnidentifierUser() {
+	public void testCreateOfferByUnidentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"noisette@mail.com\", \"price\": \"21\", \"startCity\":\"Nice\", \"endCity\":\"Sophia\", \"capacity\":\"1\" },\"identification\":{\"userID\":\"noisette@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 		
@@ -283,7 +283,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testAskOfferByUnidentifierUser() {
+	public void testAskOfferByUnidentifierUser() throws DatabaseException {
 		String jsonString = 	"{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \"IDOFFER\",\"buyerID\": \"reglisse@mail.com\",\"weight\": \"12\", \"volume\":\"12\", \"date\":\"01/10/2018\" }, \"identification\":{\"userID\":\"reglisse@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 		
@@ -297,7 +297,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testConsultOffersByUnidentifierUser() {
+	public void testConsultOffersByUnidentifierUser() throws DatabaseException {
 		String jsonString =  "{\"event\":\"consult-offers\",\"data\": {\"weight\": \"12\", \"volume\":\"12\", \"date\":\"01/10/2018\" },\"filters\": {\"weight\": \"12\",\"startAddress\": \"Nice\",\"endAddress\": \"Sophia\",\"maxPrice\": \"10000\"},\"identification\":{\"userID\":\"reglisse@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 		
@@ -311,7 +311,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testConsultAwaitingOffersByUnidentifierUser() {
+	public void testConsultAwaitingOffersByUnidentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\": \"consult-awaiting-offers\" ,\"data\": {\"ownerID\": \noisette@mail.com\"}, \"identification\":{\"userID\":\"noisette@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 
@@ -325,7 +325,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testConfirmAwaitingOffersByUnidentifierUser() {
+	public void testConfirmAwaitingOffersByUnidentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\": IDOFFER}, \"identification\":{\"userID\":\"noisette@mail.com\"}}";
 
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
@@ -340,7 +340,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testClaimReceiptByunIdentifierUser() {
+	public void testClaimReceiptByunIdentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": TRANSACTIONID}, \"identification\":{\"userID\":\"reglisse@mail.com\"}}";
 
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
@@ -355,7 +355,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testConfirmReceiptByUnidentifierUser() {
+	public void testConfirmReceiptByUnidentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": \"TRANSACTIONID\"}, \"identification\":{\"userID\":\"noisette@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 		
@@ -369,7 +369,7 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testClaimDepositByUnidentifierUser() {
+	public void testClaimDepositByUnidentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": $offerIdD}, \"identification\":{\"userID\":\"$driver\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 
@@ -383,11 +383,10 @@ public class TestFlowOrchestratorOffers {
 	
 	
 	@Test
-	public void testConfirmDepositByUnidentifierUser() {
+	public void testConfirmDepositByUnidentifierUser() throws DatabaseException {
 		String jsonString = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": \"TRANSACTIONID\"}, \"identification\":{\"userID\":\"reglisse@mail.com\"}}";
 		JsonObject jsonObject = JsonUtils.getFromJson(jsonString);
 
-		
 		when(userIO.isIdentified(jsonObject.get("identification").getAsJsonObject().get("userID").getAsString())).thenReturn(false);
 
 		FlowOrchestrationResult res = flowOrchestrator.orchestrateOffersEntryPoint(jsonString);

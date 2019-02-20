@@ -1,5 +1,10 @@
 package ui.frame;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -256,25 +261,40 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
     }
 
     private void setResponses(String data){
-        String[] res = {};
-        
-        String[] data1 = {"056402864","61","15","10/02/2019","0125678","125","Sophia","Nice"};
+        if(data.equals("[ ]\n")){
+            response.clear();
+        }else {
+        /*String[] data1 = {"056402864","61","15","10/02/2019","0125678","125","Sophia","Nice"};
         String[] data2 = {"045408964","42","12","10/02/2019","0167954","100","Sophia","Nice"};
         String[] data3 = {"026076584","12","10","10/02/2019","0236125","200","Sophia","Nice"};
         response.add(data1);
         response.add(data2);
-        response.add(data3);
-        response.add(res);
+        response.add(data3);*/
+            //final GsonBuilder builder = new GsonBuilder();
+            //final Gson gson = builder.create();
+
+            JsonArray res = new Gson().fromJson(data, JsonArray.class);
+            System.out.println(res.get(1).toString());
+            for(int i= 0; i < res.size();i++){
+                response.add(res.get(i).toString());
+            }
+
+        }
+
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(curlAction()) {
         //if(true){
-            acceptButton.setSelected(false);
-            frame.dispose();
-            //setResponses("");
-            //String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
-            new ShowOfferUI(connectedUser,response);
+            if(this.response.size() < 1){
+                JOptionPane.showMessageDialog(frame, "your request has no match");
+            }else{
+                acceptButton.setSelected(false);
+                frame.dispose();
+                //setResponses("");
+                //String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
+                new ShowOfferUI(connectedUser, response);
+            }
         }else{
             JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
         }

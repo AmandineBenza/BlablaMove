@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,22 +95,6 @@ public class WebServiceController implements IWebServiceController {
 		BBMLogger.infoln("Response received.");
 		
 		return new ResponseEntity(result,HttpStatus.OK);
-	}
-	
-	@CrossOrigin
-	@RequestMapping(value = "ADMIN", method = RequestMethod.GET)
-	public String adminEntryPoint(HttpServletRequest request, Model model) throws IOException {
-		// remove ? user should not be able to shoot admin entry
-		if(!ddosChecker.checkNewRequestAuthorization(request.getRemoteAddr())) {
-			BBMLogger.infoln(request.getRemoteAddr() + " blocked by DDOS engine.");
-			return request.getRemoteAddr() + " blocked by DDOS engine.";
-		}
-		
-		BBMLogger.infoln("------------------------------------");
-		BBMLogger.infoln("Access to html admin page on \"BBM/Admin\".");
-		model.addAttribute("x", "x");
-		BBMLogger.infoln("Response received.");
-		return "admin";
 	}
 
 }

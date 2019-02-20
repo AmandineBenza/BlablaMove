@@ -1,8 +1,5 @@
 package ui.frame;
 
-import netscape.javascript.JSObject;
-import ui.UIIOHandler;
-
 import javax.swing.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -23,7 +20,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     private JTextField passwordField;
     private JLabel passwordLabel;
     private JFrame frame;
-    private UIIOHandler ioHandler;
 
     /**
      * Creates new form IdentificationUI
@@ -57,8 +53,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                 loginButtonActionPerformed(evt);
             }
         });
-
-        //img.setIcon(new javax.swing.ImageIcon(getClass().getResource("./bbmUI/src/main/ressources/img/01.png")));
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png")));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
