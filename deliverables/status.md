@@ -412,9 +412,6 @@ WEEK 8 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 - Exceptions system improvements
 
 >>>>> What is planned for the following week ?
-
-
-
-
->>>>> What are the blockers and risks ?
-
+- Prepare demo slides [Ongoing]
+- Prepare demo scripts
+- Prepare oral
