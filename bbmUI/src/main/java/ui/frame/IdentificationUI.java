@@ -53,8 +53,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                 loginButtonActionPerformed(evt);
             }
         });
-
-        //img.setIcon(new javax.swing.ImageIcon(getClass().getResource("./bbmUI/src/main/ressources/img/01.png")));
+        img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01.png")));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
