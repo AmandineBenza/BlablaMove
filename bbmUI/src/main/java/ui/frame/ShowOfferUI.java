@@ -1,5 +1,8 @@
 package ui.frame;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -19,14 +22,14 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     private ArrayList listOfferId;
     private JButton cancelButton;
     private String connectedUser;
-    private ArrayList<String[]> data;
+    private ArrayList<String> data;
     private ArrayList<JButton> jbuttonList;
     private String response;
     private int click = -1;
     /**
      * Creates new form ShowOfferUI
      */
-    public ShowOfferUI(String user, ArrayList<String[]> getListOffer) {
+    public ShowOfferUI(String user, ArrayList<String> getListOffer) {
         this.connectedUser = user;
         this.listOfferId = getListId(getListOffer);
         this.response = null;
@@ -34,10 +37,11 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         initialisation();
     }
 
-    private ArrayList getListId(ArrayList<String[]> getListOffer) {
+    private ArrayList getListId(ArrayList<String> getListOffer) {
         ArrayList res = new ArrayList();
         for(int i =0; i<getListOffer.size();i++){
-            res.add(getListOffer.get(i)[0]);
+            JsonObject json = new Gson().fromJson(getListOffer.get(i), JsonObject.class);
+            res.add(json.get("offerID").toString());
         }
         return res;
     }
@@ -74,18 +78,19 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     }
 
     private void lineCreation(int i) {
+        JsonObject json = new Gson().fromJson(data.get(i), JsonObject.class);
         JPanel linePanel = new JPanel();
         final JButton acceptButton = new JButton("Accept");
         JLabel offerIdTxtLabel = new JLabel("Id :");
-        JLabel offerIdResLabel = new JLabel(data.get(i)[0]+ "    ");
+        JLabel offerIdResLabel = new JLabel(json.get("offerID").toString()+ "    ");
         JLabel offerWeightTxtLabel = new JLabel("Weight Max :");
-        JLabel offerWeightResLabel = new JLabel(data.get(i)[1]);
+        JLabel offerWeightResLabel = new JLabel(json.get("capacity").toString());
         JLabel offerVolumeTxtLabel = new JLabel("Volume :");
-        JLabel offerVolumeResLabel = new JLabel(data.get(i)[2]);
+        JLabel offerVolumeResLabel = new JLabel(json.get("capacity").toString());
         JLabel offerDateTxtLabel = new JLabel("Date :");
-        JLabel offerDateResLabel = new JLabel(data.get(i)[3]);
+        JLabel offerDateResLabel = new JLabel(json.get("offerID").toString());
         JLabel offerPriceTxtLabel = new JLabel("Price :");
-        JLabel offerPriceResLabel = new JLabel(data.get(i)[5]);
+        JLabel offerPriceResLabel = new JLabel(json.get("price").toString());
 
         jbuttonList.add(acceptButton);
         acceptButton.addActionListener(new java.awt.event.ActionListener() {
@@ -188,8 +193,9 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
 
     @Override
     public String curlJsonParser() {
-        String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ data.get(click)[0] +",\"buyerID\": \""+ data.get(click)[1] +
-                "\",\"weight\": \""+ data.get(click)[2] +"\", \"volume\":\""+ data.get(click)[3] +"\", \"date\":\""+ data.get(click)[4] +
+        JsonObject json = new Gson().fromJson(data.get(click), JsonObject.class);
+        String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ json.get("offerID").toString() +",\"buyerID\": \""+ json.get("ownerID").toString() +
+                "\",\"weight\": \""+ json.get("capacity").toString() +"\", \"volume\":\""+ json.get("capacity").toString() +"\", \"date\":\""+ json.get("offerID").toString() +
                 "\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
         System.out.println("Request : " + res);
         return res;
@@ -201,7 +207,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         String start = first[1].split(":")[1];
         String end = first[2].split(":")[1];
         String price = first[3].split(":")[1];
-        String[] res = {price,date,start,end,data.get(click)[0]};
+        String[] res = {price,date,start,end};
         return res;
     }
 
@@ -224,8 +230,8 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         //if (true) {
         if (curlAction()) {
             //response = "{ \"date\": \"5\", \"startAddress\": \"Nice\", \"endAddress\": \"Sophia\", \"price\": \"10\" }";
-            frame.dispose();
-            new ShowRecapUI(connectedUser,parseResponse());
+            //frame.dispose();
+            //new ShowRecapUI(connectedUser,parseResponse());
 
         } else {
             click = -1;

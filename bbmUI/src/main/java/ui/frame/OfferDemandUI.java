@@ -2,6 +2,7 @@ package ui.frame;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import javax.swing.*;
@@ -269,11 +270,15 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         response.add(data1);
         response.add(data2);
         response.add(data3);*/
-            final GsonBuilder builder = new GsonBuilder();
-            final Gson gson = builder.create();
-            
-            String res = gson.toJson(data);
-            response.add(gson.toJson(data));
+            //final GsonBuilder builder = new GsonBuilder();
+            //final Gson gson = builder.create();
+
+            JsonArray res = new Gson().fromJson(data, JsonArray.class);
+            System.out.println(res.get(1).toString());
+            for(int i= 0; i < res.size();i++){
+                response.add(res.get(i).toString());
+            }
+
         }
 
     }
@@ -283,7 +288,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         //if(true){
             if(this.response.size() < 1){
                 JOptionPane.showMessageDialog(frame, "your request has no match");
-            }else {
+            }else{
                 acceptButton.setSelected(false);
                 frame.dispose();
                 //setResponses("");
