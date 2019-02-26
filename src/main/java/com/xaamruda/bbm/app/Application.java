@@ -75,7 +75,7 @@ public class Application {
 		ContextProvider.init(context);
 		// DDOSGuard.start(context.getBean(AuthorizationService.class), DDOSGuard.STANDARD_THREAD_SLEEP_MS);
 		DatabaseConnectionChecker.start();
-		UserIdentificationChecker.start(context.getBean(UserService.class), 5 * 60 * 1000);
+		UserIdentificationChecker.start(context.getBean(UserService.class), 20 * 60 * 1000); // 20 mins
 		JournalingEngine.init();
 	}
 	

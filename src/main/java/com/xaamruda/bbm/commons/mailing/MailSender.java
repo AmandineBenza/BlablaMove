@@ -17,7 +17,6 @@ public class MailSender {
 	public JavaMailSender emailSender;
 
 	private void sendSimpleEmail(String mail) {
-		
 		// Create a Simple MailMessage.
 		SimpleMailMessage message = new SimpleMailMessage();
 
@@ -26,13 +25,15 @@ public class MailSender {
 		message.setText("Hello, Im testing Simple Email");
 
 		// Send Message!
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + mail + "\" failed.");
+		}
 	}
 	
 	
 	private void sendEmailConfirmAwaitingOffer(String ownerMail, String buyerMail) {
-		
 		SimpleMailMessage message = new SimpleMailMessage();
 
 		message.setTo(ownerMail);
@@ -42,7 +43,11 @@ public class MailSender {
 		+ "You can now log in on BlablaMove to have a full recap about this offer ! :D \n\n "
 		+ "Have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
 
 	}
 	
@@ -57,12 +62,14 @@ public class MailSender {
 		+ " you can now log in on BlablaMove and have a full recap about this offer ! :D \n\n "
 		+ "Have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
 	}
 	
 	private void sendEmailProblemOccuredConfirmDeposit(String ownerMail, String buyerMail) {
-		
 		SimpleMailMessage message = new SimpleMailMessage();
 
 		message.setTo(buyerMail);
@@ -73,12 +80,16 @@ public class MailSender {
 		".\n You can now log in on BlablaMove in order to redo the confirmation !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
 
+		
 	}
 	
 	private void sendEmailProblemOccuredClaimDeposit(String ownerMail, String buyerMail) {
-		
 		SimpleMailMessage message = new SimpleMailMessage();
 
 		message.setTo(ownerMail);
@@ -89,8 +100,12 @@ public class MailSender {
 		".\n You can now log in on BlablaMove in order to redo the claim !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
+		
 	}
 	
 	private void sendEmailProblemOccuredConfirmReception(String ownerMail, String buyerMail) {
@@ -105,8 +120,12 @@ public class MailSender {
 		".\n You can now log in on BlablaMove in order to redo the confirmation !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
+		
 	}
 	
 	private void sendEmailProblemOccuredClaimReception(String ownerMail, String buyerMail) {
@@ -121,8 +140,12 @@ public class MailSender {
 		".\n You can now log in on BlablaMove in order to redo the claim !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
+		
 	}
 	
 	private void sendEmailProblemOccuredConfirmAwaitingOffer(String ownerMail, String buyerMail) {
@@ -137,8 +160,12 @@ public class MailSender {
 		".\n You can now log in on BlablaMove in order to redo the confirmation !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
+		
 	}
 	
 	private void sendEmailProblemOccuredAskValidation(String ownerMail, String buyerMail) {
@@ -152,8 +179,12 @@ public class MailSender {
 		+ ".\n You can now log in on BlablaMove in order to redo the request !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
+		
 	}
 	
 	private void sendEmailProblemOccuredPostingOffer(String ownerMail, String buyerMail) {
@@ -167,8 +198,12 @@ public class MailSender {
 		+ ".\n You can now log in on BlablaMove in order to post your offer !  \n\n "
 		+ "Thank you and have a nice day ! \n\n - BlablaMove Staff");
 
-		this.emailSender.send(message);
-
+		try {
+			this.emailSender.send(message);
+		}   catch(Exception e) {
+			BBMLogger.errorln("Mail sending to \"" + ownerMail + "\" failed.");
+		}
+		
 	}
 
 	public boolean sendEmail(String ownerMail, String buyerMail, String subject) {
