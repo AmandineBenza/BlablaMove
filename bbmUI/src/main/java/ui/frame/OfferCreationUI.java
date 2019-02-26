@@ -27,9 +27,7 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
     private int[] minMax;
 
     private String connectedUser;
-    /**
-     * Creates new form OfferCreationUI
-     */
+
     public OfferCreationUI(String user) {
         connectedUser = user;
         minMax = new int[2];
@@ -216,10 +214,6 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
 
     }
 
-    //priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-    // "{"event" : "validate-price" , "data" : {"data" : "x"},
-    // "filters": {"startAddress": "$startAdress","endAddress": "$endAddress","maxPrice": "0"}}"
-    // "localhost:8080/BBM/OFFERS/" | grep -o -P 'F.*' );
     @Override
     public String curlJsonParser(){
         String startLocation = startLocationField.getText();
@@ -238,9 +232,6 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         acceptButton.setSelected(false);
         if(curlAction()){
-        //if (true) {
-            //responseParser("For this distance (13) the authorized points amount is within [6 : 39]");
-            //responseParser("Incorrect price ! For this distance (25) the authorized points amount is within [12 : 75].");
             frame.dispose();
             String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText(),priceField.getText()};
             new RangePriceUI(connectedUser,data,minMax);

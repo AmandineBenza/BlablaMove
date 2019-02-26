@@ -26,14 +26,16 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     private ArrayList<JButton> jbuttonList;
     private String response;
     private int click = -1;
-    /**
-     * Creates new form ShowOfferUI
-     */
-    public ShowOfferUI(String user, ArrayList<String> getListOffer) {
+    private String from;
+    private String to;
+
+    public ShowOfferUI(String user, ArrayList<String> getListOffer,String from,String to) {
         this.connectedUser = user;
         this.listOfferId = getListId(getListOffer);
         this.response = null;
         this.data = getListOffer;
+        this.from = from;
+        this.to = to;
         initialisation();
     }
 
@@ -194,7 +196,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     @Override
     public String curlJsonParser() {
         JsonObject json = new Gson().fromJson(data.get(click), JsonObject.class);
-       String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \""+ json.get("offerID").toString() +"\",\"buyerID\": " + json.get("ownerID").toString() +
+       String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \""+ json.get("offerID").toString() +"\",\"buyerID\": " + connectedUser +
                 ",\"weight\": \""+ json.get("capacity").toString() +"\", \"volume\":\""+ json.get("capacity").toString() +"\", \"date\":\""+ json.get("offerID").toString() +
                 "\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
        // String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ json.get("offerID").toString() +",\r\"buyerID\": \""+ json.get("ownerID").toString() +
@@ -205,12 +207,13 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     }
 
     private String[] parseResponse(){
-        String[] first = response.split(",");
-        String date = first[0].split(":")[1];
-        String start = first[1].split(":")[1];
-        String end = first[2].split(":")[1];
-        String price = first[3].split(":")[1];
-        String[] res = {price,date,start,end};
+        JsonObject json = new Gson().fromJson(response, JsonObject.class);
+        String date = json.get("dateBeforeOrder").toString();
+        String start = this.from;
+        String end = this.to;
+        String price = json.get("finalPrice").toString();
+        String offerID= json.get("offerID").toString();
+        String[] res = {price,date,start,end,offerID};
         return res;
     }
 
@@ -230,11 +233,9 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         }
         button.setSelected(false);
         click = i;
-        //if (true) {
         if (curlAction()) {
-            //response = "{ \"date\": \"5\", \"startAddress\": \"Nice\", \"endAddress\": \"Sophia\", \"price\": \"10\" }";
-            //frame.dispose();
-            //new ShowRecapUI(connectedUser,parseResponse());
+            frame.dispose();
+            new ShowRecapUI(connectedUser,parseResponse());
 
         } else {
             click = -1;

@@ -1,6 +1,7 @@
 package ui.frame;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import javax.swing.*;
@@ -27,22 +28,19 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
         private String response;
         private int click = -1;
         private boolean start = true;
-        /**
-         * Creates new form ShowOfferUI
-         */
+
     public ConsultOfferUI(String user) {
             this.connectedUser = user;
             this.response = null;
+
             initialisation();
         }
 
-        private ArrayList getListId(ArrayList<String> getListOffer) {
-            ArrayList res = new ArrayList();
-            for(int i =0; i<getListOffer.size();i++){
-                JsonObject json = new Gson().fromJson(getListOffer.get(i), JsonObject.class);
-                res.add(json.get("offerID").toString());
+        private void getListId(String data) {
+            JsonArray res = new Gson().fromJson(data, JsonArray.class);
+            for(int i= 0; i < res.size();i++) {
+                this.data.add(res.get(i).toString());
             }
-            return res;
         }
 
 
@@ -62,10 +60,10 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-            if(listOfferId.size() == 0 ){
+            if(data.size() == 0 ){
                 mainPanel.add(new javax.swing.JLabel("No offer awaiting"));
             }else {
-                for (int i = 0; i < listOfferId.size(); i++) {
+                for (int i = 0; i < data.size(); i++) {
                     lineCreation(i);
                     mainPanel.add(new javax.swing.JSeparator());
                 }
@@ -87,6 +85,10 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
             final JButton acceptButton = new JButton("Accept");
             JLabel offerIdTxtLabel = new JLabel("Id :");
             JLabel offerIdResLabel = new JLabel(json.get("offerID").toString()+ "    ");
+            JLabel offerPriceTxtLabel = new JLabel("Price :");
+            JLabel offerPriceResLabel = new JLabel(json.get("finalPrice").toString());
+            JLabel offerBuyeurTxtLabel = new JLabel("Buyer :");
+            JLabel offerBuyeurResLabel = new JLabel(json.get("buyerID").toString());
 
             jbuttonList.add(acceptButton);
             acceptButton.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +107,18 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
             c.gridx = 1;
             c.gridy = 0;
             linePanel.add(offerIdResLabel,c);
+            c.gridx = 0;
+            c.gridy = 1;
+            linePanel.add(offerPriceTxtLabel,c);
+            c.gridx = 1;
+            c.gridy = 1;
+            linePanel.add(offerPriceResLabel,c);
+            c.gridx = 0;
+            c.gridy = 2;
+            linePanel.add(offerBuyeurTxtLabel,c);
+            c.gridx = 1;
+            c.gridy = 2;
+            linePanel.add(offerBuyeurResLabel,c);
             c.weightx = 1;
             c.gridx = 4;
             c.gridy = 0;
@@ -135,9 +149,8 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
                 OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
                 if(this.start){
                     wr.write(curlJsonParser());
-                    this.start = false;
                 }else{
-                    wr.write(curlJsonParserEnd(5));
+                    wr.write(curlJsonParserEnd());
                 }
                 wr.flush();
 
@@ -151,6 +164,10 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
                         sb.append(line + "\n");
                     }
                     System.out.println( "response is : " + sb.toString());
+                    if(this.start){
+                        getListId(sb.toString());
+                        this.start = false;
+                    }
                     br.close();
                     response = sb.toString();
                     if(sb.toString() == "No offers waiting for confirmation."){
@@ -181,20 +198,19 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
             return res;
         }
 
-    public String curlJsonParserEnd(int i) {
+    public String curlJsonParserEnd() {
         JsonObject json = new Gson().fromJson(data.get(click), JsonObject.class);
-        String res = "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\":\"" + i + "\"}, \"identification\":{\"userID\":\""+ connectedUser +"\"}";
+        String res = "{\"event\": \"confirm-awaiting-offers\" ,\"data\": {\"transactionID\":" + json.get("transactionID").toString() + "}, \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
         System.out.println("Request : " + res);
         return res;
     }
 
         private String[] parseResponse(){
-            String[] first = response.split(",");
-            String date = first[0].split(":")[1];
-            String start = first[1].split(":")[1];
-            String end = first[2].split(":")[1];
-            String price = first[3].split(":")[1];
-            String[] res = {price,date,start,end};
+            JsonObject json = new Gson().fromJson(response, JsonObject.class);
+            String id = json.get("offerID").toString();
+            String buyeur = json.get("buyeurID").toString();
+            String price = json.get("Price").toString();
+            String[] res = {id,price,buyeur};
             return res;
         }
 
@@ -216,9 +232,9 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
             click = i;
             //if (true) {
             if (curlAction()) {
-                //response = "{ \"date\": \"5\", \"startAddress\": \"Nice\", \"endAddress\": \"Sophia\", \"price\": \"10\" }";
-                //frame.dispose();
-                //new ShowRecapUI(connectedUser,parseResponse());
+                JOptionPane.showMessageDialog(frame, "This offer has been accepted!");
+                frame.dispose();
+                new MainMenuUI(connectedUser);
 
             } else {
                 click = -1;

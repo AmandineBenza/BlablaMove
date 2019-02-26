@@ -36,9 +36,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
 
     private String connectedUser;
 
-    /**
-     * Creates new form OfferDemandUI
-     */
+
     public OfferDemandUI(String user) {
         connectedUser = user;
         response = new ArrayList<String[]>();
@@ -185,15 +183,6 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
 
     @Override
     public boolean curlAction() {
-        //System.out.println("Start Location : " + startLocationField.getText());
-        //System.out.println("Arrival Location : " + arrivalLocationField.getText());
-        //System.out.println("Max Price : " + maximumPointSpendField.getText());
-        //System.out.println("Weight : " + weightField.getText());
-        //System.out.println("Size : " + sizeField.getText());
-        //searchResultList=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d
-        // "{"event":"consult-offers","data": {"weight": "$bedW", "volume":"$bedV", "date":"$inDays" },
-        // "filters": {"weight": "$bedV","startAddress": "$startAddress","endAddress": "$endAddress","maxPrice": "10000"}}"
-        // "localhost:8080/BBM/OFFERS")
         if(!startLocationField.getText().equals("") && !arrivalLocationField.getText().equals("") && !maximumPointSpendField.getText().equals("")
                 && !weightField.getText().equals("") && !sizeField.getText().equals("") &&
         maximumPointSpendField.getText().chars().allMatch( Character::isDigit ) &&  sizeField.getText().chars().allMatch( Character::isDigit )
@@ -264,15 +253,6 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
         if(data.equals("[ ]\n")){
             response.clear();
         }else {
-        /*String[] data1 = {"056402864","61","15","10/02/2019","0125678","125","Sophia","Nice"};
-        String[] data2 = {"045408964","42","12","10/02/2019","0167954","100","Sophia","Nice"};
-        String[] data3 = {"026076584","12","10","10/02/2019","0236125","200","Sophia","Nice"};
-        response.add(data1);
-        response.add(data2);
-        response.add(data3);*/
-            //final GsonBuilder builder = new GsonBuilder();
-            //final Gson gson = builder.create();
-
             JsonArray res = new Gson().fromJson(data, JsonArray.class);
             for(int i= 0; i < res.size();i++){
                 response.add(res.get(i).toString());
@@ -284,15 +264,12 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(curlAction()) {
-        //if(true){
             if(this.response.size() < 1){
                 JOptionPane.showMessageDialog(frame, "your request has no match");
             }else{
                 acceptButton.setSelected(false);
                 frame.dispose();
-                //setResponses("");
-                //String[] newData = {"o2501191000",this.maximumPointSpendField.getText(),"25/01/19",this.startLocationField.getText(),this.arrivalLocationField.getText()};
-                new ShowOfferUI(connectedUser, response);
+                new ShowOfferUI(connectedUser, response, this.startLocationField.getText(),this.arrivalLocationField.getText());
             }
         }else{
             JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");

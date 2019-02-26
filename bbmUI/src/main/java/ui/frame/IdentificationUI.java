@@ -21,9 +21,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     private JLabel passwordLabel;
     private JFrame frame;
 
-    /**
-     * Creates new form IdentificationUI
-     */
     public IdentificationUI() {
         initialisation();
     }
@@ -115,8 +112,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
 
     @Override
     public boolean curlAction() {
-        //System.out.println("Identifient : " + identifiantField.getText());
-        //System.out.println("Password : " + passwordField.getText());
         if(!identifiantField.getText().equals("") && !passwordField.getText().equals("")) {
             String url = "http://localhost:8080/BBM/USERS";
             try {
@@ -172,7 +167,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
         loginButton.setSelected(false);
         if(curlAction()){
-        //if(true) {
             frame.dispose();
             new MainMenuUI(identifiantField.getText());
         }else{

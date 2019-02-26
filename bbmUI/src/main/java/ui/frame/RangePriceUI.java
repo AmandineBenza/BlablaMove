@@ -35,9 +35,6 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private String[] offerData;
     private int[] minMax;
 
-    /**
-     * Creates new form RangePriceUI
-     */
     public RangePriceUI(String user,String[] data,int[] minMaximum) {
         offerData = data;
         connectedUser = user;
@@ -258,7 +255,6 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if(curlAction()){
-        //if(true) {
             JOptionPane.showMessageDialog(frame, "Your request has been granted.");
             acceptButton.setSelected(false);
             frame.dispose();

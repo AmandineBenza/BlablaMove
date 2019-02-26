@@ -20,9 +20,6 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
 
     private String connectedUser;
 
-    /**
-     * Creates new form MainMenuUI
-     */
     public MainMenuUI(String user) {
         connectedUser = user;
         initialisation();
