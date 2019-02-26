@@ -164,8 +164,11 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
                         sb.append(line + "\n");
                     }
                     System.out.println( "response is : " + sb.toString());
+
                     if(this.start){
-                        getListId(sb.toString());
+                        if( !sb.toString().equals("No offers waiting for confirmation.\n")) {
+                            getListId(sb.toString());
+                        }
                         this.start = false;
                     }
                     br.close();

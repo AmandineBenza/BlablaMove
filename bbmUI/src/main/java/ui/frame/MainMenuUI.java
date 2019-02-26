@@ -171,7 +171,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
     private void transactionButtonActionPerformed(java.awt.event.ActionEvent evt) {
         transactionButton.setSelected(false);
         frame.dispose();
-        new TransactionUI();
+        new TransactionUI(connectedUser);
     }
 
     private void consultButtonActionPerformed(java.awt.event.ActionEvent evt){

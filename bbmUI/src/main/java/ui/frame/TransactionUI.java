@@ -22,13 +22,36 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JToggleButton startTransactionButton;
     private javax.swing.JLabel statutTransactionResLabel;
     private javax.swing.JLabel statutTransactionTxtLabel;
+    private javax.swing.JLabel numberTransactionTxtLabel;
+    private javax.swing.JLabel numberTransactionResLabel;
     private javax.swing.JFrame frame;
-    private int transactionID = 2;
+    private int transactionID;
+    private String connectedUser;
     /**
      * Creates new form TransactionUI
      */
-    public TransactionUI() {
+    public TransactionUI(String connect) {
+        popupID();
+        connectedUser = connect;
         initialisation();
+    }
+
+    private void popupID(){
+        String s = (String)JOptionPane.showInputDialog(
+                frame,
+                "ID of Transaction",
+                "Id Transaction choice",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                null,
+                "0");
+
+
+        if ((s != null) && (s.length() > 0)) {
+            this.transactionID =  Integer.parseInt(s);
+            initialisation();
+            return;
+        }
     }
 
     @Override
@@ -40,7 +63,6 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
         statutTransactionResLabel = new javax.swing.JLabel();
         startTransactionButton = new javax.swing.JToggleButton();
         statutTransactionTxtLabel = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         endTransactionButton.setText("End Transaction");
@@ -177,14 +199,14 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     @Override
     public String curlJsonParser() {
         String res = "";
-        if(statutTransactionResLabel.getText().equals("not Started")){
-            res =  "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": "+  transactionID +"}}" ;
+        if(statutTransactionResLabel.getText().equals("not started")){
+            res =  "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": \""+  transactionID + "\"},\"identification\":{\"userID\":\""+ connectedUser +"\"}}";
         }else if(statutTransactionResLabel.getText().equals("Transaction in progress")){
-            res =  "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": "+  transactionID +"}}" ;
+            res =  "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": \""+  transactionID +"\"},\"identification\":{\"userID\":\""+ connectedUser +"\"}}";
         }else if(statutTransactionResLabel.getText().equals(("Waiting for confirmation"))){
-            res = "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": "+  transactionID +"}}";
+            res = "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": \""+  transactionID +"\"},\"identification\":{\"userID\":\""+ connectedUser +"\"}}";
         } else if(statutTransactionResLabel.getText().equals("Waiting confirmation for Payment")){
-            res = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": "+  transactionID +"}}";
+            res = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": \""+  transactionID +"\"},\"identification\":{\"userID\":\""+ connectedUser +"\"}}";
         }
         System.out.println("Request : " + res);
         return res;
