@@ -274,7 +274,6 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
             //final Gson gson = builder.create();
 
             JsonArray res = new Gson().fromJson(data, JsonArray.class);
-            System.out.println(res.get(1).toString());
             for(int i= 0; i < res.size();i++){
                 response.add(res.get(i).toString());
             }

@@ -12,6 +12,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
     private JPanel mainPanel;
     private JButton offerDemandButton;
     private JButton transactionButton;
+    private JButton consultOfferButton;
     private JLabel welcomeLabel;
     private JLabel yourPointResLabel;
     private JLabel yourPointTxtLabel;
@@ -37,6 +38,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
         welcomeLabel = new javax.swing.JLabel();
         createOfferButton = new javax.swing.JButton();
         offerDemandButton = new javax.swing.JButton();
+        consultOfferButton = new javax.swing.JButton();
         transactionButton = new javax.swing.JButton();
         yourPointTxtLabel = new javax.swing.JLabel();
         yourPointResLabel = new javax.swing.JLabel();
@@ -59,6 +61,13 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
             }
         });
 
+        consultOfferButton.setText("Consult Offer");
+        consultOfferButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultButtonActionPerformed(evt);
+            }
+        });
+
         transactionButton.setText("Transaction");
         transactionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,8 +87,10 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(mainPanelLayout.createSequentialGroup()
                                                 .addComponent(createOfferButton)
-                                                .addGap(38, 38, 38)
+                                                .addGap(10, 10, 10)
                                                 .addComponent(offerDemandButton)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(consultOfferButton)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(transactionButton))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
@@ -105,6 +116,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(createOfferButton)
                                         .addComponent(offerDemandButton)
+                                        .addComponent(consultOfferButton)
                                         .addComponent(transactionButton))
                                 .addGap(27, 27, 27)
                                 .addComponent(yourPointTxtLabel)
@@ -163,6 +175,12 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
         transactionButton.setSelected(false);
         frame.dispose();
         new TransactionUI();
+    }
+
+    private void consultButtonActionPerformed(java.awt.event.ActionEvent evt){
+        consultOfferButton.setSelected(false);
+        frame.dispose();
+        new ConsultOfferUI(connectedUser);
     }
 
     private void setPointForActualUser(){
