@@ -11,7 +11,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JToggleButton acceptButton;
     private javax.swing.JLabel arrivalLocationResLabel;
     private javax.swing.JLabel arrivalLocationTxtLabel;
-    private javax.swing.JToggleButton cancelButton;
+   // private javax.swing.JToggleButton cancelButton;
     private javax.swing.JLabel costTxtLabel;
     private javax.swing.JLabel dateResLabel;
     private javax.swing.JLabel dateTxtLabel;
@@ -43,7 +43,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
         frame = new JFrame("BlablaMove : Recapitulation");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
-        cancelButton = new javax.swing.JToggleButton();
+       // cancelButton = new javax.swing.JToggleButton();
         acceptButton = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
@@ -63,12 +63,12 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        cancelButton.setText("Refused");
+        /*cancelButton.setText("Refused");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelActionPerformed(evt);
             }
-        });
+        });*/
 
         acceptButton.setText("OK");
         acceptButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +103,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(acceptButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cancelButton)
+                                //.addComponent(cancelButton)
                                 .addContainerGap())
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                 .addGap(38, 38, 38)
@@ -172,7 +172,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
                                         .addComponent(dateResLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(cancelButton)
+                                     //   .addComponent(cancelButton)
                                         .addComponent(acceptButton))
                                 .addContainerGap())
         );
@@ -231,7 +231,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {
-        cancelButton.setSelected(false);
+      //  cancelButton.setSelected(false);
         frame.dispose();
         new MainMenuUI(connectedUser);
     }

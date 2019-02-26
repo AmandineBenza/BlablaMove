@@ -257,9 +257,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
             for(int i= 0; i < res.size();i++){
                 response.add(res.get(i).toString());
             }
-
         }
-
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,7 +267,8 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
             }else{
                 acceptButton.setSelected(false);
                 frame.dispose();
-                new ShowOfferUI(connectedUser, response, this.startLocationField.getText(),this.arrivalLocationField.getText());
+                String[] transferData = {this.startLocationField.getText(),this.arrivalLocationField.getText(),this.sizeField.getText(),this.weightField.getText()} ;
+                new ShowOfferUI(connectedUser, response,transferData);
             }
         }else{
             JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");

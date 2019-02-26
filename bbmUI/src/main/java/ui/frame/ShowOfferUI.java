@@ -28,14 +28,18 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     private int click = -1;
     private String from;
     private String to;
+    private String weight;
+    private String volume;
 
-    public ShowOfferUI(String user, ArrayList<String> getListOffer,String from,String to) {
+    public ShowOfferUI(String user, ArrayList<String> getListOffer,String[] oldData) {
         this.connectedUser = user;
         this.listOfferId = getListId(getListOffer);
         this.response = null;
         this.data = getListOffer;
-        this.from = from;
-        this.to = to;
+        this.from = oldData[0];
+        this.to = oldData[1];
+        this.weight = oldData[3];
+        this.volume = oldData[2];
         initialisation();
     }
 
@@ -197,7 +201,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     public String curlJsonParser() {
         JsonObject json = new Gson().fromJson(data.get(click), JsonObject.class);
        String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \""+ json.get("offerID").toString() +"\",\"buyerID\": " + connectedUser +
-                ",\"weight\": \""+ json.get("capacity").toString() +"\", \"volume\":\""+ json.get("capacity").toString() +"\", \"date\":\""+ json.get("offerID").toString() +
+                ",\"weight\": \""+ this.weight +"\", \"volume\":\""+ this.volume +"\", \"date\":\""+ json.get("offerID").toString() +
                 "\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
        // String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ json.get("offerID").toString() +",\r\"buyerID\": \""+ json.get("ownerID").toString() +
        //         "\r\",\"weight\": \""+ json.get("capacity").toString() +"\r\", \"volume\":\""+ json.get("capacity").toString() +"\r\", \"date\":\""+ json.get("offerID").toString() +
@@ -213,7 +217,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         String end = this.to;
         String price = json.get("finalPrice").toString();
         String offerID= json.get("offerID").toString();
-        String[] res = {price,date,start,end,offerID};
+        String[] res = {date,start,end,price,offerID};
         return res;
     }
 
