@@ -194,9 +194,12 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
     @Override
     public String curlJsonParser() {
         JsonObject json = new Gson().fromJson(data.get(click), JsonObject.class);
-        String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ json.get("offerID").toString() +",\"buyerID\": \""+ json.get("ownerID").toString() +
-                "\",\"weight\": \""+ json.get("capacity").toString() +"\", \"volume\":\""+ json.get("capacity").toString() +"\", \"date\":\""+ json.get("offerID").toString() +
+       String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": \""+ json.get("offerID").toString() +"\",\"buyerID\": " + json.get("ownerID").toString() +
+                ",\"weight\": \""+ json.get("capacity").toString() +"\", \"volume\":\""+ json.get("capacity").toString() +"\", \"date\":\""+ json.get("offerID").toString() +
                 "\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\"}}";
+       // String res = "{\"event\":\"ask-offer\" ,\"data\": {\"offerID\": "+ json.get("offerID").toString() +",\r\"buyerID\": \""+ json.get("ownerID").toString() +
+       //         "\r\",\"weight\": \""+ json.get("capacity").toString() +"\r\", \"volume\":\""+ json.get("capacity").toString() +"\r\", \"date\":\""+ json.get("offerID").toString() +
+       //         "\r\" }," + " \"identification\":{\"userID\":\""+ connectedUser +"\r\"}}";
         System.out.println("Request : " + res);
         return res;
     }

@@ -23,7 +23,7 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel statutTransactionResLabel;
     private javax.swing.JLabel statutTransactionTxtLabel;
     private javax.swing.JFrame frame;
-
+    private int transactionID = 2;
     /**
      * Creates new form TransactionUI
      */
@@ -178,13 +178,13 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     public String curlJsonParser() {
         String res = "";
         if(statutTransactionResLabel.getText().equals("not Started")){
-            res =  "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": "+ "" +"}}" ;
+            res =  "{\"event\": \"claim-receipt\" ,\"data\": {\"transactionID\": "+  transactionID +"}}" ;
         }else if(statutTransactionResLabel.getText().equals("Transaction in progress")){
-            res =  "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": "+ "" +"}}" ;
+            res =  "{\"event\": \"claim-deposit\" ,\"data\": {\"transactionID\": "+  transactionID +"}}" ;
         }else if(statutTransactionResLabel.getText().equals(("Waiting for confirmation"))){
-            res = "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": "+ "" +"}}";
+            res = "{\"event\": \"confirm-receipt\" ,\"data\": {\"transactionID\": "+  transactionID +"}}";
         } else if(statutTransactionResLabel.getText().equals("Waiting confirmation for Payment")){
-            res = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": "+ "" +"}}";
+            res = "{\"event\": \"confirm-deposit\" ,\"data\": {\"transactionID\": "+  transactionID +"}}";
         }
         System.out.println("Request : " + res);
         return res;
