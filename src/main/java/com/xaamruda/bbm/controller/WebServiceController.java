@@ -93,8 +93,7 @@ public class WebServiceController implements IWebServiceController {
 		String result = chaosManager.handle(jsonEvents);
 		
 		BBMLogger.infoln("Response received.");
-		
-		return new ResponseEntity(result,HttpStatus.OK);
+		return new ResponseEntity(result, HttpStatus.OK);
 	}
 
 }

@@ -161,7 +161,7 @@ public class ChaosManager {
 			BBMLogger.errorln("No Admin event");
 		}
 		}
-		return "Request " + event.getAsString() +  " OK";
+		return "Request " + event.getAsString() +  " OK\n";
 
 	}
 

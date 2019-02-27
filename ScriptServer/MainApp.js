@@ -92,7 +92,7 @@ app.route("/DATABASE/PRERUN").get(function () {
 
 app.route("/DATABASE/RUN").get(function () {
   displayOutput("./run.log");
-  shell.exec("sh ../src/main/resources/requests/run/run.sh 5 > run.log", { async: true });
+  shell.exec("sh ../src/main/resources/requests/run/run.sh 2 > run.log", { async: true });
 })
 
 app.route("/DATABASE/RUN2").get(function () {
