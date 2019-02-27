@@ -415,3 +415,20 @@ WEEK 8 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
 - Prepare demo slides [Ongoing]
 - Prepare demo scripts
 - Prepare oral
+
+
+--------------------
+
+
+WEEK 9 : ![#ffc900](https://placehold.it/15/ffc900/000000?text=+)
+(27/02/18)
+
+>>>>> What was achieved this week ?
+- Fixing bugs on the application
+- Preparation of the demo for the oral defense
+- Finishing the slides for the oral defense
+- Making and finishing the video 
+
+>>>>> What is planned for the following week ?
+- This is the end :'(
+Goodbye BlaBlaMove ! 
