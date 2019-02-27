@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title>DataBase status</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/DataBase.css">
+    <script>
+        $(function () {
+            $("input").checkboxradio({
+                icon: false
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>BLABLAMOVE Aministation center</h1>
+    </div>
+
+    <div class="content">
+        <div class="contentBlock request">
+            <h2>Commands</h2>
+            <ul class="commandLaunch">
+                <li class="command" id="PreRun">
+                    <div class="commandTitle">Prepare database</div>
+                    <div class="commandDescrition">Launch scripts that prepare database </div>
+                </li>
+                <li class="command" id="Run">
+                    <div class="commandTitle">Run non-regression script</div>
+                    <div class="commandDescrition">Run the previous demo scripting</div>
+                </li>
+                <li class="command">
+                    <div class="commandTitle">Shutdown database</div>
+                    <div class="commandDescrition">Shutdown the VM hosting the database </div>
+                </li>
+                <li class="command">
+                    <div class="commandTitle">Restart database</div>
+                    <div class="commandDescrition">Restart the VM hosting the database </div>
+                </li>
+            </ul>
+        </div>
+        <div class="contentBlock result">
+            <h2>Server status</h2>
+            <div>
+                <fieldset>
+                    <legend>Logging </legend>
+                    <label for="checkbox-nested-2" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget">
+                        Logging
+                        <input type="checkbox" name="checkbox-nested-2" id="checkbox-nested-2"
+                            class="ui-checkboxradio ui-helper-hidden-accessible">
+                    </label>
+                    <label for="checkbox-nested-1" class="ui-checkboxradio-label ui-corner-all ui-button ui-widget">
+                        Advanced Logging
+                        <input type="checkbox" name="checkbox-nested-1" id="checkbox-nested-1"
+                            class="ui-checkboxradio ui-helper-hidden-accessible">
+                    </label>
+                </fieldset>
+            </div>
+            <input class="oui" id="PauseTime" indice="0" type="search"> <input class="oui" id="AdvancedPauseTime"
+                indice="0" type="search">
+            <div id="MainCommand">
+                <div class="statusHolder" id="StartApp">
+                    <div style="vertical-align: middle">
+                        <span class="status">Start BLABLAMOVE <span class="refresh">
+                                <img class="marginImg" src="/rsc/refresh.png"> </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="statusHolder">
+                    <div style="vertical-align: middle">
+                        <span class="status">DataBase UP <span class="refresh">
+                                <img class="marginImg" src="/rsc/refresh.png"> </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="statusHolder" id="Update">
+                    <div style="vertical-align: middle">
+                        <span class="status">Update server configuration<span class="refresh">
+                                <img class="marginImg" src="/rsc/refresh.png"> </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>
+            <!-- <h2>Results </h2>
+            <div class="resultBlock">
+                <span>
+                    Coccaecat non ad fugiat ad occaecat. Aliqua velit amet occaecat duis elit ipsum. Minim magna est
+                    nostrud
+                    laboris consequat eiusmod consectetur consequat id et elit. Aliqua ipsum laborum qui magna
+                    reprehenderit
+                    anim. Esse culpa labore proident in enim anim adipisicing nisi dolor ut eu ad est nulla.
+                </span>
+            </div> -->
+
+        </div>
+    </div>
+    <!-- <script> var last_response_len = false;
+        $.ajax('http://localhost:8090/MAIN', {
+            xhrFields: {
+                onprogress: function(e)
+                {
+                    var this_response, response = e.currentTarget.response;
+                    if(last_response_len === false)
+                    {
+                        this_response = response;
+                        last_response_len = response.length;
+                    }
+                    else
+                    {
+                        this_response = response.substring(last_response_len);
+                        last_response_len = response.length;
+                    }
+                    console.log(this_response);
+                }
+            }
+        })
+        .done(function(data)
+        {
+            console.log('Complete response = ' + data);
+        })
+        .fail(function(data)
+        {
+            console.log('Error: ', data);
+        });
+        console.log('Request Sent');</script> -->
+    <script type="application/javascript">
+        $('#StartApp').click(function () {
+            $.ajax({
+                url: 'http://localhost:8090/MAIN',
+                type: "GET",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", " application/json");
+                    xhr.setRequestHeader("Content-type", " application/json");
+                }, success: function (data) {
+                }
+            })
+        })
+        $('#PreRun').click(function () {
+            $.ajax({
+                url: 'http://localhost:8090/Database/PRERUN',
+                type: "GET",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#Run').click(function () {
+            $.ajax({
+                url: 'http://localhost:8090/Database/RUN',
+                type: "GET",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#Update').click(function () {
+            
+
+            runCommand({
+                loggin: $("#checkbox-nested-2").prop('checked'),
+                advancedLoggin: $("#checkbox-nested-1").prop('checked'),
+                advancedPauseTime: $("#AdvancedPauseTime").val(),
+                pauseTime: $("#PauseTime").val()
+            })
+        })
+
+        function runCommand(payload) {
+            console.log("x")
+            var data2 = payload || "ls"
+            $.ajax({
+                url: 'http://localhost:8080/BBM/ADMIN',
+                type: "POST",
+                data: JSON.stringify({ event: "update-server-configuration", data: data2 }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", " application/json");
+                    xhr.setRequestHeader("Content-type", " application/json");
+                }, success: function (data) {
+                }
+            })
+        };
+        // $('#')
+
+    </script>
+
+</body>
+
+</html>

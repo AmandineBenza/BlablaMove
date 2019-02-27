@@ -451,7 +451,6 @@ public class OffersIOHandler {
 		// add entry to offer journal
 		long journalId = integrityIOHandler.addOfferJournalEntry("confirmDeposit", this.getClass().getSimpleName(), workData);
 		String mailSubjectProblem = BlablaMailConstants.BLABLA_SUBJECT_PROBLEM_OCCURED_WITH_CONFIRM_DEPOSIT;
-
 		
 		JsonObject json = JsonUtils.getFromJson(workData);
 		String transactionID = json.get("transactionID").getAsString();

@@ -71,7 +71,15 @@ public class ChaosManager {
 			databaseCleaner.cleanDatabase();
 			break;
 		}
-		
+		case "update-server-configuration": {
+			BBMLogger.infoln("Server configuration updated");
+			JsonElement data = jsonObject.get("data");
+			BBMLogger.toogleLogging(data.getAsJsonObject().get("loggin").getAsBoolean());
+			BBMLogger.toogleAdvancedLogging(data.getAsJsonObject().get("advancedLoggin").getAsBoolean());
+			BBMLogger.changePauseTime(data.getAsJsonObject().get("pauseTime").getAsInt());
+			BBMLogger.changePauseTime(data.getAsJsonObject().get("advancedPauseTime").getAsInt());
+			break;
+		}
 		case "consult-users" : {
 			BBMLogger.infoln("Administrator consults database users...");
 			
@@ -148,6 +156,7 @@ public class ChaosManager {
 			}
 			break;
 		}
+		
 		default:{
 			BBMLogger.errorln("No Admin event");
 		}

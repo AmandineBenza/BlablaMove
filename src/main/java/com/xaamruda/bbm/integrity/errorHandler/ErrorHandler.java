@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ErrorHandler implements ErrorController {
-
+	
 	  @RequestMapping("/error")
 	  @ResponseBody
 	  public String handleError(HttpServletRequest request) {

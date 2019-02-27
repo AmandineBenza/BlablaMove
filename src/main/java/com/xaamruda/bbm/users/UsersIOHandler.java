@@ -151,6 +151,7 @@ public class UsersIOHandler {
 		
 		int newBuyerPoints = buyer.getPointsAmount() - finalPrice;
 		
+		
 		// inferior bound
 		if(newBuyerPoints < 0) {
 			newBuyerPoints = 0;
@@ -159,7 +160,11 @@ public class UsersIOHandler {
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
 		buyer.setPointsAmount(newBuyerPoints);
 
+		BBMLogger.advancedDemoln("The system credit " + owner.getAddress()+ "with " + finalPrice + " points");
 		service.store(owner);
+		BBMLogger.advancedDemoln("The system is frezing in order to shutdown DataBase...");
+		BBMLogger.waitForEvent();
+		
 		service.store(buyer);
 		
 		// end journaling entry
