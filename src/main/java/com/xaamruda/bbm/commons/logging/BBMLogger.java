@@ -72,11 +72,15 @@ public final class BBMLogger {
 		DEFAULT_PAUSE_TIME = newTime;
 	}
 	
+	public static synchronized void changeAdvancedPauseTime(int newTime) {
+		ADVANCED_PAUSE_TIME = newTime;
+	}
+	
 	public static synchronized void toogleLogging(boolean state) {
 		LOGGING_ACTIVATED = state;
 	}
 	
 	public static synchronized void toogleAdvancedLogging(boolean state) {
-		LOGGING_ACTIVATED = state;
+		ADVANCED_LOGGING_ACTIVATED = state;
 	}
 }

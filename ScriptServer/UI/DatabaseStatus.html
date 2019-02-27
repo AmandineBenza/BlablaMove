@@ -75,8 +75,13 @@
                 </fieldset>
             </div>
             <div id="Values">
-                <input class="oui" id="PauseTime" indice="0" type="search"> <input class="oui" id="AdvancedPauseTime"
-                    indice="0" type="search">
+                <label for="PauseTime"> Logging time
+                    <input class="oui" id="PauseTime" indice="0" type="search">
+                </label>
+                <label for="AdvancedPauseTime">
+                    Freezing time
+                    <input class="oui" id="AdvancedPauseTime" indice="0" type="search">
+                </label>
             </div>
 
             <div id="MainCommand">
@@ -102,13 +107,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
         <div>
             <!-- <h2>Results </h2>
             <div class="resultBlock">
@@ -190,12 +189,13 @@
                 }, success: function (data) { }
             })
         })
+
         $('#Update').click(function () {
             runCommand({
                 loggin: $("#checkbox-nested-2").prop('checked'),
-                advancedLoggin: $("#checkbox-nested-1").prop('checked'),
-                advancedPauseTime: $("#AdvancedPauseTime").val(),
-                pauseTime: $("#PauseTime").val()
+                advancedLoggin: $("#checkbox-nested-1").prop('checked') ,
+                advancedPauseTime: $("#AdvancedPauseTime").val() || 1000,
+                pauseTime: $("#PauseTime").val() || 1000
             })
         })
 
@@ -266,4 +266,5 @@
         })
     </script>
 </body>
+
 </html>

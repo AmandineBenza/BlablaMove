@@ -99,6 +99,7 @@ app.route("/DATABASE/RUN2").get(function () {
   displayOutput("./run.log");
   shell.exec("sh ../src/main/resources/requests/run/run2.sh 2 > run.log", { async: true });
 })
+
 app.route("/DATABASE/RUN22").get(function () {
   shell.exec("sh ../src/main/resources/requests/run/run22.sh 2 >> run.log", { async: true });
 })
