@@ -29,7 +29,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
 
     @Override
     public void initialisation() {
-        frame = new JFrame("BalblaMove : Login");
+        frame = new JFrame("BlablaMove : Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
         identifiantLabel = new javax.swing.JLabel();
@@ -41,7 +41,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        identifiantLabel.setText("Identifiant");
+        identifiantLabel.setText("Login");
 
         passwordLabel.setText("Password");
 
