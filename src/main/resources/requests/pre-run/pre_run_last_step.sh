@@ -1,7 +1,7 @@
 #!/bin/sh
 
-client="Bob1@mail.fr"
-driver="Alice1@mail.fr"
+client="Bob@mail.fr"
+driver="Alice@mail.fr"
 password="DWpasswOrdL"
 
 startAddress="Nice"
@@ -16,7 +16,7 @@ inDays="5";
 curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\": \"identify-user\" ,\"data\":{\"mail\":\"$driver\",\"password\":\"$password\"}}" "localhost:8080/BBM/USERS";
 
 #Alice1 veut creer une offre et valider son prix
-priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS/" | egrep -o 'F.*' );
+priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAddress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS/" | egrep -o 'F.*' );
 
 
 rangePrice=$(echo $priceRequest | egrep -o '\[[0123456789]+ : [0123456789]*\]')

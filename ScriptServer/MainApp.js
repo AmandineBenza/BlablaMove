@@ -86,7 +86,7 @@ app.route("/MAIN").get(x);
 
 app.route("/DATABASE/PRERUN").get(function () {
   displayOutput("./prerun.log");
-  shell.exec("sh ../src/main/resources/requests/pre-run/pre-run_Alice_Bob.sh > prerun.log");
+  shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_Alice_Bob.sh > prerun.log");
   shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_last_step.sh >> prerun.log");
 })
 
