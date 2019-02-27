@@ -47,5 +47,5 @@ public class AuthorizationService implements IAuthorizationService {
 	public void delete(DDOSMetadata metada) {
 		repository.delete(metada);
 	}
-	
+
 }

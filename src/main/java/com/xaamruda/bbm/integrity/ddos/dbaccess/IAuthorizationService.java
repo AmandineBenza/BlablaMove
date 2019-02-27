@@ -17,6 +17,6 @@ public interface IAuthorizationService {
 	
 	public void save(Collection<DDOSMetadata> metadatas);
 	
-	public void delete(DDOSMetadata metada); 
+	public void delete(DDOSMetadata metada);
 	
 }
