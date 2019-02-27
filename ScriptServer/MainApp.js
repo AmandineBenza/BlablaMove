@@ -62,20 +62,20 @@ app.route("/BASH/DISPLAY").post(function (req, res) {
 })
 
 function displayOutput(outputFile) {
-  console.log("gnome-terminal -e 'bash -c \"tail -f"  + outputFile + ";read\"'")
-  // console.log(shell.exec("gnome-terminal -e \'bash -c ls'"));
-
-  shell.exec("gnome-terminal -e 'bash -c \"tail -f -n 200 "  + outputFile + ";read\"'",{ async: true });
+  var x = shell.exec("echo $PWD");
+  console.log("osascript -e 'tell app \"Terminal\"\ndo script\" cd " + x + "&& tail -f -n 200 " + outputFile + "\" \n end tell\'");
+  if (process.platform != "darwin") {
+    shell.exec("gnome-terminal -e 'bash -c \"tail -f -n 200 " + outputFile + ";read\"'", { async: true });
+  } else {
+    shell.exec("osascript -e 'tell app \"Terminal\"\ndo script\" cd " + x + "&& tail -f -n 200 " + outputFile + "\" \n end tell\'",{ async: true })
+  }
 }
 
 async function x(req, res) {
   if (!AppStatus) {
     // console.log(shell.exec("ls"))
-    console.log(shell.exec("ls .."));
-
     shell.exec('cd .. && sudo docker-compose up > ./ScriptServer/server.log', { async: true }).stdout.pipe(res);
     displayOutput("./server.log");
-    console.log("fin de connection")
   } else {
     shell.exec("docker kill $(docker ps -q)");
     shell.exec("cd .. && sudo docker-compose up");
@@ -83,15 +83,12 @@ async function x(req, res) {
 };
 
 app.route("/MAIN").get(x);
-
-
 app.route("/DATABASE/PRERUN").get(function () {
   displayOutput("./prerun.log");
-  console.log(shell.exec("sh ../src/main/resources/requests/pre-run/pre-run_Alice_Bob.sh > prerun.log",{ async: true }));
+  shell.exec("sh ../src/main/resources/requests/pre-run/pre-run_Alice_Bob.sh > prerun.log", { async: true });
 })
 
 app.route("/DATABASE/RUN").get(function () {
-  console.log("xd")
   displayOutput("./run.log");
-  console.log(shell.exec("sh ../src/main/resources/requests/run/run.sh 5 > run.log",{ async: true }));
+  shell.exec("sh ../src/main/resources/requests/run/run.sh 5 > run.log", { async: true });
 })
