@@ -1,6 +1,7 @@
 package ui.frame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -62,6 +63,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
         jSeparator2 = new javax.swing.JSeparator();
         yourNewPriceTxtLabel = new javax.swing.JLabel();
         yourNewPriceField = new javax.swing.JTextField();
+        yourNewPriceField.setSize(new Dimension(5, 5));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,7 +125,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                                 .addGap(13, 13, 13))
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(142, 142, 142)
+                                .addGap(160, 160, 160)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(yourPriceTxtLabel)
                                         .addComponent(yourPriceResLabel))
@@ -132,8 +134,8 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                         .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addGap(142, 142, 142)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                       .addComponent(yourNewPriceField)
-                                        .addComponent(yourNewPriceTxtLabel))
+                                        .addComponent(yourNewPriceTxtLabel)
+                                        .addComponent(yourNewPriceField))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
