@@ -12,7 +12,9 @@ import java.net.URL;
  */
 public class OfferCreationUI extends JFrame implements IGlobalUI{
 
-    private JToggleButton acceptButton;
+	private static final long serialVersionUID = 6729169453555513706L;
+	
+	private JToggleButton acceptButton;
     private JTextField arrivalLocationField;
     private JLabel arrivalLocationLabel;
     private JToggleButton cancelButton;
@@ -185,12 +187,12 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
                     }
                     br.close();
                     responseParser(sb.toString());
-                    System.out.println( "response is : " + sb.toString());
+                    // System.out.println( "response is : " + sb.toString());
                     return !(sb.toString()).equals("");
 
                 } else {
-                    System.out.println( "HTTP result : " + HttpResult);
-                    System.out.println( "response is : " + sb.toString());
+                    // System.out.println( "HTTP result : " + HttpResult);
+                    // System.out.println( "response is : " + sb.toString());
                     return !(sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
@@ -236,7 +238,7 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
             String[] data = {startLocationField.getText(),arrivalLocationField.getText(),carCapacityField.getText(),priceField.getText()};
             new RangePriceUI(connectedUser,data,minMax);
         } else {
-            JOptionPane.showMessageDialog(frame, "You didn't fill all informations or give malformed information.");
+            JOptionPane.showMessageDialog(frame, "You didn't fill all the information or give malformed information.");
         }
     }
 

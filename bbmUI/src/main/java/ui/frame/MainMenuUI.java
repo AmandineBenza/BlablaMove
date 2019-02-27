@@ -8,7 +8,9 @@ import javax.swing.*;
  */
 public class MainMenuUI extends JFrame implements IGlobalUI{
 
-    private JButton createOfferButton;
+	private static final long serialVersionUID = 6206028673585702673L;
+	
+	private JButton createOfferButton;
     private JPanel mainPanel;
     private JButton offerDemandButton;
     private JButton transactionButton;
@@ -74,7 +76,9 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
 
         yourPointTxtLabel.setText("Your Point");
 
+        // TODO not used ?
         int pointResSize = yourPointResLabel.getText().length();
+        
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(

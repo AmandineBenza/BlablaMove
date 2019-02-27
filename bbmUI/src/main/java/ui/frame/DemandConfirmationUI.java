@@ -12,9 +12,10 @@ import javax.swing.*;
  * @author roody
  */
 public class DemandConfirmationUI extends javax.swing.JFrame implements IGlobalUI{
-    /** TO DO? **/
 
-    /**
+	private static final long serialVersionUID = -1043315423187089327L;
+
+	/**
      * Creates new form DemandConfirmationUI
      */
     public DemandConfirmationUI() {

@@ -12,7 +12,9 @@ import java.net.URL;
  */
 public class IdentificationUI extends JFrame implements IGlobalUI {
 
-    private JTextField identifiantField;
+	private static final long serialVersionUID = -3108042890591036330L;
+	
+	private JTextField identifiantField;
     private JLabel identifiantLabel;
     private JLabel img;
     private JToggleButton loginButton;
@@ -24,7 +26,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
     public IdentificationUI() {
         initialisation();
     }
-
 
     @Override
     public void initialisation() {
@@ -136,12 +137,12 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
                     }
-                    System.out.println( "response is : " + sb.toString());
+                    // System.out.println( "response is : " + sb.toString());
                     br.close();
                     return !(sb.toString()).equals("");
                 } else {
-                    System.out.println( "HTTP result : " + HttpResult);
-                    System.out.println( "response is : " + sb.toString());
+                    // System.out.println( "HTTP result : " + HttpResult);
+                	// System.out.println( "response is : " + sb.toString());
                     return !(sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
