@@ -83,7 +83,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
 
         startLocationTxtLabel.setText("Start Location :");
 
-        recapLabel.setText("Recapitulation of your command");
+        recapLabel.setText("Command summary");
 
        setRecap();
 
@@ -123,7 +123,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
                                                         .addComponent(priceResLabel)
                                                         .addComponent(offerIdResLabel)))
                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGap(67, 67, 67)
+                                                .addGap(90, 90, 90)
                                                 .addComponent(recapLabel)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

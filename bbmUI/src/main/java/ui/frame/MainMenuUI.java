@@ -101,14 +101,14 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                                                .addGap(110 , 110, 110)
+                                                                .addGap(140 , 140, 140)
                                                                 .addComponent(yourPointResLabel))
                                                         .addComponent(yourPointTxtLabel))
                                                 .addGap(143, 143, 143))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addComponent(welcomeLabel)
-                                                .addGap(150, 150, 150)))
+                                                .addGap(180, 180, 180)))
                                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
