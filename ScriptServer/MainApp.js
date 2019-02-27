@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 var AppStatus = false;
 
 const DOCKER_MASTERDATABASE_NAME = "dbnouveau";
+const APP_NAME = "application"
 // var multer = require('multer');
 // var multerData = multer();
 
@@ -55,6 +56,17 @@ app.route("/DATABASE/KILL").post(function () {
 
 app.route("/DATABASE/START").post(function () {
   shell.exec("docker-compose start " + DOCKER_MASTERDATABASE_NAME)
+})
+
+
+
+
+app.route("/SERVER/KILL").post(function () {
+  shell.exec("docker-compose kill " + APP_NAME)
+})
+
+app.route("/SERVER/START").post(function () {
+  shell.exec("docker-compose start " + APP_NAME)
 })
 
 app.route("/BASH/DISPLAY").post(function (req, res) {

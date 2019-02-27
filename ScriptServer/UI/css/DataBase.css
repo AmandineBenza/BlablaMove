@@ -88,7 +88,7 @@ h2 {
     /* border: solid; */
     /* border-color: dodgerblue; */
     display: inline-block;
-    background-color: rgb(0, 240, 0);
+    background-color: rgb(10, 200, 10);
     cursor: pointer;
     margin-right: 0;
     margin: 0;
@@ -154,7 +154,7 @@ h2 {
 
 .command:hover
 {
-    background-color: lightblue;
+    background-color: rgba(173, 198, 230, 0.651);
 }
 
 .resultBlock { 

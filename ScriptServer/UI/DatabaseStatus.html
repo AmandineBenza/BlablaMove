@@ -55,6 +55,15 @@
                     <div class="commandTitle">Restart database</div>
                     <div class="commandDescrition">Restart the VM hosting the database </div>
                 </li>
+                <li class="command" id="ShutdownAPP">
+                    <div class="commandTitle">Shutdown Server</div>
+                    <div class="commandDescrition">Shutdown the VM hosting the server </div>
+                </li>
+
+                <li class="command" id="RestartAPP">
+                    <div class="commandTitle">Restart Server</div>
+                    <div class="commandDescrition">Restart the VM hosting the server </div>
+                </li>
             </ul>
         </div>
         <div class="contentBlock result">
@@ -106,6 +115,7 @@
                         </span>
                     </div>
                 </div>
+
             </div>
         </div>
         <div>
@@ -193,7 +203,7 @@
         $('#Update').click(function () {
             runCommand({
                 loggin: $("#checkbox-nested-2").prop('checked'),
-                advancedLoggin: $("#checkbox-nested-1").prop('checked') ,
+                advancedLoggin: $("#checkbox-nested-1").prop('checked'),
                 advancedPauseTime: $("#AdvancedPauseTime").val() || 1000,
                 pauseTime: $("#PauseTime").val() || 1000
             })
@@ -255,6 +265,32 @@
             console.log("restart");
             $.ajax({
                 url: 'http://localhost:8090/Database/START',
+                type: "POST",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#ShutdownAPP').click(function () {
+            console.log("shutdown");
+            $.ajax({
+                url: 'http://localhost:8090/SERVER/KILL',
+                type: "POST",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#RestartAPP').click(function () {
+            console.log("restart");
+            $.ajax({
+                url: 'http://localhost:8090/SERVER/START',
                 type: "POST",
                 data: JSON.stringify({ event: "toggle" }),
                 dataType: "json",
