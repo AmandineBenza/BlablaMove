@@ -29,6 +29,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     private javax.swing.JLabel yourNewPriceTxtLabel;
     private javax.swing.JTextField yourNewPriceField;
 
+    private String resp = "";
     private int maxPrice;
     private int minPrice;
     private String connectedUser;
@@ -218,6 +219,7 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
                     }
                     System.out.println( "response is : " + sb.toString());
                     br.close();
+                    this.resp = sb.toString();
                     return !("" + sb.toString()).equals("");
                 } else {
                     System.out.println( "HTTP result : " + HttpResult);
@@ -254,13 +256,13 @@ public class RangePriceUI extends javax.swing.JFrame implements IGlobalUI{
     }
 
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if(curlAction()){
+        if(curlAction()  && !(resp.split("!")[0].equals("Incorrect price "))){
             JOptionPane.showMessageDialog(frame, "Your request has been granted.");
             acceptButton.setSelected(false);
             frame.dispose();
             new MainMenuUI(connectedUser);
         } else {
-            JOptionPane.showMessageDialog(frame, "You didn't fill all informations.");
+            JOptionPane.showMessageDialog(frame, "You didn't fill all informations or give malformed information or your price is too high.");
         }
     }
 
