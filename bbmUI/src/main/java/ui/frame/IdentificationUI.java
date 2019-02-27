@@ -1,6 +1,7 @@
 package ui.frame;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -102,7 +103,9 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
         frame.setContentPane(this.mainPanel);
         frame.setVisible(true);
         frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        frame.setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
         frame.pack();
     }
 

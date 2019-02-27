@@ -106,7 +106,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
                                                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                 .addComponent(cancelButton))
                                                                         .addGroup(mainPanelLayout.createSequentialGroup()
-                                                                                .addGap(159, 159, 159)
+                                                                                .addGap(150, 150, 150)
                                                                                 .addComponent(weightLabel)
                                                                                 .addGap(0, 0, Short.MAX_VALUE))))
                                                         .addGroup(mainPanelLayout.createSequentialGroup()
@@ -125,7 +125,7 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
                                                 .addComponent(startLocationLabel)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(arrivalLocationLabel)
-                                                .addGap(100, 100, 100))))
+                                                .addGap(86, 86, 86))))
         );
         mainPanelLayout.setVerticalGroup(
                 mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
