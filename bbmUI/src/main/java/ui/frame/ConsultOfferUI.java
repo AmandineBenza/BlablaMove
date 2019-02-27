@@ -97,11 +97,13 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
 		JPanel linePanel = new JPanel();
 		final JButton acceptButton = new JButton("Accept");
 		JLabel offerIdTxtLabel = new JLabel("Id :");
-		JLabel offerIdResLabel = new JLabel(json.get("offerID").toString() + "    ");
+		JLabel offerIdResLabel = new JLabel(json.get("offerID").toString().split("\"")[1]);
 		JLabel offerPriceTxtLabel = new JLabel("Price :");
 		JLabel offerPriceResLabel = new JLabel(json.get("finalPrice").toString());
 		JLabel offerBuyeurTxtLabel = new JLabel("Buyer :");
 		JLabel offerBuyeurResLabel = new JLabel(json.get("buyerID").toString());
+		JLabel offerTransactionTxtLabel = new JLabel("Transaction ID :");
+		JLabel offerTransactionResLabel = new JLabel(json.get("transactionID").toString());
 
 		jbuttonList.add(acceptButton);
 		acceptButton.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +134,12 @@ public class ConsultOfferUI extends javax.swing.JFrame implements IGlobalUI {
 		c.gridx = 1;
 		c.gridy = 2;
 		linePanel.add(offerBuyeurResLabel, c);
+		c.gridx = 0;
+		c.gridy = 3;
+		linePanel.add(offerTransactionTxtLabel, c);
+		c.gridx = 1;
+		c.gridy = 3;
+		linePanel.add(offerTransactionResLabel, c);
 		c.weightx = 1;
 		c.gridx = 4;
 		c.gridy = 0;

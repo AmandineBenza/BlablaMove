@@ -215,7 +215,7 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         String date = json.get("dateBeforeOrder").toString();
         String start = this.from;
         String end = this.to;
-        String price = json.get("finalPrice").toString();
+        String price = json.get("finalPrice").toString().split("\"")[1];
         String offerID= json.get("offerID").toString();
         String[] res = {date,start,end,price,offerID};
         return res;
