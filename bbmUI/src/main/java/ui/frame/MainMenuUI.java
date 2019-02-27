@@ -60,7 +60,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
             }
         });
 
-        consultOfferButton.setText("Consult Offer");
+        consultOfferButton.setText("Consult My Offers");
         consultOfferButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultButtonActionPerformed(evt);
@@ -74,7 +74,7 @@ public class MainMenuUI extends JFrame implements IGlobalUI{
             }
         });
 
-        yourPointTxtLabel.setText("Your Point");
+        yourPointTxtLabel.setText("Your Points");
 
         // TODO not used ?
         int pointResSize = yourPointResLabel.getText().length();

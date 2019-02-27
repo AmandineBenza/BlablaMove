@@ -187,12 +187,12 @@ public class OfferCreationUI extends JFrame implements IGlobalUI{
                     }
                     br.close();
                     responseParser(sb.toString());
-                    // System.out.println( "response is : " + sb.toString());
+                    System.out.println( "response is : " + sb.toString());
                     return !(sb.toString()).equals("");
 
                 } else {
-                    // System.out.println( "HTTP result : " + HttpResult);
-                    // System.out.println( "response is : " + sb.toString());
+                    System.out.println( "HTTP result : " + HttpResult);
+                    System.out.println( "response is : " + sb.toString());
                     return !(sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {

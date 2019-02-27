@@ -68,9 +68,9 @@ public class OfferDemandUI extends JFrame implements IGlobalUI {
 
         arrivalLocationLabel.setText("Arrival Location");
 
-        sizeLabel.setText("Size of Item");
+        sizeLabel.setText("Item volume");
 
-        weightLabel.setText("Weight of Item");
+        weightLabel.setText("Item weight");
 
         acceptButton.setText("Accept");
         acceptButton.addActionListener(new java.awt.event.ActionListener() {

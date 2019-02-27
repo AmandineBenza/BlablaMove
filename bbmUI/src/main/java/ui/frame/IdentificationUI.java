@@ -41,7 +41,7 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        identifiantLabel.setText("Login");
+        identifiantLabel.setText("Identifier");
 
         passwordLabel.setText("Password");
 
@@ -137,12 +137,12 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
                     while ((line = br.readLine()) != null) {
                         sb.append(line + "\n");
                     }
-                    // System.out.println( "response is : " + sb.toString());
+                    System.out.println( "response is : " + sb.toString());
                     br.close();
                     return !(sb.toString()).equals("");
                 } else {
-                    // System.out.println( "HTTP result : " + HttpResult);
-                	// System.out.println( "response is : " + sb.toString());
+                    System.out.println( "HTTP result : " + HttpResult);
+                	System.out.println( "response is : " + sb.toString());
                     return !(sb.toString()).equals("");
                 }
             } catch (MalformedURLException e) {
