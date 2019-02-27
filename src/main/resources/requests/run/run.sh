@@ -24,13 +24,16 @@ echo "\t- arrival location"
 echo "\t- price"
 echo "\t- capacity of car\n"
 
-priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAdress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS/" | egrep -o 'F.*' );
+priceRequest=$(curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\" : \"validate-price\" , \"data\" : {\"data\" : \"x\"}, \"filters\": {\"startAddress\": \"$startAddress\",\"endAddress\": \"$endAddress\",\"maxPrice\": \"0\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS/" | egrep -o 'F.*' );
 
 echo "BlablaMove response:"
 echo $priceRequest
 
 rangePrice=$(echo $priceRequest | egrep -o '\[[0123456789]+ : [0123456789]*\]')
 minPrice=$(echo $rangePrice | egrep -o  '\[[0123456789]+' | egrep -o  '[0123456789]+') 
+
+echo $rangePrice;
+echo $priceRequest;
 
 curl -s -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{\"event\":\"create-offer\",\"data\":{\"ownerID\":\"$driver\", \"price\": \"$(echo $minPrice*2.1 | bc | cut -f1 -d\.)\", \"startCity\":\"$startAddress\", \"endCity\":\"$endAddress\", \"capacity\":\"$carV\"}, \"identification\":{\"userID\":\"$driver\"}}" "localhost:8080/BBM/OFFERS"
 

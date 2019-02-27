@@ -22,7 +22,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<User> getUserByMail(String mail) {
-		BBMLogger.infoln("Retrieving user given mail " + mail + ".");
+		// infoln("Retrieving user given mail " + mail + ".");
 		return repository.findByMail(mail);
 	}
 	
