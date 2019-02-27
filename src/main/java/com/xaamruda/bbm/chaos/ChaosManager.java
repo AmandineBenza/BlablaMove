@@ -84,7 +84,7 @@ public class ChaosManager {
 			BBMLogger.toogleLogging(data.getAsJsonObject().get("loggin").getAsBoolean());
 			BBMLogger.toogleAdvancedLogging(data.getAsJsonObject().get("advancedLoggin").getAsBoolean());
 			BBMLogger.changePauseTime(data.getAsJsonObject().get("pauseTime").getAsInt());
-			BBMLogger.changePauseTime(data.getAsJsonObject().get("advancedPauseTime").getAsInt());
+			BBMLogger.changeAdvancedPauseTime(data.getAsJsonObject().get("advancedPauseTime").getAsInt());
 			break;
 		}
 		case "consult-users" : {
