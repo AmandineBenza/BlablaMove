@@ -6,7 +6,9 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 
@@ -20,6 +22,8 @@ import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 import com.xaamruda.bbm.offers.OffersIOHandler;
+import com.xaamruda.bbm.offers.dbaccess.service.IOffersTransactionService;
+import com.xaamruda.bbm.offers.model.OffersTransaction;
 import com.xaamruda.bbm.users.UsersIOHandler;
 import com.xaamruda.bbm.users.model.User;
 
@@ -43,6 +47,9 @@ public class ChaosManager {
 	
 	@Autowired
 	private DatabaseCleaner databaseCleaner;
+	
+	@Autowired
+	private IOffersTransactionService offersTransactionService;
 
 	public void lsPrint() throws IOException {
 		final Process p = Runtime.getRuntime().exec("ls");
@@ -112,6 +119,48 @@ public class ChaosManager {
 			} else {
 				return "No user \"" + userMail + "\" found in database.\n"; 
 			}
+		}
+		case "consult-transaction" : {
+			JsonElement data = jsonObject.get("data");
+			JsonObject object = data.getAsJsonObject();
+			String ownerID = object.get("ownerID").getAsString();
+			BBMLogger.infoln("Administrator consults transaction(s)...");
+			List<OffersTransaction> transactions;
+			
+			try {
+				transactions = offersTransactionService.getOffersByOwnerId(ownerID);
+				String buyerID = object.get("buyerID").getAsString();
+				int itemVolume = object.get("itemVolume").getAsInt();
+				int itemWeight = object.get("itemWeight").getAsInt();
+				
+				if(transactions != null) {
+					List<OffersTransaction> match = transactions.parallelStream()
+						.filter(transaction ->
+						transaction.getBuyerID().equals(buyerID)
+						&& transaction.getVolume() == itemVolume
+						&& transaction.getWeigth() == itemWeight)
+					.collect(Collectors.toList());
+					
+					int maxId = match.stream().mapToInt(transaction -> transaction.getTransactionID())
+							.max().orElseThrow(NoSuchElementException::new);
+					
+					match = match.stream().filter(t ->  t.getTransactionID() == maxId)
+							.collect(Collectors.toList());
+					
+					if(match != null) {
+						return JsonUtils.toJson(match.get(0));
+					} else {
+						BBMLogger.infoln("Did not find any transactions. Owner: \"" + ownerID + "\".");
+						break;
+					}
+				}
+				
+			} catch(Exception e) {
+				BBMLogger.errorln("Error occured while trying to retrieve transactions. Owner: \""
+						 + ownerID + "\".");
+				break;
+			}
+			
 		}
 		case "runCommand":{
 			JsonElement data = jsonObject.get("data");
