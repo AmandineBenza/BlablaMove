@@ -87,15 +87,15 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         JsonObject json = new Gson().fromJson(data.get(i), JsonObject.class);
         JPanel linePanel = new JPanel();
         final JButton acceptButton = new JButton("Accept");
-        JLabel offerIdTxtLabel = new JLabel("Id :");
-        JLabel offerIdResLabel = new JLabel(json.get("offerID").toString()+ "    ");
-        JLabel offerWeightTxtLabel = new JLabel("Weight Max :");
+        JLabel offerIdTxtLabel = new JLabel("Id offer : ");
+        JLabel offerIdResLabel = new JLabel(json.get("offerID").toString());
+        JLabel offerWeightTxtLabel = new JLabel( "   Weight : ");
         JLabel offerWeightResLabel = new JLabel(json.get("capacity").toString());
-        JLabel offerVolumeTxtLabel = new JLabel("Volume :");
+        JLabel offerVolumeTxtLabel = new JLabel("Volume : ");
         JLabel offerVolumeResLabel = new JLabel(json.get("capacity").toString());
-        JLabel offerDateTxtLabel = new JLabel("Date :");
+        JLabel offerDateTxtLabel = new JLabel("Date : ");
         JLabel offerDateResLabel = new JLabel(json.get("offerID").toString());
-        JLabel offerPriceTxtLabel = new JLabel("Price :");
+        JLabel offerPriceTxtLabel = new JLabel("Price     :");
         JLabel offerPriceResLabel = new JLabel(json.get("price").toString());
 
         jbuttonList.add(acceptButton);
@@ -121,9 +121,8 @@ public class ShowOfferUI extends javax.swing.JFrame implements IGlobalUI {
         c.gridx = 3;
         c.gridy = 0;
         linePanel.add(offerWeightResLabel,c);
-        c.weightx = 1;
-        c.gridx = 4;
-        c.gridy = 0;
+        c.gridx = 5;
+        c.gridy = 2;
         linePanel.add(acceptButton,c);
         c.gridx = 0;
         c.gridy = 1;
