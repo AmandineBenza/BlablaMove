@@ -40,7 +40,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
 
     @Override
     public void initialisation() {
-        frame = new JFrame("BlablaMove : Recapitulation");
+        frame = new JFrame("BlablaMove : Summary");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainPanel = new javax.swing.JPanel();
        // cancelButton = new javax.swing.JToggleButton();
@@ -49,7 +49,6 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
-        dateTxtLabel = new javax.swing.JLabel();
         costTxtLabel = new javax.swing.JLabel();
         offerIdTxtLabel = new javax.swing.JLabel();
         arrivalLocationTxtLabel = new javax.swing.JLabel();
@@ -59,8 +58,6 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
         arrivalLocationResLabel = new javax.swing.JLabel();
         offerIdResLabel = new javax.swing.JLabel();
         priceResLabel = new javax.swing.JLabel();
-        dateResLabel = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         /*cancelButton.setText("Refused");
@@ -77,8 +74,6 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
             }
         });
 
-        dateTxtLabel.setText("Date :");
-        dateTxtLabel.setToolTipText("");
 
         costTxtLabel.setText("Price : ");
 
@@ -129,12 +124,7 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
                                                         .addComponent(offerIdResLabel)))
                                         .addGroup(mainPanelLayout.createSequentialGroup()
                                                 .addGap(67, 67, 67)
-                                                .addComponent(recapLabel))
-                                        .addGroup(mainPanelLayout.createSequentialGroup()
-                                                .addGap(38, 38, 38)
-                                                .addComponent(dateTxtLabel)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(dateResLabel)))
+                                                .addComponent(recapLabel)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -166,10 +156,6 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
                                         .addComponent(priceResLabel))
                                 .addGap(18, 18, 18)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(dateTxtLabel)
-                                        .addComponent(dateResLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                      //   .addComponent(cancelButton)
@@ -218,7 +204,6 @@ public class ShowRecapUI extends javax.swing.JFrame implements IGlobalUI{
     private void setRecap(){
         offerIdResLabel.setText(data[4]);
         priceResLabel.setText(data[3]);
-        dateResLabel.setText(data[0]);
         startLocationResLabel.setText(data[1]);
         arrivalLocationResLabel.setText(data[2]);
     }
