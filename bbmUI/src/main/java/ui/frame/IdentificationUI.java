@@ -106,7 +106,6 @@ public class IdentificationUI extends JFrame implements IGlobalUI {
         Toolkit toolkit = getToolkit();
         Dimension size = toolkit.getScreenSize();
         frame.setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
-        //frame.setLocationRelativeTo(null);
         frame.pack();
     }
 
