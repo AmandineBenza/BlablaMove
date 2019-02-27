@@ -44,7 +44,6 @@
    
 }
 
-
 .logoHandler {
     float: right;
     /* display: inline-block; */
@@ -131,12 +130,13 @@ h2 {
     margin-right: 8px;
 }
 #Values {
-    margin : 4px;
+    margin : 10px;
 }
 
 #MainCommand {
-text-align: center;
+    text-align: center;
 }
+
 .logo {
     background-color: rgba(201, 76, 76, 0.3);
 }

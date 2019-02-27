@@ -79,7 +79,4 @@ public final class BBMLogger {
 	public static synchronized void toogleAdvancedLogging(boolean state) {
 		LOGGING_ACTIVATED = state;
 	}
-
-
-
 }

@@ -50,11 +50,11 @@ app.route("/SCRIPT").get(function (req, res) {
 });
 
 app.route("/DATABASE/KILL").post(function () {
-  shell.exec("docker-compose kill" + DOCKER_MASTERDATABASE_NAME)
+  shell.exec("docker-compose kill " + DOCKER_MASTERDATABASE_NAME)
 })
 
 app.route("/DATABASE/START").post(function () {
-  shell.exec("docker-compose start" + DOCKER_MASTERDATABASE_NAME)
+  shell.exec("docker-compose start " + DOCKER_MASTERDATABASE_NAME)
 })
 
 app.route("/BASH/DISPLAY").post(function (req, res) {
@@ -63,11 +63,11 @@ app.route("/BASH/DISPLAY").post(function (req, res) {
 
 function displayOutput(outputFile) {
   var x = shell.exec("echo $PWD");
-  console.log("osascript -e 'tell app \"Terminal\"\ndo script\" cd " + x + "&& tail -f -n 200 " + outputFile + "\" \n end tell\'");
+  x = x.substr(0, x.length - 1)
   if (process.platform != "darwin") {
     shell.exec("gnome-terminal -e 'bash -c \"tail -f -n 200 " + outputFile + ";read\"'", { async: true });
   } else {
-    shell.exec("osascript -e 'tell app \"Terminal\"\ndo script\" cd " + x + "&& tail -f -n 200 " + outputFile + "\" \n end tell\'",{ async: true })
+    shell.exec("osascript -e 'tell app \"Terminal\" \n do script \" cd " + x + " && tail -f -n 200 " + outputFile + " \" \n end tell\'", { async: true })
   }
 }
 
@@ -83,12 +83,22 @@ async function x(req, res) {
 };
 
 app.route("/MAIN").get(x);
+
 app.route("/DATABASE/PRERUN").get(function () {
   displayOutput("./prerun.log");
-  shell.exec("sh ../src/main/resources/requests/pre-run/pre-run_Alice_Bob.sh > prerun.log", { async: true });
+  shell.exec("sh ../src/main/resources/requests/pre-run/pre-run_Alice_Bob.sh > prerun.log");
+  shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_last_step.sh >> prerun.log");
 })
 
 app.route("/DATABASE/RUN").get(function () {
   displayOutput("./run.log");
   shell.exec("sh ../src/main/resources/requests/run/run.sh 5 > run.log", { async: true });
+})
+
+app.route("/DATABASE/RUN2").get(function () {
+  displayOutput("./run.log");
+  shell.exec("sh ../src/main/resources/requests/run/run2.sh 2 > run.log", { async: true });
+})
+app.route("/DATABASE/RUN22").get(function () {
+  shell.exec("sh ../src/main/resources/requests/run/run22.sh 2 >> run.log", { async: true });
 })

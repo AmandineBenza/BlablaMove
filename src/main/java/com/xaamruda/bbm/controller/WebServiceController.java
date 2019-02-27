@@ -91,7 +91,7 @@ public class WebServiceController implements IWebServiceController {
 		BBMLogger.infoln("------------------------------------");
 		BBMLogger.infoln("Listened new event on \"BBM/Admin\".");
 		String result = chaosManager.handle(jsonEvents);
-		chaosManager.lsPrint();
+		
 		BBMLogger.infoln("Response received.");
 		
 		return new ResponseEntity(result,HttpStatus.OK);
