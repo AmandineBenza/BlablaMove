@@ -79,7 +79,7 @@ public class ChaosManager {
 			break;
 		}
 		case "update-server-configuration": {
-			BBMLogger.infoln("Server configuration updated");
+			BBMLogger.infoln("Server configuration updated !");
 			JsonElement data = jsonObject.get("data");
 			BBMLogger.toogleLogging(data.getAsJsonObject().get("loggin").getAsBoolean());
 			BBMLogger.toogleAdvancedLogging(data.getAsJsonObject().get("advancedLoggin").getAsBoolean());
@@ -88,7 +88,7 @@ public class ChaosManager {
 			break;
 		}
 		case "consult-users" : {
-			BBMLogger.infoln("Administrator consults database users...");
+			BBMLogger.infoln("Administrator consults users...");
 			
 			List<User> users;
 			try {
@@ -124,7 +124,7 @@ public class ChaosManager {
 			JsonElement data = jsonObject.get("data");
 			JsonObject object = data.getAsJsonObject();
 			String ownerID = object.get("ownerID").getAsString();
-			BBMLogger.infoln("Administrator consults transaction(s)...");
+			BBMLogger.infoln("Administrator consults transaction...");
 			List<OffersTransaction> transactions;
 			
 			try {
@@ -185,7 +185,7 @@ public class ChaosManager {
 		case "datasource":{
 			try {
 				java.sql.Connection con = dataSource.getConnection();
-				System.out.println(con.isClosed());
+				// System.out.println(con.isClosed());
 				con.close();
 				return "Datasource up";
 			} catch (SQLException e) {
@@ -195,7 +195,7 @@ public class ChaosManager {
 		case "closeConnection":{
 			try {
 				
-				System.out.println();
+				// System.out.println();
 				dataSource.getConnection().close();
 				
 				return "Connexion Closed";
@@ -207,7 +207,7 @@ public class ChaosManager {
 		}
 		
 		default:{
-			BBMLogger.errorln("No Admin event");
+			BBMLogger.errorln("No Admin event.");
 		}
 		}
 		return "Request " + event.getAsString() +  " OK\n";
@@ -249,7 +249,7 @@ public class ChaosManager {
 
 	public void toggleChaos() throws IOException {
 		chaosActivated  = !chaosActivated;
-		System.out.println(chaosActivated);
+		// System.out.println(chaosActivated);
 	}
 
 	public void changeChaos(int level) throws IOException {
@@ -257,7 +257,7 @@ public class ChaosManager {
 	}
 
 	public static void shutDownDataBase() {
-		System.out.println();
+		//System.out.println();
 		if(ChaosManager.chaosActivated && chaosProvider.nextInt(1000) < chaosLevel) {
 			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();
 		}

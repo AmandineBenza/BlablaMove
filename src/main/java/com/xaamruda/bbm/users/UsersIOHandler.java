@@ -160,9 +160,9 @@ public class UsersIOHandler {
 		owner.setPointsAmount(owner.getPointsAmount() + finalPrice);
 		buyer.setPointsAmount(newBuyerPoints);
 
-		BBMLogger.advancedDemoln("The system credit " + owner.getAddress()+ "with " + finalPrice + " points");
+		BBMLogger.advancedDemoln("The system credits " + owner.getMail() + " with " + finalPrice + " points.");
 		service.store(owner);
-		BBMLogger.advancedDemoln("The system is frezing in order to shutdown DataBase...");
+		BBMLogger.advancedDemoln("The system is freezing in order to shutdown the database...");
 		BBMLogger.waitForEvent();
 		
 		service.store(buyer);
