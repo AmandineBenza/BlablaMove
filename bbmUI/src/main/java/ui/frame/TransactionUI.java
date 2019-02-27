@@ -33,7 +33,6 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
     public TransactionUI(String connect) {
         popupID();
         connectedUser = connect;
-        initialisation();
     }
 
     private void popupID(){
@@ -44,13 +43,15 @@ public class TransactionUI extends javax.swing.JFrame implements IGlobalUI{
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 null,
-                "0");
+                "");
 
 
-        if ((s != null) && (s.length() > 0)) {
+        if ((s != null) && !s.equals("") && (s.length() > 0 && s.chars().allMatch( Character::isDigit))){
             this.transactionID =  Integer.parseInt(s);
             initialisation();
             return;
+        }else{
+            new  MainMenuUI(connectedUser);
         }
     }
 
