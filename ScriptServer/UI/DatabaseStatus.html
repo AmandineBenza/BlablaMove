@@ -5,9 +5,6 @@
 <head>
     <title>DataBase status</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -40,11 +37,21 @@
                     <div class="commandTitle">Run non-regression script</div>
                     <div class="commandDescrition">Run the previous demo scripting</div>
                 </li>
-                <li class="command">
+                <li class="command" id="Run2">
+                    <div class="commandTitle">Run 2nd Senario</div>
+                    <div class="commandDescrition">Run a scenario where we kill database</div>
+                </li>
+                <li class="command" id="Run22">
+                    <div class="commandTitle">Run 2nd part of 2nd Senario</div>
+                    <div class="commandDescrition">Run the following of 2nd senario</div>
+                </li>
+
+                <li class="command" id="Shutdown">
                     <div class="commandTitle">Shutdown database</div>
                     <div class="commandDescrition">Shutdown the VM hosting the database </div>
                 </li>
-                <li class="command">
+
+                <li class="command" id="Restart">
                     <div class="commandTitle">Restart database</div>
                     <div class="commandDescrition">Restart the VM hosting the database </div>
                 </li>
@@ -67,12 +74,12 @@
                     </label>
                 </fieldset>
             </div>
-            <div id="Values" >
+            <div id="Values">
                 <input class="oui" id="PauseTime" indice="0" type="search"> <input class="oui" id="AdvancedPauseTime"
-                indice="0" type="search">
+                    indice="0" type="search">
             </div>
-            
-                <div id="MainCommand">
+
+            <div id="MainCommand">
                 <div class="statusHolder" id="StartApp">
                     <div style="vertical-align: middle">
                         <span class="status">Start BLABLAMOVE <span class="refresh">
@@ -90,7 +97,7 @@
                 <div class="statusHolder" id="Update">
                     <div style="vertical-align: middle">
                         <span class="status">Update server configuration<span class="refresh">
-                            <img class="marginImg" src="/rsc/refresh.png"> </span>
+                                <img class="marginImg" src="/rsc/refresh.png"> </span>
                         </span>
                     </div>
                 </div>
@@ -184,8 +191,6 @@
             })
         })
         $('#Update').click(function () {
-            
-
             runCommand({
                 loggin: $("#checkbox-nested-2").prop('checked'),
                 advancedLoggin: $("#checkbox-nested-1").prop('checked'),
@@ -209,10 +214,56 @@
                 }
             })
         };
-        // $('#')
-
+        $('#Run2').click(function () {
+            $.ajax({
+                url: 'http://localhost:8090/Database/RUN2',
+                type: "GET",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#Run22').click(function () {
+            $.ajax({
+                url: 'http://localhost:8090/Database/RUN22',
+                type: "GET",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#Shutdown').click(function () {
+            console.log("shutdown");
+            $.ajax({
+                url: 'http://localhost:8090/Database/KILL',
+                type: "POST",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#Restart').click(function () {
+            console.log("restart");
+            $.ajax({
+                url: 'http://localhost:8090/Database/START',
+                type: "POST",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
     </script>
-
 </body>
-
 </html>
