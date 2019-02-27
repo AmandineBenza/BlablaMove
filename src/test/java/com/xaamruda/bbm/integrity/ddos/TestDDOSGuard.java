@@ -93,7 +93,6 @@ public class TestDDOSGuard {
 	@Test
 	public void testresetThread() {
 		DDOSThread resetTread = new DDOSThread(DDOSThreadType.REQUEST_COUNT_RESET, service, 100, cache);
-		
 		DDOSMetadata metadata1 = new DDOSMetadata("10.20.30", false, 0, 30); 
 		DDOSMetadata metadata2 = new DDOSMetadata("10.20.30", false, 0, 50);
 		List<DDOSMetadata> metadatas = new ArrayList<>();
@@ -113,6 +112,5 @@ public class TestDDOSGuard {
 		assertEquals(metadata2.getRequestsCount(), 0);
 		resetTread.stop();
 	}
-	
 	
 }
