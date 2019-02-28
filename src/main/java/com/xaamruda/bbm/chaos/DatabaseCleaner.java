@@ -49,8 +49,10 @@ public class DatabaseCleaner {
 			List<DDOSMetadata> metadatas = authorizationService.getAll();
 			metadatas.forEach(metada -> authorizationService.delete(metada));
 			BBMLogger.infoln("Metadatas table cleaned.");
+			ChaosManager.setDatabaseState(true);
 		} catch(Exception e) {
 			BBMLogger.debugln("Error occured while cleaning database.");
+			ChaosManager.setDatabaseState(false);
 		}
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.xaamruda.bbm.offers.model.PostedOffer;
 import com.xaamruda.bbm.offers.model.OfferStatus;
+import com.xaamruda.bbm.chaos.ChaosManager;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 import com.xaamruda.bbm.integrity.IntegrityIOHandler;
 import com.xaamruda.bbm.offers.dbaccess.repository.IOfferRepository;
@@ -101,6 +102,7 @@ public class OfferService implements IOfferService {
 	public void shutDown() {
 		BBMLogger.infoln("Shutting down database...");
 		offerRepository.shutDown();
+		ChaosManager.setDatabaseState(false);
 	}
 
 	@Override

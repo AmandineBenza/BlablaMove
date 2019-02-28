@@ -1,5 +1,6 @@
 package com.xaamruda.bbm.integrity.dbcommunication;
 
+import com.xaamruda.bbm.chaos.ChaosManager;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
 
 public class DatabaseConnectionChecker {
@@ -11,6 +12,7 @@ public class DatabaseConnectionChecker {
 	public static void start(String... config) {
 		BBMLogger.infoln("Starting database connection checker...");
 		thread = new DatabaseConnectionThread();
+		ChaosManager.setDatabaseState(true);
 		thread.start();
 	}
 	

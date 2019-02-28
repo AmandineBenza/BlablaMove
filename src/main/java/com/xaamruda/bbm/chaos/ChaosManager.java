@@ -33,6 +33,7 @@ public class ChaosManager {
 	static private volatile int chaosLevel = 10;
 	static private volatile boolean chaosActivated = false;
 	final static private Random  chaosProvider = new Random(new Date().getTime());
+	private static boolean database_state;
 
 	public ChaosManager() {}
 
@@ -50,6 +51,11 @@ public class ChaosManager {
 	
 	@Autowired
 	private IOffersTransactionService offersTransactionService;
+	
+	public static void setDatabaseState(boolean state) {
+		if(state != database_state)
+			database_state = state;
+	}
 
 	public void lsPrint() throws IOException {
 		final Process p = Runtime.getRuntime().exec("ls");
@@ -77,6 +83,17 @@ public class ChaosManager {
 		case "clear-database" : {
 			databaseCleaner.cleanDatabase();
 			break;
+		}
+		case "kill-database" : {
+			setDatabaseState(false);
+			break;
+		}
+		case "launch-database": {
+			setDatabaseState(true);
+			break;
+		}
+		case "check-database": {
+			return Boolean.toString(database_state); 
 		}
 		case "update-server-configuration": {
 			BBMLogger.infoln("Server configuration updated !");
@@ -256,11 +273,11 @@ public class ChaosManager {
 		chaosLevel = level;
 	}
 
-	public static void shutDownDataBase() {
-		//System.out.println();
-		if(ChaosManager.chaosActivated && chaosProvider.nextInt(1000) < chaosLevel) {
-			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();
-		}
-	}
+//	public static void shutDownDataBase() {
+//		//System.out.println();
+//		if(ChaosManager.chaosActivated && chaosProvider.nextInt(1000) < chaosLevel) {
+//			ContextProvider.getBean(ChaosManager.class).offersIOHandler.shutDownDB();
+//		}
+//	}
 
 }

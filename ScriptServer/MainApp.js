@@ -6,6 +6,7 @@ const server = require("http").Server(app);
 const port = process.env.PORT || 8090;
 const bodyParser = require("body-parser");
 var AppStatus = false;
+var database_state = true;
 
 const DOCKER_MASTERDATABASE_NAME = "dbnouveau";
 const APP_NAME = "application"
@@ -32,6 +33,12 @@ app.use(function (req, res, next) {
 
 server.listen(port, function () { console.log("Server launched on 8090") });
 
+/*
+  ---------------------------------------
+  --         Main-related           -
+  ---------------------------------------
+*/
+
 app.route("/index").get(function (req, res) {
   res.sendFile("/UI/admin.html");
 });
@@ -50,17 +57,57 @@ app.route("/SCRIPT").get(function (req, res) {
   //run command
 });
 
+
+/*
+  ---------------------------------------
+  --         Database-related           -
+  ---------------------------------------
+*/
 app.route("/DATABASE/KILL").post(function () {
-  shell.exec("docker-compose kill " + DOCKER_MASTERDATABASE_NAME)
+  shell.exec("sh ./scripts/killDatabase.sh " + DOCKER_MASTERDATABASE_NAME + " > ./logs/database-related.log");
+  // database_state = false;
+  // shell.exec("docker-compose kill " + DOCKER_MASTERDATABASE_NAME)
 })
 
 app.route("/DATABASE/START").post(function () {
-  shell.exec("docker-compose start " + DOCKER_MASTERDATABASE_NAME)
+  shell.exec("sh ./scripts/restartDatabase.sh " + DOCKER_MASTERDATABASE_NAME + " > ./logs/database-related.log");
+  // database_state = true;
+  // shell.exec("docker-compose start " + DOCKER_MASTERDATABASE_NAME)
+})
+
+// TODO
+app.route("/DATABASE/CHECK").post(function () {
+  database_state = shell.exec("sh ./scripts/checkDatabase.sh > ./logs/database-related.log").trim();
+  // var elem = document.getElementById('CheckDatabase');
+  // elem.style.color = "red";
+})
+
+app.route("/DATABASE/PRERUN").get(function () {
+  displayOutput("./logs/prerun.log");
+  shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_Alice_Bob.sh > ./logs/prerun.log");
+  shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_last_step.sh >> ./logs/prerun.log");
+})
+
+app.route("/DATABASE/RUN").get(function () {
+  displayOutput("./logs/run.log");
+  shell.exec("sh ../src/main/resources/requests/run/run.sh 2 > ./logs/run.log", { async: true });
+})
+
+app.route("/DATABASE/RUN2").get(function () {
+  displayOutput("./logs/run.log");
+  shell.exec("sh ../src/main/resources/requests/run/run2.sh 2 > ./logs/run.log", { async: true });
+})
+
+app.route("/DATABASE/RUN22").get(function () {
+  shell.exec("sh ../src/main/resources/requests/run/run22.sh 2 >> ./logs/run.log", { async: true });
 })
 
 
-
-
+/*
+  ---------------------------------------
+  --         Server-related           -
+  ---------------------------------------
+*/
 app.route("/SERVER/KILL").post(function () {
   shell.exec("docker-compose kill " + APP_NAME)
 })
@@ -69,6 +116,13 @@ app.route("/SERVER/START").post(function () {
   shell.exec("docker-compose start " + APP_NAME)
 })
 
+
+
+/*
+  ---------------------------------------
+  --         Others things              -
+  ---------------------------------------
+*/
 app.route("/BASH/DISPLAY").post(function (req, res) {
   shell.exec('gnome-terminal -e "tail -f' + req.params.name + '"')
 })
@@ -86,8 +140,8 @@ function displayOutput(outputFile) {
 async function x(req, res) {
   if (!AppStatus) {
     // console.log(shell.exec("ls"))
-    shell.exec('cd .. && sudo docker-compose up > ./ScriptServer/server.log', { async: true }).stdout.pipe(res);
-    displayOutput("./server.log");
+    shell.exec('cd .. && sudo docker-compose up > ./ScriptServer/logs/server.log', { async: true }).stdout.pipe(res);
+    displayOutput("./logs/server.log");
   } else {
     shell.exec("docker kill $(docker ps -q)");
     shell.exec("cd .. && sudo docker-compose up");
@@ -95,23 +149,3 @@ async function x(req, res) {
 };
 
 app.route("/MAIN").get(x);
-
-app.route("/DATABASE/PRERUN").get(function () {
-  displayOutput("./prerun.log");
-  shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_Alice_Bob.sh > prerun.log");
-  shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_last_step.sh >> prerun.log");
-})
-
-app.route("/DATABASE/RUN").get(function () {
-  displayOutput("./run.log");
-  shell.exec("sh ../src/main/resources/requests/run/run.sh 2 > run.log", { async: true });
-})
-
-app.route("/DATABASE/RUN2").get(function () {
-  displayOutput("./run.log");
-  shell.exec("sh ../src/main/resources/requests/run/run2.sh 2 > run.log", { async: true });
-})
-
-app.route("/DATABASE/RUN22").get(function () {
-  shell.exec("sh ../src/main/resources/requests/run/run22.sh 2 >> run.log", { async: true });
-})

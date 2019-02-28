@@ -88,11 +88,10 @@ public class WebServiceController implements IWebServiceController {
 			return new ResponseEntity("DDOS analyze prevent you from accessing BlablaMove.\n", HttpStatus.FORBIDDEN);
 		}
 		
-		BBMLogger.infoln("------------------------------------");
-		BBMLogger.infoln("Listened new event on \"BBM/Admin\".");
+		BBMLogger.infoln2("------------------------------------");
+		BBMLogger.infoln2("Listened new event on \"BBM/Admin\".");
 		String result = chaosManager.handle(jsonEvents);
-		
-		BBMLogger.infoln("Response received.");
+		BBMLogger.infoln2("Response received.");
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
 

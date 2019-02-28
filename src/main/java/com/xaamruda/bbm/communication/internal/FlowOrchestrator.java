@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.xaamruda.bbm.chaos.ChaosManager;
 import com.xaamruda.bbm.commons.exceptions.DatabaseException;
 import com.xaamruda.bbm.commons.json.JsonUtils;
 import com.xaamruda.bbm.commons.logging.BBMLogger;
@@ -62,6 +63,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e.getWholeMessage();
 				clazz = String.class;
 				status = e.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -82,6 +84,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e.getWholeMessage();
 				clazz = String.class;
 				status = e.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			} 
 			
@@ -129,6 +132,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -143,6 +147,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -161,6 +166,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -175,6 +181,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -192,6 +199,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -206,6 +214,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}		
 			}
@@ -224,6 +233,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -238,6 +248,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -257,6 +268,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -270,6 +282,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -289,6 +302,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -302,6 +316,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -321,6 +336,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -334,6 +350,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -353,6 +370,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -366,6 +384,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -385,6 +404,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -398,6 +418,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}
@@ -417,6 +438,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 				content = e1.getWholeMessage();
 				clazz = String.class;
 				status = e1.getRelatedHttpStatus();
+				ChaosManager.setDatabaseState(false);
 				break;
 			}
 			
@@ -430,6 +452,7 @@ public class FlowOrchestrator implements IFlowOrchestrator {
 					content = e.getWholeMessage();
 					clazz = String.class;
 					status = e.getRelatedHttpStatus();
+					ChaosManager.setDatabaseState(false);
 					break;
 				}
 			}

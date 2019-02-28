@@ -101,7 +101,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="statusHolder">
+                <div class="statusHolder" id="CheckDatabase"> <!-- TODO -->
                     <div style="vertical-align: middle">
                         <span class="status">Database UP?<span class="refresh">
                                 <img class="marginImg" src="/rsc/refresh.png"> </span>
@@ -165,6 +165,19 @@
         $('#StartApp').click(function () {
             $.ajax({
                 url: 'http://localhost:8090/MAIN',
+                type: "GET",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", " application/json");
+                    xhr.setRequestHeader("Content-type", " application/json");
+                }, success: function (data) {
+                }
+            })
+        })
+        $('#CheckDatabase').click(function () {
+            $.ajax({
+                url: 'http://localhost:8090/Database/CHECK',
                 type: "GET",
                 data: JSON.stringify({ event: "toggle" }),
                 dataType: "json",

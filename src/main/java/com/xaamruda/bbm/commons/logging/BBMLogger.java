@@ -26,6 +26,10 @@ public final class BBMLogger {
 	public static void error(String msg) {
 		System.out.print("[ERROR|" + dateInfo() + msg + "]");
 	}
+	
+	public static void infoln2(String msg) {
+		System.out.println("[INFO|" + dateInfo() + msg + "]");
+	}
 
 	public static void infoln(String msg) {
 		// System.out.println("[INFO|" + dateInfo() + msg + "]");
