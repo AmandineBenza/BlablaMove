@@ -1,0 +1,5 @@
+----------------------------------------------------------------------
+--> BlablaMove Administration center
+
+NodeJS server allowing to administrate our SpringBoot application using custom scripts.
+----------------------------------------------------------------------

@@ -1,0 +1,73 @@
+User created.
+User created.
+Successfully identified.
+{
+  "offerID": 35,
+  "ownerID": "Alice@mail.fr",
+  "price": 16,
+  "startCity": "Nice",
+  "endCity": "Sophia",
+  "capacity": 10,
+  "status": "POSTED",
+  "distance": 16
+}Successfully identified.
+[
+  {
+    "transactionID": 29,
+    "offerID": "35",
+    "ownerID": "Alice@mail.fr",
+    "buyerID": "Bob@mail.fr",
+    "volume": 6,
+    "weigth": 5,
+    "finalPrice": 44,
+    "dateBeforeOrder": 5,
+    "askforConfirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+    "confirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+    "status": "CONFIRMED"
+  }
+]{
+  "transactionID": 29,
+  "offerID": "35",
+  "ownerID": "Alice@mail.fr",
+  "buyerID": "Bob@mail.fr",
+  "volume": 6,
+  "weigth": 5,
+  "finalPrice": 44,
+  "dateBeforeOrder": 5,
+  "askforConfirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+  "confirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+  "clientDepositDate": "Thu Feb 28 10:48:47 GMT 2019",
+  "status": "AWAITING_RECEIPT_CONFIRMATION"
+}[
+  {
+    "transactionID": 29,
+    "offerID": "35",
+    "ownerID": "Alice@mail.fr",
+    "buyerID": "Bob@mail.fr",
+    "volume": 6,
+    "weigth": 5,
+    "finalPrice": 44,
+    "dateBeforeOrder": 5,
+    "askforConfirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+    "confirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+    "clientDepositDate": "Thu Feb 28 10:48:47 GMT 2019",
+    "clientDepositConfimationDate": "Thu Feb 28 10:48:47 GMT 2019",
+    "status": "RECEIPT_DONE"
+  }
+][
+  {
+    "transactionID": 29,
+    "offerID": "35",
+    "ownerID": "Alice@mail.fr",
+    "buyerID": "Bob@mail.fr",
+    "volume": 6,
+    "weigth": 5,
+    "finalPrice": 44,
+    "dateBeforeOrder": 5,
+    "askforConfirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+    "confirmationDate": "Thu Feb 28 10:48:46 GMT 2019",
+    "clientDepositDate": "Thu Feb 28 10:48:47 GMT 2019",
+    "clientDepositConfimationDate": "Thu Feb 28 10:48:47 GMT 2019",
+    "status": "AWAITING_DEPOSIT_CONFIRMATION"
+  }
+]

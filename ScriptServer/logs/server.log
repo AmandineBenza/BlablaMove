@@ -1,0 +1,1226 @@
+Attaching to dbnouveau, dbnouveau2, wpphpmyadmin, blablamove_application_1
+[36mdbnouveau      |[0m 2019-02-28T14:37:16.119601Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[36mdbnouveau      |[0m 2019-02-28T14:37:16.119728Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[33mdbnouveau2     |[0m 2019-02-28T14:37:17.286520Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:17.286694Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[32mwpphpmyadmin   |[0m /usr/lib/python2.7/site-packages/supervisor/options.py:461: UserWarning: Supervisord is running as root and it is searching for its configuration file in default locations (including its current working directory); you probably want to specify a "-c" argument specifying an absolute path to a configuration file for improved security.
+[32mwpphpmyadmin   |[0m   'Supervisord is running as root and it is searching '
+[36mdbnouveau      |[0m 2019-02-28T14:37:17.704102Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.058513Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:18,868 CRIT Supervisor is running as root.  Privileges were not dropped because no user is specified in the config file.  If you intend to run as root, you can set user=root in the config file to avoid this message.
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:18,869 INFO Included extra file "/etc/supervisor.d/nginx.ini" during parsing
+[36mdbnouveau      |[0m 2019-02-28T14:37:17.715676Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:18,869 INFO Included extra file "/etc/supervisor.d/php.ini" during parsing
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.067974Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.174087Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[32mwpphpmyadmin   |[0m Unlinking stale socket /run/supervisord.sock
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.224914Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.184212Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:19,222 INFO RPC interface 'supervisor' initialized
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205091Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.232442Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205125Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:19,222 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205138Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205151Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248781Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248828Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:19,223 INFO supervisord started with pid 1
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248847Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205201Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248858Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205218Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248907Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248922Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.248945Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.205239Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.220607Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.302575Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.220724Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.302615Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.407101Z 0 [Warning] [MY-010604] [Repl] Neither --relay-log nor --relay-log-index were used; so replication may break when this MySQL server acts as a slave and has his hostname changed!! Please use '--relay-log=bac00f833e17-relay-bin' to avoid this problem.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.231772Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[36mdbnouveau      |[0m 2019-02-28T14:37:18.594472Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.769893Z 0 [ERROR] [MY-010544] [Repl] Failed to open the relay log './b6ce4737cc17-relay-bin.000003' (relay_log_pos 383).
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.769915Z 0 [ERROR] [MY-011059] [Repl] Could not find target log file mentioned in relay log info in the index file './bac00f833e17-relay-bin.index' during relay log initialization.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.774776Z 0 [ERROR] [MY-010426] [Repl] Slave: Failed to initialize the master info structure for channel ''; its record may still be present in 'mysql.slave_master_info' table, consider deleting it.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.774800Z 0 [ERROR] [MY-010529] [Repl] Failed to create or recover replication info repositories.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.776926Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[33mdbnouveau2     |[0m 2019-02-28T14:37:19.797433Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:20,225 INFO spawned: 'php-fpm' with pid 11
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:20,227 INFO spawned: 'nginx' with pid 12
+[32mwpphpmyadmin   |[0m [28-Feb-2019 14:37:21] NOTICE: fpm is running, pid 11
+[32mwpphpmyadmin   |[0m [28-Feb-2019 14:37:21] NOTICE: ready to handle connections
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:22,112 INFO success: php-fpm entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+[32mwpphpmyadmin   |[0m 2019-02-28 14:37:22,112 INFO success: nginx entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+[35mapplication_1  |[0m 
+[35mapplication_1  |[0m   .   ____          _            __ _ _
+[35mapplication_1  |[0m  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+[35mapplication_1  |[0m ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+[35mapplication_1  |[0m  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+[35mapplication_1  |[0m   '  |____| .__|_| |_|_| |_\__, | / / / /
+[35mapplication_1  |[0m  =========|_|==============|___/=/_/_/_/
+[35mapplication_1  |[0m  :: Spring Boot ::        (v2.1.1.RELEASE)
+[35mapplication_1  |[0m 
+[35mapplication_1  |[0m 2019-02-28 14:37:22.574  INFO 1 --- [           main] com.xaamruda.bbm.app.Application         : Starting Application v2.0-SNAPSHOT on 6bdf241bdf1b with PID 1 (/bbm.jar started by root in /)
+[35mapplication_1  |[0m 2019-02-28 14:37:22.584  INFO 1 --- [           main] com.xaamruda.bbm.app.Application         : No active profile set, falling back to default profiles: default
+[35mapplication_1  |[0m 2019-02-28 14:37:24.142  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+[35mapplication_1  |[0m 2019-02-28 14:37:24.301  INFO 1 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 141ms. Found 4 repository interfaces.
+[35mapplication_1  |[0m 2019-02-28 14:37:25.363  INFO 1 --- [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$98777953] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[35mapplication_1  |[0m 2019-02-28 14:37:26.326  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+[35mapplication_1  |[0m 2019-02-28 14:37:26.389  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+[35mapplication_1  |[0m 2019-02-28 14:37:26.389  INFO 1 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+[35mapplication_1  |[0m 2019-02-28 14:37:26.408  INFO 1 --- [           main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server:/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64:/usr/lib/jvm/java-1.8-openjdk/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib]
+[35mapplication_1  |[0m 2019-02-28 14:37:26.537  INFO 1 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+[35mapplication_1  |[0m 2019-02-28 14:37:26.538  INFO 1 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 3796 ms
+[35mapplication_1  |[0m 2019-02-28 14:37:26.953  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+[35mapplication_1  |[0m 2019-02-28 14:37:27.383  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+[35mapplication_1  |[0m 2019-02-28 14:37:27.581  INFO 1 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+[35mapplication_1  |[0m 	name: default
+[35mapplication_1  |[0m 	...]
+[35mapplication_1  |[0m 2019-02-28 14:37:27.757  INFO 1 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+[35mapplication_1  |[0m 2019-02-28 14:37:27.760  INFO 1 --- [           main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+[35mapplication_1  |[0m 2019-02-28 14:37:28.157  INFO 1 --- [           main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+[35mapplication_1  |[0m 2019-02-28 14:37:28.946  INFO 1 --- [           main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+[36mdbnouveau      |[0m mbind: Operation not permitted
+[35mapplication_1  |[0m 2019-02-28 14:37:29.978  INFO 1 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:30 | DDOS Guard instance created.]
+[35mapplication_1  |[0m 2019-02-28 14:37:31.705  INFO 1 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+[35mapplication_1  |[0m 2019-02-28 14:37:31.798  WARN 1 --- [           main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[35mapplication_1  |[0m 2019-02-28 14:37:32.368  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+[35mapplication_1  |[0m 2019-02-28 14:37:32.372  INFO 1 --- [           main] com.xaamruda.bbm.app.Application         : Started Application in 10.764 seconds (JVM running for 12.988)
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | >> Welcome to BlablaMove <<]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Starting ddos guarding...]
+[35mapplication_1  |[0m 2019-02-28 14:37:32.497  INFO 1 --- [           main] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | DDOS cache loaded from database.]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Starting database connection checker...]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Initialized "./src/main/resources/journaling/usersJournal.ddb" database journaling.]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "UsersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/usersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Journaling engine "./src/main/resources/journaling/usersJournal.ddb" analyze finished.]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Initialized "./src/main/resources/journaling/offersJournal.ddb" database journaling.]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Method_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Method_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Method_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Method_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Method_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Method_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [DEBUG|28/02/2019 14:37:32 | Journaling analyze, caller class "OffersIOHandler" unknown.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:32 | Could not perform journal "./src/main/resources/journaling/offersJournal.ddb" analyze.[Service-caller_error]]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Journaling engine "./src/main/resources/journaling/offersJournal.ddb" analyze finished.]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:32 | Initialized "./src/main/resources/journaling/billingJournal.ddb" database journaling.]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:33 | Could not perform journal "./src/main/resources/journaling/billingJournal.ddb" analyze.[Method-invocation_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:33 | Could not perform journal "./src/main/resources/journaling/billingJournal.ddb" analyze.[Method-invocation_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:33 | Could not perform journal "./src/main/resources/journaling/billingJournal.ddb" analyze.[Method-invocation_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:33 | Could not perform journal "./src/main/resources/journaling/billingJournal.ddb" analyze.[Method-invocation_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:33 | Could not perform journal "./src/main/resources/journaling/billingJournal.ddb" analyze.[Method-invocation_error]]
+[35mapplication_1  |[0m [ERROR|28/02/2019 14:37:33 | Could not perform journal "./src/main/resources/journaling/billingJournal.ddb" analyze.[Method-invocation_error]]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:37:33 | Journaling engine "./src/main/resources/journaling/billingJournal.ddb" analyze finished.]
+[35mapplication_1  |[0m 2019-02-28 14:38:31.473  INFO 1 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+[35mapplication_1  |[0m 2019-02-28 14:38:31.473  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+[35mapplication_1  |[0m 2019-02-28 14:38:31.491  INFO 1 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 18 ms
+[35mapplication_1  |[0m [INFO|28/02/2019 14:38:31 | ------------------------------------]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:38:31 | Listened new event on "BBM/Admin".]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:38:31 | Response received.]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:39:12 | ------------------------------------]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:39:12 | Listened new event on "BBM/Admin".]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:39:12 | Response received.]
+[36mdbnouveau exited with code 137
+[0m[35mapplication_1  |[0m [INFO|28/02/2019 14:39:22 | ------------------------------------]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:39:22 | Listened new event on "BBM/Admin".]
+[35mapplication_1  |[0m 2019-02-28 14:39:22.216  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@367a121e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.220  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2076c397 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.221  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@46facf65 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.222  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@58214a7b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.225  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@1768e76a (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.230  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@194f46b (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.232  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@118582db (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.234  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@43256002 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.235  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@13269cbb (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m 2019-02-28 14:39:22.237  WARN 1 --- [nio-8080-exec-6] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@35371518 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+[35mapplication_1  |[0m [INFO|28/02/2019 14:39:52 | Response received.]
+[35mapplication_1  |[0m 2019-02-28 14:40:26.607  WARN 1 --- [       Thread-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+[35mapplication_1  |[0m 2019-02-28 14:40:26.609 ERROR 1 --- [       Thread-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms.
+[35mapplication_1  |[0m 2019-02-28 14:40:26.611 ERROR 1 --- [       Thread-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : Could not create connection to database server. Attempted reconnect 10 times. Giving up.
+[35mapplication_1  |[0m Exception in thread "Thread-4" 2019-02-28 14:40:26.943  WARN 1 --- [       Thread-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+[35mapplication_1  |[0m 2019-02-28 14:40:26.943 ERROR 1 --- [       Thread-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms.
+[35mapplication_1  |[0m 2019-02-28 14:40:26.943 ERROR 1 --- [       Thread-4] o.h.engine.jdbc.spi.SqlExceptionHelper   : Could not create connection to database server. Attempted reconnect 10 times. Giving up.
+[35mapplication_1  |[0m org.springframework.transaction.CannotCreateTransactionException: Could not open JPA EntityManager for transaction; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to acquire JDBC Connection
+[35mapplication_1  |[0m 	at org.springframework.orm.jpa.JpaTransactionManager.doBegin(JpaTransactionManager.java:446)
+[35mapplication_1  |[0m 	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+[35mapplication_1  |[0m 	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+[35mapplication_1  |[0m 	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+[35mapplication_1  |[0m 	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+[35mapplication_1  |[0m 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+[35mapplication_1  |[0m 	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:139)
+[35mapplication_1  |[0m 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+[35mapplication_1  |[0m 	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:135)
+[35mapplication_1  |[0m 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+[35mapplication_1  |[0m 	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:93)
+[35mapplication_1  |[0m 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+[35mapplication_1  |[0m 	at org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor.invoke(SurroundingTransactionDetectorMethodInterceptor.java:61)
+[35mapplication_1  |[0m 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+[35mapplication_1  |[0m 	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212)
+[35mapplication_1  |[0m 	at com.sun.proxy.$Proxy93.findAll(Unknown Source)
+[35mapplication_1  |[0m 	at com.xaamruda.bbm.integrity.ddos.dbaccess.AuthorizationService.getAll(AuthorizationService.java:38)
+[35mapplication_1  |[0m 	at com.xaamruda.bbm.integrity.ddos.DDOSThread.runRequestCountReset(DDOSThread.java:66)
+[35mapplication_1  |[0m 	at com.xaamruda.bbm.integrity.ddos.DDOSThread.run(DDOSThread.java:50)
+[35mapplication_1  |[0m 	at java.lang.Thread.run(Thread.java:748)
+[35mapplication_1  |[0m Caused by: org.hibernate.exception.JDBCConnectionException: Unable to acquire JDBC Connection
+[35mapplication_1  |[0m 	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:48)
+[35mapplication_1  |[0m 	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+[35mapplication_1  |[0m 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+[35mapplication_1  |[0m 	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
+[35mapplication_1  |[0m 	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:109)
+[35mapplication_1  |[0m 	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.getPhysicalConnection(LogicalConnectionManagedImpl.java:136)
+[35mapplication_1  |[0m 	at org.hibernate.internal.SessionImpl.connection(SessionImpl.java:541)
+[35mapplication_1  |[0m 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[35mapplication_1  |[0m 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+[35mapplication_1  |[0m 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[35mapplication_1  |[0m 	at java.lang.reflect.Method.invoke(Method.java:498)
+[35mapplication_1  |[0m 	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:246)
+[35mapplication_1  |[0m 	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:230)
+[35mapplication_1  |[0m 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle.doGetConnection(HibernateJpaDialect.java:424)
+[35mapplication_1  |[0m 	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.beginTransaction(HibernateJpaDialect.java:173)
+[35mapplication_1  |[0m 	at org.springframework.orm.jpa.JpaTransactionManager.doBegin(JpaTransactionManager.java:401)
+[35mapplication_1  |[0m 	... 19 more
+[35mapplication_1  |[0m Caused by: java.sql.SQLTransientConnectionException: HikariPool-1 - Connection is not available, request timed out after 30000ms.
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool.createTimeoutException(HikariPool.java:676)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:190)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool.getConnection(HikariPool.java:155)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:128)
+[35mapplication_1  |[0m 	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+[35mapplication_1  |[0m 	at org.hibernate.internal.NonContextualJdbcConnectionAccess.obtainConnection(NonContextualJdbcConnectionAccess.java:35)
+[35mapplication_1  |[0m 	at org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl.acquireConnectionIfNeeded(LogicalConnectionManagedImpl.java:106)
+[35mapplication_1  |[0m 	... 30 more
+[35mapplication_1  |[0m Caused by: java.sql.SQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 10 times. Giving up.
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:110)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:73)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:905)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:830)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:207)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool.access$100(HikariPool.java:71)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:706)
+[35mapplication_1  |[0m 	at com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:692)
+[35mapplication_1  |[0m 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[35mapplication_1  |[0m 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[35mapplication_1  |[0m 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[35mapplication_1  |[0m 	... 1 more
+[35mapplication_1  |[0m Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+[35mapplication_1  |[0m 
+[35mapplication_1  |[0m The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+[35mapplication_1  |[0m 	at sun.reflect.GeneratedConstructorAccessor53.newInstance(Unknown Source)
+[35mapplication_1  |[0m 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+[35mapplication_1  |[0m 	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+[35mapplication_1  |[0m 	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+[35mapplication_1  |[0m 	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+[35mapplication_1  |[0m 	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+[35mapplication_1  |[0m 	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+[35mapplication_1  |[0m 	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+[35mapplication_1  |[0m 	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+[35mapplication_1  |[0m 	at com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:849)
+[35mapplication_1  |[0m 	... 15 more
+[35mapplication_1  |[0m Caused by: java.net.UnknownHostException: dbnouveau
+[35mapplication_1  |[0m 	at java.net.InetAddress.getAllByName0(InetAddress.java:1280)
+[35mapplication_1  |[0m 	at java.net.InetAddress.getAllByName(InetAddress.java:1192)
+[35mapplication_1  |[0m 	at java.net.InetAddress.getAllByName(InetAddress.java:1126)
+[35mapplication_1  |[0m 	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:132)
+[35mapplication_1  |[0m 	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+[35mapplication_1  |[0m 	... 17 more
+[35mapplication_1  |[0m 2019-02-28 14:40:26.964  WARN 1 --- [       Thread-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+[35mapplication_1  |[0m 2019-02-28 14:40:26.964 ERROR 1 --- [       Thread-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms.
+[35mapplication_1  |[0m 2019-02-28 14:40:26.964 ERROR 1 --- [       Thread-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : Could not create connection to database server. Attempted reconnect 10 times. Giving up.
+[35mapplication_1  |[0m 2019-02-28 14:42:08.621  WARN 1 --- [       Thread-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+[35mapplication_1  |[0m 2019-02-28 14:42:08.621 ERROR 1 --- [       Thread-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms.
+[35mapplication_1  |[0m 2019-02-28 14:42:08.622 ERROR 1 --- [       Thread-5] o.h.engine.jdbc.spi.SqlExceptionHelper   : Could not create connection to database server. Attempted reconnect 10 times. Giving up.
+[35mapplication_1  |[0m 2019-02-28 14:42:08.965  WARN 1 --- [       Thread-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+[35mapplication_1  |[0m 2019-02-28 14:42:08.965 ERROR 1 --- [       Thread-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms.
+[35mapplication_1  |[0m 2019-02-28 14:42:08.966 ERROR 1 --- [       Thread-6] o.h.engine.jdbc.spi.SqlExceptionHelper   : Could not create connection to database server. Attempted reconnect 10 times. Giving up.
+[35mapplication_1  |[0m [INFO|28/02/2019 14:42:09 | ------------------------------------]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:42:09 | Listened new event on "BBM/Admin".]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:42:14 | ------------------------------------]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:42:14 | Listened new event on "BBM/Admin".]
+[35mapplication_1  |[0m [INFO|28/02/2019 14:42:14 | Response received.]
+[31mdbnouveau      |[0m 2019-02-22T17:26:04.536156Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-22T17:26:04.536284Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.000951Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.281818Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.806744Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.806886Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.806941Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.806970Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.807045Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.807061Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.807096Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.906902Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:13.906962Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-22T17:26:14.185826Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-22T17:26:14.585833Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-23T15:04:38.162736Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-26T18:20:28.926941Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-26T18:20:28.927059Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-26T18:20:41.984067Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-26T18:20:41.990282Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123464Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123510Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123524Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123538Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123599Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123617Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.123644Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.265268Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.265296Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.288240Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-26T18:20:42.539733Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-26T21:19:52.360367Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-26T21:19:52.360530Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-26T21:19:55.193471Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-26T21:19:55.203992Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-26T21:19:55.930329Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.036798Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137426Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137492Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137519Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137547Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137630Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137650Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.137688Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.912838Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:56.912895Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-26T21:19:57.084079Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-26T21:19:57.548885Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T08:58:30.578584Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T08:58:30.718660Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T08:58:50.459691Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T08:58:50.487287Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T08:58:53.125182Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T08:58:54.152160Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.030711Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.032272Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.032301Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.032318Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.131743Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.131779Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.131809Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.548885Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.548917Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T08:58:55.878431Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T08:58:57.096855Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T11:13:19.521169Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T11:22:57.825354Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T11:22:57.825725Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T11:23:21.132787Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T11:23:21.527268Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.002829Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.003865Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.003895Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.003918Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.003996Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.004015Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.004047Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.414137Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.414169Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.436473Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T11:23:22.995700Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T12:13:11.886397Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T12:15:13.344375Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T12:15:13.344575Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.626524Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.734279Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894146Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894183Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894197Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894209Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894267Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894289Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:25.894319Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:26.622946Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:26.623006Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T12:15:26.755095Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T12:15:26.937312Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T12:27:41.176878Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T13:23:07.902342Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T13:23:07.902601Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T13:23:17.522894Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.280792Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.409996Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.410114Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.410191Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.410265Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.410530Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.410606Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:18.410685Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:19.243479Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:19.243510Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:23:19.472167Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T13:23:19.881687Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T13:45:51.252008Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T13:48:42.163886Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T13:48:42.164074Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.282071Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.398250Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636342Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636378Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636407Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636427Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636482Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636498Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.636524Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.897660Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.897694Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T13:48:52.947097Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T13:48:53.186812Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T14:27:53.071695Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T14:27:54.923204Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T14:28:38.079004Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T14:28:43.392344Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T14:29:08.311795Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T14:29:19.358577Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726143Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726192Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726213Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726239Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726300Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726319Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:20.726347Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:22.699143Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:22.699171Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T14:29:23.185291Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T14:29:25.177653Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T14:41:50.508336Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T16:13:17.783911Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T16:13:17.788095Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T16:13:36.937978Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.263621Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513475Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513528Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513549Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513574Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513638Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513651Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:37.513676Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:38.182698Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:38.182736Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T16:13:38.232045Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T16:13:38.383744Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T17:20:45.408245Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T17:28:57.178456Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T17:28:57.179075Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.768067Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.838318Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.926978Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.927015Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.927029Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.927049Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.927821Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.927838Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:12.927856Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:13.573862Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:13.573903Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T17:29:13.631504Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T17:29:13.759747Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T18:49:40.346014Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T18:49:40.611419Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T18:50:06.317497Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T18:50:06.327238Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T18:50:10.299362Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T18:50:11.378796Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.151672Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.154235Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.154258Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.154273Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.154343Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.154365Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:12.154394Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:13.434110Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:13.434149Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:50:13.611125Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T18:50:15.623569Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T18:55:21.284657Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T18:55:21.284778Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T18:55:29.820786Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T18:55:29.833962Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.577546Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.696400Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957125Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957172Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957193Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957219Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957291Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957304Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:30.957326Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:31.760798Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:31.760839Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T18:55:31.775004Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T18:55:32.202672Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T20:21:42.477296Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T20:21:42.477622Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T20:21:57.533556Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T20:21:57.543830Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T20:21:58.866262Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.043986Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190400Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190489Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190538Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190589Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190713Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190754Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.190800Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.353694Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.353729Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.364181Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T20:21:59.533076Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T20:47:00.884608Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T20:47:01.623200Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T20:47:28.733330Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T20:47:30.765119Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T20:47:37.145519Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T20:47:40.333971Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.953768Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.955422Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.955450Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.955473Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.956229Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.956245Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:44.956274Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:48.423652Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:48.423733Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T20:47:52.460092Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T20:47:59.362918Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T21:16:12.410867Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T21:18:41.233331Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T21:18:41.537791Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.173824Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.245790Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602563Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602597Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602611Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602628Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602700Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602728Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:03.602770Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:04.134727Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:04.134764Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:19:04.179087Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T21:19:04.406550Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T21:49:09.024123Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T21:49:09.024294Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T21:49:10.943952Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T21:49:10.958748Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.277307Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.311219Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332665Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332699Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332728Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332748Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332806Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332819Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.332842Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.476937Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.476967Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.483773Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T21:49:11.578121Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T22:29:55.154128Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T22:29:55.154313Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.435991Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.448192Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.812061Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.870795Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.952324Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.952370Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.952394Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.952415Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.952489Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.952505Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:58.953116Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:59.262491Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:59.262560Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:29:59.281053Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T22:29:59.461782Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T22:43:48.805934Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T22:43:48.806101Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T22:43:50.913748Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T22:43:50.923434Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.170773Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.189114Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243798Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243839Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243854Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243866Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243929Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243947Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.243969Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.372637Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.372666Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.382533Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T22:43:51.582786Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T22:49:57.171032Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T22:49:57.171164Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T22:49:57.999771Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.010906Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.089352Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.096256Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106342Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106392Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106411Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106428Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106485Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106499Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.106518Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.202918Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.202961Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.209365Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T22:49:58.450248Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T22:51:29.947953Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T22:53:14.028730Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T22:53:14.028881Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.006129Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.011597Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022412Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022462Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022486Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022516Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022620Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022655Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.022696Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.069668Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.069753Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.081069Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T22:53:15.115433Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T22:57:25.769290Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T22:57:25.769417Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.586635Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.596164Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.685084Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.690575Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699089Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699119Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699137Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699155Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699213Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699224Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.699240Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.781834Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.781861Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.787129Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T22:57:26.832265Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m 2019-02-27T23:01:57.090838Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:01:57.090983Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:01:58.874928Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T23:01:58.886275Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.112907Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.135692Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.262930Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.262980Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.263003Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.263033Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.263130Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.263150Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.263179Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.383746Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.383789Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.394573Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:01:59.550532Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T23:04:37.508583Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:04:37.508728Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.400534Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.411687Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.513003Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.517773Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526788Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526830Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526850Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526874Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526931Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526945Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.526967Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.596994Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.597026Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.602231Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:04:38.636282Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m 2019-02-27T23:07:54.214446Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:09:59.139544Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:09:59.139670Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.032613Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.037667Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052025Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052069Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052102Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052122Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052191Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052205Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.052229Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.114917Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.114968Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.129567Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:10:01.161772Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T23:10:24.602298Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:11:49.312581Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:11:49.312774Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.262359Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.267432Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278227Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278269Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278292Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278318Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278393Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278410Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.278436Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.353635Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.353670Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.360888Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:11:50.410039Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T23:15:57.365255Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:15:57.365449Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.291399Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.305118Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.397057Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.404278Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.425795Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.425852Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.426392Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.426440Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.426811Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.426990Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.427296Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.494970Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.495013Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.504914Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:15:58.528632Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T23:18:37.478465Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:18:37.478643Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.365594Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.375970Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.470008Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.475506Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488697Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488748Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488773Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488794Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488857Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488871Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.488893Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.548043Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.548086Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.558866Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:18:38.604536Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-27T23:23:31.167073Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-27T23:23:31.167184Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-27T23:23:31.927623Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-27T23:23:31.943122Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.035675Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.041906Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.066292Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.068656Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.069518Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.069738Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.070058Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.070113Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.070159Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.135267Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.135414Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.144244Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-27T23:23:32.152756Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T08:51:59.243994Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T08:51:59.244161Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.203261Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.213072Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.347646Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.353883Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373149Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373391Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373517Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373551Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373624Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373643Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.373670Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.432182Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.432222Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.443352Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T08:52:01.514511Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T09:06:21.752548Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T09:06:21.752978Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T09:06:23.996772Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.014343Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.499653Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.544093Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584706Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584740Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584769Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584789Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584842Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584856Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.584878Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.629168Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.629231Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.640612Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T09:06:24.861318Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T09:08:22.338804Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T09:08:22.339007Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T09:08:25.798212Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T09:08:25.814385Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T09:08:25.978075Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.016037Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039550Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039589Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039611Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039659Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039743Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039760Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.039783Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.104665Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.104697Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.116133Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T09:08:26.247673Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m 2019-02-28T09:18:50.066171Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T09:18:50.066314Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T09:18:51.972908Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T09:18:51.985011Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.071453Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.077548Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095235Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095269Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095288Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095306Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095391Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095408Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.095432Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.165981Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.166012Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.173643Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T09:18:52.463327Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T09:37:05.491998Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T09:47:27.974221Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T09:47:27.974378Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.450002Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.527184Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.601872Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.601920Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.601941Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.601960Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.602021Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.602040Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.602065Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.623303Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.623341Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.700439Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T09:47:30.887415Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T09:55:52.904783Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T09:55:52.904899Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T09:55:54.499701Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T09:55:54.511479Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.140593Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.201752Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256746Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256786Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256800Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256814Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256874Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256895Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.256920Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.306719Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.306756Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.319808Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T09:55:55.642020Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T10:02:36.041011Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:02:36.041109Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.078166Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.087167Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.184257Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.188217Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203195Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203238Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203253Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203266Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203330Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203344Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.203363Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.218558Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.218587Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.225064Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:02:37.323788Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m 2019-02-28T10:04:01.246923Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:04:01.247137Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.292735Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.302249Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.445735Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.494546Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505008Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505053Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505073Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505092Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505163Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505178Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.505202Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.628317Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.628345Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.633274Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:04:02.807820Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T10:08:37.736724Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:08:37.736841Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:08:38.842846Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:08:38.860663Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.063159Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.069498Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.078990Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.079040Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.079065Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.079087Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.079164Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.079180Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.079209Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.092000Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.092043Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.100008Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:08:39.335271Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m 2019-02-28T10:22:51.707104Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:22:51.707272Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.412371Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.421034Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.503757Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.508838Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.523824Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.523872Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.523895Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.523916Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.523984Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.523999Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.524022Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.563651Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.563696Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.574187Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:22:53.839432Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T10:23:49.987584Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:29:59.508806Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:29:59.508920Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.824969Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.835366Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844293Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844327Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844344Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844363Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844428Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844441Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.844470Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.893273Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.893304Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:30:00.901457Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:30:01.060271Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T10:41:50.990241Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:41:50.990360Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.451178Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.461356Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.571242Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.594163Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624135Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624176Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624200Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624225Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624299Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624318Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.624345Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.637065Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.637096Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.645450Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:41:52.878610Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T10:45:05.214499Z 0 [System] [MY-010910] [Server] /usr/sbin/mysqld: Shutdown complete (mysqld 8.0.13)  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:45:40.166192Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:45:40.166362Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.172232Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.177454Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191449Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191506Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191534Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191555Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191627Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191642Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.191667Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.232602Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.232653Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.238027Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:45:41.584030Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T10:50:59.308279Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:50:59.308454Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.626103Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.638513Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.724382Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.730295Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746226Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746260Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746278Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746298Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746352Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746368Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.746395Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.759847Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.759891Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.768940Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:51:00.854242Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.017494Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.017641Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.875750Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.886938Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.915413Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.921574Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932105Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932138Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932156Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932176Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932238Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932254Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.932279Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.942864Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.942911Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T10:54:04.949074Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T10:54:05.113849Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T11:10:39.805704Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T11:10:39.805823Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.173087Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.182577Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.415328Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.420324Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431282Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431330Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431346Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431362Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431413Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431424Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.431444Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.441932Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.441969Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.450713Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T11:10:41.507613Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T14:37:16.119601Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T14:37:16.119728Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T14:37:17.704102Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T14:37:17.715676Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.174087Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.184212Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205091Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205125Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205138Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205151Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205201Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205218Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.205239Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.220607Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.220724Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.231772Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T14:37:18.594472Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[31mdbnouveau      |[0m mbind: Operation not permitted
+[31mdbnouveau      |[0m 2019-02-28T14:42:17.715834Z 0 [Warning] [MY-011070] [Server] 'Disabling symbolic links using --skip-symbolic-links (or equivalent) is the default. Consider not using this option as it' is deprecated and will be removed in a future release.
+[31mdbnouveau      |[0m 2019-02-28T14:42:17.715948Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.13) starting as process 1
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.032755Z 0 [System] [MY-010229] [Server] Starting crash recovery...
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.043041Z 0 [System] [MY-010232] [Server] Crash recovery finished.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.190144Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.207282Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228401Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.infoschema@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228434Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228450Z 0 [Warning] [MY-010315] [Server] 'user' entry 'mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228465Z 0 [Warning] [MY-010315] [Server] 'user' entry 'root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228517Z 0 [Warning] [MY-010323] [Server] 'db' entry 'performance_schema mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228531Z 0 [Warning] [MY-010323] [Server] 'db' entry 'sys mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.228552Z 0 [Warning] [MY-010311] [Server] 'proxies_priv' entry '@ root@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.244484Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'user mysql.session@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.244519Z 0 [Warning] [MY-010330] [Server] 'tables_priv' entry 'sys_config mysql.sys@localhost' ignored in --skip-name-resolve mode.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.253228Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.13'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+[31mdbnouveau      |[0m 2019-02-28T14:42:19.491645Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: '/var/run/mysqld/mysqlx.sock' bind-address: '::' port: 33060
+[35mapplication_1  |[0m [INFO|28/02/2019 14:42:23 | Response received.]
