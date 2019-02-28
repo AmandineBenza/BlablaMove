@@ -33,14 +33,17 @@
                     <div class="commandTitle">Prepare database</div>
                     <div class="commandDescrition">Launch scripts that prepare the database </div>
                 </li>
+
                 <li class="command" id="Run">
                     <div class="commandTitle">Run non-regression script</div>
                     <div class="commandDescrition">Run the previous demo script</div>
                 </li>
+
                 <li class="command" id="Run2">
                     <div class="commandTitle">Run 2nd scenario</div>
                     <div class="commandDescrition">Run the database shutdown script</div>
                 </li>
+
                 <li class="command" id="Run22">
                     <div class="commandTitle">Run 2nd part of 2nd scenario</div>
                     <div class="commandDescrition">Run the following of the 2nd scenario</div>
@@ -55,6 +58,12 @@
                     <div class="commandTitle">Restart database</div>
                     <div class="commandDescrition">Restart the VM hosting the database</div>
                 </li>
+
+                <li class="command" id="CleanDatabase">
+                    <div class="commandTitle">Clean database</div>
+                    <div class="commandDescrition">Run the database cleaner script</div>
+                </li>
+
                 <li class="command" id="ShutdownAPP">
                     <div class="commandTitle">Shutdown Server</div>
                     <div class="commandDescrition">Shutdown the VM hosting the server</div>
@@ -296,6 +305,19 @@
             console.log("restart");
             $.ajax({
                 url: 'http://localhost:8090/Database/START',
+                type: "POST",
+                data: JSON.stringify({ event: "toggle" }),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-type", "application/json");
+                }, success: function (data) { }
+            })
+        })
+        $('#CleanDatabase').click(function () {
+            console.log("restart");
+            $.ajax({
+                url: 'http://localhost:8090/Database/CLEAN',
                 type: "POST",
                 data: JSON.stringify({ event: "toggle" }),
                 dataType: "json",
