@@ -22,8 +22,8 @@ import com.xaamruda.bbm.integrity.ddos.dbaccess.IAuthorizationService;
 public class DDOSGuard {
 
 	public static final int STANDARD_BAN_BOUND_REQUESTS_COUNT = 30;
-	public final static long STANDARD_THREAD_SLEEP_MS = 3600;
-	public final static int STANDARD_BAN_TIME_MS = 3600;
+	public final static long STANDARD_THREAD_SLEEP_MS = 1000 * 10;
+	public final static int STANDARD_BAN_TIME_MS = 1000 * 10;
 	
 	// to reset metadata requests count
 	private static DDOSThread resetTread;
@@ -47,6 +47,7 @@ public class DDOSGuard {
 	
 	public DDOSGuard loadCacheFromDatabase() {
 		List<DDOSMetadata> databaseContent = null;
+		cache.clear();
 		
 		try {
 			databaseContent = ddosService.getAll();
@@ -86,7 +87,7 @@ public class DDOSGuard {
 		} else {
 			DDOSMetadata metadata = new DDOSMetadata();
 			metadata.setBanned(false);
-			metadata.setBannedTimeMs(STANDARD_BAN_TIME_MS);
+			metadata.setBannedTimeMs(0);
 			metadata.setRequestRemoteAddress(remoteAddressUrl);
 			metadata.setRequestsCount(1);
 			cache.put(remoteAddressUrl, metadata);
