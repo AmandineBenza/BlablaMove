@@ -101,7 +101,8 @@
                         </span>
                     </div>
                 </div>
-                <div class="statusHolder" id="CheckDatabase"> <!-- TODO -->
+                <div class="statusHolder" id="CheckDatabase">
+                    <!-- TODO -->
                     <div style="vertical-align: middle">
                         <span class="status">Database UP?<span class="refresh">
                                 <img class="marginImg" src="/rsc/refresh.png"> </span>
@@ -177,14 +178,31 @@
         })
         $('#CheckDatabase').click(function () {
             $.ajax({
-                url: 'http://localhost:8090/Database/CHECK',
-                type: "GET",
-                data: JSON.stringify({ event: "toggle" }),
+                url: 'http://localhost:8080/BBM/ADMIN',
+                type: "POST",
+                data: JSON.stringify({ event: "datasource" }),
                 dataType: "json",
+                error: function (data) {
+                    console.log(data);
+                    if (data.responseText == "Datasource up") {
+                        console.log("add")
+                        $('#CheckDatabase > div > span').removeClass("disabled");
+                    }
+                    else {
+                        console.log("remove")
+                        $('#CheckDatabase > div > span').addClass("disabled");
+                    }
+                },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Accept", " application/json");
                     xhr.setRequestHeader("Content-type", " application/json");
-                }, success: function (data) {
+                }
+                , success: function (data) {
+                    if (data.responseText == "Datasource up")
+                        $('#CheckDatabase').addClass("disabled");
+                    else
+                        $('#CheckDatabase').removeClass("disabled");
+                    console.log(data);
                 }
             })
         })

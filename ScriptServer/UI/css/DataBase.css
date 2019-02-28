@@ -178,3 +178,7 @@ h2 {
 .resultBlock > * {
     margin : 10px;
 }
+
+.disabled {
+    background-color: red
+}
