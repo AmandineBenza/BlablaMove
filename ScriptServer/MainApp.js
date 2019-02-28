@@ -82,6 +82,12 @@ app.route("/DATABASE/CHECK").post(function () {
   // elem.style.color = "red";
 })
 
+app.route("/DATABASE/CLEAN").post(function () {
+  shell.exec("sh ./scripts/cleanDatabase.sh > ./logs/database-related.log");
+  // database_state = true;
+  // shell.exec("docker-compose start " + DOCKER_MASTERDATABASE_NAME)
+})
+
 app.route("/DATABASE/PRERUN").get(function () {
   displayOutput("./logs/prerun.log");
   shell.exec("sh ../src/main/resources/requests/pre-run/pre_run_Alice_Bob.sh > ./logs/prerun.log");
