@@ -19,6 +19,8 @@ import com.xaamruda.bbm.commons.spring.context.ContextProvider;
 
 public class JournalingEngine {
 
+	private final static boolean logging = false;
+	
 	private static JournalingEngine usersJournalEngine;
 	private static JournalingEngine offersJournalEngine;
 	private static JournalingEngine billingJournalEngine;
@@ -60,7 +62,7 @@ public class JournalingEngine {
 		this.journalFilePath = journalFilePath;
 		this.safeStart = false;
 		this.maxId = ERROR_CODE;
-		BBMLogger.infoln("Initialized \"" + journalFilePath + "\" database journaling.");
+		if (logging) BBMLogger.infoln("Initialized \"" + journalFilePath + "\" database journaling.");
 	}
 	
 	// TODO buffered reader better perfs
@@ -82,7 +84,7 @@ public class JournalingEngine {
 			}
 			
 		} catch (FileNotFoundException e) {
-			BBMLogger.errorln("Journal engine for \"" + journalFilePath + "\" is in a bad state.");
+			if(logging) BBMLogger.errorln("Journal engine for \"" + journalFilePath + "\" is in a bad state.");
 			safeStart = false;
 		}
 		
@@ -95,7 +97,7 @@ public class JournalingEngine {
 	 */
 	public JournalingEngine start() {
 		if(safeStart) {
-			BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not start as engine is already started.");
+			if(logging) BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not start as engine is already started.");
 			return this;
 		}
 		
@@ -106,7 +108,7 @@ public class JournalingEngine {
 				journalFile.createNewFile();
 			} catch (IOException e) {
 				safeStart = false;
-				BBMLogger.infoln("Could not create journal file.");
+				if(logging) BBMLogger.infoln("Could not create journal file.");
 				return this;
 			}
 		}
@@ -123,7 +125,7 @@ public class JournalingEngine {
 	 */
 	public synchronized void analyze() {
 		if(!safeStart) {
-			BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not perform analyze as engine is not started.");
+			if(logging) BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" could not perform analyze as engine is not started.");
 			return;
 		}
 		
@@ -140,7 +142,7 @@ public class JournalingEngine {
 			e.printStackTrace();
 		}
 		
-		BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" analyze finished.");
+		if(logging) BBMLogger.infoln("Journaling engine \"" + journalFilePath + "\" analyze finished.");
 	}
 	
 	/**
@@ -162,14 +164,14 @@ public class JournalingEngine {
 		Class<?> serviceCallerClazz = analyzeService(service, className);
 		
 		if(serviceCallerClazz == null) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Service-caller_error]");
+			if(logging) BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Service-caller_error]");
 			return false;
 		}
 		
 		Method method = analyzeMethod(serviceCallerClazz, action);
 		
 		if(method == null) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method_error]");
+			if(logging) BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method_error]");
 			return false;
 		}
 		
@@ -186,7 +188,7 @@ public class JournalingEngine {
 			endJournal(id);
 			return true;
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method-invocation_error]");
+			if(logging) BBMLogger.errorln("Could not perform journal \"" + journalFilePath + "\" analyze.[Method-invocation_error]");
 			return false;
 		}
 	}
@@ -216,7 +218,7 @@ public class JournalingEngine {
 		try {
 			return Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			BBMLogger.debugln("Journaling analyze, caller class \"" + className + "\" unknown.");
+			if(logging) BBMLogger.debugln("Journaling analyze, caller class \"" + className + "\" unknown.");
 			return null;
 		}
 	}
@@ -240,7 +242,7 @@ public class JournalingEngine {
 		
 		if(fullParameters.isEmpty() || fullParameters.equals("()")
 				|| fullParameters.equals("([])")) {
-			BBMLogger.infoln("No parameters found.");
+			if(logging) BBMLogger.infoln("No parameters found.");
 			return null;
 		}
 		
@@ -295,7 +297,7 @@ public class JournalingEngine {
 	 */
 	public synchronized long journal(String service, String className, String action, Object... parameters){
 		if(!safeStart) {
-			BBMLogger.infoln("Could not log on closed journal");
+			if(logging) BBMLogger.infoln("Could not log on closed journal");
 			return ERROR_CODE;
 		}
 
@@ -427,7 +429,7 @@ public class JournalingEngine {
 			pw.println(sb.toString());
 			pw.close();
 		} catch (IOException e) {
-			BBMLogger.infoln("Journaling failed.");
+			if(logging) BBMLogger.infoln("Journaling failed.");
 		}
 	}
 	
